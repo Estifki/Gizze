@@ -1,4 +1,5 @@
 import 'package:ashewa_d/const/const.dart';
+import 'package:ashewa_d/screens/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -33,7 +34,7 @@ class OnBoardingScreen extends StatelessWidget {
                 imageUrl: "assets/2.PNG",
               ),
               CustomOnboardingWidget(
-                title: "IN TIME DELIVERY",
+                title: "ON TIME DELIVERY",
                 description:
                     "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text",
                 imageUrl: "assets/3.PNG",
@@ -66,24 +67,30 @@ class OnBoardingScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    height: 46,
-                    width: screenSize.width * 0.9,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: AppColor.primaryColor),
-                    child: const Text(
-                      "Sign In",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const LoginScreen()));
+                    },
+                    child: Container(
+                      height: 46,
+                      width: screenSize.width * 0.9,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6.0),
+                          color: AppColor.primaryColor),
+                      child: const Text(
+                        "Sign In",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 19, color: Colors.white),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 10),
                   const Text(
                     "Create An Account",
                     style:
-                        TextStyle(fontSize: 19, color: AppColor.primaryColor),
+                        TextStyle(fontSize: 18, color: AppColor.primaryColor),
                   )
                 ],
               ))
