@@ -15,7 +15,7 @@ class CustomOnboardingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Container(
-      color: Colors.white,
+      color: Colors.black,
       child: Stack(alignment: Alignment.center, children: [
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -29,19 +29,17 @@ class CustomOnboardingWidget extends StatelessWidget {
                         image: DecorationImage(
                             image: AssetImage(imageUrl), fit: BoxFit.fitWidth)),
                   )
-                : Container(
-                    height: screenSize.height * 0.46,
+                : SizedBox(
+                    height: screenSize.height * 0.42,
                     width: screenSize.width,
-                    color: Colors.black),
+                  ),
             // ),
             Padding(
               padding: EdgeInsets.only(top: screenSize.height * 0.08),
               child: Text(
                 title,
-                style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ),
             Center(
@@ -50,7 +48,7 @@ class CustomOnboardingWidget extends StatelessWidget {
                 child: Text(
                   description,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.black, fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
             ),
@@ -60,9 +58,9 @@ class CustomOnboardingWidget extends StatelessWidget {
         //
         //Cenetr Image View
         //
-        // Positioned(
-        //     top: screenSize.height * 0.29,
-        //     child: Image.asset(imageUrl, height: 180)),
+        Positioned(
+            top: screenSize.height * 0.22,
+            child: Image.asset(imageUrl, height: 150)),
       ]),
     );
   }

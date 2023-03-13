@@ -1,4 +1,5 @@
 import 'package:ashewa_d/const/const.dart';
+import 'package:ashewa_d/screens/auth/register/phone.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -18,8 +19,10 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         leading: GestureDetector(
           onTap: () => Navigator.of(context).pop(),
-          child: const Icon(Icons.arrow_back_ios_new),
+          child: const Icon(Icons.arrow_back_ios_new, size: 22),
         ),
+        title: const Text("Sign In"),
+        centerTitle: true,
       ),
       body: SafeArea(
           child: SingleChildScrollView(
@@ -89,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           border: InputBorder.none,
                           counterText: "",
                           hintText: "Password",
-                          contentPadding: EdgeInsets.only(left: 48)),
+                          contentPadding: EdgeInsets.only(left: 50)),
                     ),
                   ),
                   //
@@ -117,16 +120,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Text(
                     "Forgot Password",
                     style:
-                        TextStyle(fontSize: 18, color: AppColor.primaryColor),
+                        TextStyle(fontSize: 16, color: AppColor.primaryColor),
                   ),
                 ],
               ),
             ),
             Positioned(
                 bottom: screenSize.height * 0.0,
-                child: const Text(
-                  "Create An Account",
-                  style: TextStyle(fontSize: 18, color: AppColor.primaryColor),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const PhoneRegisterScreen()));
+                  },
+                  child: const Text(
+                    "Create An Account",
+                    style:
+                        TextStyle(fontSize: 16, color: AppColor.primaryColor),
+                  ),
                 ))
           ]),
         ),
