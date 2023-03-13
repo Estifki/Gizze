@@ -1,4 +1,4 @@
-import 'package:ashewa_d/screens/home.dart';
+import 'package:ashewa_d/screens/onboarding.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Ashewa Delivery',
-        theme: ThemeData.dark(),
-        home: const HomePage());
+        theme: ThemeData.dark().copyWith(
+            primaryColor: Colors.black,
+            scaffoldBackgroundColor: Colors.black,
+            appBarTheme: const AppBarTheme(backgroundColor: Colors.black)),
+        home: OnBoardingScreen());
   }
 }
