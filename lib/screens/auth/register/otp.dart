@@ -1,7 +1,9 @@
 import 'package:ashewa_d/screens/auth/register/register.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../const/const.dart';
+import '../../../provider/auth.dart';
 import '../../../widget/otp.dart';
 
 class VerifyOtpForRegisterScreen extends StatefulWidget {
@@ -14,6 +16,7 @@ class VerifyOtpForRegisterScreen extends StatefulWidget {
 
 class _VerifyOtpForRegisterScreenState
     extends State<VerifyOtpForRegisterScreen> {
+  final bool _isLoading = false;
   final _otpController1 = TextEditingController();
   final _otpController2 = TextEditingController();
   final _otpController3 = TextEditingController();
@@ -65,25 +68,58 @@ class _VerifyOtpForRegisterScreenState
                 OtpInputWidget(otpController: _otpController4, isLast: true),
               ]),
               const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const RegisterScreen()));
-                },
-                child: Container(
-                  height: 46,
-                  width: screenSize.width * 0.9,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6.0),
-                      color: AppColor.primaryColor),
-                  child: const Text(
-                    "Verify Phone Number",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 19, color: Colors.white),
-                  ),
-                ),
-              ),
+              _isLoading
+                  ? Center(
+                      child: Transform.scale(
+                        scale: 0.6,
+                        child: const CircularProgressIndicator(),
+                      ),
+                    )
+                  : GestureDetector(
+                      // onTap: () async {
+                      //   try {
+                      //     setState(() {
+                      //       _isLoading = true;
+                      //     });
+                      //     await Provider.of<AuthProvider>(context, listen: false)
+                      //         .verifyOtp(phone: "251${_p}")
+                      //         .then((_) {
+                      //       _otpController1.clear();
+                      //       _otpController2.clear();
+                      //       _otpController3.clear();
+                      //       _otpController4.clear();
+                      //       showInfoReposnse(
+                      //           context: context, title: "Verification Code resent");
+                      //       setState(() {
+                      //         _isResendLoading = false;
+                      //       });
+                      //     });
+                      //   } catch (_) {
+                      //     _otpController1.clear();
+                      //     _otpController2.clear();
+                      //     _otpController3.clear();
+                      //     _otpController4.clear();
+                      //     showErrorReposnse(
+                      //         context: context, title: "Please Try Again Later!");
+                      //     setState(() {
+                      //       _isResendLoading = false;
+                      //     });
+                      //   }
+                      // },
+                      child: Container(
+                        height: 46,
+                        width: screenSize.width * 0.9,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6.0),
+                            color: AppColor.primaryColor),
+                        child: const Text(
+                          "Verify Phone Number",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 19, color: Colors.white),
+                        ),
+                      ),
+                    ),
             ],
           ),
         ),
