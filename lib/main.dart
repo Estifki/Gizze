@@ -1,5 +1,5 @@
 import 'package:ashewa_d/provider/auth.dart';
-import 'package:ashewa_d/screens/home.dart';
+import 'package:ashewa_d/screens/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
               primaryColor: Colors.black,
               scaffoldBackgroundColor: Colors.black,
               appBarTheme: const AppBarTheme(backgroundColor: Colors.black)),
-          home: const HomeScreen()),
+          home: OnBoardingScreen()),
     );
   }
 }

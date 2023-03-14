@@ -31,41 +31,41 @@ List<ProductM> data = [
       address: "Goro",
       price: 2000,
       description:
-          "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+          "is simply dummy text of the printing and type Lorem setting industry. Lorem Ipsum has been the industry's standard dummy",
       imageUrl: "assets/pngimg1.png"),
   ProductM(
       name: "Alage Sand",
       address: "Unisa",
       price: 1800,
       description:
-          "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+          "is simply dummy text of the printing and type setting industry. Lorem Ipsum has been the industry's standard dummy",
       imageUrl: "assets/pngimg2.png"),
   ProductM(
       name: "Metehara Sand",
       address: "Goro",
       price: 800,
       description:
-          "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+          "is simply dummy text of the printing and type setting industry. Lorem Ipsum has been the industry's standard dummy",
       imageUrl: "assets/pngimg3.png"),
   ProductM(
       name: "Arsi Sand",
       address: "Goro",
       price: 2000,
       description:
-          "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+          "is simply dummy text of the printing and type setting industry. Lorem Ipsum has been the industry's standard dummy",
       imageUrl: "assets/pngimg1.png"),
   ProductM(
       name: "Alage Sand",
       address: "Unisa",
       price: 1800,
       description:
-          "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+          "is simply dummy text of the printing and type setting industry. Lorem Ipsum has been the industry's standard dummy",
       imageUrl: "assets/pngimg2.png"),
   ProductM(
       name: "Metehara Sand",
       address: "Goro",
       price: 800,
       description:
-          "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+          "is simply dummy text of the printing and type setting industry. Lorem Ipsum has been the industry's standard dummy",
       imageUrl: "assets/pngimg3.png"),
 ];

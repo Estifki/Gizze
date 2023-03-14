@@ -1,6 +1,7 @@
 import 'package:ashewa_d/const/const.dart';
 import 'package:ashewa_d/screens/auth/forget/forget.dart';
 import 'package:ashewa_d/screens/auth/register/phone.dart';
+import 'package:ashewa_d/screens/home.dart';
 import 'package:flutter/material.dart';
 
 import '../../widget/textfield.dart';
@@ -91,17 +92,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   //
 
                   const SizedBox(height: 20),
-                  Container(
-                    height: 46,
-                    width: screenSize.width * 0.9,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6.0),
-                        color: AppColor.primaryColor),
-                    child: const Text(
-                      "Sign In",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 19, color: Colors.white),
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const HomeScreen())),
+                    child: Container(
+                      height: 46,
+                      width: screenSize.width * 0.9,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6.0),
+                          color: AppColor.primaryColor),
+                      child: const Text(
+                        "Sign In",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 19, color: Colors.white),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20),
