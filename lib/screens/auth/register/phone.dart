@@ -1,9 +1,7 @@
-import 'package:ashewa_d/provider/auth.dart';
+import 'package:ashewa_d/screens/auth/register/otp.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../const/const.dart';
-import 'otp.dart';
 
 class PhoneRegisterScreen extends StatefulWidget {
   const PhoneRegisterScreen({super.key});
@@ -14,7 +12,7 @@ class PhoneRegisterScreen extends StatefulWidget {
 
 class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
   final _phoneController = TextEditingController();
-  bool _isLoading = false;
+  final bool _isLoading = false;
 
   @override
   void dispose() {
@@ -35,6 +33,7 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
       body: SingleChildScrollView(
         child: Center(
           child: Column(children: [
+            SizedBox(height: screenSize.height * 0.04),
             //
             //Phone Number Input
             //
@@ -81,7 +80,9 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
                     ),
                   )
                 : GestureDetector(
-                    onTap: () => validate(),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            const VerifyOtpForRegisterScreen())),
                     child: Container(
                       height: 46,
                       width: screenSize.width * 0.9,
@@ -102,30 +103,30 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
     );
   }
 
-  void validate() async {
-    try {
-      if (_phoneController.text.length != 9) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            backgroundColor: Colors.red,
-            content: Text("Invalid Phone Number")));
-      } else {
-        setState(() {
-          _isLoading = true;
-        });
-        Provider.of<AuthProvider>(context, listen: false)
-            .setPhoneNumber(_phoneController.text);
-        await Provider.of<AuthProvider>(context, listen: false)
-            .phoneRegister(phone: "251${_phoneController.text}")
-            .then((_) {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const VerifyOtpForRegisterScreen()));
-          setState(() {
-            _isLoading = false;
-          });
-        });
-      }
-    } catch (e) {
-      rethrow;
-    }
-  }
+  // void validate() async {
+  //   try {
+  //     if (_phoneController.text.length != 9) {
+  //       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+  //           backgroundColor: Colors.red,
+  //           content: Text("Invalid Phone Number")));
+  //     } else {
+  //       setState(() {
+  //         _isLoading = true;
+  //       });
+  //       Provider.of<AuthProvider>(context, listen: false)
+  //           .setPhoneNumber(_phoneController.text);
+  //       await Provider.of<AuthProvider>(context, listen: false)
+  //           .phoneRegister(phone: "251${_phoneController.text}")
+  //           .then((_) {
+  //         Navigator.of(context).push(MaterialPageRoute(
+  //             builder: (context) => const VerifyOtpForRegisterScreen()));
+  //         setState(() {
+  //           _isLoading = false;
+  //         });
+  //       });
+  //     }
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
 }

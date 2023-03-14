@@ -2,6 +2,7 @@ import 'package:ashewa_d/screens/auth/login.dart';
 import 'package:flutter/material.dart';
 
 import '../../../const/const.dart';
+import '../../../widget/textfield.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -37,84 +38,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
               //
               //Full Name
               //
-              Container(
-                height: 48,
-                width: screenSize.width * 0.9,
-                decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.26),
-                    borderRadius: BorderRadius.circular(6)),
-                child: TextField(
-                  controller: _nameController,
-                  keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      counterText: "",
-                      hintText: "Full Name",
-                      contentPadding: EdgeInsets.only(left: 10)),
-                ),
-              ),
+              CustomTextFieldWidget(
+                  hint: "Full Name", controller: _nameController),
 
               const SizedBox(height: 15),
               //
               //Email
               //
-              Container(
-                height: 48,
-                width: screenSize.width * 0.9,
-                decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.26),
-                    borderRadius: BorderRadius.circular(6)),
-                child: TextField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      counterText: "",
-                      hintText: "Email",
-                      contentPadding: EdgeInsets.only(left: 10)),
-                ),
-              ),
+              CustomTextFieldWidget(
+                  hint: "Email", controller: _emailController),
               const SizedBox(height: 15),
               //
               //Password
               //
 
-              Container(
-                height: 48,
-                width: screenSize.width * 0.9,
-                decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.26),
-                    borderRadius: BorderRadius.circular(6)),
-                child: TextField(
-                  controller: _passwordController,
-                  keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      counterText: "",
-                      hintText: "Password",
-                      contentPadding: EdgeInsets.only(left: 10)),
-                ),
-              ),
+              CustomTextFieldWidget(
+                  hint: "Password", controller: _passwordController),
               const SizedBox(height: 15),
               //
               //Confirm Password
               //
-              Container(
-                height: 48,
-                width: screenSize.width * 0.9,
-                decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.26),
-                    borderRadius: BorderRadius.circular(6)),
-                child: TextField(
-                  controller: _confirmPasswordController,
-                  keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      counterText: "",
-                      hintText: "Confirm Password",
-                      contentPadding: EdgeInsets.only(left: 10)),
-                ),
-              ),
+              CustomTextFieldWidget(
+                  hint: "Confirm Password",
+                  controller: _confirmPasswordController),
+
               //
               //i Agree
               //

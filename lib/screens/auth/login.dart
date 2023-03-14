@@ -1,6 +1,9 @@
 import 'package:ashewa_d/const/const.dart';
+import 'package:ashewa_d/screens/auth/forget/forget.dart';
 import 'package:ashewa_d/screens/auth/register/phone.dart';
 import 'package:flutter/material.dart';
+
+import '../../widget/textfield.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -79,22 +82,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   //Password Input
                   //
 
-                  Container(
-                    height: 48,
-                    width: screenSize.width * 0.9,
-                    decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.26),
-                        borderRadius: BorderRadius.circular(6)),
-                    child: TextField(
+                  CustomTextFieldWidget(
+                      hint: "Password",
                       controller: _passwordController,
-                      keyboardType: TextInputType.phone,
-                      decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          counterText: "",
-                          hintText: "Password",
-                          contentPadding: EdgeInsets.only(left: 50)),
-                    ),
-                  ),
+                      leftcontentPadding: 50),
                   //
                   //Sign In Button
                   //
@@ -117,10 +108,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   //
                   //Forget Password
                   //
-                  const Text(
-                    "Forgot Password",
-                    style:
-                        TextStyle(fontSize: 16, color: AppColor.primaryColor),
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const ForgotPasswordScreen())),
+                    child: const Text(
+                      "Forgot Password",
+                      style:
+                          TextStyle(fontSize: 16, color: AppColor.primaryColor),
+                    ),
                   ),
                 ],
               ),

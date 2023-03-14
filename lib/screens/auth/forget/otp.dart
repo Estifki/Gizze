@@ -1,21 +1,18 @@
-import 'package:ashewa_d/screens/auth/register/register.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../const/const.dart';
-import '../../../provider/auth.dart';
 import '../../../widget/otp.dart';
+import 'new_password.dart';
 
-class VerifyOtpForRegisterScreen extends StatefulWidget {
-  const VerifyOtpForRegisterScreen({super.key});
+class VerifyOtpForForgotScreen extends StatefulWidget {
+  const VerifyOtpForForgotScreen({super.key});
 
   @override
-  State<VerifyOtpForRegisterScreen> createState() =>
-      _VerifyOtpForRegisterScreenState();
+  State<VerifyOtpForForgotScreen> createState() =>
+      _VerifyOtpForForgotScreenState();
 }
 
-class _VerifyOtpForRegisterScreenState
-    extends State<VerifyOtpForRegisterScreen> {
+class _VerifyOtpForForgotScreenState extends State<VerifyOtpForForgotScreen> {
   final bool _isLoading = false;
   final _otpController1 = TextEditingController();
   final _otpController2 = TextEditingController();
@@ -107,7 +104,7 @@ class _VerifyOtpForRegisterScreenState
                       //   }
                       // },
                       onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const RegisterScreen())),
+                          builder: (context) => const NewPasswordScreen())),
                       child: Container(
                         height: 46,
                         width: screenSize.width * 0.9,

@@ -1,7 +1,6 @@
 import 'package:ashewa_d/const/const.dart';
 import 'package:ashewa_d/screens/auth/login.dart';
 import 'package:ashewa_d/screens/auth/register/phone.dart';
-import 'package:ashewa_d/screens/auth/register/register.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -89,6 +88,9 @@ class OnBoardingScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
+                  //
+                  //Create An account
+                  //
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
