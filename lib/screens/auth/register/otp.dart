@@ -1,9 +1,7 @@
 import 'package:ashewa_d/screens/auth/register/register.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../const/const.dart';
-import '../../../provider/auth.dart';
 import '../../../widget/otp.dart';
 
 class VerifyOtpForRegisterScreen extends StatefulWidget {

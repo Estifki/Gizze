@@ -2,6 +2,7 @@ import 'package:ashewa_d/screens/auth/register/otp.dart';
 import 'package:flutter/material.dart';
 
 import '../../../const/const.dart';
+import '../login.dart';
 
 class PhoneRegisterScreen extends StatefulWidget {
   const PhoneRegisterScreen({super.key});
@@ -97,6 +98,17 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
                       ),
                     ),
                   ),
+            const SizedBox(height: 30),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const LoginScreen()));
+              },
+              child: const Text(
+                "Already Have an Account",
+                style: TextStyle(fontSize: 16, color: AppColor.primaryColor),
+              ),
+            )
           ]),
         ),
       ),

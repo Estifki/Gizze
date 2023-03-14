@@ -1,9 +1,12 @@
 import 'package:ashewa_d/provider/auth.dart';
-import 'package:ashewa_d/screens/onboarding.dart';
+import 'package:ashewa_d/screens/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.black));
   runApp(const MyApp());
 }
 
@@ -21,7 +24,7 @@ class MyApp extends StatelessWidget {
               primaryColor: Colors.black,
               scaffoldBackgroundColor: Colors.black,
               appBarTheme: const AppBarTheme(backgroundColor: Colors.black)),
-          home: OnBoardingScreen()),
+          home: const HomeScreen()),
     );
   }
 }

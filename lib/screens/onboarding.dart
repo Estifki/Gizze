@@ -7,7 +7,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../widget/onboarding.dart';
 
 class OnBoardingScreen extends StatelessWidget {
-  PageController pageController = PageController();
+  final PageController pageController = PageController();
 
   OnBoardingScreen({super.key});
 

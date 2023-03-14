@@ -9,3 +9,63 @@ class AppColor {
 class BaseUrl {
   static const String appUrl = "https://gize.amanueld.info/api";
 }
+
+class ProductM {
+  String name;
+  String description;
+  String address;
+  double price;
+  String imageUrl;
+
+  ProductM(
+      {required this.name,
+      required this.address,
+      required this.price,
+      required this.description,
+      required this.imageUrl});
+}
+
+List<ProductM> data = [
+  ProductM(
+      name: "Arsi Sand",
+      address: "Goro",
+      price: 2000,
+      description:
+          "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+      imageUrl: "assest/pngimg1.png"),
+  ProductM(
+      name: "Alage Sand",
+      address: "Unisa",
+      price: 1800,
+      description:
+          "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+      imageUrl: "assest/pngimg2.png"),
+  ProductM(
+      name: "Metehara Sand",
+      address: "Goro",
+      price: 800,
+      description:
+          "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+      imageUrl: "assest/pngimg3.png"),
+  ProductM(
+      name: "Arsi Sand",
+      address: "Goro",
+      price: 2000,
+      description:
+          "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+      imageUrl: "assest/pngimg1.png"),
+  ProductM(
+      name: "Alage Sand",
+      address: "Unisa",
+      price: 1800,
+      description:
+          "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+      imageUrl: "assest/pngimg2.png"),
+  ProductM(
+      name: "Metehara Sand",
+      address: "Goro",
+      price: 800,
+      description:
+          "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+      imageUrl: "assest/pngimg3.png"),
+];
