@@ -1,8 +1,12 @@
 import 'package:ashewa_d/const/const.dart';
+import 'package:ashewa_d/provider/auth.dart';
 import 'package:ashewa_d/screens/auth/forget/forget.dart';
 import 'package:ashewa_d/screens/auth/register/phone.dart';
 import 'package:ashewa_d/screens/home.dart';
+import 'package:ashewa_d/uitil/http_error.dart';
+import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../widget/textfield.dart';
 
@@ -16,6 +20,16 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
+  FocusNode focusNode = FocusNode();
+  bool _isLoading = false;
+
+  @override
+  void dispose() {
+    _phoneController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -92,23 +106,30 @@ class _LoginScreenState extends State<LoginScreen> {
                   //
 
                   const SizedBox(height: 20),
-                  GestureDetector(
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const HomeScreen())),
-                    child: Container(
-                      height: 46,
-                      width: screenSize.width * 0.9,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6.0),
-                          color: AppColor.primaryColor),
-                      child: const Text(
-                        "Sign In",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 19, color: Colors.white),
-                      ),
-                    ),
-                  ),
+                  _isLoading
+                      ? Center(
+                          child: Transform.scale(
+                            scale: 0.6,
+                            child: const CircularProgressIndicator(),
+                          ),
+                        )
+                      : GestureDetector(
+                          onTap: () => validate(),
+                          child: Container(
+                            height: 46,
+                            width: screenSize.width * 0.9,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6.0),
+                                color: AppColor.primaryColor),
+                            child: const Text(
+                              "Sign In",
+                              textAlign: TextAlign.center,
+                              style:
+                                  TextStyle(fontSize: 19, color: Colors.white),
+                            ),
+                          ),
+                        ),
                   const SizedBox(height: 20),
                   //
                   //Forget Password
@@ -142,5 +163,40 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       )),
     );
+  }
+
+  void validate() async {
+    if (_phoneController.text.length != 9) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Invalid Phone Number");
+    } else if (_passwordController.text.length < 6) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Password To Short");
+    } else {
+      setState(() {
+        _isLoading = true;
+      });
+      try {
+        await Provider.of<AuthProvider>(context, listen: false)
+            .signIn("251${_phoneController.text}", _passwordController.text)
+            .then((_) {
+          setState(() {
+            _isLoading = false;
+          });
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const HomeScreen()));
+        });
+      } on CustomHttpException catch (_) {
+        setState(() {
+          _isLoading = false;
+        });
+        CustomHttpException(errorMessage: "Try Again Later");
+      } catch (e) {
+        setState(() {
+          _isLoading = false;
+        });
+        CustomHttpException(errorMessage: "Try Again Later");
+      }
+    }
   }
 }
