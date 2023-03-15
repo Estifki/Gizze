@@ -1,5 +1,9 @@
+import 'package:ashewa_d/provider/auth.dart';
 import 'package:ashewa_d/screens/auth/register/otp.dart';
+import 'package:ashewa_d/uitil/http_error.dart';
+import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../const/const.dart';
 import '../login.dart';
@@ -13,7 +17,7 @@ class PhoneRegisterScreen extends StatefulWidget {
 
 class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
   final _phoneController = TextEditingController();
-  final bool _isLoading = false;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -81,9 +85,7 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
                     ),
                   )
                 : GestureDetector(
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            const VerifyOtpForRegisterScreen())),
+                    onTap: () => validate(),
                     child: Container(
                       height: 46,
                       width: screenSize.width * 0.9,
@@ -115,30 +117,35 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
     );
   }
 
-  // void validate() async {
-  //   try {
-  //     if (_phoneController.text.length != 9) {
-  //       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-  //           backgroundColor: Colors.red,
-  //           content: Text("Invalid Phone Number")));
-  //     } else {
-  //       setState(() {
-  //         _isLoading = true;
-  //       });
-  //       Provider.of<AuthProvider>(context, listen: false)
-  //           .setPhoneNumber(_phoneController.text);
-  //       await Provider.of<AuthProvider>(context, listen: false)
-  //           .phoneRegister(phone: "251${_phoneController.text}")
-  //           .then((_) {
-  //         Navigator.of(context).push(MaterialPageRoute(
-  //             builder: (context) => const VerifyOtpForRegisterScreen()));
-  //         setState(() {
-  //           _isLoading = false;
-  //         });
-  //       });
-  //     }
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
+  void validate() async {
+    if (_phoneController.text.length != 9) {
+      showScaffoldMessanger(context: context, errorMessage: "Invalid Phone");
+    } else {
+      setState(() {
+        _isLoading = true;
+      });
+      try {
+        await Provider.of<AuthProvider>(context, listen: false)
+            .phoneRegister(phone: "251${_phoneController.text}")
+            .then((_) {
+          setState(() {
+            _isLoading = false;
+          });
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => VerifyOtpForRegisterScreen(
+                  phone: "251${_phoneController.text}")));
+        });
+      } on CustomHttpException catch (_) {
+        setState(() {
+          _isLoading = false;
+        });
+        showScaffoldMessanger(context: context, errorMessage: "errorMessage");
+      } catch (_) {
+        setState(() {
+          _isLoading = false;
+        });
+        showScaffoldMessanger(context: context, errorMessage: "errorMessage");
+      }
+    }
+  }
 }

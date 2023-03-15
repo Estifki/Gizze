@@ -183,19 +183,21 @@ class _LoginScreenState extends State<LoginScreen> {
           setState(() {
             _isLoading = false;
           });
-          Navigator.of(context).push(
+          Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => const HomeScreen()));
         });
       } on CustomHttpException catch (_) {
         setState(() {
           _isLoading = false;
         });
-        CustomHttpException(errorMessage: "Try Again Later");
+        showScaffoldMessanger(
+            context: context, errorMessage: "Try Again Later");
       } catch (e) {
         setState(() {
           _isLoading = false;
         });
-        CustomHttpException(errorMessage: "Try Again Later");
+        showScaffoldMessanger(
+            context: context, errorMessage: "Try Again Later");
       }
     }
   }

@@ -14,10 +14,10 @@ showScaffoldMessanger({
         errorMessage,
         textAlign: TextAlign.center,
         style: const TextStyle(
-            fontSize: 14.5, fontWeight: FontWeight.bold, color: Colors.white),
+            fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
       ),
-      duration: const Duration(milliseconds: 3000),
-      padding: const EdgeInsets.all(11),
+      duration: const Duration(milliseconds: 2000),
+      padding: const EdgeInsets.all(16),
     ),
   );
 }

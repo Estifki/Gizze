@@ -9,11 +9,7 @@ import 'package:http/http.dart' as http;
 class AuthProvider with ChangeNotifier {
   String? token;
   String? userID;
-  String? phoneNumber;
 
-  setPhoneNumber(String phone) {
-    phoneNumber = "251$phone";
-  }
   //
   //Login
   //
@@ -28,8 +24,7 @@ class AuthProvider with ChangeNotifier {
             "Accept": "application/json"
           },
           body: jsonEncode({"phone": phone, "password": password}));
-      print(response.statusCode);
-      print(response.body);
+
       if (response.statusCode != 200) {
         throw CustomHttpException(errorMessage: "Please Try Again Later");
       } else {}
@@ -41,31 +36,40 @@ class AuthProvider with ChangeNotifier {
   Future<void> phoneRegister({required String phone}) async {
     String url = "${BaseUrl.appUrl}/register";
     try {
-      http.Response response =
-          await http.post(Uri.parse(url), body: jsonEncode({"phone": phone}));
+      http.Response response = await http.post(Uri.parse(url),
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: jsonEncode({"phone": phone}));
 
       print(response.body);
-      if (response.statusCode != 201) {
-        //throw
+      if (response.statusCode != 200) {
+        throw CustomHttpException(errorMessage: "errorMessage");
       } else {}
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<void> verifyOtp({required String code}) async {
+  Future<void> verifyOtp({required String phone, required String code}) async {
     String url = "${BaseUrl.appUrl}/verify-otp";
-    print(phoneNumber);
+
     try {
       http.Response response = await http.post(Uri.parse(url),
-          body: jsonEncode({"phone": phoneNumber, "password": code}));
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: jsonEncode({"phone": phone, "password": code}));
 
       print(response.body);
       final decodedData = jsonDecode(response.body);
       if (response.statusCode != 201) {
-        //throw
+        throw CustomHttpException(errorMessage: "errorMessage");
       } else {
         token = decodedData['data']["token"];
+        print(token);
       }
     } catch (e) {
       rethrow;

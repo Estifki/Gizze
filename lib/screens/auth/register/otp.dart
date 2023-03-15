@@ -1,12 +1,16 @@
 import 'package:ashewa_d/screens/auth/register/register.dart';
+import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../const/const.dart';
+import '../../../provider/auth.dart';
+import '../../../uitil/http_error.dart';
 import '../../../widget/otp.dart';
 
 class VerifyOtpForRegisterScreen extends StatefulWidget {
-  const VerifyOtpForRegisterScreen({super.key});
-
+  String phone;
+  VerifyOtpForRegisterScreen({required this.phone});
   @override
   State<VerifyOtpForRegisterScreen> createState() =>
       _VerifyOtpForRegisterScreenState();
@@ -14,7 +18,7 @@ class VerifyOtpForRegisterScreen extends StatefulWidget {
 
 class _VerifyOtpForRegisterScreenState
     extends State<VerifyOtpForRegisterScreen> {
-  final bool _isLoading = false;
+  bool _isLoading = false;
   final _otpController1 = TextEditingController();
   final _otpController2 = TextEditingController();
   final _otpController3 = TextEditingController();
@@ -74,38 +78,41 @@ class _VerifyOtpForRegisterScreenState
                       ),
                     )
                   : GestureDetector(
-                      // onTap: () async {
-                      //   try {
-                      //     setState(() {
-                      //       _isLoading = true;
-                      //     });
-                      //     await Provider.of<AuthProvider>(context, listen: false)
-                      //         .verifyOtp(phone: "251${_p}")
-                      //         .then((_) {
-                      //       _otpController1.clear();
-                      //       _otpController2.clear();
-                      //       _otpController3.clear();
-                      //       _otpController4.clear();
-                      //       showInfoReposnse(
-                      //           context: context, title: "Verification Code resent");
-                      //       setState(() {
-                      //         _isResendLoading = false;
-                      //       });
-                      //     });
-                      //   } catch (_) {
-                      //     _otpController1.clear();
-                      //     _otpController2.clear();
-                      //     _otpController3.clear();
-                      //     _otpController4.clear();
-                      //     showErrorReposnse(
-                      //         context: context, title: "Please Try Again Later!");
-                      //     setState(() {
-                      //       _isResendLoading = false;
-                      //     });
-                      //   }
-                      // },
-                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const RegisterScreen())),
+                      onTap: () async {
+                        String userInput =
+                            "${_otpController1.text}${_otpController2.text}${_otpController3.text}${_otpController4.text}";
+                        if (userInput.length < 4) {
+                        } else {
+                          try {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                            await Provider.of<AuthProvider>(context,
+                                    listen: false)
+                                .verifyOtp(phone: widget.phone, code: userInput)
+                                .then((_) {
+                              setState(() {
+                                _isLoading = false;
+                              });
+                              print("sucecuss");
+                              // Navigator.of(context).pushNamedAndRemoveUntil(
+                              //     AppRoutes.passwordRegister, (route) => false);
+                            });
+                          } on CustomHttpException catch (e) {
+                            showScaffoldMessanger(
+                                context: context, errorMessage: e.toString());
+                            setState(() {
+                              _isLoading = false;
+                            });
+                          } catch (e) {
+                            setState(() {
+                              _isLoading = false;
+                            });
+                            showScaffoldMessanger(
+                                context: context, errorMessage: e.toString());
+                          }
+                        }
+                      },
                       child: Container(
                         height: 46,
                         width: screenSize.width * 0.9,
