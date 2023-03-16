@@ -89,7 +89,10 @@ class _VerifyOtpForRegisterScreenState
                             });
                             await Provider.of<AuthProvider>(context,
                                     listen: false)
-                                .verifyOtp(phone: widget.phone, code: userInput)
+                                .verifyOtp(
+                                    isForRegister: true,
+                                    phone: widget.phone,
+                                    code: userInput)
                                 .then((_) {
                               setState(() {
                                 _isLoading = false;

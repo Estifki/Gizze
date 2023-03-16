@@ -1,19 +1,23 @@
+import 'package:ashewa_d/provider/auth.dart';
+import 'package:ashewa_d/uitil/http_error.dart';
+import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../const/const.dart';
 import '../../../widget/otp.dart';
 import 'new_password.dart';
 
 class VerifyOtpForForgotScreen extends StatefulWidget {
-  const VerifyOtpForForgotScreen({super.key});
-
+  final String phone;
+  VerifyOtpForForgotScreen({required this.phone});
   @override
   State<VerifyOtpForForgotScreen> createState() =>
       _VerifyOtpForForgotScreenState();
 }
 
 class _VerifyOtpForForgotScreenState extends State<VerifyOtpForForgotScreen> {
-  final bool _isLoading = false;
+  bool _isLoading = false;
   final _otpController1 = TextEditingController();
   final _otpController2 = TextEditingController();
   final _otpController3 = TextEditingController();
@@ -21,7 +25,6 @@ class _VerifyOtpForForgotScreenState extends State<VerifyOtpForForgotScreen> {
   @override
   void dispose() {
     super.dispose();
-
     _otpController1.dispose();
     _otpController2.dispose();
     _otpController3.dispose();
@@ -41,88 +44,131 @@ class _VerifyOtpForForgotScreenState extends State<VerifyOtpForForgotScreen> {
       body: SingleChildScrollView(
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: screenSize.height * 0.04),
-              const Text(
-                "Get Your Code",
-                style: TextStyle(fontSize: 25),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 20, right: 20.0, top: 10),
-                child: Text(
-                  "Lorem Lorem Lorem Lore Lorem",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18),
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: screenSize.height * 0.04),
+                const Text(
+                  "Get Your Code",
+                  style: TextStyle(fontSize: 25),
                 ),
-              ),
-              const SizedBox(height: 30),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                OtpInputWidget(otpController: _otpController1),
-                OtpInputWidget(otpController: _otpController2),
-                OtpInputWidget(otpController: _otpController3),
-                OtpInputWidget(otpController: _otpController4, isLast: true),
-              ]),
-              const SizedBox(height: 20),
-              _isLoading
-                  ? Center(
-                      child: Transform.scale(
-                        scale: 0.6,
-                        child: const CircularProgressIndicator(),
-                      ),
-                    )
-                  : GestureDetector(
-                      // onTap: () async {
-                      //   try {
-                      //     setState(() {
-                      //       _isLoading = true;
-                      //     });
-                      //     await Provider.of<AuthProvider>(context, listen: false)
-                      //         .verifyOtp(phone: "251${_p}")
-                      //         .then((_) {
-                      //       _otpController1.clear();
-                      //       _otpController2.clear();
-                      //       _otpController3.clear();
-                      //       _otpController4.clear();
-                      //       showInfoReposnse(
-                      //           context: context, title: "Verification Code resent");
-                      //       setState(() {
-                      //         _isResendLoading = false;
-                      //       });
-                      //     });
-                      //   } catch (_) {
-                      //     _otpController1.clear();
-                      //     _otpController2.clear();
-                      //     _otpController3.clear();
-                      //     _otpController4.clear();
-                      //     showErrorReposnse(
-                      //         context: context, title: "Please Try Again Later!");
-                      //     setState(() {
-                      //       _isResendLoading = false;
-                      //     });
-                      //   }
-                      // },
-                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const NewPasswordScreen())),
-                      child: Container(
-                        height: 46,
-                        width: screenSize.width * 0.9,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6.0),
-                            color: AppColor.primaryColor),
-                        child: const Text(
-                          "Verify Phone Number",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 19, color: Colors.white),
+                const Padding(
+                  padding: EdgeInsets.only(left: 20, right: 20.0, top: 10),
+                  child: Text(
+                    "Lorem Lorem Lorem Lore Lorem",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      OtpInputWidget(otpController: _otpController1),
+                      OtpInputWidget(otpController: _otpController2),
+                      OtpInputWidget(otpController: _otpController3),
+                      OtpInputWidget(
+                          otpController: _otpController4, isLast: true),
+                    ]),
+                const SizedBox(height: 20),
+                _isLoading
+                    ? Center(
+                        child: Transform.scale(
+                          scale: 0.6,
+                          child: const CircularProgressIndicator(),
+                        ),
+                      )
+                    : GestureDetector(
+                        // onTap: () async {
+                        //   try {
+                        //     setState(() {
+                        //       _isLoading = true;
+                        //     });
+                        //     await Provider.of<AuthProvider>(context, listen: false)
+                        //         .verifyOtp(phone: "251${_p}")
+                        //         .then((_) {
+                        //       _otpController1.clear();
+                        //       _otpController2.clear();
+                        //       _otpController3.clear();
+                        //       _otpController4.clear();
+                        //       showInfoReposnse(
+                        //           context: context, title: "Verification Code resent");
+                        //       setState(() {
+                        //         _isResendLoading = false;
+                        //       });
+                        //     });
+                        //   } catch (_) {
+                        // _otpController1.clear();
+                        // _otpController2.clear();
+                        // _otpController3.clear();
+                        // _otpController4.clear();
+                        // showErrorReposnse(
+                        //     context: context, title: "Please Try Again Later!");
+                        // setState(() {
+                        //   _isResendLoading = false;
+                        // });
+                        //   }
+                        // },
+                        onTap: () {},
+                        child: Container(
+                          height: 46,
+                          width: screenSize.width * 0.9,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6.0),
+                              color: AppColor.primaryColor),
+                          child: const Text(
+                            "Verify Phone Number",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 19, color: Colors.white),
+                          ),
                         ),
                       ),
-                    ),
-            ],
-          ),
+              ]),
         ),
       ),
     );
+  }
+
+  void validate() async {
+    if (_otpController4.text.isEmpty) {
+    } else {
+      setState(() {
+        _isLoading = true;
+      });
+      try {
+        String userInput =
+            "${_otpController1.text}${_otpController2.text}${_otpController3.text}${_otpController4.text}";
+        await Provider.of<AuthProvider>(context, listen: false)
+            .verifyOtp(
+                isForRegister: false, phone: widget.phone, code: userInput)
+            .then((_) {
+          setState(() {
+            _isLoading = false;
+          });
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => const NewPasswordScreen()));
+        });
+      } on CustomHttpException catch (e) {
+        _otpController1.clear();
+        _otpController2.clear();
+        _otpController3.clear();
+        _otpController4.clear();
+        showScaffoldMessanger(context: context, errorMessage: e.toString());
+        setState(() {
+          _isLoading = false;
+        });
+      } catch (_) {
+        _otpController1.clear();
+        _otpController2.clear();
+        _otpController3.clear();
+        _otpController4.clear();
+        showScaffoldMessanger(
+            context: context, errorMessage: "Please Try Again Later!");
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
   }
 }

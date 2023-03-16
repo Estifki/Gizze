@@ -1,6 +1,11 @@
 import 'package:ashewa_d/const/const.dart';
+import 'package:ashewa_d/provider/auth.dart';
+import 'package:ashewa_d/screens/auth/login.dart';
+import 'package:ashewa_d/uitil/http_error.dart';
+import 'package:ashewa_d/uitil/toast.dart';
 import 'package:ashewa_d/widget/textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NewPasswordScreen extends StatefulWidget {
   const NewPasswordScreen({super.key});
@@ -12,15 +17,17 @@ class NewPasswordScreen extends StatefulWidget {
 class _NewPasswordScreenState extends State<NewPasswordScreen> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: const Icon(Icons.arrow_back_ios_new, size: 22),
-        ),
+        automaticallyImplyLeading: false,
+        // leading: GestureDetector(
+        //   onTap: () => Navigator.of(context).pop(),
+        //   child: const Icon(Icons.arrow_back_ios_new, size: 22),
+        // ),
         title: const Text("Reset Password"),
         centerTitle: true,
       ),
@@ -51,27 +58,73 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
               //
 
               const SizedBox(height: 20),
-              Container(
-                height: 46,
-                width: screenSize.width * 0.9,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6.0),
-                    color: AppColor.primaryColor),
-                child: const Text(
-                  "Reset Password",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 19, color: Colors.white),
-                ),
-              ),
-              const SizedBox(height: 20),
-              //
-              //Forget Password
-              //
+              _isLoading
+                  ? Center(
+                      child: Transform.scale(
+                          scale: 0.6, child: const CircularProgressIndicator()),
+                    )
+                  : GestureDetector(
+                      onTap: () => validate(),
+                      child: Container(
+                        height: 46,
+                        width: screenSize.width * 0.9,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6.0),
+                            color: AppColor.primaryColor),
+                        child: const Text(
+                          "Reset Password",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 19, color: Colors.white),
+                        ),
+                      ),
+                    ),
             ],
           ),
         ),
       )),
     );
+  }
+
+  void validate() async {
+    if (_passwordController.text.length < 6) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Password must be at least 6 digit.");
+    } else if (_passwordController.text != _confirmPasswordController.text) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Password don not match");
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+      try {
+        await Provider.of<AuthProvider>(context, listen: false)
+            .changePassword(
+                newPassword: _passwordController.text,
+                confirmPassword: _confirmPasswordController.text)
+            .then((_) {
+          setState(() {
+            _isLoading = false;
+          });
+          showScaffoldMessanger(
+              context: context,
+              backgroundColor: Colors.green,
+              errorMessage: "Password Changed Successfully");
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const LoginScreen()));
+        });
+      } on CustomHttpException catch (e) {
+        setState(() {
+          _isLoading = false;
+        });
+        showScaffoldMessanger(context: context, errorMessage: e.toString());
+      } catch (e) {
+        setState(() {
+          _isLoading = false;
+        });
+        showScaffoldMessanger(
+            context: context, errorMessage: "Please Try Again Later");
+      }
+    }
   }
 }

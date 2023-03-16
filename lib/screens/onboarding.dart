@@ -70,7 +70,7 @@ class OnBoardingScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => const LoginScreen()));
                     },
                     child: Container(
@@ -93,7 +93,7 @@ class OnBoardingScreen extends StatelessWidget {
                   //
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => const PhoneRegisterScreen()));
                     },
                     child: const Text(

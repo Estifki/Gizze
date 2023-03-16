@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Ashewa Delivery',
+          title: 'Gizze',
           theme: ThemeData.dark().copyWith(
               primaryColor: Colors.black,
               scaffoldBackgroundColor: Colors.black,

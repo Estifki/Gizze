@@ -23,9 +23,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-          leading: GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
-              child: const Icon(Icons.arrow_back_ios_new, size: 22)),
+          automaticallyImplyLeading: false,
+          // leading: GestureDetector(
+          //     onTap: () => Navigator.of(context).pop(),
+          //     child: const Icon(Icons.arrow_back_ios_new, size: 22)),
           title: const Text("Sign Up"),
           centerTitle: true),
       body: SingleChildScrollView(
