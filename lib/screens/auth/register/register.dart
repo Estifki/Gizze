@@ -1,6 +1,10 @@
+import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../const/const.dart';
+import '../../../provider/auth.dart';
+import '../../../uitil/http_error.dart';
 import '../../../widget/textfield.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -12,10 +16,10 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _nameController = TextEditingController();
-
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  bool _isLoading = false;
   bool checkBoxValue = false;
 
   @override
@@ -95,21 +99,81 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ]),
               ),
               const SizedBox(height: 20),
-              Container(
-                height: 46,
-                width: screenSize.width * 0.9,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6.0),
-                    color: AppColor.primaryColor),
-                child: const Text(
-                  "Sign Up",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 19, color: Colors.white),
-                ),
-              ),
+              _isLoading
+                  ? Center(
+                      child: Transform.scale(
+                        scale: 0.6,
+                        child: const CircularProgressIndicator(),
+                      ),
+                    )
+                  : GestureDetector(
+                      onTap: () => validate(),
+                      child: Container(
+                        height: 46,
+                        width: screenSize.width * 0.9,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6.0),
+                            color: AppColor.primaryColor),
+                        child: const Text(
+                          "Sign Up",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 19, color: Colors.white),
+                        ),
+                      ),
+                    ),
             ]),
       ),
     );
+  }
+
+  void validate() async {
+    if (_nameController.text.length < 2) {
+      showScaffoldMessanger(context: context, errorMessage: "Invalid Name");
+    } else if (!RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
+        .hasMatch(_emailController.text)) {
+      showScaffoldMessanger(context: context, errorMessage: "Invalid email");
+    } else if (_passwordController.text.length < 6) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Password must be at least 6 digit.");
+    } else if (_passwordController.text != _confirmPasswordController.text) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Password don not match");
+    } else {
+      try {
+        FocusScope.of(context).unfocus();
+        setState(() {
+          _isLoading = true;
+        });
+        await Provider.of<AuthProvider>(context, listen: false)
+            .register(
+                name: _nameController.text,
+                email: _emailController.text,
+                password: _passwordController.text,
+                confirmPassword: _confirmPasswordController.text)
+            .then((_) {
+          setState(() {
+            _isLoading = false;
+          });
+          showScaffoldMessanger(
+              context: context,
+              backgroundColor: Colors.green,
+              errorMessage: "User Registered Successfully");
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
+        });
+      } on CustomHttpException catch (e) {
+        setState(() {
+          _isLoading = false;
+        });
+        showScaffoldMessanger(context: context, errorMessage: e.toString());
+      } catch (e) {
+        setState(() {
+          _isLoading = false;
+        });
+        showScaffoldMessanger(
+            context: context, errorMessage: "Please Try Again Later");
+      }
+    }
   }
 }

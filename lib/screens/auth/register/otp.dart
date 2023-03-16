@@ -9,8 +9,8 @@ import '../../../uitil/http_error.dart';
 import '../../../widget/otp.dart';
 
 class VerifyOtpForRegisterScreen extends StatefulWidget {
-  String phone;
-  VerifyOtpForRegisterScreen({required this.phone});
+  final String phone;
+  const VerifyOtpForRegisterScreen({required this.phone});
   @override
   State<VerifyOtpForRegisterScreen> createState() =>
       _VerifyOtpForRegisterScreenState();
@@ -78,44 +78,7 @@ class _VerifyOtpForRegisterScreenState
                       ),
                     )
                   : GestureDetector(
-                      onTap: () async {
-                        String userInput =
-                            "${_otpController1.text}${_otpController2.text}${_otpController3.text}${_otpController4.text}";
-                        if (userInput.length < 4) {
-                        } else {
-                          try {
-                            setState(() {
-                              _isLoading = true;
-                            });
-                            await Provider.of<AuthProvider>(context,
-                                    listen: false)
-                                .verifyOtp(
-                                    isForRegister: true,
-                                    phone: widget.phone,
-                                    code: userInput)
-                                .then((_) {
-                              setState(() {
-                                _isLoading = false;
-                              });
-                              print("sucecuss");
-                              // Navigator.of(context).pushNamedAndRemoveUntil(
-                              //     AppRoutes.passwordRegister, (route) => false);
-                            });
-                          } on CustomHttpException catch (e) {
-                            showScaffoldMessanger(
-                                context: context, errorMessage: e.toString());
-                            setState(() {
-                              _isLoading = false;
-                            });
-                          } catch (e) {
-                            setState(() {
-                              _isLoading = false;
-                            });
-                            showScaffoldMessanger(
-                                context: context, errorMessage: e.toString());
-                          }
-                        }
-                      },
+                      onTap: () {},
                       child: Container(
                         height: 46,
                         width: screenSize.width * 0.9,
@@ -135,5 +98,40 @@ class _VerifyOtpForRegisterScreenState
         ),
       ),
     );
+  }
+
+  void validate() async {
+    String userInput =
+        "${_otpController1.text}${_otpController2.text}${_otpController3.text}${_otpController4.text}";
+    if (userInput.length < 4) {
+    } else {
+      try {
+        setState(() {
+          _isLoading = true;
+        });
+        await Provider.of<AuthProvider>(context, listen: false)
+            .verifyOtp(
+                isForRegister: true, phone: widget.phone, code: userInput)
+            .then((_) {
+          setState(() {
+            _isLoading = false;
+          });
+
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              AppRoute.registerScreen, (route) => false);
+        });
+      } on CustomHttpException catch (e) {
+        showScaffoldMessanger(context: context, errorMessage: e.toString());
+        setState(() {
+          _isLoading = false;
+        });
+      } catch (_) {
+        setState(() {
+          _isLoading = false;
+        });
+        showScaffoldMessanger(
+            context: context, errorMessage: "Please Try Again Later");
+      }
+    }
   }
 }

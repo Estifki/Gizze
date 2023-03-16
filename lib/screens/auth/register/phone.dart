@@ -30,9 +30,10 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-          leading: GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
-              child: const Icon(Icons.arrow_back_ios_new, size: 22)),
+          automaticallyImplyLeading: false,
+          // leading: GestureDetector(
+          //     onTap: () => Navigator.of(context).pop(),
+          //     child: const Icon(Icons.arrow_back_ios_new, size: 22)),
           title: const Text("Sign Up"),
           centerTitle: true),
       body: SingleChildScrollView(
@@ -131,20 +132,21 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
           setState(() {
             _isLoading = false;
           });
-          Navigator.of(context).pushReplacement(MaterialPageRoute(
+          Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => VerifyOtpForRegisterScreen(
                   phone: "251${_phoneController.text}")));
         });
-      } on CustomHttpException catch (_) {
+      } on CustomHttpException catch (e) {
         setState(() {
           _isLoading = false;
         });
-        showScaffoldMessanger(context: context, errorMessage: "errorMessage");
+        showScaffoldMessanger(context: context, errorMessage: e.toString());
       } catch (_) {
         setState(() {
           _isLoading = false;
         });
-        showScaffoldMessanger(context: context, errorMessage: "errorMessage");
+        showScaffoldMessanger(
+            context: context, errorMessage: "Please Try Again Later");
       }
     }
   }

@@ -1,6 +1,7 @@
 import 'package:ashewa_d/const/const.dart';
 import 'package:ashewa_d/provider/auth.dart';
 import 'package:ashewa_d/screens/auth/forget/new_password.dart';
+import 'package:ashewa_d/screens/auth/register/register.dart';
 import 'package:ashewa_d/screens/home.dart';
 import 'package:ashewa_d/screens/onboarding.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
           routes: {
             AppRoute.home: (_) => const HomeScreen(),
             AppRoute.newPassword: (_) => const NewPasswordScreen(),
+            AppRoute.registerScreen: (_) => const RegisterScreen(),
           }),
     );
   }

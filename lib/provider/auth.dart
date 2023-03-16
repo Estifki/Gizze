@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class AuthProvider with ChangeNotifier {
-  // String? tokenForRegister;
-  // String? tokenForForget;
   String? token;
   String? userID;
 
@@ -25,7 +23,9 @@ class AuthProvider with ChangeNotifier {
       final decodedData = jsonDecode(response.body);
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
-      } else {}
+      } else {
+        userID = decodedData['data']["user"]["id"];
+      }
     } catch (_) {
       rethrow;
     }
@@ -111,9 +111,12 @@ class AuthProvider with ChangeNotifier {
           },
           body: jsonEncode({"phone": phone}));
 
+      print(response.statusCode);
       print(response.body);
-      if (response.statusCode != 200) {
-        throw CustomHttpException(errorMessage: "errorMessage");
+
+      final decodedData = jsonDecode(response.body);
+      if (response.statusCode != 201) {
+        throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {}
     } catch (e) {
       rethrow;
@@ -123,23 +126,25 @@ class AuthProvider with ChangeNotifier {
   Future<void> register(
       {required String name,
       required String email,
-      required String password}) async {
+      required String password,
+      required String confirmPassword}) async {
     String url = "${BaseUrl.appUrl}/finish-register";
     try {
       http.Response response = await http.post(Uri.parse(url),
           headers: {
             "Content-Type": "application/json",
+            "Accept": "application/json",
             HttpHeaders.authorizationHeader: "Bearer $token"
           },
           body: jsonEncode({
             "name": name,
             "email": email,
             "password": password,
-            "confirm_password": password
+            "confirm_password": confirmPassword
           }));
       final decodedData = jsonDecode(response.body);
       if (response.statusCode != 201) {
-        //throw
+        throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
         userID = decodedData['data']["user"]["id"];
       }

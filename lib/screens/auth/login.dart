@@ -151,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 bottom: screenSize.height * 0.0,
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) => const PhoneRegisterScreen()));
                   },
                   child: const Text(

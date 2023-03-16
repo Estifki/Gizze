@@ -101,14 +101,14 @@ class _VerifyOtpForForgotScreenState extends State<VerifyOtpForForgotScreen> {
   }
 
   void validate() async {
-    if (_otpController4.text.isEmpty) {
+    String userInput =
+        "${_otpController1.text}${_otpController2.text}${_otpController3.text}${_otpController4.text}";
+    if (userInput.length < 4) {
     } else {
       setState(() {
         _isLoading = true;
       });
       try {
-        String userInput =
-            "${_otpController1.text}${_otpController2.text}${_otpController3.text}${_otpController4.text}";
         await Provider.of<AuthProvider>(context, listen: false)
             .verifyOtp(
                 isForRegister: false, phone: widget.phone, code: userInput)
