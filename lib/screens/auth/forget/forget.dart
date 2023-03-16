@@ -113,6 +113,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       showScaffoldMessanger(
           context: context, errorMessage: "Invalid Phone Number");
     } else {
+      FocusScope.of(context).unfocus();
       setState(() {
         _isLoading = true;
       });

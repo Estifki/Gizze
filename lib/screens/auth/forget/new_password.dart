@@ -94,10 +94,11 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
       showScaffoldMessanger(
           context: context, errorMessage: "Password don not match");
     } else {
-      setState(() {
-        _isLoading = false;
-      });
       try {
+        FocusScope.of(context).unfocus();
+        setState(() {
+          _isLoading = true;
+        });
         await Provider.of<AuthProvider>(context, listen: false)
             .changePassword(
                 newPassword: _passwordController.text,

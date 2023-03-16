@@ -178,21 +178,21 @@ class _LoginScreenState extends State<LoginScreen> {
         _isLoading = true;
       });
       try {
+        FocusScope.of(context).unfocus();
         await Provider.of<AuthProvider>(context, listen: false)
             .signIn("251${_phoneController.text}", _passwordController.text)
             .then((_) {
           setState(() {
             _isLoading = false;
           });
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const HomeScreen()));
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
         });
-      } on CustomHttpException catch (_) {
+      } on CustomHttpException catch (e) {
         setState(() {
           _isLoading = false;
         });
-        showScaffoldMessanger(
-            context: context, errorMessage: "Try Again Later");
+        showScaffoldMessanger(context: context, errorMessage: e.toString());
       } catch (e) {
         setState(() {
           _isLoading = false;

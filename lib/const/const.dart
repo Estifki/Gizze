@@ -69,3 +69,8 @@ List<ProductM> data = [
           "is simply dummy text of the printing and type setting industry. Lorem Ipsum has been the industry's standard dummy",
       imageUrl: "assets/pngimg3.png"),
 ];
+
+class AppRoute {
+  static const String home = "/home";
+  static const String newPassword = "/newPassword";
+}

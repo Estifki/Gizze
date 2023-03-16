@@ -79,37 +79,7 @@ class _VerifyOtpForForgotScreenState extends State<VerifyOtpForForgotScreen> {
                         ),
                       )
                     : GestureDetector(
-                        // onTap: () async {
-                        //   try {
-                        //     setState(() {
-                        //       _isLoading = true;
-                        //     });
-                        //     await Provider.of<AuthProvider>(context, listen: false)
-                        //         .verifyOtp(phone: "251${_p}")
-                        //         .then((_) {
-                        //       _otpController1.clear();
-                        //       _otpController2.clear();
-                        //       _otpController3.clear();
-                        //       _otpController4.clear();
-                        //       showInfoReposnse(
-                        //           context: context, title: "Verification Code resent");
-                        //       setState(() {
-                        //         _isResendLoading = false;
-                        //       });
-                        //     });
-                        //   } catch (_) {
-                        // _otpController1.clear();
-                        // _otpController2.clear();
-                        // _otpController3.clear();
-                        // _otpController4.clear();
-                        // showErrorReposnse(
-                        //     context: context, title: "Please Try Again Later!");
-                        // setState(() {
-                        //   _isResendLoading = false;
-                        // });
-                        //   }
-                        // },
-                        onTap: () {},
+                        onTap: () => validate(),
                         child: Container(
                           height: 46,
                           width: screenSize.width * 0.9,
@@ -146,8 +116,8 @@ class _VerifyOtpForForgotScreenState extends State<VerifyOtpForForgotScreen> {
           setState(() {
             _isLoading = false;
           });
-          Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => const NewPasswordScreen()));
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(AppRoute.newPassword, (route) => false);
         });
       } on CustomHttpException catch (e) {
         _otpController1.clear();

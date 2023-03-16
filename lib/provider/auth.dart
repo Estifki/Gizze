@@ -22,9 +22,9 @@ class AuthProvider with ChangeNotifier {
             "Accept": "application/json"
           },
           body: jsonEncode({"phone": phone, "password": password}));
-
+      final decodedData = jsonDecode(response.body);
       if (response.statusCode != 201) {
-        throw CustomHttpException(errorMessage: "Please Try Again Later");
+        throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {}
     } catch (_) {
       rethrow;
@@ -35,7 +35,13 @@ class AuthProvider with ChangeNotifier {
     String url = "${BaseUrl.appUrl}/reset-password";
 
     try {
-      http.Response response = await http.post(Uri.parse(url));
+      http.Response response = await http.post(Uri.parse(url),
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: jsonEncode({"phone": phone}));
+
       final decodedData = jsonDecode(response.body);
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
@@ -75,7 +81,6 @@ class AuthProvider with ChangeNotifier {
   Future<void> changePassword(
       {required newPassword, required confirmPassword}) async {
     String url = "${BaseUrl.appUrl}/create-password";
-
     try {
       http.Response response = await http.post(Uri.parse(url),
           headers: {
@@ -88,8 +93,7 @@ class AuthProvider with ChangeNotifier {
             "new_confirm_password": confirmPassword
           }));
       final decodedData = jsonDecode(response.body);
-
-      if (response.statusCode != 201) {
+      if (response.statusCode != 200) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       }
     } catch (_) {
@@ -121,7 +125,6 @@ class AuthProvider with ChangeNotifier {
       required String email,
       required String password}) async {
     String url = "${BaseUrl.appUrl}/finish-register";
-    print("token from Register: $token");
     try {
       http.Response response = await http.post(Uri.parse(url),
           headers: {
