@@ -73,4 +73,6 @@ List<ProductM> data = [
 class AppRoute {
   static const String home = "/home";
   static const String newPassword = "/newPassword";
+
+  static const String registerScreen = "/registerScreen";
 }
