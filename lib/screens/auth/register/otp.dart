@@ -46,55 +46,57 @@ class _VerifyOtpForRegisterScreenState
       body: SingleChildScrollView(
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: screenSize.height * 0.04),
-              const Text(
-                "Get Your Code",
-                style: TextStyle(fontSize: 25),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 20, right: 20.0, top: 10),
-                child: Text(
-                  "Lorem Lorem Lorem Lore Lorem",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18),
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: screenSize.height * 0.04),
+                const Text(
+                  "Get Your Code",
+                  style: TextStyle(fontSize: 25),
                 ),
-              ),
-              const SizedBox(height: 30),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                OtpInputWidget(otpController: _otpController1),
-                OtpInputWidget(otpController: _otpController2),
-                OtpInputWidget(otpController: _otpController3),
-                OtpInputWidget(otpController: _otpController4, isLast: true),
-              ]),
-              const SizedBox(height: 20),
-              _isLoading
-                  ? Center(
-                      child: Transform.scale(
-                        scale: 0.6,
-                        child: const CircularProgressIndicator(),
-                      ),
-                    )
-                  : GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        height: 46,
-                        width: screenSize.width * 0.9,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6.0),
-                            color: AppColor.primaryColor),
-                        child: const Text(
-                          "Verify Phone Number",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 19, color: Colors.white),
+                const Padding(
+                  padding: EdgeInsets.only(left: 20, right: 20.0, top: 10),
+                  child: Text(
+                    "Lorem Lorem Lorem Lore Lorem",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      OtpInputWidget(otpController: _otpController1),
+                      OtpInputWidget(otpController: _otpController2),
+                      OtpInputWidget(otpController: _otpController3),
+                      OtpInputWidget(
+                          otpController: _otpController4, isLast: true),
+                    ]),
+                const SizedBox(height: 20),
+                _isLoading
+                    ? Center(
+                        child: Transform.scale(
+                          scale: 0.6,
+                          child: const CircularProgressIndicator(),
+                        ),
+                      )
+                    : GestureDetector(
+                        onTap: () => validate(),
+                        child: Container(
+                          height: 46,
+                          width: screenSize.width * 0.9,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6.0),
+                              color: AppColor.primaryColor),
+                          child: const Text(
+                            "Verify Phone Number",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 19, color: Colors.white),
+                          ),
                         ),
                       ),
-                    ),
-            ],
-          ),
+              ]),
         ),
       ),
     );

@@ -139,6 +139,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     } else if (_passwordController.text != _confirmPasswordController.text) {
       showScaffoldMessanger(
           context: context, errorMessage: "Password don not match");
+    } else if (checkBoxValue == false) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Term and Conditions Not Agreed");
     } else {
       try {
         FocusScope.of(context).unfocus();

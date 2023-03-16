@@ -122,10 +122,11 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
     if (_phoneController.text.length != 9) {
       showScaffoldMessanger(context: context, errorMessage: "Invalid Phone");
     } else {
-      setState(() {
-        _isLoading = true;
-      });
       try {
+        FocusScope.of(context).unfocus();
+        setState(() {
+          _isLoading = true;
+        });
         await Provider.of<AuthProvider>(context, listen: false)
             .phoneRegister(phone: "251${_phoneController.text}")
             .then((_) {
