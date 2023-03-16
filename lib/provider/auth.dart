@@ -111,9 +111,7 @@ class AuthProvider with ChangeNotifier {
           },
           body: jsonEncode({"phone": phone}));
 
-      print(response.statusCode);
-      print(response.body);
-
+     
       final decodedData = jsonDecode(response.body);
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: decodedData["data"]);

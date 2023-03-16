@@ -6,11 +6,10 @@ import 'package:provider/provider.dart';
 
 import '../../../const/const.dart';
 import '../../../widget/otp.dart';
-import 'new_password.dart';
 
 class VerifyOtpForForgotScreen extends StatefulWidget {
   final String phone;
-  VerifyOtpForForgotScreen({required this.phone});
+  const VerifyOtpForForgotScreen({required this.phone, super.key});
   @override
   State<VerifyOtpForForgotScreen> createState() =>
       _VerifyOtpForForgotScreenState();

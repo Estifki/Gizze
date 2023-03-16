@@ -1,4 +1,4 @@
-import 'package:ashewa_d/screens/auth/register/register.dart';
+
 import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +10,7 @@ import '../../../widget/otp.dart';
 
 class VerifyOtpForRegisterScreen extends StatefulWidget {
   final String phone;
-  const VerifyOtpForRegisterScreen({required this.phone});
+  const VerifyOtpForRegisterScreen({required this.phone,super.key});
   @override
   State<VerifyOtpForRegisterScreen> createState() =>
       _VerifyOtpForRegisterScreenState();
