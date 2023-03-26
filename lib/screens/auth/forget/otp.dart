@@ -38,7 +38,8 @@ class _VerifyOtpForForgotScreenState extends State<VerifyOtpForForgotScreen> {
           leading: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
               child: const Icon(Icons.arrow_back_ios_new, size: 22)),
-          title: const Text("Phone Verification"),
+          title: const Text("Phone Verification",
+              style: TextStyle(color: Colors.black)),
           centerTitle: true),
       body: SingleChildScrollView(
         child: Center(

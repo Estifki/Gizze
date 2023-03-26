@@ -31,8 +31,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       appBar: AppBar(
           leading: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
-              child: const Icon(Icons.arrow_back_ios_new, size: 22)),
-          title: const Text("Forgot Password"),
+              child: const Icon(Icons.arrow_back_ios_new,
+                  size: 22, color: Colors.black)),
+          title: const Text("Forgot Password",
+              style: TextStyle(color: Colors.black)),
           centerTitle: true),
       body: SingleChildScrollView(
         child: Center(

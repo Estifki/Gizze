@@ -1,4 +1,3 @@
-
 import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +9,7 @@ import '../../../widget/otp.dart';
 
 class VerifyOtpForRegisterScreen extends StatefulWidget {
   final String phone;
-  const VerifyOtpForRegisterScreen({required this.phone,super.key});
+  const VerifyOtpForRegisterScreen({required this.phone, super.key});
   @override
   State<VerifyOtpForRegisterScreen> createState() =>
       _VerifyOtpForRegisterScreenState();
@@ -41,7 +40,8 @@ class _VerifyOtpForRegisterScreenState
           leading: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
               child: const Icon(Icons.arrow_back_ios_new, size: 22)),
-          title: const Text("Phone Verification"),
+          title: const Text("Phone Verification",
+              style: TextStyle(color: Colors.black)),
           centerTitle: true),
       body: SingleChildScrollView(
         child: Center(

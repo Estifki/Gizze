@@ -4,38 +4,42 @@ class CustomOnboardingWidget extends StatelessWidget {
   final String title;
   final String description;
   final String imageUrl;
-  final bool isima;
-  const CustomOnboardingWidget(
-      {super.key,
-      required this.title,
-      required this.description,
-      required this.imageUrl,
-      this.isima = false});
+  // final bool isima;
+  const CustomOnboardingWidget({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.imageUrl,
+    // this.isima = false
+  });
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Container(
-      color: Colors.black,
+      color: Colors.white,
+      // color: Colors.black,
       child: Stack(alignment: Alignment.center, children: [
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            isima
-                ? Container(
-                    height: screenSize.height * 0.6,
-                    width: screenSize.width,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(imageUrl), fit: BoxFit.fitWidth)),
-                  )
-                : SizedBox(
-                    height: screenSize.height * 0.42,
-                    width: screenSize.width,
-                  ),
+            // isima
+            //     ? Container(
+            //         height: screenSize.height * 0.6,
+            //         width: screenSize.width,
+            //         decoration: BoxDecoration(
+            //             image: DecorationImage(
+            //                 image: AssetImage(imageUrl), fit: BoxFit.fitWidth)),
+            //       )
+            //     :
+            Container(
+              height: screenSize.height * 0.46,
+              width: screenSize.width,
+              color: Colors.black,
+            ),
             // ),
             Padding(
-              padding: EdgeInsets.only(top: screenSize.height * 0.08),
+              padding: EdgeInsets.only(top: screenSize.height * 0.04),
               child: Text(
                 title,
                 style:
@@ -59,8 +63,8 @@ class CustomOnboardingWidget extends StatelessWidget {
         //Cenetr Image View
         //
         Positioned(
-            top: screenSize.height * 0.22,
-            child: Image.asset(imageUrl, height: 150)),
+            top: screenSize.height * 0.2,
+            child: Image.asset(imageUrl, height: 170)),
       ]),
     );
   }

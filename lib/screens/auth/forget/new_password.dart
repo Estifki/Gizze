@@ -28,7 +28,8 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
         //   onTap: () => Navigator.of(context).pop(),
         //   child: const Icon(Icons.arrow_back_ios_new, size: 22),
         // ),
-        title: const Text("Reset Password"),
+        title:
+            const Text("Reset Password", style: TextStyle(color: Colors.black)),
         centerTitle: true,
       ),
       body: SafeArea(

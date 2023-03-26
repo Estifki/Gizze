@@ -31,7 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           // leading: GestureDetector(
           //     onTap: () => Navigator.of(context).pop(),
           //     child: const Icon(Icons.arrow_back_ios_new, size: 22)),
-          title: const Text("Sign Up"),
+          title: const Text("Sign Up", style: TextStyle(color: Colors.black)),
           centerTitle: true),
       body: SingleChildScrollView(
         child: Column(

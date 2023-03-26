@@ -19,7 +19,7 @@ class CustomTextFieldWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(6)),
       child: TextField(
         controller: controller,
-        keyboardType: TextInputType.phone,
+        // keyboardType: TextInputType.phone,
         decoration: InputDecoration(
             border: InputBorder.none,
             counterText: "",
