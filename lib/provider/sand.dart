@@ -9,14 +9,14 @@ import '../model/sand.dart';
 import 'package:http/http.dart' as http;
 
 class SandProvider with ChangeNotifier {
-  List<Favorite> _favSand = [];
-  List<Favorite> _sand = [];
+final  List<Favorite> _favSand = [];
+final  List<Favorite> _sand = [];
 
   List<Favorite> get favoriteSand => [..._favSand];
   List<Favorite> get featuredSand => [..._sand];
 
   Future<void> getSand() async {
-    String url = "${AppConst.AppUrl}/home-sands";
+    String url = "${AppConst.appUrl}/home-sands";
 
     try {
       http.Response response = await http.get(

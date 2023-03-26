@@ -11,7 +11,7 @@ class AuthProvider with ChangeNotifier {
   String? userID;
 
   Future<void> signIn(String phone, String password) async {
-    String url = "${AppConst.AppUrl}/login";
+    String url = "${AppConst.appUrl}/login";
 
     try {
       http.Response response = await http.post(Uri.parse(url),
@@ -32,7 +32,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> resetPassword(String phone) async {
-    String url = "${AppConst.AppUrl}/reset-password";
+    String url = "${AppConst.appUrl}/reset-password";
 
     try {
       http.Response response = await http.post(Uri.parse(url),
@@ -56,8 +56,8 @@ class AuthProvider with ChangeNotifier {
       required String phone,
       required String code}) async {
     String url = isForRegister
-        ? "${AppConst.AppUrl}/verify-otp"
-        : "${AppConst.AppUrl}/verify-password";
+        ? "${AppConst.appUrl}/verify-otp"
+        : "${AppConst.appUrl}/verify-password";
 
     try {
       http.Response response = await http.post(Uri.parse(url),
@@ -80,7 +80,7 @@ class AuthProvider with ChangeNotifier {
 
   Future<void> changePassword(
       {required newPassword, required confirmPassword}) async {
-    String url = "${AppConst.AppUrl}/create-password";
+    String url = "${AppConst.appUrl}/create-password";
     try {
       http.Response response = await http.post(Uri.parse(url),
           headers: {
@@ -102,7 +102,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> phoneRegister({required String phone}) async {
-    String url = "${AppConst.AppUrl}/register";
+    String url = "${AppConst.appUrl}/register";
     try {
       http.Response response = await http.post(Uri.parse(url),
           headers: {
@@ -125,7 +125,7 @@ class AuthProvider with ChangeNotifier {
       required String email,
       required String password,
       required String confirmPassword}) async {
-    String url = "${AppConst.AppUrl}/finish-register";
+    String url = "${AppConst.appUrl}/finish-register";
     try {
       http.Response response = await http.post(Uri.parse(url),
           headers: {

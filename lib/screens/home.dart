@@ -2,6 +2,7 @@ import 'package:ashewa_d/provider/sand.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../uitil/shimmer/home.dart';
 import '../widget/home/appbar.dart';
 import '../widget/home/favorite.dart';
 import '../widget/home/featured.dart';
@@ -36,10 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
           future: _sandData,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return const HomeShimmer();
+              // return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return const Center(child: Text("Unknown Error"));
             } else {
+              // return HomeShimmer();
               return SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -53,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     // Favourite
                     //
                     Padding(
-                      padding: EdgeInsets.only(left: 20.0, top: 20),
+                      padding: EdgeInsets.only(left: 16.0, top: 20),
                       child: Text(
                         "Favorites",
                         style: TextStyle(
@@ -69,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     //
 
                     Padding(
-                      padding: EdgeInsets.only(left: 20.0, top: 20),
+                      padding: EdgeInsets.only(left: 16.0, top: 20),
                       child: Text(
                         "Featured Products",
                         style: TextStyle(
