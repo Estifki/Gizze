@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           //     primaryColor: Colors.black,
           //     scaffoldBackgroundColor: Colors.black,
           //     appBarTheme: const AppBarTheme(backgroundColor: Colors.black)),
-          home: HomeScreen(),
+          home: OnBoardingScreen(),
           routes: {
             AppRoute.home: (_) => const HomeScreen(),
             AppRoute.newPassword: (_) => const NewPasswordScreen(),

@@ -25,7 +25,7 @@ class FeaturedProductWidget extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0)),
               child: Container(
-                height: screenSize.height * 0.23,
+                height: screenSize.height * 0.25,
                 width: screenSize.width,
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -59,7 +59,7 @@ class FeaturedProductWidget extends StatelessWidget {
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold),
                               ),
-                              const SizedBox(height: 5),
+                              const SizedBox(height: 3),
                               //
                               //Product Descrption
                               //
@@ -71,7 +71,7 @@ class FeaturedProductWidget extends StatelessWidget {
                                     color: Colors.black),
                               ),
 
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 6),
                               //
                               //address and price
                               //
