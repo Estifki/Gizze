@@ -21,7 +21,11 @@ class AddressAndPriceWidget extends StatelessWidget {
           const SizedBox(width: 3),
           Text(
             title,
-            style: const TextStyle(fontSize: 13, color: Colors.black),
+            maxLines: 1,
+            style: const TextStyle(
+                fontSize: 13,
+                color: Colors.black,
+                overflow: TextOverflow.ellipsis),
           ),
         ]);
   }

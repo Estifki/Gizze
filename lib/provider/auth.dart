@@ -11,7 +11,7 @@ class AuthProvider with ChangeNotifier {
   String? userID;
 
   Future<void> signIn(String phone, String password) async {
-    String url = "${BaseUrl.appUrl}/login";
+    String url = "${AppConst.AppUrl}/login";
 
     try {
       http.Response response = await http.post(Uri.parse(url),
@@ -32,7 +32,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> resetPassword(String phone) async {
-    String url = "${BaseUrl.appUrl}/reset-password";
+    String url = "${AppConst.AppUrl}/reset-password";
 
     try {
       http.Response response = await http.post(Uri.parse(url),
@@ -56,8 +56,8 @@ class AuthProvider with ChangeNotifier {
       required String phone,
       required String code}) async {
     String url = isForRegister
-        ? "${BaseUrl.appUrl}/verify-otp"
-        : "${BaseUrl.appUrl}/verify-password";
+        ? "${AppConst.AppUrl}/verify-otp"
+        : "${AppConst.AppUrl}/verify-password";
 
     try {
       http.Response response = await http.post(Uri.parse(url),
@@ -80,7 +80,7 @@ class AuthProvider with ChangeNotifier {
 
   Future<void> changePassword(
       {required newPassword, required confirmPassword}) async {
-    String url = "${BaseUrl.appUrl}/create-password";
+    String url = "${AppConst.AppUrl}/create-password";
     try {
       http.Response response = await http.post(Uri.parse(url),
           headers: {
@@ -102,7 +102,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> phoneRegister({required String phone}) async {
-    String url = "${BaseUrl.appUrl}/register";
+    String url = "${AppConst.AppUrl}/register";
     try {
       http.Response response = await http.post(Uri.parse(url),
           headers: {
@@ -111,7 +111,6 @@ class AuthProvider with ChangeNotifier {
           },
           body: jsonEncode({"phone": phone}));
 
-     
       final decodedData = jsonDecode(response.body);
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
@@ -126,7 +125,7 @@ class AuthProvider with ChangeNotifier {
       required String email,
       required String password,
       required String confirmPassword}) async {
-    String url = "${BaseUrl.appUrl}/finish-register";
+    String url = "${AppConst.AppUrl}/finish-register";
     try {
       http.Response response = await http.post(Uri.parse(url),
           headers: {

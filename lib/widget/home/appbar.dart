@@ -19,23 +19,23 @@ class CustomHomeAppBarWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 20.0, right: 20, top: 10),
               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const CircleAvatar(
-                      radius: 23,
-                      backgroundColor: AppColor.primaryColor,
-                    ),
+                    // const CircleAvatar(
+                    //   radius: 20,
+                    //   backgroundColor: AppColor.primaryColor,
+                    // ),
                     SizedBox(
-                      height: 56,
-                      width: 56,
+                      height: 50,
+                      width: 50,
                       child: Image.asset("assets/Artboard 3-1.png",
                           fit: BoxFit.cover, color: Colors.white),
                     ),
                     const Icon(Icons.more_vert, size: 30)
                   ]),
             ),
-            const SizedBox(height: 25),
+            const SizedBox(height: 40),
             Center(
               child: Container(
                 height: 40,

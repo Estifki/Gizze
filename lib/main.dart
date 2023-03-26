@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:ashewa_d/const/const.dart';
 import 'package:ashewa_d/provider/auth.dart';
+import 'package:ashewa_d/provider/sand.dart';
 import 'package:ashewa_d/screens/auth/forget/new_password.dart';
 import 'package:ashewa_d/screens/auth/register/register.dart';
 import 'package:ashewa_d/screens/home.dart';
@@ -23,7 +24,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => SandProvider())
+      ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Gizze',
@@ -35,7 +39,7 @@ class MyApp extends StatelessWidget {
           //     primaryColor: Colors.black,
           //     scaffoldBackgroundColor: Colors.black,
           //     appBarTheme: const AppBarTheme(backgroundColor: Colors.black)),
-          home: OnBoardingScreen(),
+          home: HomeScreen(),
           routes: {
             AppRoute.home: (_) => const HomeScreen(),
             AppRoute.newPassword: (_) => const NewPasswordScreen(),
