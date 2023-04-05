@@ -4,6 +4,7 @@ import 'package:ashewa_d/const/const.dart';
 import 'package:ashewa_d/provider/auth.dart';
 import 'package:ashewa_d/provider/sand.dart';
 import 'package:ashewa_d/screens/auth/forget/new_password.dart';
+import 'package:ashewa_d/screens/auth/login.dart';
 import 'package:ashewa_d/screens/auth/register/register.dart';
 import 'package:ashewa_d/screens/home.dart';
 import 'package:ashewa_d/screens/onboarding.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
           //     primaryColor: Colors.black,
           //     scaffoldBackgroundColor: Colors.black,
           //     appBarTheme: const AppBarTheme(backgroundColor: Colors.black)),
-          home: OnBoardingScreen(),
+          home: LoginScreen(),
           routes: {
             AppRoute.home: (_) => const HomeScreen(),
             AppRoute.newPassword: (_) => const NewPasswordScreen(),

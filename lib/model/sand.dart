@@ -17,7 +17,7 @@ class SandModel {
   });
 
   bool success;
-  String message;
+  dynamic message;
   int status;
   Data data;
 
@@ -105,13 +105,13 @@ class Location {
   });
 
   dynamic locationName;
-  double latitude;
-  double longitude;
+  dynamic latitude;
+  dynamic longitude;
 
   factory Location.fromJson(Map<String, dynamic> json) => Location(
         locationName: json["locationName"],
-        latitude: json["latitude"]?.toDouble(),
-        longitude: json["longitude"]?.toDouble(),
+        latitude: json["latitude"],
+        longitude: json["longitude"],
       );
 
   Map<String, dynamic> toJson() => {

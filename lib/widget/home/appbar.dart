@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class CustomHomeAppBarWidget extends StatelessWidget {
   const CustomHomeAppBarWidget({super.key});
 
@@ -46,6 +45,7 @@ class CustomHomeAppBarWidget extends StatelessWidget {
                   textAlignVertical: TextAlignVertical.center,
                   cursorColor: Colors.grey.withOpacity(0.7),
                   cursorWidth: 1.0,
+                  style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                       isCollapsed: true,
                       border: InputBorder.none,

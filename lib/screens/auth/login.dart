@@ -19,8 +19,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _phoneController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _phoneController = TextEditingController(text: "919191061");
+  final _passwordController = TextEditingController(text: "123456");
   FocusNode focusNode = FocusNode();
   bool _isLoading = false;
 

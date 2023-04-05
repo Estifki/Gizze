@@ -25,6 +25,7 @@ class AuthProvider with ChangeNotifier {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
         userID = decodedData['data']["user"]["id"];
+        token = decodedData['data']['token'];
       }
     } catch (_) {
       rethrow;

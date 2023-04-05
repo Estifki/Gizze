@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../provider/auth.dart';
 import '../uitil/shimmer/home.dart';
 import '../widget/home/appbar.dart';
 import '../widget/home/favorite.dart';
@@ -22,7 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     if (isInit) {
-      _sandData = Provider.of<SandProvider>(context, listen: false).getSand();
+      _sandData = Provider.of<SandProvider>(context, listen: false)
+          .getSand(Provider.of<AuthProvider>(context).token!);
       isInit = false;
     }
     super.didChangeDependencies();

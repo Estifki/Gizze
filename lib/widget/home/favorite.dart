@@ -1,5 +1,5 @@
-
 import 'package:ashewa_d/provider/sand.dart';
+import 'package:ashewa_d/widget/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -64,25 +64,38 @@ class HomeFavoriteWidget extends StatelessWidget {
                                     //
                                     //Order Now Button
                                     //
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            bottom: screenSize.height * 0.01),
-                                        child: Container(
-                                          height: screenSize.height * 0.032,
-                                          margin: const EdgeInsets.only(
-                                              left: 10, right: 10),
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                              color: AppColor.primaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(6.0)),
-                                          child: const Text("Order Now",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold),
-                                              textAlign: TextAlign.center),
-                                        ))
+                                    GestureDetector(
+                                      onTap: () => showMoreSandInfo(
+                                          context: context,
+                                          sandName:
+                                              value.favoriteSand[index].name,
+                                          sandDescription: value
+                                              .favoriteSand[index].description,
+                                          sandPrice:
+                                              value.favoriteSand[index].price,
+                                          sandImageUrl: value
+                                              .favoriteSand[index].sandImage),
+                                      child: Padding(
+                                          padding: EdgeInsets.only(
+                                              bottom: screenSize.height * 0.01),
+                                          child: Container(
+                                            height: screenSize.height * 0.032,
+                                            margin: const EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                                color: AppColor.primaryColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(6.0)),
+                                            child: const Text("Order Now",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                                textAlign: TextAlign.center),
+                                          )),
+                                    )
                                   ]),
                             )));
                   });
