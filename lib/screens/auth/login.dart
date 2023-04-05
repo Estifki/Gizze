@@ -19,8 +19,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _phoneController = TextEditingController(text: "919191061");
-  final _passwordController = TextEditingController(text: "123456");
+  final _phoneController = TextEditingController();
+  final _passwordController = TextEditingController();
   FocusNode focusNode = FocusNode();
   bool _isLoading = false;
 
@@ -104,7 +104,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   CustomTextFieldWidget(
                       hint: "Password",
                       controller: _passwordController,
-                      leftcontentPadding: 50),
+                      leftcontentPadding: 50,
+                      isObsquired: true),
                   //
                   //Sign In Button
                   //
@@ -176,11 +177,13 @@ class _LoginScreenState extends State<LoginScreen> {
     } else if (_passwordController.text.length < 6) {
       showScaffoldMessanger(
           context: context, errorMessage: "Password To Short");
-    } else if (_phoneController.text == "910111213" &&
-        _passwordController.text == "123456") {
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
-    } else {
+    }
+    //  else if (_phoneController.text == "910111213" &&
+    //     _passwordController.text == "123456") {
+    //   Navigator.of(context)
+    //       .pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
+    // }
+    else {
       setState(() {
         _isLoading = true;
       });

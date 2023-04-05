@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../const/const.dart';
+import '../bottom_sheet.dart';
 import 'adderss_price.dart';
 
 class FeaturedProductWidget extends StatelessWidget {
@@ -99,20 +100,30 @@ class FeaturedProductWidget extends StatelessWidget {
                               //Order Now Button
                               //
                               const SizedBox(height: 10),
-                              Container(
-                                width: screenSize.width,
-                                height: screenSize.height * 0.046,
-                                alignment: Alignment.center,
-                                margin: const EdgeInsets.only(right: 5.0),
-                                decoration: BoxDecoration(
-                                    color: AppColor.primaryColor,
-                                    borderRadius: BorderRadius.circular(6.0)),
-                                child: const Text("Order Now",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17,
-                                        color: Colors.white),
-                                    textAlign: TextAlign.center),
+                              GestureDetector(
+                                onTap: () => showMoreSandInfo(
+                                    context: context,
+                                    sandName: value.featuredSand[index].name,
+                                    sandDescription:
+                                        value.featuredSand[index].description,
+                                    sandPrice: value.featuredSand[index].price,
+                                    sandImageUrl:
+                                        value.featuredSand[index].sandImage),
+                                child: Container(
+                                  width: screenSize.width,
+                                  height: screenSize.height * 0.046,
+                                  alignment: Alignment.center,
+                                  margin: const EdgeInsets.only(right: 5.0),
+                                  decoration: BoxDecoration(
+                                      color: AppColor.primaryColor,
+                                      borderRadius: BorderRadius.circular(6.0)),
+                                  child: const Text("Order Now",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 17,
+                                          color: Colors.white),
+                                      textAlign: TextAlign.center),
+                                ),
                               )
                             ]),
                       ),

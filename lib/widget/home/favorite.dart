@@ -51,14 +51,18 @@ class HomeFavoriteWidget extends StatelessWidget {
                                     //
                                     //Product Name
                                     //
-                                    Text(
-                                      value.favoriteSand[index].name,
-                                      maxLines: 1,
-                                      style: const TextStyle(
-                                          overflow: TextOverflow.ellipsis,
-                                          color: Colors.black,
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 5.0, right: 5),
+                                      child: Text(
+                                        value.favoriteSand[index].name,
+                                        maxLines: 1,
+                                        style: const TextStyle(
+                                            overflow: TextOverflow.ellipsis,
+                                            color: Colors.black,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                     const Spacer(),
                                     //

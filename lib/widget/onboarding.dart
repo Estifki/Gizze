@@ -4,13 +4,11 @@ class CustomOnboardingWidget extends StatelessWidget {
   final String title;
   final String description;
   final String imageUrl;
-  // final bool isima;
-  const CustomOnboardingWidget({
+  CustomOnboardingWidget({
     super.key,
     required this.title,
     required this.description,
     required this.imageUrl,
-    // this.isima = false
   });
   @override
   Widget build(BuildContext context) {

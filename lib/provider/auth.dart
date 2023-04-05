@@ -5,10 +5,26 @@ import 'package:ashewa_d/const/const.dart';
 import 'package:ashewa_d/uitil/http_error.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider with ChangeNotifier {
   String? token;
   String? userID;
+
+  Future getUserAndToken() async {
+    var prefs = await SharedPreferences.getInstance();
+
+    if (prefs.getString("LocalToken") != null &&
+        prefs.getString("LocalUserId") != null) {
+      userID = prefs.getString("LocalUserId");
+      token = prefs.getString("LocalToken");
+    } else {
+      prefs.remove("LocalUserId");
+      prefs.remove("LocalToken");
+      userID = null;
+      token = null;
+    }
+  }
 
   Future<void> signIn(String phone, String password) async {
     String url = "${AppConst.appUrl}/login";
@@ -24,8 +40,11 @@ class AuthProvider with ChangeNotifier {
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
+        var prefs = await SharedPreferences.getInstance();
         userID = decodedData['data']["user"]["id"];
         token = decodedData['data']['token'];
+        prefs.setString("LocalUserId", decodedData['data']["user"]["id"]);
+        prefs.setString("LocalToken", decodedData['data']['token']);
       }
     } catch (_) {
       rethrow;

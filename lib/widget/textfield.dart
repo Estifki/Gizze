@@ -4,10 +4,12 @@ class CustomTextFieldWidget extends StatelessWidget {
   final String hint;
   final TextEditingController controller;
   final double leftcontentPadding;
+  final bool isObsquired;
   const CustomTextFieldWidget(
       {super.key,
       required this.hint,
       required this.controller,
+      this.isObsquired = false,
       this.leftcontentPadding = 10.0});
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class CustomTextFieldWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(6)),
       child: TextField(
         controller: controller,
+        obscureText: isObsquired,
         // keyboardType: TextInputType.phone,
         decoration: InputDecoration(
             border: InputBorder.none,
