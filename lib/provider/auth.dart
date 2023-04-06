@@ -11,6 +11,14 @@ class AuthProvider with ChangeNotifier {
   String? token;
   String? userID;
 
+  Future<void> LogOut() async {
+    var prefs = await SharedPreferences.getInstance();
+    prefs.remove("LocalUserId");
+    prefs.remove("LocalToken");
+    userID = null;
+    token = null;
+  }
+
   Future getUserAndToken() async {
     var prefs = await SharedPreferences.getInstance();
 
@@ -37,6 +45,7 @@ class AuthProvider with ChangeNotifier {
           },
           body: jsonEncode({"phone": phone, "password": password}));
       final decodedData = jsonDecode(response.body);
+
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {

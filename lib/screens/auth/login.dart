@@ -2,6 +2,7 @@ import 'package:ashewa_d/const/const.dart';
 import 'package:ashewa_d/provider/auth.dart';
 import 'package:ashewa_d/screens/auth/forget/forget.dart';
 import 'package:ashewa_d/screens/auth/register/user/phone.dart';
+import 'package:ashewa_d/screens/home.dart';
 
 import 'package:ashewa_d/uitil/http_error.dart';
 import 'package:ashewa_d/uitil/toast.dart';
@@ -178,13 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } else if (_passwordController.text.length < 6) {
       showScaffoldMessanger(
           context: context, errorMessage: "Password To Short");
-    }
-    //  else if (_phoneController.text == "910111213" &&
-    //     _passwordController.text == "123456") {
-    //   Navigator.of(context)
-    //       .pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
-    // }
-    else {
+    } else {
       setState(() {
         _isLoading = true;
       });
@@ -196,8 +191,9 @@ class _LoginScreenState extends State<LoginScreen> {
           setState(() {
             _isLoading = false;
           });
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => HomeScreenForUser()),
+              (route) => false);
         });
       } on CustomHttpException catch (e) {
         setState(() {
@@ -205,6 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
         });
         showScaffoldMessanger(context: context, errorMessage: e.toString());
       } catch (e) {
+        print(e.toString());
         setState(() {
           _isLoading = false;
         });

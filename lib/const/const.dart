@@ -70,8 +70,4 @@ class ProductM {
 //       imageUrl: "assets/pngimg3.png"),
 // ];
 
-class AppRoute {
-  static const String home = "/home";
-  static const String newPassword = "/newPassword";
-  static const String registerScreen = "/registerScreen";
-}
+

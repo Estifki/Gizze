@@ -9,14 +9,14 @@ import '../widget/home/appbar.dart';
 import '../widget/home/favorite.dart';
 import '../widget/home/featured.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreenForUser extends StatefulWidget {
+  const HomeScreenForUser({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreenForUser> createState() => _HomeScreenForUserState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenForUserState extends State<HomeScreenForUser> {
   bool isInit = true;
   late Future _sandData;
 
@@ -33,6 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     // Size screenSize = MediaQuery.of(context).size;
+
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(statusBarColor: Colors.black));
     return Scaffold(
       backgroundColor: const Color(0xffedf2f6),
       body: SafeArea(

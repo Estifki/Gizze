@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../const/const.dart';
 import '../../../widget/otp.dart';
+import 'new_password.dart';
 
 class VerifyOtpForForgotScreen extends StatefulWidget {
   final String phone;
@@ -37,7 +38,11 @@ class _VerifyOtpForForgotScreenState extends State<VerifyOtpForForgotScreen> {
       appBar: AppBar(
           leading: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
-              child: const Icon(Icons.arrow_back_ios_new, size: 22)),
+              child: const Icon(
+                Icons.arrow_back_ios_new,
+                size: 22,
+                color: Colors.black,
+              )),
           title: const Text("Phone Verification",
               style: TextStyle(color: Colors.black)),
           centerTitle: true),
@@ -116,8 +121,9 @@ class _VerifyOtpForForgotScreenState extends State<VerifyOtpForForgotScreen> {
           setState(() {
             _isLoading = false;
           });
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil(AppRoute.newPassword, (route) => false);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => NewPasswordScreen()),
+              (route) => false);
         });
       } on CustomHttpException catch (e) {
         _otpController1.clear();

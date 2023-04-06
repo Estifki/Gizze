@@ -1,4 +1,10 @@
+import 'package:ashewa_d/provider/auth.dart';
+import 'package:ashewa_d/screens/splash.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../screens/onboarding.dart';
 
 class CustomHomeAppBarWidget extends StatelessWidget {
   const CustomHomeAppBarWidget({super.key});
@@ -17,20 +23,31 @@ class CustomHomeAppBarWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 20.0, right: 20, top: 10),
               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     // const CircleAvatar(
                     //   radius: 20,
                     //   backgroundColor: AppColor.primaryColor,
                     // ),
+                    const Icon(Icons.more_vert, size: 30, color: Colors.black),
                     SizedBox(
                       height: 50,
                       width: 50,
                       child: Image.asset("assets/Artboard 3-1.png",
                           fit: BoxFit.cover, color: Colors.white),
                     ),
-                    const Icon(Icons.more_vert, size: 30)
+
+                    GestureDetector(
+                        onTap: () {
+                          Provider.of<AuthProvider>(context, listen: false)
+                              .LogOut();
+                          Navigator.of(context).pushReplacement(
+                              CupertinoPageRoute(
+                                  builder: (context) => SplashScreen()));
+                        },
+                        child: const Icon(Icons.logout,
+                            size: 25, color: Colors.white))
                   ]),
             ),
             const SizedBox(height: 40),

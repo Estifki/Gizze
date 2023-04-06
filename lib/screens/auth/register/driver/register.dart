@@ -24,7 +24,7 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
 
   final _accountNameController = TextEditingController();
   final _accountnumberController = TextEditingController();
-  final _bankNamePasswordController = TextEditingController();
+  final _bankNameController = TextEditingController();
 
   final _phoneController = TextEditingController();
 
@@ -46,6 +46,7 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
           title: const Text("Sign Up", style: TextStyle(color: Colors.black)),
           centerTitle: true),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -95,7 +96,30 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
                   ),
                 ]),
               ),
-
+              const SizedBox(height: 15),
+              //
+              //Account Number
+              //
+              CustomTextFieldWidget(
+                  hint: "Account Number", controller: _accountnumberController),
+              const SizedBox(height: 15),
+              //
+              //Account Holder Name
+              //
+              CustomTextFieldWidget(
+                  hint: "Account Holder Name",
+                  controller: _accountNameController),
+              const SizedBox(height: 15),
+              //
+              //Bank Name
+              //
+              CustomTextFieldWidget(
+                  hint: "Bank Name", controller: _bankNameController),
+              const SizedBox(height: 15),
+              //
+              //Full Name
+              //
+              CustomTextFieldWidget(hint: "City", controller: _cityController),
               const SizedBox(height: 15),
               //
               //Email
@@ -174,6 +198,8 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
                         ),
                       ),
                     ),
+
+              const SizedBox(height: 40),
             ]),
       ),
     );
@@ -214,8 +240,8 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
               context: context,
               backgroundColor: Colors.green,
               errorMessage: "User Registered Successfully");
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
+          // Navigator.of(context)
+          //     .pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
         });
       } on CustomHttpException catch (e) {
         setState(() {

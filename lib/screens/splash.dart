@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(Duration.zero, () {
-      // Provider.of<AuthProvider>(context, listen: false).getUserAndToken();
+      Provider.of<AuthProvider>(context, listen: false).getUserAndToken();
     });
     Timer(const Duration(seconds: 2), () {
       if (Provider.of<AuthProvider>(context, listen: false).userID == null) {
@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
         );
       } else {
         Navigator.of(context).pushReplacement(
-          CupertinoPageRoute(builder: (context) => HomeScreen()),
+          CupertinoPageRoute(builder: (context) => HomeScreenForUser()),
         );
       }
     });

@@ -1,3 +1,4 @@
+import 'package:ashewa_d/screens/home.dart';
 import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -175,8 +176,9 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
               context: context,
               backgroundColor: Colors.green,
               errorMessage: "User Registered Successfully");
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => HomeScreenForUser()),
+              (route) => false);
         });
       } on CustomHttpException catch (e) {
         setState(() {

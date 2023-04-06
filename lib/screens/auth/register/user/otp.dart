@@ -1,3 +1,4 @@
+import 'package:ashewa_d/screens/auth/register/user/register.dart';
 import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,8 @@ class _VerifyOtpForUserRegisterScreenState
       appBar: AppBar(
           leading: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
-              child: const Icon(Icons.arrow_back_ios_new, size: 22)),
+              child: const Icon(Icons.arrow_back_ios_new,
+                  size: 22, color: Colors.black)),
           title: const Text("Phone Verification",
               style: TextStyle(color: Colors.black)),
           centerTitle: true),
@@ -119,8 +121,9 @@ class _VerifyOtpForUserRegisterScreenState
             _isLoading = false;
           });
 
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              AppRoute.registerScreen, (route) => false);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => RegisterScreenForUser()),
+              (route) => false);
         });
       } on CustomHttpException catch (e) {
         showScaffoldMessanger(context: context, errorMessage: e.toString());

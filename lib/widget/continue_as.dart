@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../const/const.dart';
 import '../screens/auth/login.dart';
+import '../screens/auth/register/driver/register.dart';
 import '../screens/auth/register/user/phone.dart';
 
 class ContinueAsWidget extends StatelessWidget {
@@ -19,7 +20,7 @@ class ContinueAsWidget extends StatelessWidget {
       color: Colors.grey.withOpacity(0.5),
       child: Center(
         child: Container(
-          height: 150,
+          height: 170,
           width: screenSize.width * 0.65,
           decoration: BoxDecoration(
               color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
@@ -62,9 +63,10 @@ class ContinueAsWidget extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   if (isLogin) {
-                    print("Login for Driver");
+                    // print("Login for Driver");
                   } else if (isRegister) {
-                    print("Register for Driver");
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const RegisterScreenForDriver()));
                   }
                 },
                 child: Container(
