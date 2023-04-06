@@ -1,21 +1,23 @@
 import 'package:ashewa_d/provider/auth.dart';
-import 'package:ashewa_d/screens/auth/register/otp.dart';
 import 'package:ashewa_d/uitil/http_error.dart';
 import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../../const/const.dart';
-import '../login.dart';
+import '../../../../const/const.dart';
+import '../../login.dart';
+import 'otp.dart';
 
-class PhoneRegisterScreen extends StatefulWidget {
-  const PhoneRegisterScreen({super.key});
+
+class PhoneRegisterScreenForUser extends StatefulWidget {
+  const PhoneRegisterScreenForUser({super.key});
 
   @override
-  State<PhoneRegisterScreen> createState() => _PhoneRegisterScreenState();
+  State<PhoneRegisterScreenForUser> createState() => _PhoneRegisterScreenForUserState();
 }
 
-class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
+class _PhoneRegisterScreenForUserState extends State<PhoneRegisterScreenForUser> {
   final _phoneController = TextEditingController();
   bool _isLoading = false;
 
@@ -28,6 +30,9 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(statusBarColor: Colors.white));
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -137,7 +142,7 @@ class _PhoneRegisterScreenState extends State<PhoneRegisterScreen> {
             _isLoading = false;
           });
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => VerifyOtpForRegisterScreen(
+              builder: (context) => VerifyOtpForUserRegisterScreen(
                   phone: "251${_phoneController.text}")));
         });
       } on CustomHttpException catch (e) {

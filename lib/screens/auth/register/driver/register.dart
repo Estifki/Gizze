@@ -3,23 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../../const/const.dart';
-import '../../../provider/auth.dart';
-import '../../../uitil/http_error.dart';
-import '../../../widget/textfield.dart';
+import '../../../../const/const.dart';
+import '../../../../provider/auth.dart';
+import '../../../../uitil/http_error.dart';
+import '../../../../widget/textfield.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class RegisterScreenForDriver extends StatefulWidget {
+  const RegisterScreenForDriver({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<RegisterScreenForDriver> createState() =>
+      _RegisterScreenForDriverState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+
+  final _accountNameController = TextEditingController();
+  final _accountnumberController = TextEditingController();
+  final _bankNamePasswordController = TextEditingController();
+
+  final _phoneController = TextEditingController();
+
+  final _cityController = TextEditingController();
   bool _isLoading = false;
   bool checkBoxValue = false;
 
@@ -47,6 +56,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
               //
               CustomTextFieldWidget(
                   hint: "Full Name", controller: _nameController),
+
+              const SizedBox(height: 15),
+              //
+              //Phone Number Input
+              //
+              Container(
+                height: 48,
+                width: screenSize.width * 0.9,
+                decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.26),
+                    borderRadius: BorderRadius.circular(6)),
+                child: Row(children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 10.0, right: 8),
+                    child: Text("251",
+                        style: TextStyle(
+                            fontSize: 17,
+                            fontFamily: "",
+                            fontWeight: FontWeight.w600,
+                            color: AppColor.primaryColor)),
+                  ),
+                  Expanded(
+                    child: TextField(
+                      controller: _phoneController,
+                      maxLength: 9,
+                      onChanged: (val) {
+                        if (!val.startsWith("9")) {
+                          _phoneController.clear();
+                        }
+                      },
+                      keyboardType: TextInputType.phone,
+                      decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          counterText: "",
+                          hintText: "Phone"),
+                    ),
+                  ),
+                ]),
+              ),
 
               const SizedBox(height: 15),
               //
@@ -93,7 +141,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       RichText(
                           text: const TextSpan(
                               text: "I agree to the ",
-                              style: TextStyle(fontSize: 16),
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.black),
                               children: [
                             TextSpan(
                                 text: "Term and Conditions",

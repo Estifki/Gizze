@@ -2,21 +2,21 @@ import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../const/const.dart';
-import '../../../provider/auth.dart';
-import '../../../uitil/http_error.dart';
-import '../../../widget/otp.dart';
+import '../../../../const/const.dart';
+import '../../../../provider/auth.dart';
+import '../../../../uitil/http_error.dart';
+import '../../../../widget/otp.dart';
 
-class VerifyOtpForRegisterScreen extends StatefulWidget {
+class VerifyOtpForUserRegisterScreen extends StatefulWidget {
   final String phone;
-  const VerifyOtpForRegisterScreen({required this.phone, super.key});
+  const VerifyOtpForUserRegisterScreen({required this.phone, super.key});
   @override
-  State<VerifyOtpForRegisterScreen> createState() =>
-      _VerifyOtpForRegisterScreenState();
+  State<VerifyOtpForUserRegisterScreen> createState() =>
+      _VerifyOtpForUserRegisterScreenState();
 }
 
-class _VerifyOtpForRegisterScreenState
-    extends State<VerifyOtpForRegisterScreen> {
+class _VerifyOtpForUserRegisterScreenState
+    extends State<VerifyOtpForUserRegisterScreen> {
   bool _isLoading = false;
   final _otpController1 = TextEditingController();
   final _otpController2 = TextEditingController();

@@ -1,9 +1,10 @@
 import 'package:ashewa_d/const/const.dart';
 import 'package:ashewa_d/screens/auth/login.dart';
-import 'package:ashewa_d/screens/auth/register/phone.dart';
+import 'package:ashewa_d/screens/auth/register/user/phone.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../widget/continue_as.dart';
 import '../widget/onboarding.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -61,7 +62,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 isShowRegister = false;
               });
             },
-            child: LoginAsWidget(
+            child: ContinueAsWidget(
                 isLogin: isShowLoginVisible, isRegister: isShowRegister),
           ))
         else
@@ -142,84 +143,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   )
                 ]))
       ])),
-    );
-  }
-}
-
-class LoginAsWidget extends StatelessWidget {
-  bool isLogin;
-  bool isRegister;
-
-  LoginAsWidget({super.key, required this.isLogin, required this.isRegister});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      color: Colors.grey.withOpacity(0.5),
-      child: Center(
-        child: Container(
-          height: 140,
-          width: 180,
-          decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  if (isLogin) {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const LoginScreen()));
-                  } else if (isRegister) {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const PhoneRegisterScreen()));
-                  }
-                },
-                child: Container(
-                  height: 36,
-                  width: 140,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6.0),
-                    color: AppColor.primaryColor,
-                  ),
-                  child: const Text(
-                    "User",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 19, color: Colors.white),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              GestureDetector(
-                onTap: () {
-                  if (isLogin) {
-                    print("Login for Driver");
-                  } else if (isRegister) {
-                    print("Register for Driver");
-                  }
-                },
-                child: Container(
-                  height: 36,
-                  width: 140,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6.0),
-                    color: AppColor.primaryColor,
-                  ),
-                  child: const Text(
-                    "Driver",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 19, color: Colors.white),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

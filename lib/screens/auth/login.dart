@@ -1,7 +1,7 @@
 import 'package:ashewa_d/const/const.dart';
 import 'package:ashewa_d/provider/auth.dart';
 import 'package:ashewa_d/screens/auth/forget/forget.dart';
-import 'package:ashewa_d/screens/auth/register/phone.dart';
+import 'package:ashewa_d/screens/auth/register/user/phone.dart';
 
 import 'package:ashewa_d/uitil/http_error.dart';
 import 'package:ashewa_d/uitil/toast.dart';
@@ -156,7 +156,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const PhoneRegisterScreen()));
+                        builder: (context) =>
+                            const PhoneRegisterScreenForUser()));
                   },
                   child: const Text(
                     "Create An Account",
