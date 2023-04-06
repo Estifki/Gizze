@@ -72,7 +72,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         //
 
         Positioned(
-          top: screenSize.height * 0.78,
+          bottom: screenSize.height * 0.17,
           child: SmoothPageIndicator(
             controller: pageController,
             count: 3,
@@ -93,7 +93,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         // Sign In and Create Account
         //
         Positioned(
-            bottom: screenSize.height * 0.045,
+            bottom: screenSize.height * 0.03,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -121,7 +121,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: screenSize.height * 0.02),
                   //
                   //Create An account
                   //

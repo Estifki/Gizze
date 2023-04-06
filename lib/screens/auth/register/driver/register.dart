@@ -36,7 +36,7 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.black));
+        const SystemUiOverlayStyle(statusBarColor: Colors.white));
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,

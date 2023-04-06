@@ -24,10 +24,11 @@ showMoreSandInfo({
                   left: 10,
                   right: 20,
                   bottom: MediaQuery.of(context).viewInsets.bottom),
-              duration: Duration(milliseconds: 150),
+              duration: const Duration(milliseconds: 150),
               curve: Curves.easeOut,
               child: Container(
-                  constraints: BoxConstraints(maxHeight: 500, minHeight: 150),
+                  constraints:
+                      const BoxConstraints(maxHeight: 1500, minHeight: 150),
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +39,7 @@ showMoreSandInfo({
                           width: double.infinity,
                           child: Image.network(sandImageUrl),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Text(
                           sandName,
                           style: const TextStyle(
@@ -46,12 +47,12 @@ showMoreSandInfo({
                               fontSize: 19,
                               fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.flip_to_back_rounded,
                                 color: AppColor.primaryColor,
                                 size: 17,
@@ -66,13 +67,13 @@ showMoreSandInfo({
                                     overflow: TextOverflow.ellipsis),
                               ),
                             ]),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Text(
                           sandDescription,
                           style: const TextStyle(
                               color: Colors.black, fontSize: 17),
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         Container(
                           height: 46,
                           width: MediaQuery.of(context).size.width * 0.5,
@@ -86,15 +87,15 @@ showMoreSandInfo({
                             cursorColor: Colors.grey.withOpacity(0.7),
                             cursorWidth: 1.0,
                             style: const TextStyle(color: Colors.black),
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               isCollapsed: true,
                               hintText: "Amount",
                               border: InputBorder.none,
-                              contentPadding: const EdgeInsets.only(left: 10),
+                              contentPadding: EdgeInsets.only(left: 10),
                             ),
                           ),
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         Container(
                           height: 46,
                           width: MediaQuery.of(context).size.width,
@@ -107,15 +108,15 @@ showMoreSandInfo({
                             cursorColor: Colors.grey.withOpacity(0.7),
                             cursorWidth: 1.0,
                             style: const TextStyle(color: Colors.black),
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               isCollapsed: true,
                               hintText: "Delivery Location",
                               border: InputBorder.none,
-                              contentPadding: const EdgeInsets.only(left: 10),
+                              contentPadding: EdgeInsets.only(left: 10),
                             ),
                           ),
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         Container(
                           height: 50,
                           width: MediaQuery.of(context).size.width,
@@ -130,7 +131,7 @@ showMoreSandInfo({
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center),
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                       ])));
         });
       });

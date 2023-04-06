@@ -22,6 +22,8 @@ class _HomeScreenForUserState extends State<HomeScreenForUser> {
 
   @override
   void didChangeDependencies() {
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(statusBarColor: Colors.black));
     if (isInit) {
       _sandData = Provider.of<SandProvider>(context, listen: false)
           .getSand(Provider.of<AuthProvider>(context).token!);
@@ -34,8 +36,6 @@ class _HomeScreenForUserState extends State<HomeScreenForUser> {
   Widget build(BuildContext context) {
     // Size screenSize = MediaQuery.of(context).size;
 
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.black));
     return Scaffold(
       backgroundColor: const Color(0xffedf2f6),
       body: SafeArea(
