@@ -137,13 +137,13 @@ class _PhoneRegisterScreenForUserState
           _isLoading = true;
         });
         await Provider.of<AuthProvider>(context, listen: false)
-            .phoneRegister(phone: "251${_phoneController.text}")
+            .phoneRegisterUser(phone: "251${_phoneController.text}")
             .then((_) {
           setState(() {
             _isLoading = false;
           });
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => VerifyOtpForUserRegisterScreen(
+              builder: (context) => VerifyOtpForUserScreen(
                   phone: "251${_phoneController.text}")));
         });
       } on CustomHttpException catch (e) {

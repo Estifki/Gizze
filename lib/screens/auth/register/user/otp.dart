@@ -8,16 +8,14 @@ import '/../../provider/auth.dart';
 import '/../../uitil/http_error.dart';
 import '/../../widget/otp.dart';
 
-class VerifyOtpForUserRegisterScreen extends StatefulWidget {
+class VerifyOtpForUserScreen extends StatefulWidget {
   final String phone;
-  const VerifyOtpForUserRegisterScreen({required this.phone, super.key});
+  const VerifyOtpForUserScreen({required this.phone, super.key});
   @override
-  State<VerifyOtpForUserRegisterScreen> createState() =>
-      _VerifyOtpForUserRegisterScreenState();
+  State<VerifyOtpForUserScreen> createState() => _VerifyOtpForUserScreenState();
 }
 
-class _VerifyOtpForUserRegisterScreenState
-    extends State<VerifyOtpForUserRegisterScreen> {
+class _VerifyOtpForUserScreenState extends State<VerifyOtpForUserScreen> {
   bool _isLoading = false;
   final _otpController1 = TextEditingController();
   final _otpController2 = TextEditingController();

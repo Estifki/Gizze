@@ -221,40 +221,40 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
       showScaffoldMessanger(
           context: context, errorMessage: "Term and Conditions Not Agreed");
     } else {
-      try {
-        FocusScope.of(context).unfocus();
-        setState(() {
-          _isLoading = true;
-        });
-        await Provider.of<AuthProvider>(context, listen: false)
-            .register(
-                name: _nameController.text,
-                email: _emailController.text,
-                password: _passwordController.text,
-                confirmPassword: _confirmPasswordController.text)
-            .then((_) {
-          setState(() {
-            _isLoading = false;
-          });
-          showScaffoldMessanger(
-              context: context,
-              backgroundColor: Colors.green,
-              errorMessage: "User Registered Successfully");
-          // Navigator.of(context)
-          //     .pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
-        });
-      } on CustomHttpException catch (e) {
-        setState(() {
-          _isLoading = false;
-        });
-        showScaffoldMessanger(context: context, errorMessage: e.toString());
-      } catch (e) {
-        setState(() {
-          _isLoading = false;
-        });
-        showScaffoldMessanger(
-            context: context, errorMessage: "Please Try Again Later");
-      }
+      // try {
+      //   FocusScope.of(context).unfocus();
+      //   setState(() {
+      //     _isLoading = true;
+      //   });
+      //   await Provider.of<AuthProvider>(context, listen: false)
+      //       .register(
+      //           name: _nameController.text,
+      //           email: _emailController.text,
+      //           password: _passwordController.text,
+      //           confirmPassword: _confirmPasswordController.text)
+      //       .then((_) {
+      //     setState(() {
+      //       _isLoading = false;
+      //     });
+      //     showScaffoldMessanger(
+      //         context: context,
+      //         backgroundColor: Colors.green,
+      //         errorMessage: "User Registered Successfully");
+      //     // Navigator.of(context)
+      //     //     .pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
+      //   });
+      // } on CustomHttpException catch (e) {
+      //   setState(() {
+      //     _isLoading = false;
+      //   });
+      //   showScaffoldMessanger(context: context, errorMessage: e.toString());
+      // } catch (e) {
+      //   setState(() {
+      //     _isLoading = false;
+      //   });
+      //   showScaffoldMessanger(
+      //       context: context, errorMessage: "Please Try Again Later");
+      // }
     }
   }
 }

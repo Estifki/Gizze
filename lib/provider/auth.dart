@@ -130,7 +130,7 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  Future<void> phoneRegister({required String phone}) async {
+  Future<void> phoneRegisterUser({required String phone}) async {
     String url = "${AppConst.appUrl}/register";
     try {
       http.Response response = await http.post(Uri.parse(url),
@@ -149,7 +149,7 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  Future<void> register(
+  Future<void> registerUser(
       {required String name,
       required String email,
       required String password,

@@ -163,7 +163,7 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
           _isLoading = true;
         });
         await Provider.of<AuthProvider>(context, listen: false)
-            .register(
+            .registerUser(
                 name: _nameController.text,
                 email: _emailController.text,
                 password: _passwordController.text,
@@ -177,7 +177,8 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
               backgroundColor: Colors.green,
               errorMessage: "User Registered Successfully");
           Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => HomeScreenForUser()),
+              MaterialPageRoute(
+                  builder: (context) => const HomeScreenForUser()),
               (route) => false);
         });
       } on CustomHttpException catch (e) {
