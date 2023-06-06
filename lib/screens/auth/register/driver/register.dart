@@ -1,12 +1,8 @@
-import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-
 import '/../../const/const.dart';
-import '/../../provider/auth.dart';
-import '/../../uitil/http_error.dart';
 import '/../../widget/textfield.dart';
+import 'package:file_picker/file_picker.dart';
 
 class RegisterScreenForDriver extends StatefulWidget {
   const RegisterScreenForDriver({super.key});
@@ -26,11 +22,20 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
   final _accountnumberController = TextEditingController();
   final _bankNameController = TextEditingController();
 
-  final _phoneController = TextEditingController();
+  // final _phoneController = TextEditingController();
 
   final _cityController = TextEditingController();
   bool _isLoading = false;
   bool checkBoxValue = false;
+
+  String carOwnershipDocName = "";
+  String licenceDocName = "";
+
+  String carOwnershipDocPath = "";
+  String licenceDocPath = "";
+
+  String profilePicName = "";
+  String profilePicPath = "";
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +51,7 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
           title: const Text("Sign Up", style: TextStyle(color: Colors.black)),
           centerTitle: true),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,45 +62,168 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
               //
               CustomTextFieldWidget(
                   hint: "Full Name", controller: _nameController),
-
+              const SizedBox(height: 15),
+              CustomTextFieldWidget(
+                  hint: "Email", controller: _emailController),
               const SizedBox(height: 15),
               //
-              //Phone Number Input
+              //Full Name
               //
-              Container(
-                height: 48,
-                width: screenSize.width * 0.9,
-                decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.26),
-                    borderRadius: BorderRadius.circular(6)),
-                child: Row(children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 10.0, right: 8),
-                    child: Text("251",
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontFamily: "",
-                            fontWeight: FontWeight.w600,
-                            color: AppColor.primaryColor)),
-                  ),
-                  Expanded(
-                    child: TextField(
-                      controller: _phoneController,
-                      maxLength: 9,
-                      onChanged: (val) {
-                        if (!val.startsWith("9")) {
-                          _phoneController.clear();
-                        }
-                      },
-                      keyboardType: TextInputType.phone,
-                      decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          counterText: "",
-                          hintText: "Phone"),
-                    ),
-                  ),
-                ]),
+              CustomTextFieldWidget(hint: "City", controller: _cityController),
+
+              // const SizedBox(height: 15),
+              // //
+              // //Phone Number Input
+              // //
+              // Container(
+              //   height: 48,
+              //   width: screenSize.width * 0.9,
+              //   decoration: BoxDecoration(
+              //       color: Colors.grey.withOpacity(0.26),
+              //       borderRadius: BorderRadius.circular(6)),
+              //   child: Row(children: [
+              //     const Padding(
+              //       padding: EdgeInsets.only(left: 10.0, right: 8),
+              //       child: Text("251",
+              //           style: TextStyle(
+              //               fontSize: 17,
+              //               fontFamily: "",
+              //               fontWeight: FontWeight.w600,
+              //               color: AppColor.primaryColor)),
+              //     ),
+              //     Expanded(
+              //       child: TextField(
+              //         controller: _phoneController,
+              //         maxLength: 9,
+              //         onChanged: (val) {
+              //           if (!val.startsWith("9")) {
+              //             _phoneController.clear();
+              //           }
+              //         },
+              //         keyboardType: TextInputType.phone,
+              //         decoration: const InputDecoration(
+              //             border: InputBorder.none,
+              //             counterText: "",
+              //             hintText: "Phone"),
+              //       ),
+              //     ),
+              //   ]),
+              // ),
+              const SizedBox(height: 15),
+              GestureDetector(
+                onTap: () async {
+                  FilePickerResult? result =
+                      await FilePicker.platform.pickFiles();
+
+                  if (result != null) {
+                    PlatformFile file = result.files.first;
+                    setState(() {
+                      profilePicName = file.name;
+                      profilePicPath = file.path!;
+                    });
+                  } else {
+                    return;
+                  }
+                },
+                child: Container(
+                  height: 48,
+                  alignment: Alignment.centerLeft,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.26),
+                      borderRadius: BorderRadius.circular(6)),
+                  child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: profilePicName.isEmpty
+                          ? Text(
+                              "Upload Driver image",
+                              style: TextStyle(
+                                  fontSize: 16, color: Colors.grey.shade700),
+                            )
+                          : Text(
+                              profilePicName,
+                              style: TextStyle(
+                                  fontSize: 16, color: Colors.grey.shade700),
+                            )),
+                ),
               ),
+              const SizedBox(height: 15),
+              GestureDetector(
+                onTap: () async {
+                  FilePickerResult? result =
+                      await FilePicker.platform.pickFiles();
+
+                  if (result != null) {
+                    PlatformFile file = result.files.first;
+                    setState(() {
+                      carOwnershipDocName = file.name;
+                      carOwnershipDocPath = file.path!;
+                    });
+                  } else {
+                    return;
+                  }
+                },
+                child: Container(
+                  height: 48,
+                  alignment: Alignment.centerLeft,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.26),
+                      borderRadius: BorderRadius.circular(6)),
+                  child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: carOwnershipDocName.isEmpty
+                          ? Text(
+                              "Car Ownership Document",
+                              style: TextStyle(
+                                  fontSize: 16, color: Colors.grey.shade700),
+                            )
+                          : Text(
+                              carOwnershipDocName,
+                              style: TextStyle(
+                                  fontSize: 16, color: Colors.grey.shade700),
+                            )),
+                ),
+              ),
+              const SizedBox(height: 15),
+              GestureDetector(
+                onTap: () async {
+                  FilePickerResult? result =
+                      await FilePicker.platform.pickFiles();
+
+                  if (result != null) {
+                    PlatformFile file = result.files.first;
+                    setState(() {
+                      licenceDocName = file.name;
+                      licenceDocPath = file.path!;
+                    });
+                  } else {
+                    return;
+                  }
+                },
+                child: Container(
+                  height: 48,
+                  alignment: Alignment.centerLeft,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.26),
+                      borderRadius: BorderRadius.circular(6)),
+                  child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: licenceDocName.isEmpty
+                          ? Text(
+                              "Licence Doc",
+                              style: TextStyle(
+                                  fontSize: 16, color: Colors.grey.shade700),
+                            )
+                          : Text(
+                              licenceDocName,
+                              style: TextStyle(
+                                  fontSize: 16, color: Colors.grey.shade700),
+                            )),
+                ),
+              ),
+
               const SizedBox(height: 15),
               //
               //Account Number
@@ -115,17 +243,7 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
               //
               CustomTextFieldWidget(
                   hint: "Bank Name", controller: _bankNameController),
-              const SizedBox(height: 15),
-              //
-              //Full Name
-              //
-              CustomTextFieldWidget(hint: "City", controller: _cityController),
-              const SizedBox(height: 15),
-              //
-              //Email
-              //
-              CustomTextFieldWidget(
-                  hint: "Email", controller: _emailController),
+
               const SizedBox(height: 15),
               //
               //Password
@@ -206,55 +324,56 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
   }
 
   void validate() async {
-    if (_nameController.text.length < 2) {
-      showScaffoldMessanger(context: context, errorMessage: "Invalid Name");
-    } else if (!RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
-        .hasMatch(_emailController.text)) {
-      showScaffoldMessanger(context: context, errorMessage: "Invalid email");
-    } else if (_passwordController.text.length < 6) {
-      showScaffoldMessanger(
-          context: context, errorMessage: "Password must be at least 6 digit.");
-    } else if (_passwordController.text != _confirmPasswordController.text) {
-      showScaffoldMessanger(
-          context: context, errorMessage: "Password don not match");
-    } else if (checkBoxValue == false) {
-      showScaffoldMessanger(
-          context: context, errorMessage: "Term and Conditions Not Agreed");
-    } else {
-      // try {
-      //   FocusScope.of(context).unfocus();
-      //   setState(() {
-      //     _isLoading = true;
-      //   });
-      //   await Provider.of<AuthProvider>(context, listen: false)
-      //       .register(
-      //           name: _nameController.text,
-      //           email: _emailController.text,
-      //           password: _passwordController.text,
-      //           confirmPassword: _confirmPasswordController.text)
-      //       .then((_) {
-      //     setState(() {
-      //       _isLoading = false;
-      //     });
-      //     showScaffoldMessanger(
-      //         context: context,
-      //         backgroundColor: Colors.green,
-      //         errorMessage: "User Registered Successfully");
-      //     // Navigator.of(context)
-      //     //     .pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
-      //   });
-      // } on CustomHttpException catch (e) {
-      //   setState(() {
-      //     _isLoading = false;
-      //   });
-      //   showScaffoldMessanger(context: context, errorMessage: e.toString());
-      // } catch (e) {
-      //   setState(() {
-      //     _isLoading = false;
-      //   });
-      //   showScaffoldMessanger(
-      //       context: context, errorMessage: "Please Try Again Later");
-      // }
-    }
+    // if (_nameController.text.length < 2) {
+    //   showScaffoldMessanger(context: context, errorMessage: "Invalid Name");
+    // } else if (!RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
+    //     .hasMatch(_emailController.text)) {
+    //   showScaffoldMessanger(context: context, errorMessage: "Invalid email");
+    // } else if (_passwordController.text.length < 6) {
+    //   showScaffoldMessanger(
+    //       context: context, errorMessage: "Password must be at least 6 digit.");
+    // } else if (_passwordController.text != _confirmPasswordController.text) {
+    //   showScaffoldMessanger(
+    //       context: context, errorMessage: "Password don not match");
+    // } else if (checkBoxValue == false) {
+    //   showScaffoldMessanger(
+    //       context: context, errorMessage: "Term and Conditions Not Agreed");
+    // }
+    // else {
+    // try {
+    //   FocusScope.of(context).unfocus();
+    //   setState(() {
+    //     _isLoading = true;
+    //   });
+    //   await Provider.of<AuthProvider>(context, listen: false)
+    //       .register(
+    //           name: _nameController.text,
+    //           email: _emailController.text,
+    //           password: _passwordController.text,
+    //           confirmPassword: _confirmPasswordController.text)
+    //       .then((_) {
+    //     setState(() {
+    //       _isLoading = false;
+    //     });
+    //     showScaffoldMessanger(
+    //         context: context,
+    //         backgroundColor: Colors.green,
+    //         errorMessage: "User Registered Successfully");
+    //     // Navigator.of(context)
+    //     //     .pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
+    //   });
+    // } on CustomHttpException catch (e) {
+    //   setState(() {
+    //     _isLoading = false;
+    //   });
+    //   showScaffoldMessanger(context: context, errorMessage: e.toString());
+    // } catch (e) {
+    //   setState(() {
+    //     _isLoading = false;
+    //   });
+    //   showScaffoldMessanger(
+    //       context: context, errorMessage: "Please Try Again Later");
+    // }
+    // }
   }
 }

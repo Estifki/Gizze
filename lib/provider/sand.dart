@@ -10,10 +10,10 @@ import 'package:http/http.dart' as http;
 
 class SandProvider with ChangeNotifier {
   final List<Favorite> _favSand = [];
-  final List<Sands> _sand = [];
+  final List<Favorite> _sand = [];
 
   List<Favorite> get favoriteSand => [..._favSand];
-  List<Sands> get featuredSand => [..._sand];
+  List<Favorite> get featuredSand => [..._sand];
 
   Future<void> getSand(String token) async {
     String url = "${AppConst.appUrl}/home-sands";
@@ -35,7 +35,7 @@ class SandProvider with ChangeNotifier {
         final data = sandModelFromJson(response.body);
 
         _favSand.addAll(data.data.favorite);
-        _sand.addAll([data.data.sands]);
+        _sand.addAll(data.data.sands.data);
       }
     } catch (e) {
       rethrow;

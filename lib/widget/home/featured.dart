@@ -39,7 +39,7 @@ class FeaturedProductWidget extends StatelessWidget {
                     //Image
                     //
                     const SizedBox(width: 8),
-                    Image.network(value.featuredSand[0].data[index].sandImage,
+                    Image.network(value.featuredSand[index].sandImage,
                         width: screenSize.width * 0.43),
                     const SizedBox(width: 10),
                     Flexible(
@@ -53,7 +53,7 @@ class FeaturedProductWidget extends StatelessWidget {
                               //Product Name
                               //
                               Text(
-                                value.featuredSand[0].data[index].name,
+                                value.featuredSand[index].name,
                                 maxLines: 1,
                                 style: const TextStyle(
                                     color: Colors.black,
@@ -65,7 +65,7 @@ class FeaturedProductWidget extends StatelessWidget {
                               //Product Descrption
                               //
                               Text(
-                                value.featuredSand[0].data[index].description,
+                                value.featuredSand[index].description,
                                 maxLines: 2,
                                 style: const TextStyle(
                                     overflow: TextOverflow.ellipsis,
@@ -85,7 +85,7 @@ class FeaturedProductWidget extends StatelessWidget {
                                     //
                                     AddressAndPriceWidget(
                                         title: "location name",
-                                        //  value.featuredSand[0].data[index]
+                                        //  value.featuredSand[index]
                                         //     .location.locationName,
                                         icon: Icons.location_on),
                                     //
@@ -104,14 +104,13 @@ class FeaturedProductWidget extends StatelessWidget {
                               GestureDetector(
                                 onTap: () => showMoreSandInfo(
                                     context: context,
-                                    sandName:
-                                        value.featuredSand[0].data[index].name,
-                                    sandDescription: value.featuredSand[0]
-                                        .data[index].description,
+                                    sandName: value.featuredSand[index].name,
+                                    sandDescription:
+                                        value.featuredSand[index].description,
                                     sandPrice: "free",
-                                    //value.featuredSand[0].data[index].price,
-                                    sandImageUrl: value
-                                        .featuredSand[0].data[index].sandImage),
+                                    //value.featuredSand[index].price,
+                                    sandImageUrl:
+                                        value.featuredSand[index].sandImage),
                                 child: Container(
                                   width: screenSize.width,
                                   height: screenSize.height * 0.046,
