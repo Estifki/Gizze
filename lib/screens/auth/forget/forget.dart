@@ -4,7 +4,7 @@ import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../const/const.dart';
+import '/../const/const.dart';
 import 'otp.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {

@@ -75,8 +75,8 @@ class HomeFavoriteWidget extends StatelessWidget {
                                               value.favoriteSand[index].name,
                                           sandDescription: value
                                               .favoriteSand[index].description,
-                                          sandPrice:
-                                              value.favoriteSand[index].price,
+                                          sandPrice: "free",
+                                          // value.favoriteSand[index].price,
                                           sandImageUrl: value
                                               .favoriteSand[index].sandImage),
                                       child: Padding(

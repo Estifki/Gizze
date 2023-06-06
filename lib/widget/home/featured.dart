@@ -39,7 +39,7 @@ class FeaturedProductWidget extends StatelessWidget {
                     //Image
                     //
                     const SizedBox(width: 8),
-                    Image.network(value.featuredSand[index].sandImage,
+                    Image.network(value.featuredSand[0].data[index].sandImage,
                         width: screenSize.width * 0.43),
                     const SizedBox(width: 10),
                     Flexible(
@@ -53,7 +53,7 @@ class FeaturedProductWidget extends StatelessWidget {
                               //Product Name
                               //
                               Text(
-                                value.featuredSand[index].name,
+                                value.featuredSand[0].data[index].name,
                                 maxLines: 1,
                                 style: const TextStyle(
                                     color: Colors.black,
@@ -65,7 +65,7 @@ class FeaturedProductWidget extends StatelessWidget {
                               //Product Descrption
                               //
                               Text(
-                                value.featuredSand[index].description,
+                                value.featuredSand[0].data[index].description,
                                 maxLines: 2,
                                 style: const TextStyle(
                                     overflow: TextOverflow.ellipsis,
@@ -84,16 +84,17 @@ class FeaturedProductWidget extends StatelessWidget {
                                     //Address
                                     //
                                     AddressAndPriceWidget(
-                                        title: value.featuredSand[index]
-                                            .location.locationName,
+                                        title: "location name",
+                                        //  value.featuredSand[0].data[index]
+                                        //     .location.locationName,
                                         icon: Icons.location_on),
                                     //
                                     //Price
                                     //
                                     const SizedBox(height: 2),
                                     AddressAndPriceWidget(
-                                        title:
-                                            "${value.featuredSand[index].price} Birr/m²",
+                                        title: "free",
+                                        // "${value.featuredSand[index].price} Birr/m²",
                                         icon: Icons.flip_to_back_rounded)
                                   ]),
                               //
@@ -103,12 +104,14 @@ class FeaturedProductWidget extends StatelessWidget {
                               GestureDetector(
                                 onTap: () => showMoreSandInfo(
                                     context: context,
-                                    sandName: value.featuredSand[index].name,
-                                    sandDescription:
-                                        value.featuredSand[index].description,
-                                    sandPrice: value.featuredSand[index].price,
-                                    sandImageUrl:
-                                        value.featuredSand[index].sandImage),
+                                    sandName:
+                                        value.featuredSand[0].data[index].name,
+                                    sandDescription: value.featuredSand[0]
+                                        .data[index].description,
+                                    sandPrice: "free",
+                                    //value.featuredSand[0].data[index].price,
+                                    sandImageUrl: value
+                                        .featuredSand[0].data[index].sandImage),
                                 child: Container(
                                   width: screenSize.width,
                                   height: screenSize.height * 0.046,

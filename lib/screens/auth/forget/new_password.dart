@@ -113,7 +113,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
               backgroundColor: Colors.green,
               errorMessage: "Password Changed Successfully");
           Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const LoginScreen()));
+              MaterialPageRoute(builder: (context) => const SignInScreenForUser()));
         });
       } on CustomHttpException catch (e) {
         setState(() {

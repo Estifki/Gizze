@@ -1,6 +1,5 @@
 import 'package:ashewa_d/const/const.dart';
 import 'package:ashewa_d/provider/auth.dart';
-import 'package:ashewa_d/screens/auth/forget/forget.dart';
 import 'package:ashewa_d/screens/auth/register/user/phone.dart';
 import 'package:ashewa_d/screens/home.dart';
 
@@ -11,15 +10,16 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../widget/textfield.dart';
+import 'forget/forget.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignInScreenForUser extends StatefulWidget {
+  const SignInScreenForUser({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignInScreenForUser> createState() => _SignInScreenForUserState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignInScreenForUserState extends State<SignInScreenForUser> {
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
   FocusNode focusNode = FocusNode();

@@ -3,10 +3,10 @@ import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../const/const.dart';
-import '../../../../provider/auth.dart';
-import '../../../../uitil/http_error.dart';
-import '../../../../widget/otp.dart';
+import '/../../const/const.dart';
+import '/../../provider/auth.dart';
+import '/../../uitil/http_error.dart';
+import '/../../widget/otp.dart';
 
 class VerifyOtpForUserRegisterScreen extends StatefulWidget {
   final String phone;

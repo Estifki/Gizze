@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:ashewa_d/screens/auth/login.dart';
 import 'package:ashewa_d/screens/home.dart';
 import 'package:ashewa_d/screens/onboarding.dart';
 import 'package:flutter/cupertino.dart';

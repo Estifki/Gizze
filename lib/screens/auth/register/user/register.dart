@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../const/const.dart';
-import '../../../../provider/auth.dart';
-import '../../../../uitil/http_error.dart';
-import '../../../../widget/textfield.dart';
+import '/../../const/const.dart';
+import '/../../provider/auth.dart';
+import '/../../uitil/http_error.dart';
+import '/../../widget/textfield.dart';
 
 class RegisterScreenForUser extends StatefulWidget {
   const RegisterScreenForUser({super.key});

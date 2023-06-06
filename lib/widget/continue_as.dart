@@ -37,7 +37,7 @@ class ContinueAsWidget extends StatelessWidget {
                 onTap: () {
                   if (isLogin) {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const LoginScreen()));
+                        builder: (context) => const SignInScreenForUser()));
                   } else if (isRegister) {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) =>

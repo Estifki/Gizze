@@ -1,6 +1,4 @@
 import 'package:ashewa_d/const/const.dart';
-import 'package:ashewa_d/screens/auth/login.dart';
-import 'package:ashewa_d/screens/auth/register/user/phone.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

@@ -2,20 +2,18 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:ashewa_d/const/const.dart';
-import 'package:ashewa_d/provider/auth.dart';
 import 'package:ashewa_d/uitil/http_error.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../model/sand.dart';
 import 'package:http/http.dart' as http;
 
 class SandProvider with ChangeNotifier {
   final List<Favorite> _favSand = [];
-  final List<Favorite> _sand = [];
+  final List<Sands> _sand = [];
 
   List<Favorite> get favoriteSand => [..._favSand];
-  List<Favorite> get featuredSand => [..._sand];
+  List<Sands> get featuredSand => [..._sand];
 
   Future<void> getSand(String token) async {
     String url = "${AppConst.appUrl}/home-sands";
@@ -37,7 +35,7 @@ class SandProvider with ChangeNotifier {
         final data = sandModelFromJson(response.body);
 
         _favSand.addAll(data.data.favorite);
-        _sand.addAll(data.data.sands.data);
+        _sand.addAll([data.data.sands]);
       }
     } catch (e) {
       rethrow;

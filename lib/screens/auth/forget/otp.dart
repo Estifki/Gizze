@@ -4,8 +4,8 @@ import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../const/const.dart';
-import '../../../widget/otp.dart';
+import '/../const/const.dart';
+import '/../widget/otp.dart';
 import 'new_password.dart';
 
 class VerifyOtpForForgotScreen extends StatefulWidget {

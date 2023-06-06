@@ -5,19 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../const/const.dart';
+import '/../../const/const.dart';
 import '../../login.dart';
 import 'otp.dart';
-
 
 class PhoneRegisterScreenForUser extends StatefulWidget {
   const PhoneRegisterScreenForUser({super.key});
 
   @override
-  State<PhoneRegisterScreenForUser> createState() => _PhoneRegisterScreenForUserState();
+  State<PhoneRegisterScreenForUser> createState() =>
+      _PhoneRegisterScreenForUserState();
 }
 
-class _PhoneRegisterScreenForUserState extends State<PhoneRegisterScreenForUser> {
+class _PhoneRegisterScreenForUserState
+    extends State<PhoneRegisterScreenForUser> {
   final _phoneController = TextEditingController();
   bool _isLoading = false;
 
@@ -113,7 +114,7 @@ class _PhoneRegisterScreenForUserState extends State<PhoneRegisterScreenForUser>
             GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const LoginScreen()));
+                    builder: (context) => const SignInScreenForUser()));
               },
               child: const Text(
                 "Already Have an Account",
