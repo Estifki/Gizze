@@ -21,25 +21,37 @@ class DriverAuthProvider with ChangeNotifier {
       required bank,
       required password,
       required PlatformFile carOwnershipDocPath,
-      required PlatformFile LicenceDocPath,
+      required PlatformFile licenceDocPath,
       required PlatformFile profileImage}) async {
-    String url = "${AppConst.appUrl}/register";
+    // print(phone);
+    // print(email);
+    // print(accountNumber);
+    // print(accountholderName);
+    // print(carOwnershipDocPath.path!);
+    // print(licenceDocPath.path!);
+    // print(profileImage.path!);
+    // print(password);
+    // print(bank);
+    // print(city);
+    // print(name);
+    String url = "${AppConst.appUrl}/register-driver";
     try {
       final request = http.MultipartRequest('POST', Uri.parse(url));
-      // request.headers['Content-Type'] = 'multipart/form-data';
-      request.fields["phone"] = phone.toInt().toString();
-      request.fields["name"] = name;
-      request.fields["password"] = password;
-      request.fields["confirm_password"] = password;
-      request.fields["account_number"] = accountNumber;
-      request.fields["account_holder_name"] = accountholderName;
-      request.fields["bank_name"] = bank;
-      request.fields["city"] = city;
-      request.fields["carOwnershipDoc"] = carOwnershipDocPath.path.toString();
+      // request.headers['Accept-Type'] = 'application/json';
+      // request.fields["phone"] = phone;
+      // request.fields["name"] = name;
+      // request.fields["email"] = email;
+      // request.fields["password"] = password;
+      // request.fields["confirm_password"] = password;
+      // request.fields["account_number"] = accountNumber;
+      // request.fields["account_holder_name"] = accountholderName;
+      // request.fields["bank_name"] = bank;
+      // request.fields["city"] = city;
+      // request.fields["carOwnershipDoc"] = carOwnershipDocPath.path!;
 
-      request.fields["LicenceDoc"] = LicenceDocPath.path.toString();
+      // request.fields["LicenceDoc"] = licenceDocPath.path!;
 
-      request.fields["profile_image"] = profileImage.path.toString();
+      // request.fields["profile_image"] = profileImage.path!;
       final response = await request.send();
       var responseBody = await (response.stream.bytesToString());
 

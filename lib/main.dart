@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:ashewa_d/provider/auth/auth_driver.dart';
 import 'package:ashewa_d/provider/auth/auth_user.dart';
 import 'package:ashewa_d/provider/sand.dart';
 import 'package:ashewa_d/screens/splash.dart';
@@ -13,6 +14,7 @@ void main() {
       const SystemUiOverlayStyle(statusBarColor: Colors.black));
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => UserAuthProvider()),
+    ChangeNotifierProvider(create: (_) => DriverAuthProvider()),
     ChangeNotifierProvider(create: (_) => SandProvider()),
     ChangeNotifierProvider(create: (_) => CustomBottomBarProvider())
   ], child: const MyApp()));

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../../provider/auth/auth_driver.dart';
+import '../../../../uitil/http_error.dart';
 import '../../../../uitil/toast.dart';
+import '../../login.dart';
 import '/../../const/const.dart';
 import '/../../widget/textfield.dart';
 import 'package:file_picker/file_picker.dart';
@@ -17,6 +19,8 @@ class RegisterScreenForDriver extends StatefulWidget {
 
 class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
   final _nameController = TextEditingController();
+
+  final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
@@ -32,12 +36,19 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
   bool checkBoxValue = false;
   PlatformFile? carOwnershipDocPath;
   PlatformFile? licenceDocPath;
+  PlatformFile? profileImagePath;
   String carOwnershipDocName = "";
   String carOwnershipDocPathh = "";
   String licenceDocName = "";
   String licenceDocPathh = "";
   String profilePicName = "";
   String profilePicPathh = "";
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +79,10 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
               CustomTextFieldWidget(
                   hint: "Email", controller: _emailController),
               const SizedBox(height: 15),
-              //
-              //Full Name
-              //
+
+              CustomTextFieldWidget(
+                  hint: "Phone Number", controller: _phoneController),
+              const SizedBox(height: 15),
               CustomTextFieldWidget(hint: "City", controller: _cityController),
 
               // const SizedBox(height: 15),
@@ -122,6 +134,7 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
                     setState(() {
                       profilePicName = file.name;
                       profilePicPathh = file.path!;
+                      profileImagePath = file;
                     });
                   } else {
                     return;
@@ -333,6 +346,9 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
     } else if (!RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
         .hasMatch(_emailController.text)) {
       showScaffoldMessanger(context: context, errorMessage: "Invalid email");
+    } else if (_phoneController.text.isEmpty) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Invalid Phone Number");
     } else if (_cityController.text.isEmpty) {
       showScaffoldMessanger(context: context, errorMessage: "Invalid City");
     } else if (profilePicPathh == "") {
@@ -345,12 +361,15 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
     } else if (licenceDocPathh == "") {
       showScaffoldMessanger(
           context: context, errorMessage: "licence Documnet Not Selected");
+    } else if (_accountnumberController.text.isEmpty) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Invalid Account Number");
     } else if (_accountNameController.text.isEmpty) {
       showScaffoldMessanger(
           context: context, errorMessage: "Invalid Account Name");
-    } else if (_accountNameController.text.isEmpty) {
+    } else if (_bankNameController.text.isEmpty) {
       showScaffoldMessanger(
-          context: context, errorMessage: "licence Documnet Not Selected");
+          context: context, errorMessage: "Invalid Bank Name");
     } else if (_passwordController.text.length < 6) {
       showScaffoldMessanger(
           context: context, errorMessage: "Password must be at least 6 digit.");
@@ -368,6 +387,14 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
         });
         await Provider.of<DriverAuthProvider>(context, listen: false)
             .resgisterDriver(
+          phone: "251${_phoneController.text}",
+          accountNumber: _accountnumberController.text,
+          accountholderName: _accountNameController.text,
+          city: _cityController.text,
+          carOwnershipDocPath: carOwnershipDocPath!,
+          bank: _bankNameController.text,
+          licenceDocPath: licenceDocPath!,
+          profileImage: profileImagePath!,
           name: _nameController.text,
           email: _emailController.text,
           password: _passwordController.text,
@@ -380,15 +407,20 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
               context: context,
               backgroundColor: Colors.green,
               errorMessage: "User Registered Successfully");
-          // Navigator.of(context)
-          //     .pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => const SignInScreenForUser(),
+              ),
+              (route) => false);
         });
       } on CustomHttpException catch (e) {
+        print("A ${e.toString()}");
         setState(() {
           _isLoading = false;
         });
         showScaffoldMessanger(context: context, errorMessage: e.toString());
       } catch (e) {
+        print("B ${e.toString()}");
         setState(() {
           _isLoading = false;
         });
