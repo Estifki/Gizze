@@ -14,7 +14,7 @@ class HomeFavoriteWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: SizedBox(
-          height: screenSize.height * 0.165,
+          height: screenSize.height * 0.175,
           width: screenSize.width,
           child: Consumer<SandProvider>(
             builder: (context, value, _) {
@@ -60,7 +60,7 @@ class HomeFavoriteWidget extends StatelessWidget {
                                         style: const TextStyle(
                                             overflow: TextOverflow.ellipsis,
                                             color: Colors.black,
-                                            fontSize: 17,
+                                            fontSize: 16,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
@@ -81,7 +81,8 @@ class HomeFavoriteWidget extends StatelessWidget {
                                               .favoriteSand[index].sandImage),
                                       child: Padding(
                                           padding: EdgeInsets.only(
-                                              bottom: screenSize.height * 0.01),
+                                              bottom:
+                                                  screenSize.height * 0.013),
                                           child: Container(
                                             height: screenSize.height * 0.032,
                                             margin: const EdgeInsets.only(

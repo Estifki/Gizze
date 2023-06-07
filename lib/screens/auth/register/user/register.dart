@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '/../../const/const.dart';
-import '/../../provider/auth.dart';
+import '../../../../provider/auth/auth_user.dart';
 import '/../../uitil/http_error.dart';
 import '/../../widget/textfield.dart';
 
@@ -162,7 +162,7 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
         setState(() {
           _isLoading = true;
         });
-        await Provider.of<AuthProvider>(context, listen: false)
+        await Provider.of<UserAuthProvider>(context, listen: false)
             .registerUser(
                 name: _nameController.text,
                 email: _emailController.text,

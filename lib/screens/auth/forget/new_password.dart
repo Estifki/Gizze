@@ -1,5 +1,5 @@
 import 'package:ashewa_d/const/const.dart';
-import 'package:ashewa_d/provider/auth.dart';
+import 'package:ashewa_d/provider/auth/auth_user.dart';
 import 'package:ashewa_d/screens/auth/login.dart';
 import 'package:ashewa_d/uitil/http_error.dart';
 import 'package:ashewa_d/uitil/toast.dart';
@@ -100,7 +100,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
         setState(() {
           _isLoading = true;
         });
-        await Provider.of<AuthProvider>(context, listen: false)
+        await Provider.of<UserAuthProvider>(context, listen: false)
             .changePassword(
                 newPassword: _passwordController.text,
                 confirmPassword: _confirmPasswordController.text)

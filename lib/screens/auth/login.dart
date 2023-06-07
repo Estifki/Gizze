@@ -1,5 +1,5 @@
 import 'package:ashewa_d/const/const.dart';
-import 'package:ashewa_d/provider/auth.dart';
+import 'package:ashewa_d/provider/auth/auth_user.dart';
 import 'package:ashewa_d/screens/auth/register/user/phone.dart';
 import 'package:ashewa_d/screens/home.dart';
 
@@ -185,7 +185,7 @@ class _SignInScreenForUserState extends State<SignInScreenForUser> {
       });
       try {
         FocusScope.of(context).unfocus();
-        await Provider.of<AuthProvider>(context, listen: false)
+        await Provider.of<UserAuthProvider>(context, listen: false)
             .signIn("251${_phoneController.text}", _passwordController.text)
             .then((_) {
           setState(() {

@@ -79,7 +79,7 @@ class FeaturedProductWidget extends StatelessWidget {
                               Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
+                                  children: const [
                                     //
                                     //Address
                                     //
@@ -91,9 +91,9 @@ class FeaturedProductWidget extends StatelessWidget {
                                     //
                                     //Price
                                     //
-                                    const SizedBox(height: 2),
+                                    SizedBox(height: 2),
                                     AddressAndPriceWidget(
-                                        title: "free",
+                                        title: "Price",
                                         // "${value.featuredSand[index].price} Birr/m²",
                                         icon: Icons.flip_to_back_rounded)
                                   ]),

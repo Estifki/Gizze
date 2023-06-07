@@ -36,6 +36,7 @@ class SandProvider with ChangeNotifier {
 
         _favSand.addAll(data.data.favorite);
         _sand.addAll(data.data.sands.data);
+        notifyListeners();
       }
     } catch (e) {
       rethrow;

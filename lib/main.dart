@@ -1,8 +1,8 @@
 import 'dart:io';
-
-import 'package:ashewa_d/provider/auth.dart';
+import 'package:ashewa_d/provider/auth/auth_user.dart';
 import 'package:ashewa_d/provider/sand.dart';
 import 'package:ashewa_d/screens/splash.dart';
+import 'package:ashewa_d/uitil/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -12,8 +12,9 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.black));
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => AuthProvider()),
-    ChangeNotifierProvider(create: (_) => SandProvider())
+    ChangeNotifierProvider(create: (_) => UserAuthProvider()),
+    ChangeNotifierProvider(create: (_) => SandProvider()),
+    ChangeNotifierProvider(create: (_) => CustomBottomBarProvider())
   ], child: const MyApp()));
 }
 

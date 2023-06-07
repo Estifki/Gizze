@@ -1,4 +1,4 @@
-import 'package:ashewa_d/provider/auth.dart';
+import 'package:ashewa_d/provider/auth/auth_user.dart';
 import 'package:ashewa_d/uitil/http_error.dart';
 import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
@@ -136,7 +136,7 @@ class _PhoneRegisterScreenForUserState
         setState(() {
           _isLoading = true;
         });
-        await Provider.of<AuthProvider>(context, listen: false)
+        await Provider.of<UserAuthProvider>(context, listen: false)
             .phoneRegisterUser(phone: "251${_phoneController.text}")
             .then((_) {
           setState(() {

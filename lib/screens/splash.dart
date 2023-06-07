@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'package:ashewa_d/screens/home.dart';
 import 'package:ashewa_d/screens/onboarding.dart';
+import 'package:ashewa_d/uitil/bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 //
-import '../provider/auth.dart';
+import '../provider/auth/auth_user.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,16 +20,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(Duration.zero, () {
-      Provider.of<AuthProvider>(context, listen: false).getUserAndToken();
+      Provider.of<UserAuthProvider>(context, listen: false).getUserAndToken();
     });
     Timer(const Duration(seconds: 2), () {
-      if (Provider.of<AuthProvider>(context, listen: false).userID == null) {
+      if (Provider.of<UserAuthProvider>(context, listen: false).userID == null) {
         Navigator.of(context).pushReplacement(
-          CupertinoPageRoute(builder: (context) => OnBoardingScreen()),
+          CupertinoPageRoute(builder: (context) => const OnBoardingScreen()),
         );
       } else {
         Navigator.of(context).pushReplacement(
-          CupertinoPageRoute(builder: (context) => HomeScreenForUser()),
+          CupertinoPageRoute(builder: (context) => const CustomBottomBar()),
         );
       }
     });

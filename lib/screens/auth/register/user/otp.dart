@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '/../../const/const.dart';
-import '/../../provider/auth.dart';
+import '../../../../provider/auth/auth_user.dart';
 import '/../../uitil/http_error.dart';
 import '/../../widget/otp.dart';
 
@@ -111,7 +111,7 @@ class _VerifyOtpForUserScreenState extends State<VerifyOtpForUserScreen> {
         setState(() {
           _isLoading = true;
         });
-        await Provider.of<AuthProvider>(context, listen: false)
+        await Provider.of<UserAuthProvider>(context, listen: false)
             .verifyOtp(
                 isForRegister: true, phone: widget.phone, code: userInput)
             .then((_) {

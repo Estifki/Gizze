@@ -1,4 +1,4 @@
-import 'package:ashewa_d/provider/auth.dart';
+import 'package:ashewa_d/provider/auth/auth_user.dart';
 import 'package:ashewa_d/screens/splash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +40,7 @@ class CustomHomeAppBarWidget extends StatelessWidget {
 
                     GestureDetector(
                         onTap: () {
-                          Provider.of<AuthProvider>(context, listen: false)
+                          Provider.of<UserAuthProvider>(context, listen: false)
                               .LogOut();
                           Navigator.of(context).pushReplacement(
                               CupertinoPageRoute(
