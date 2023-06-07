@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../screens/onboarding.dart';
-
 class CustomHomeAppBarWidget extends StatelessWidget {
   const CustomHomeAppBarWidget({super.key});
 
@@ -41,7 +39,7 @@ class CustomHomeAppBarWidget extends StatelessWidget {
                     GestureDetector(
                         onTap: () {
                           Provider.of<UserAuthProvider>(context, listen: false)
-                              .LogOut();
+                              .logOut();
                           Navigator.of(context).pushReplacement(
                               CupertinoPageRoute(
                                   builder: (context) => SplashScreen()));

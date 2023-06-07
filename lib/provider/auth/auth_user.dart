@@ -10,13 +10,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 class UserAuthProvider with ChangeNotifier {
   String? token;
   String? userID;
+  String? role;
 
-  Future<void> LogOut() async {
+  Future<void> logOut() async {
     var prefs = await SharedPreferences.getInstance();
     prefs.remove("LocalUserId");
     prefs.remove("LocalToken");
+    prefs.remove("Role");
     userID = null;
     token = null;
+    role = null;
   }
 
   Future getUserAndToken() async {
@@ -26,11 +29,14 @@ class UserAuthProvider with ChangeNotifier {
         prefs.getString("LocalUserId") != null) {
       userID = prefs.getString("LocalUserId");
       token = prefs.getString("LocalToken");
+      role = prefs.getString("Role");
     } else {
       prefs.remove("LocalUserId");
       prefs.remove("LocalToken");
+      prefs.remove("Role");
       userID = null;
       token = null;
+      role = null;
     }
   }
 
@@ -52,8 +58,10 @@ class UserAuthProvider with ChangeNotifier {
         var prefs = await SharedPreferences.getInstance();
         userID = decodedData['data']["user"]["id"];
         token = decodedData['data']['token'];
+        role = decodedData['data']["user"]["role"]["name"];
         prefs.setString("LocalUserId", decodedData['data']["user"]["id"]);
         prefs.setString("LocalToken", decodedData['data']['token']);
+        prefs.setString("Role", decodedData['data']["user"]["role"]["name"]);
       }
     } catch (_) {
       rethrow;

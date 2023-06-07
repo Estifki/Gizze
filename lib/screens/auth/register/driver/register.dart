@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import '../../../../provider/auth/auth_driver.dart';
+import '../../../../uitil/toast.dart';
 import '/../../const/const.dart';
 import '/../../widget/textfield.dart';
 import 'package:file_picker/file_picker.dart';
@@ -27,15 +30,14 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
   final _cityController = TextEditingController();
   bool _isLoading = false;
   bool checkBoxValue = false;
-
+  PlatformFile? carOwnershipDocPath;
+  PlatformFile? licenceDocPath;
   String carOwnershipDocName = "";
+  String carOwnershipDocPathh = "";
   String licenceDocName = "";
-
-  String carOwnershipDocPath = "";
-  String licenceDocPath = "";
-
+  String licenceDocPathh = "";
   String profilePicName = "";
-  String profilePicPath = "";
+  String profilePicPathh = "";
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +121,7 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
                     PlatformFile file = result.files.first;
                     setState(() {
                       profilePicName = file.name;
-                      profilePicPath = file.path!;
+                      profilePicPathh = file.path!;
                     });
                   } else {
                     return;
@@ -157,7 +159,8 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
                     PlatformFile file = result.files.first;
                     setState(() {
                       carOwnershipDocName = file.name;
-                      carOwnershipDocPath = file.path!;
+                      carOwnershipDocPathh = file.path!;
+                      carOwnershipDocPath = file;
                     });
                   } else {
                     return;
@@ -195,7 +198,8 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
                     PlatformFile file = result.files.first;
                     setState(() {
                       licenceDocName = file.name;
-                      licenceDocPath = file.path!;
+                      licenceDocPathh = file.path!;
+                      licenceDocPath = file;
                     });
                   } else {
                     return;
@@ -324,56 +328,73 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
   }
 
   void validate() async {
-    // if (_nameController.text.length < 2) {
-    //   showScaffoldMessanger(context: context, errorMessage: "Invalid Name");
-    // } else if (!RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
-    //     .hasMatch(_emailController.text)) {
-    //   showScaffoldMessanger(context: context, errorMessage: "Invalid email");
-    // } else if (_passwordController.text.length < 6) {
-    //   showScaffoldMessanger(
-    //       context: context, errorMessage: "Password must be at least 6 digit.");
-    // } else if (_passwordController.text != _confirmPasswordController.text) {
-    //   showScaffoldMessanger(
-    //       context: context, errorMessage: "Password don not match");
-    // } else if (checkBoxValue == false) {
-    //   showScaffoldMessanger(
-    //       context: context, errorMessage: "Term and Conditions Not Agreed");
-    // }
-    // else {
-    // try {
-    //   FocusScope.of(context).unfocus();
-    //   setState(() {
-    //     _isLoading = true;
-    //   });
-    //   await Provider.of<AuthProvider>(context, listen: false)
-    //       .register(
-    //           name: _nameController.text,
-    //           email: _emailController.text,
-    //           password: _passwordController.text,
-    //           confirmPassword: _confirmPasswordController.text)
-    //       .then((_) {
-    //     setState(() {
-    //       _isLoading = false;
-    //     });
-    //     showScaffoldMessanger(
-    //         context: context,
-    //         backgroundColor: Colors.green,
-    //         errorMessage: "User Registered Successfully");
-    //     // Navigator.of(context)
-    //     //     .pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
-    //   });
-    // } on CustomHttpException catch (e) {
-    //   setState(() {
-    //     _isLoading = false;
-    //   });
-    //   showScaffoldMessanger(context: context, errorMessage: e.toString());
-    // } catch (e) {
-    //   setState(() {
-    //     _isLoading = false;
-    //   });
-    //   showScaffoldMessanger(
-    //       context: context, errorMessage: "Please Try Again Later");
-    // }
-    // }
+    if (_nameController.text.length < 2) {
+      showScaffoldMessanger(context: context, errorMessage: "Invalid Name");
+    } else if (!RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
+        .hasMatch(_emailController.text)) {
+      showScaffoldMessanger(context: context, errorMessage: "Invalid email");
+    } else if (_cityController.text.isEmpty) {
+      showScaffoldMessanger(context: context, errorMessage: "Invalid City");
+    } else if (profilePicPathh == "") {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Profile Image Not Selected");
+    } else if (carOwnershipDocPathh == "") {
+      showScaffoldMessanger(
+          context: context,
+          errorMessage: "Car Ownership Documnet Not Selected");
+    } else if (licenceDocPathh == "") {
+      showScaffoldMessanger(
+          context: context, errorMessage: "licence Documnet Not Selected");
+    } else if (_accountNameController.text.isEmpty) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Invalid Account Name");
+    } else if (_accountNameController.text.isEmpty) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "licence Documnet Not Selected");
+    } else if (_passwordController.text.length < 6) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Password must be at least 6 digit.");
+    } else if (_passwordController.text != _confirmPasswordController.text) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Password do not match");
+    } else if (checkBoxValue == false) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Term and Conditions Not Agreed");
+    } else {
+      try {
+        FocusScope.of(context).unfocus();
+        setState(() {
+          _isLoading = true;
+        });
+        await Provider.of<DriverAuthProvider>(context, listen: false)
+            .resgisterDriver(
+          name: _nameController.text,
+          email: _emailController.text,
+          password: _passwordController.text,
+        )
+            .then((_) {
+          setState(() {
+            _isLoading = false;
+          });
+          showScaffoldMessanger(
+              context: context,
+              backgroundColor: Colors.green,
+              errorMessage: "User Registered Successfully");
+          // Navigator.of(context)
+          //     .pushNamedAndRemoveUntil(AppRoute.home, (route) => false);
+        });
+      } on CustomHttpException catch (e) {
+        setState(() {
+          _isLoading = false;
+        });
+        showScaffoldMessanger(context: context, errorMessage: e.toString());
+      } catch (e) {
+        setState(() {
+          _isLoading = false;
+        });
+        showScaffoldMessanger(
+            context: context, errorMessage: "Please Try Again Later");
+      }
+    }
   }
 }
