@@ -1,9 +1,7 @@
-import 'dart:convert';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../const/const.dart';
 import '../../uitil/http_error.dart';
 
@@ -34,29 +32,30 @@ class DriverAuthProvider with ChangeNotifier {
     // print(bank);
     // print(city);
     // print(name);
-    String url = "${AppConst.appUrl}/register-driver";
+    final url = Uri.parse("${AppConst.appUrl}/register-driver");
     try {
-      final request = http.MultipartRequest('POST', Uri.parse(url));
-      // request.headers['Accept-Type'] = 'application/json';
-      // request.fields["phone"] = phone;
-      // request.fields["name"] = name;
-      // request.fields["email"] = email;
-      // request.fields["password"] = password;
-      // request.fields["confirm_password"] = password;
-      // request.fields["account_number"] = accountNumber;
-      // request.fields["account_holder_name"] = accountholderName;
-      // request.fields["bank_name"] = bank;
-      // request.fields["city"] = city;
-      // request.fields["carOwnershipDoc"] = carOwnershipDocPath.path!;
+      final request = http.MultipartRequest('POST', url);
+      // request.headers['Content-Type'] = 'application/json';
+      request.fields["carOwnershipDoc"] = carOwnershipDocPath.path!;
+      request.fields["LicenceDoc"] = licenceDocPath.path!;
+      request.fields["profile_image"] = profileImage.path!;
+      request.fields["phone"] = phone;
+      request.fields["name"] = name;
+      request.fields["email"] = email;
+      request.fields["password"] = password.toString();
+      request.fields["confirm_password"] = password.toString();
+      request.fields["account_number"] = accountNumber.toString();
+      request.fields["account_holder_name"] = accountholderName;
+      request.fields["bank_name"] = bank;
+      request.fields["city"] = city;
 
-      // request.fields["LicenceDoc"] = licenceDocPath.path!;
-
-      // request.fields["profile_image"] = profileImage.path!;
       final response = await request.send();
-      var responseBody = await (response.stream.bytesToString());
+      print(response.statusCode);
+      // var responseBody = await (response.stream.bytesToString());
 
-      var decodedData = jsonDecode(responseBody);
-      print(decodedData);
+      // var decodedData = jsonDecode(responseBody);
+
+      // print(decodedData);
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: "Please Try Again Later!");
       } else {}

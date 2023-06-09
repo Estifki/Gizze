@@ -1,7 +1,8 @@
 import 'package:ashewa_d/const/const.dart';
 import 'package:ashewa_d/provider/auth/auth_user.dart';
 import 'package:ashewa_d/screens/auth/register/user/phone.dart';
-import 'package:ashewa_d/screens/home.dart';
+import 'package:ashewa_d/screens/driver/bottom_bar_driver.dart';
+import 'package:ashewa_d/screens/user/home.dart';
 
 import 'package:ashewa_d/uitil/http_error.dart';
 import 'package:ashewa_d/uitil/toast.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../widget/textfield.dart';
+import '../driver/order.dart';
 import 'forget/forget.dart';
 
 class SignInScreenForUser extends StatefulWidget {
@@ -191,9 +193,18 @@ class _SignInScreenForUserState extends State<SignInScreenForUser> {
           setState(() {
             _isLoading = false;
           });
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => HomeScreenForUser()),
-              (route) => false);
+          if (Provider.of<UserAuthProvider>(context, listen: false).role ==
+              "Driver") {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder: (context) => const DriverCustomBottomBar()),
+                (route) => false);
+          } else {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder: (context) => const HomeScreenForUser()),
+                (route) => false);
+          }
         });
       } on CustomHttpException catch (e) {
         setState(() {

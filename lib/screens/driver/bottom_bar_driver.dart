@@ -1,24 +1,31 @@
 import 'dart:io';
 
-import 'package:ashewa_d/screens/home.dart';
+import 'package:ashewa_d/screens/user/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CustomBottomBar extends StatefulWidget {
-  const CustomBottomBar({super.key});
+import 'order.dart';
+import 'profile.dart';
+
+class DriverCustomBottomBar extends StatefulWidget {
+  const DriverCustomBottomBar({super.key});
 
   @override
-  State<CustomBottomBar> createState() => _CustomBottomBarState();
+  State<DriverCustomBottomBar> createState() => _DriverCustomBottomBarState();
 }
 
-class _CustomBottomBarState extends State<CustomBottomBar> {
-  List<Widget> _screen = [HomeScreenForUser(), Scaffold(), Scaffold()];
+class _DriverCustomBottomBarState extends State<DriverCustomBottomBar> {
+  List<Widget> _screen = [
+    OrderScreenForDriver(),
+    // Scaffold(),
+    ProfileScreenForDriver()
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: _screen.elementAt(
-          Provider.of<CustomBottomBarProvider>(context).selectedIndex,
+          Provider.of<DriverCustomBottomBarProvider>(context).selectedIndex,
         ),
         bottomNavigationBar: SizedBox(
           height: Platform.isIOS ? null : 56,
@@ -30,18 +37,19 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
               // iconSize: 24,
               unselectedLabelStyle: const TextStyle(fontSize: 11.0),
               selectedLabelStyle: const TextStyle(fontSize: 13.0),
-              currentIndex:
-                  Provider.of<CustomBottomBarProvider>(context).selectedIndex,
+              currentIndex: Provider.of<DriverCustomBottomBarProvider>(context)
+                  .selectedIndex,
               onTap: (index) {
-                Provider.of<CustomBottomBarProvider>(context, listen: false)
+                Provider.of<DriverCustomBottomBarProvider>(context,
+                        listen: false)
                     .onIndexChange(index);
               },
               items: const [
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.home_filled), label: "Home"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.money_off_csred_sharp),
-                    label: "My Orders"),
+                    icon: Icon(Icons.home_filled), label: "Order"),
+                // BottomNavigationBarItem(
+                //     icon: Icon(Icons.money_off_csred_sharp),
+                //     label: "My Orders"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.person), label: "Profile"),
               ]),
@@ -49,7 +57,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   }
 }
 
-class CustomBottomBarProvider with ChangeNotifier {
+class DriverCustomBottomBarProvider with ChangeNotifier {
   int _selectedIndex = 0;
   int get selectedIndex => _selectedIndex;
 

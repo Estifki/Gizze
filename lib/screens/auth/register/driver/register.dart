@@ -406,12 +406,12 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
           showScaffoldMessanger(
               context: context,
               backgroundColor: Colors.green,
-              errorMessage: "User Registered Successfully");
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (context) => const SignInScreenForUser(),
-              ),
-              (route) => false);
+              errorMessage: "Driver Registered Successfully");
+          // Navigator.of(context).pushAndRemoveUntil(
+          //     MaterialPageRoute(
+          //       builder: (context) => const SignInScreenForUser(),
+          //     ),
+          //     (route) => false);
         });
       } on CustomHttpException catch (e) {
         print("A ${e.toString()}");

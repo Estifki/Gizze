@@ -14,7 +14,7 @@ class UserAuthProvider with ChangeNotifier {
 
   Future<void> logOut() async {
     var prefs = await SharedPreferences.getInstance();
-    prefs.remove("LocalUserId");
+    prefs.remove("LocalId");
     prefs.remove("LocalToken");
     prefs.remove("Role");
     userID = null;
@@ -26,12 +26,12 @@ class UserAuthProvider with ChangeNotifier {
     var prefs = await SharedPreferences.getInstance();
 
     if (prefs.getString("LocalToken") != null &&
-        prefs.getString("LocalUserId") != null) {
+        prefs.getString("LocalId") != null) {
       userID = prefs.getString("LocalUserId");
       token = prefs.getString("LocalToken");
       role = prefs.getString("Role");
     } else {
-      prefs.remove("LocalUserId");
+      prefs.remove("LocalId");
       prefs.remove("LocalToken");
       prefs.remove("Role");
       userID = null;
@@ -59,7 +59,7 @@ class UserAuthProvider with ChangeNotifier {
         userID = decodedData['data']["user"]["id"];
         token = decodedData['data']['token'];
         role = decodedData['data']["user"]["role"]["name"];
-        prefs.setString("LocalUserId", decodedData['data']["user"]["id"]);
+        prefs.setString("LocalId", decodedData['data']["user"]["id"]);
         prefs.setString("LocalToken", decodedData['data']['token']);
         prefs.setString("Role", decodedData['data']["user"]["role"]["name"]);
       }
