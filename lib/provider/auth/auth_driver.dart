@@ -1,3 +1,4 @@
+import 'dart:convert';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -36,26 +37,26 @@ class DriverAuthProvider with ChangeNotifier {
     try {
       final request = http.MultipartRequest('POST', url);
       // request.headers['Content-Type'] = 'application/json';
-      request.fields["carOwnershipDoc"] = carOwnershipDocPath.path!;
-      request.fields["LicenceDoc"] = licenceDocPath.path!;
-      request.fields["profile_image"] = profileImage.path!;
-      request.fields["phone"] = phone;
-      request.fields["name"] = name;
-      request.fields["email"] = email;
-      request.fields["password"] = password.toString();
-      request.fields["confirm_password"] = password.toString();
-      request.fields["account_number"] = accountNumber.toString();
-      request.fields["account_holder_name"] = accountholderName;
-      request.fields["bank_name"] = bank;
-      request.fields["city"] = city;
+      // request.fields["carOwnershipDoc"] = carOwnershipDocPath.path!;
+      // request.fields["LicenceDoc"] = licenceDocPath.path!;
+      // request.fields["profile_image"] = profileImage.path!;
+      // request.fields["phone"] = phone;
+      // request.fields["name"] = name;
+      // request.fields["email"] = email;
+      // request.fields["password"] = password.toString();
+      // request.fields["confirm_password"] = password.toString();
+      // request.fields["account_number"] = accountNumber.toString();
+      // request.fields["account_holder_name"] = accountholderName;
+      // request.fields["bank_name"] = bank;
+      // request.fields["city"] = city;
 
       final response = await request.send();
       print(response.statusCode);
-      // var responseBody = await (response.stream.bytesToString());
+      var responseBody = await (response.stream.bytesToString());
 
-      // var decodedData = jsonDecode(responseBody);
+      var decodedData = jsonDecode(responseBody);
 
-      // print(decodedData);
+      print(decodedData);
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: "Please Try Again Later!");
       } else {}
