@@ -11,7 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../widget/textfield.dart';
-import '../driver/order.dart';
+import '../user/bottom_bar.dart';
 import 'forget/forget.dart';
 
 class SignInScreenForUser extends StatefulWidget {
@@ -202,7 +202,7 @@ class _SignInScreenForUserState extends State<SignInScreenForUser> {
           } else {
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
-                    builder: (context) => const HomeScreenForUser()),
+                    builder: (context) => const UserCustomBottomBar()),
                 (route) => false);
           }
         });

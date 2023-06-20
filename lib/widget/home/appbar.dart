@@ -36,16 +36,7 @@ class CustomHomeAppBarWidget extends StatelessWidget {
                           fit: BoxFit.cover, color: Colors.white),
                     ),
 
-                    GestureDetector(
-                        onTap: () {
-                          Provider.of<UserAuthProvider>(context, listen: false)
-                              .logOut();
-                          Navigator.of(context).pushReplacement(
-                              CupertinoPageRoute(
-                                  builder: (context) => SplashScreen()));
-                        },
-                        child: const Icon(Icons.logout,
-                            size: 25, color: Colors.white))
+                    const Icon(Icons.logout, size: 0, color: Colors.white)
                   ]),
             ),
             const SizedBox(height: 40),

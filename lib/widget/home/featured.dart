@@ -1,8 +1,11 @@
-import 'package:ashewa_d/provider/sand.dart';
+import 'package:ashewa_d/provider/user/sand.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../const/const.dart';
+import '../../provider/auth/auth_user.dart';
+import '../../screens/user/sand_details.dart';
 import '../bottom_sheet.dart';
 import 'adderss_price.dart';
 
@@ -26,7 +29,7 @@ class FeaturedProductWidget extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0)),
               child: Container(
-                height: screenSize.height * 0.25,
+                height: screenSize.height * 0.18,
                 width: screenSize.width,
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -76,41 +79,56 @@ class FeaturedProductWidget extends StatelessWidget {
                               //
                               //address and price
                               //
-                              Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
-                                    //
-                                    //Address
-                                    //
-                                    AddressAndPriceWidget(
-                                        title: "location name",
-                                        //  value.featuredSand[index]
-                                        //     .location.locationName,
-                                        icon: Icons.location_on),
-                                    //
-                                    //Price
-                                    //
-                                    SizedBox(height: 2),
-                                    AddressAndPriceWidget(
-                                        title: "Price",
-                                        // "${value.featuredSand[index].price} Birr/m²",
-                                        icon: Icons.flip_to_back_rounded)
-                                  ]),
+                              // Column(
+                              //     mainAxisAlignment: MainAxisAlignment.start,
+                              //     crossAxisAlignment: CrossAxisAlignment.start,
+                              //     children: const [
+                              //       //
+                              //       //Address
+                              //       //
+                              //       AddressAndPriceWidget(
+                              //           title: "location name",
+                              //           //  value.featuredSand[index]
+                              //           //     .location.locationName,
+                              //           icon: Icons.location_on),
+                              //       //
+                              //       //Price
+                              //       //
+                              //       SizedBox(height: 2),
+                              //       AddressAndPriceWidget(
+                              //           title: "Price",
+                              //           // "${value.featuredSand[index].price} Birr/m²",
+                              //           icon: Icons.flip_to_back_rounded)
+                              //     ]),
                               //
                               //Order Now Button
                               //
                               const SizedBox(height: 10),
                               GestureDetector(
-                                onTap: () => showMoreSandInfo(
-                                    context: context,
-                                    sandName: value.featuredSand[index].name,
-                                    sandDescription:
-                                        value.featuredSand[index].description,
-                                    sandPrice: "free",
-                                    //value.featuredSand[index].price,
-                                    sandImageUrl:
-                                        value.featuredSand[index].sandImage),
+                                onTap: () {
+                                  Provider.of<SandProvider>(context,
+                                          listen: false)
+                                      .cleanSandDetails();
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => SandDetailsScreen(
+                                        sandID: value.featuredSand[index].id,
+                                        sandName:
+                                            value.featuredSand[index].name,
+                                        sandDescription: value
+                                            .featuredSand[index].description,
+                                        sandImage: value
+                                            .featuredSand[index].sandImage),
+                                  ));
+                                },
+                                // onTap: () => showMoreSandInfo(
+                                //     context: context,
+                                //     sandName: value.featuredSand[index].name,
+                                //     sandDescription:
+                                //         value.featuredSand[index].description,
+                                //     sandPrice: "free",
+                                //     //value.featuredSand[index].price,
+                                //     sandImageUrl:
+                                //         value.featuredSand[index].sandImage),
                                 child: Container(
                                   width: screenSize.width,
                                   height: screenSize.height * 0.046,

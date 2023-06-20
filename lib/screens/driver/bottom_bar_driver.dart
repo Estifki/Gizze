@@ -1,10 +1,11 @@
 import 'dart:io';
 
+import 'package:ashewa_d/screens/driver/sands.dart';
+import 'package:ashewa_d/screens/order/my_orders.dart';
 import 'package:ashewa_d/screens/user/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'order.dart';
 import 'profile.dart';
 
 class DriverCustomBottomBar extends StatefulWidget {
@@ -16,8 +17,8 @@ class DriverCustomBottomBar extends StatefulWidget {
 
 class _DriverCustomBottomBarState extends State<DriverCustomBottomBar> {
   List<Widget> _screen = [
-    OrderScreenForDriver(),
-    // Scaffold(),
+    MyOrdersScreen(),
+    SandscreenForDriver(),
     ProfileScreenForDriver()
   ];
 
@@ -47,9 +48,8 @@ class _DriverCustomBottomBarState extends State<DriverCustomBottomBar> {
               items: const [
                 BottomNavigationBarItem(
                     icon: Icon(Icons.home_filled), label: "Order"),
-                // BottomNavigationBarItem(
-                //     icon: Icon(Icons.money_off_csred_sharp),
-                //     label: "My Orders"),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.dataset), label: "Sands"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.person), label: "Profile"),
               ]),

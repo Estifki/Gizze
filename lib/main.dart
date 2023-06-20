@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'package:ashewa_d/provider/auth/auth_driver.dart';
 import 'package:ashewa_d/provider/auth/auth_user.dart';
-import 'package:ashewa_d/provider/sand.dart';
+import 'package:ashewa_d/provider/orders.dart';
+import 'package:ashewa_d/provider/user/sand.dart';
 import 'package:ashewa_d/screens/driver/bottom_bar_driver.dart';
 import 'package:ashewa_d/screens/splash.dart';
 import 'package:ashewa_d/screens/user/bottom_bar.dart';
@@ -17,6 +18,7 @@ void main() {
     ChangeNotifierProvider(create: (_) => UserAuthProvider()),
     ChangeNotifierProvider(create: (_) => DriverAuthProvider()),
     ChangeNotifierProvider(create: (_) => SandProvider()),
+    ChangeNotifierProvider(create: (_) => OrderProvider()),
     ChangeNotifierProvider(create: (_) => UserCustomBottomBarProvider()),
     ChangeNotifierProvider(create: (_) => DriverCustomBottomBarProvider())
   ], child: const MyApp()));

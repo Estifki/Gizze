@@ -27,7 +27,7 @@ class UserAuthProvider with ChangeNotifier {
 
     if (prefs.getString("LocalToken") != null &&
         prefs.getString("LocalId") != null) {
-      userID = prefs.getString("LocalUserId");
+      userID = prefs.getString("LocalId");
       token = prefs.getString("LocalToken");
       role = prefs.getString("Role");
     } else {
