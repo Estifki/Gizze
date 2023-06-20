@@ -13,17 +13,16 @@ class OrderProvider with ChangeNotifier {
   final List<OrderData> _onTheWayOrderData = [];
   final List<OrderData> _deliveredOrderData = [];
   final List<OrderData> _rejectedOrderData = [];
-  final List<SandAddressData> _sandAddressData = [];
 
   List<OrderData> get pendingOrderData => [..._pendingOrderData];
   List<OrderData> get onTheWayOrderData => [..._onTheWayOrderData];
   List<OrderData> get deliveredOrderData => [..._deliveredOrderData];
   List<OrderData> get rejectedOrderData => [..._rejectedOrderData];
 
-  List<SandAddressData> get sandAddressData => [..._sandAddressData];
-
-  Future<void> getPending(String token) async {
-    String url = "${AppConst.appUrl}/pending-orders";
+  Future<void> getPending(String token, bool isDriver) async {
+    String url = isDriver
+        ? "${AppConst.appUrl}/driver-pending-orders"
+        : "${AppConst.appUrl}/pending-orders";
 
     try {
       http.Response response = await http.get(
@@ -106,8 +105,10 @@ class OrderProvider with ChangeNotifier {
   //   }
   // }
 
-  Future<void> getRejected(String token) async {
-    String url = "${AppConst.appUrl}/rejected-orders";
+  Future<void> getRejected(String token, bool isDriver) async {
+    String url = isDriver
+        ? "${AppConst.appUrl}/driver-rejected-orders"
+        : "${AppConst.appUrl}/rejected-orders";
 
     try {
       http.Response response = await http.get(
@@ -126,33 +127,6 @@ class OrderProvider with ChangeNotifier {
         _rejectedOrderData.clear();
         final data = ordersModelFromJson(response.body);
         _rejectedOrderData.addAll(data.data);
-        notifyListeners();
-      }
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> getSandAddress(String token) async {
-    String url = "${AppConst.appUrl}/locations";
-
-    try {
-      http.Response response = await http.get(
-        Uri.parse(url),
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          HttpHeaders.authorizationHeader: "Bearer $token"
-        },
-      );
-      final decodedData = jsonDecode(response.body);
-
-      if (response.statusCode != 200) {
-        throw CustomHttpException(errorMessage: decodedData["data"]);
-      } else {
-        _sandAddressData.clear();
-        final data = sandAddressModelFromJson(response.body);
-        _sandAddressData.addAll(data.data);
         notifyListeners();
       }
     } catch (e) {

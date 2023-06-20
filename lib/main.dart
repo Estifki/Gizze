@@ -3,6 +3,7 @@ import 'package:ashewa_d/provider/auth/auth_driver.dart';
 import 'package:ashewa_d/provider/auth/auth_user.dart';
 import 'package:ashewa_d/provider/location.dart';
 import 'package:ashewa_d/provider/orders.dart';
+import 'package:ashewa_d/provider/sand_location.dart';
 import 'package:ashewa_d/provider/user/sand.dart';
 import 'package:ashewa_d/screens/driver/bottom_bar_driver.dart';
 import 'package:ashewa_d/screens/splash.dart';
@@ -20,6 +21,7 @@ void main() {
     ChangeNotifierProvider(create: (_) => DriverAuthProvider()),
     ChangeNotifierProvider(create: (_) => SandProvider()),
     ChangeNotifierProvider(create: (_) => OrderProvider()),
+    ChangeNotifierProvider(create: (_) => SandLocationProvider()),
     ChangeNotifierProvider(create: (_) => LocationProvider()),
     ChangeNotifierProvider(create: (_) => UserCustomBottomBarProvider()),
     ChangeNotifierProvider(create: (_) => DriverCustomBottomBarProvider())

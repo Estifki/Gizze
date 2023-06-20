@@ -1,6 +1,7 @@
 import 'package:ashewa_d/const/const.dart';
 import 'package:ashewa_d/provider/auth/auth_user.dart';
 import 'package:ashewa_d/provider/orders.dart';
+import 'package:ashewa_d/provider/sand_location.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,16 +20,16 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
   @override
   void didChangeDependencies() {
     if (_isinit) {
-      Provider.of<OrderProvider>(context, listen: false).getSandAddress(
+      Provider.of<SandLocationProvider>(context, listen: false).getSandAddress(
           Provider.of<UserAuthProvider>(context, listen: false).token!);
       _myOrders = Provider.of<OrderProvider>(context, listen: false).getPending(
-          Provider.of<UserAuthProvider>(context, listen: false).token!);
+          Provider.of<UserAuthProvider>(context, listen: false).token!, true);
       // Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
       //     Provider.of<UserAuthProvider>(context, listen: false).token!);
       // Provider.of<OrderProvider>(context, listen: false).getDelivered(
       //     Provider.of<UserAuthProvider>(context, listen: false).token!);
       Provider.of<OrderProvider>(context, listen: false).getRejected(
-          Provider.of<UserAuthProvider>(context, listen: false).token!);
+          Provider.of<UserAuthProvider>(context, listen: false).token!, true);
     }
     super.didChangeDependencies();
   }
@@ -36,13 +37,13 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
   @override
   Widget build(BuildContext context) {
     Provider.of<OrderProvider>(context, listen: false).getPending(
-        Provider.of<UserAuthProvider>(context, listen: false).token!);
+        Provider.of<UserAuthProvider>(context, listen: false).token!, true);
     // Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
     //     Provider.of<UserAuthProvider>(context, listen: false).token!);
     // Provider.of<OrderProvider>(context, listen: false).getDelivered(
     //     Provider.of<UserAuthProvider>(context, listen: false).token!);
     Provider.of<OrderProvider>(context, listen: false).getRejected(
-        Provider.of<UserAuthProvider>(context, listen: false).token!);
+        Provider.of<UserAuthProvider>(context, listen: false).token!, true);
     return DefaultTabController(
         length: 4,
         child: Scaffold(

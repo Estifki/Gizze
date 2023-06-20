@@ -1,11 +1,15 @@
 import 'package:ashewa_d/const/const.dart';
+import 'package:ashewa_d/provider/auth/auth_user.dart';
 import 'package:ashewa_d/provider/orders.dart';
+import 'package:ashewa_d/uitil/http_error.dart';
+import 'package:ashewa_d/uitil/toast.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:provider/provider.dart';
 
 import '../../../provider/location.dart';
+import '../../../provider/sand_location.dart';
 import '../../user/profile_user.dart';
 
 class AddSandScreen extends StatefulWidget {
@@ -22,6 +26,7 @@ class _AddSandScreenState extends State<AddSandScreen> {
   final _priceController = TextEditingController();
   String selectedSandAddress = "";
   bool locationPicked = false;
+  bool _isLoading = false;
 
   double? lat;
   double? long;
@@ -34,6 +39,8 @@ class _AddSandScreenState extends State<AddSandScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.black,
@@ -75,7 +82,7 @@ class _AddSandScreenState extends State<AddSandScreen> {
               dropdownDecoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
               ),
-              items: Provider.of<OrderProvider>(context)
+              items: Provider.of<SandLocationProvider>(context)
                   .sandAddressData
                   .map((item) => DropdownMenuItem<String>(
                         value: item.id,
@@ -162,9 +169,72 @@ class _AddSandScreenState extends State<AddSandScreen> {
                           ),
                   ]),
             ),
+            const SizedBox(height: 20),
+            _isLoading
+                ? const Center(child: CircularProgressIndicator.adaptive())
+                : GestureDetector(
+                    onTap: () => validate(),
+                    child: Container(
+                      height: 46,
+                      width: screenSize.width,
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(right: 5.0),
+                      decoration: BoxDecoration(
+                          color: AppColor.primaryColor,
+                          borderRadius: BorderRadius.circular(6.0)),
+                      child: const Text("Add Sand",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.white),
+                          textAlign: TextAlign.center),
+                    ),
+                  )
           ],
         ),
       ),
     );
+  }
+
+  validate() async {
+    if (_priceController.text.isEmpty) {
+      showScaffoldMessanger(context: context, errorMessage: "Price is Invalid");
+    } else if (selectedSandAddress == "") {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Price address is Invalid");
+    } else if (lat == null) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Please Pick Sand Location");
+    } else {
+      FocusScope.of(context).unfocus();
+      setState(() {
+        _isLoading = true;
+      });
+      try {
+        Provider.of<SandLocationProvider>(context, listen: false)
+            .addSandLocation(
+                token: Provider.of<UserAuthProvider>(context, listen: false)
+                    .token!,
+                sandID: widget.sandID,
+                price: _priceController.text,
+                locationID: selectedSandAddress,
+                lat: lat!.toDouble(),
+                long: long!.toDouble())
+            .then((value) {
+          showScaffoldMessanger(
+              backgroundColor: Colors.green,
+              context: context,
+              errorMessage: "Sand Added Success");
+          setState(() {
+            _isLoading = false;
+          });
+        });
+      } on CustomHttpException catch (e) {
+        showScaffoldMessanger(context: context, errorMessage: e.toString());
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
   }
 }

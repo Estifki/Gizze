@@ -1,3 +1,4 @@
+import 'package:ashewa_d/provider/location.dart';
 import 'package:ashewa_d/provider/user/sand.dart';
 import 'package:ashewa_d/screens/driver/sand/add_sand.dart';
 import 'package:ashewa_d/widget/home/adderss_price.dart';
@@ -29,6 +30,7 @@ class _SandscreenForDriverState extends State<SandscreenForDriver> {
     if (isInit) {
       _sandData = Provider.of<SandProvider>(context, listen: false)
           .getSand(Provider.of<UserAuthProvider>(context).token!);
+      Provider.of<LocationProvider>(context, listen: false).getUserAddress();
       isInit = false;
     }
     super.didChangeDependencies();

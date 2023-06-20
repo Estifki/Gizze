@@ -21,13 +21,13 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
       // Provider.of<OrderProvider>(context, listen: false).getSandAddress(
       //     Provider.of<UserAuthProvider>(context, listen: false).token!);
       _myOrders = Provider.of<OrderProvider>(context, listen: false).getPending(
-          Provider.of<UserAuthProvider>(context, listen: false).token!);
+          Provider.of<UserAuthProvider>(context, listen: false).token!, false);
       // Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
       //     Provider.of<UserAuthProvider>(context, listen: false).token!);
       // Provider.of<OrderProvider>(context, listen: false).getDelivered(
       //     Provider.of<UserAuthProvider>(context, listen: false).token!);
       Provider.of<OrderProvider>(context, listen: false).getRejected(
-          Provider.of<UserAuthProvider>(context, listen: false).token!);
+          Provider.of<UserAuthProvider>(context, listen: false).token!, false);
     }
     super.didChangeDependencies();
   }
@@ -35,13 +35,13 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
   @override
   Widget build(BuildContext context) {
     Provider.of<OrderProvider>(context, listen: false).getPending(
-        Provider.of<UserAuthProvider>(context, listen: false).token!);
+        Provider.of<UserAuthProvider>(context, listen: false).token!, false);
     // Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
     //     Provider.of<UserAuthProvider>(context, listen: false).token!);
     // Provider.of<OrderProvider>(context, listen: false).getDelivered(
     //     Provider.of<UserAuthProvider>(context, listen: false).token!);
     Provider.of<OrderProvider>(context, listen: false).getRejected(
-        Provider.of<UserAuthProvider>(context, listen: false).token!);
+        Provider.of<UserAuthProvider>(context, listen: false).token!, false);
     return DefaultTabController(
         length: 4,
         child: Scaffold(
