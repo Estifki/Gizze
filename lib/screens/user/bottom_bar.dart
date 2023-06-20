@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:ashewa_d/screens/order/my_orders.dart';
+import 'package:ashewa_d/screens/user/order/my_orders.dart';
 import 'package:ashewa_d/screens/user/home.dart';
 import 'package:ashewa_d/screens/user/profile_user.dart';
 import 'package:flutter/material.dart';

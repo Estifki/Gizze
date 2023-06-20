@@ -4,7 +4,7 @@ import 'package:ashewa_d/provider/orders.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../widget/orders.dart';
+import '../../../widget/orders.dart';
 
 class MyOrdersScreen extends StatefulWidget {
   @override

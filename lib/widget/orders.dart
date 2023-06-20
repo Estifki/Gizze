@@ -1,4 +1,4 @@
-import 'package:ashewa_d/screens/order/orders_details.dart';
+import 'package:ashewa_d/screens/user/order/details.dart';
 import 'package:flutter/material.dart';
 
 import '../const/const.dart';
