@@ -1,15 +1,17 @@
 import 'package:ashewa_d/provider/user/sand.dart';
+import 'package:ashewa_d/screens/driver/sand/add_sand.dart';
+import 'package:ashewa_d/widget/home/adderss_price.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../const/const.dart';
-import '../../provider/auth/auth_user.dart';
-import '../../uitil/shimmer/home.dart';
-import '../../widget/home/appbar.dart';
-import '../../widget/home/favorite.dart';
-import '../../widget/home/featured.dart';
-import '../../widget/home/home_sands.dart';
+import '../../../const/const.dart';
+import '../../../provider/auth/auth_user.dart';
+import '../../../uitil/shimmer/home.dart';
+import '../../../widget/home/appbar.dart';
+import '../../../widget/home/favorite.dart';
+import '../../../widget/home/featured.dart';
+import '../../../widget/home/home_sands.dart';
 
 class SandscreenForDriver extends StatefulWidget {
   const SandscreenForDriver({super.key});
@@ -131,6 +133,13 @@ class DriverSandsWidget extends StatelessWidget {
                                 //
                                 const SizedBox(height: 16),
                                 GestureDetector(
+                                  onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                          builder: (context) => AddSandScreen(
+                                              sandID:
+                                                  value.featuredSand[index].id,
+                                              sandName: value
+                                                  .featuredSand[index].name))),
                                   child: Container(
                                     width: screenSize.width,
                                     height: screenSize.height * 0.044,

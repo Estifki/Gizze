@@ -19,8 +19,8 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
   @override
   void didChangeDependencies() {
     if (_isinit) {
-      // Provider.of<OrderProvider>(context, listen: false).getSandAddress(
-      //     Provider.of<UserAuthProvider>(context, listen: false).token!);
+      Provider.of<OrderProvider>(context, listen: false).getSandAddress(
+          Provider.of<UserAuthProvider>(context, listen: false).token!);
       _myOrders = Provider.of<OrderProvider>(context, listen: false).getPending(
           Provider.of<UserAuthProvider>(context, listen: false).token!);
       // Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
