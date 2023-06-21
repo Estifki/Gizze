@@ -1,11 +1,15 @@
 import 'package:ashewa_d/const/const.dart';
+import 'package:ashewa_d/provider/sand_location.dart';
 import 'package:ashewa_d/screens/driver/bottom_bar_driver.dart';
+import 'package:ashewa_d/screens/driver/sand/add_sand.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/auth/auth_user.dart';
+import '../../provider/user/sand.dart';
 import '../splash.dart';
+import 'my_sand/my_sand.dart';
 
 class ProfileScreenForDriver extends StatefulWidget {
   const ProfileScreenForDriver({super.key});
@@ -95,7 +99,7 @@ class _ProfileScreenForDriverState extends State<ProfileScreenForDriver> {
               ),
               const SizedBox(height: 30),
               Container(
-                height: 42,
+                height: 46,
                 width: screenSize.width,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
@@ -109,7 +113,27 @@ class _ProfileScreenForDriverState extends State<ProfileScreenForDriver> {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
+              GestureDetector(
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const MySandScreen())),
+                child: Container(
+                  height: 46,
+                  width: screenSize.width,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: AppColor.primaryColor,
+                      borderRadius: BorderRadius.circular(10.0)),
+                  child: const Text(
+                    "My Sands",
+                    style: TextStyle(
+                        fontSize: 17,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
               GestureDetector(
                 onTap: () {
                   Provider.of<UserAuthProvider>(context, listen: false)
@@ -121,7 +145,7 @@ class _ProfileScreenForDriverState extends State<ProfileScreenForDriver> {
                       builder: (context) => const SplashScreen()));
                 },
                 child: Container(
-                  height: 42,
+                  height: 46,
                   width: screenSize.width,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(

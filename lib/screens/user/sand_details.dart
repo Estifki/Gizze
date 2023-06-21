@@ -5,7 +5,6 @@ import 'package:shimmer/shimmer.dart';
 import '../../const/const.dart';
 import '../../provider/auth/auth_user.dart';
 import '../../provider/user/sand.dart';
-import '../../widget/home/adderss_price.dart';
 
 class SandDetailsScreen extends StatefulWidget {
   final String sandID;

@@ -14,11 +14,11 @@ class SandProvider with ChangeNotifier {
   final List<Favorite> _favSand = [];
   final List<Favorite> _sand = [];
 
-  final List<SandLocationData> _sandLocationData = [];
+  final List<SandLocation> _sandLocationData = [];
 
   List<Favorite> get favoriteSand => [..._favSand];
   List<Favorite> get featuredSand => [..._sand];
-  List<SandLocationData> get sandLocationData => [..._sandLocationData];
+  List<SandLocation> get sandLocationData => [..._sandLocationData];
 
   cleanSandDetails() {
     _sandLocationData.clear();
@@ -72,9 +72,9 @@ class SandProvider with ChangeNotifier {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
         // _sandLocationData.clear();
-        final data = sandLocationModelFromJson(response.body);
+        final data = sandDetailsModelFromJson(response.body);
 
-        _sandLocationData.addAll(data.data);
+        _sandLocationData.addAll(data.data.sandLocations);
         notifyListeners();
       }
     } catch (e) {

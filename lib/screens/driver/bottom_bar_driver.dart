@@ -4,6 +4,7 @@ import 'package:ashewa_d/screens/driver/sand/sands.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../provider/location.dart';
 import 'orders/my_orders.dart';
 import 'profile.dart';
 
@@ -23,6 +24,7 @@ class _DriverCustomBottomBarState extends State<DriverCustomBottomBar> {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<LocationProvider>(context, listen: false).getUserAddress();
     return Scaffold(
         body: _screen.elementAt(
           Provider.of<DriverCustomBottomBarProvider>(context).selectedIndex,
