@@ -133,4 +133,45 @@ class OrderProvider with ChangeNotifier {
       rethrow;
     }
   }
+
+  Future<void> orderSand(
+      {required String token,
+      required String sandID,
+      required String price,
+      required String amount,
+      required String locationName,
+      required double lat,
+      required double long}) async {
+    String url = "${AppConst.appUrl}/my-orders";
+    print(sandID);
+    print(price);
+    print(amount);
+    print(locationName);
+
+    try {
+      http.Response response = await http.post(Uri.parse(url),
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            HttpHeaders.authorizationHeader: "Bearer $token"
+          },
+          body: jsonEncode({
+            "sandLocationId": sandID,
+            "amount": amount,
+            "totalPrice": price,
+            "locationName": locationName,
+            "latitude": lat,
+            "longitude": long
+          }));
+      final decodedData = jsonDecode(response.body);
+
+      if (response.statusCode != 201) {
+        throw CustomHttpException(errorMessage: decodedData["data"]);
+      } else {
+        print(response.body);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

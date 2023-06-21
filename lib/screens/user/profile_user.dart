@@ -95,7 +95,7 @@ class _ProfileScreenForUserState extends State<ProfileScreenForUser> {
               ),
               const SizedBox(height: 30),
               Container(
-                height: 42,
+                height: 46,
                 width: screenSize.width,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
@@ -121,7 +121,7 @@ class _ProfileScreenForUserState extends State<ProfileScreenForUser> {
                       builder: (context) => const SplashScreen()));
                 },
                 child: Container(
-                  height: 42,
+                  height: 46,
                   width: screenSize.width,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(

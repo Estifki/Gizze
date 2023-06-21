@@ -55,7 +55,7 @@ class OrderData {
   String orderStatusId;
   dynamic destinationLocation;
   OrderStatus orderStatus;
-  SandLocation sandLocation;
+  dynamic sandLocation;
   dynamic acceptedBy;
   OrderedBy orderedBy;
 
@@ -98,7 +98,9 @@ class OrderData {
             ? DestinationLocation.fromJson(json["destination_location"])
             : null,
         orderStatus: OrderStatus.fromJson(json["order_status"]),
-        sandLocation: SandLocation.fromJson(json["sand_location"]),
+        sandLocation: json["sand_location"] != null
+            ? SandLocation.fromJson(json["sand_location"])
+            : null,
         acceptedBy: json["accepted_by"] != null
             ? OrderedBy.fromJson(json["accepted_by"])
             : null,

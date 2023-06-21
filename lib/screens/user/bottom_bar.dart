@@ -6,6 +6,8 @@ import 'package:ashewa_d/screens/user/profile_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../provider/location.dart';
+
 class UserCustomBottomBar extends StatefulWidget {
   const UserCustomBottomBar({super.key});
 
@@ -14,14 +16,16 @@ class UserCustomBottomBar extends StatefulWidget {
 }
 
 class _UserCustomBottomBarState extends State<UserCustomBottomBar> {
-  List<Widget> _screen = [
-    HomeScreenForUser(),
+  final List<Widget> _screen = [
+    const HomeScreenForUser(),
     MyOrdersScreen(),
-    ProfileScreenForUser()
+    const ProfileScreenForUser()
   ];
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<LocationProvider>(context, listen: false).getUserAddress();
+
     return Scaffold(
         body: _screen.elementAt(
             Provider.of<UserCustomBottomBarProvider>(context).selectedIndex),
