@@ -1,5 +1,6 @@
 import 'package:ashewa_d/const/const.dart';
 import 'package:ashewa_d/screens/driver/bottom_bar_driver.dart';
+import 'package:ashewa_d/screens/user/bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -114,7 +115,7 @@ class _ProfileScreenForUserState extends State<ProfileScreenForUser> {
                 onTap: () {
                   Provider.of<UserAuthProvider>(context, listen: false)
                       .logOut();
-                  Provider.of<DriverCustomBottomBarProvider>(context,
+                  Provider.of<UserCustomBottomBarProvider>(context,
                           listen: false)
                       .resetIndex();
                   Navigator.of(context).pushReplacement(CupertinoPageRoute(

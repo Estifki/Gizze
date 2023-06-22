@@ -36,6 +36,7 @@ class SandProvider with ChangeNotifier {
           HttpHeaders.authorizationHeader: "Bearer $token"
         },
       );
+      print(response.body);
       final decodedData = jsonDecode(response.body);
 
       if (response.statusCode != 200) {
