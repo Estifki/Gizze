@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../../user/bottom_bar.dart';
 import '/../../const/const.dart';
 import '../../../../provider/auth/auth_user.dart';
 import '/../../uitil/http_error.dart';
@@ -17,6 +18,7 @@ class RegisterScreenForUser extends StatefulWidget {
 }
 
 class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
+  final _phoneController = TextEditingController();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -30,6 +32,7 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+    _phoneController.text;
     super.dispose();
   }
 
@@ -52,6 +55,41 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: screenSize.height * 0.04),
+              Container(
+                height: 48,
+                width: screenSize.width * 0.9,
+                decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.26),
+                    borderRadius: BorderRadius.circular(6)),
+                child: Row(children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 10.0, right: 8),
+                    child: Text("251",
+                        style: TextStyle(
+                            fontSize: 17,
+                            fontFamily: "",
+                            fontWeight: FontWeight.w600,
+                            color: AppColor.primaryColor)),
+                  ),
+                  Expanded(
+                    child: TextField(
+                      controller: _phoneController,
+                      maxLength: 9,
+                      onChanged: (val) {
+                        if (!val.startsWith("9")) {
+                          _phoneController.clear();
+                        }
+                      },
+                      keyboardType: TextInputType.phone,
+                      decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          counterText: "",
+                          hintText: "Phone"),
+                    ),
+                  ),
+                ]),
+              ),
+              SizedBox(height: 15),
               //
               //Full Name
               //
@@ -142,7 +180,9 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
   }
 
   void validate() async {
-    if (_nameController.text.length < 2) {
+    if (_phoneController.text.length != 9) {
+      showScaffoldMessanger(context: context, errorMessage: "Invalid Phone");
+    } else if (_nameController.text.length < 2) {
       showScaffoldMessanger(context: context, errorMessage: "Invalid Name");
     } else if (!RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
         .hasMatch(_emailController.text)) {
@@ -164,10 +204,10 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
         });
         await Provider.of<UserAuthProvider>(context, listen: false)
             .registerUser(
+                phone: "251${_phoneController.text}",
                 name: _nameController.text,
                 email: _emailController.text,
-                password: _passwordController.text,
-                confirmPassword: _confirmPasswordController.text)
+                password: _passwordController.text)
             .then((_) {
           setState(() {
             _isLoading = false;
@@ -178,7 +218,7 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
               errorMessage: "User Registered Successfully");
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                  builder: (context) => const HomeScreenForUser()),
+                  builder: (context) => const UserCustomBottomBar()),
               (route) => false);
         });
       } on CustomHttpException catch (e) {

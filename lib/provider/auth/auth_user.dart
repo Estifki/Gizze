@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:ashewa_d/const/const.dart';
+import 'package:ashewa_d/model/profile.dart';
 import 'package:ashewa_d/uitil/http_error.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -11,6 +12,10 @@ class UserAuthProvider with ChangeNotifier {
   String? token;
   String? userID;
   String? role;
+
+  List<ProfileData> _profileData = [];
+
+  List<ProfileData> get profileData => [..._profileData];
 
   Future<void> logOut() async {
     var prefs = await SharedPreferences.getInstance();
@@ -158,29 +163,60 @@ class UserAuthProvider with ChangeNotifier {
   }
 
   Future<void> registerUser(
-      {required String name,
+      {required phone,
+      required String name,
       required String email,
-      required String password,
-      required String confirmPassword}) async {
-    String url = "${AppConst.appUrl}/finish-register";
+      required String password}) async {
+    String url = "${AppConst.appUrl}/register"; //finish-register
     try {
       http.Response response = await http.post(Uri.parse(url),
           headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            HttpHeaders.authorizationHeader: "Bearer $token"
+            // HttpHeaders.authorizationHeader: "Bearer $token"
           },
           body: jsonEncode({
+            "phone": phone,
             "name": name,
             "email": email,
             "password": password,
-            "confirm_password": confirmPassword
+            // "confirm_password": confirmPassword
           }));
+      print(response.body);
       final decodedData = jsonDecode(response.body);
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
+        var prefs = await SharedPreferences.getInstance();
         userID = decodedData['data']["user"]["id"];
+        token = decodedData['data']['token'];
+        role = decodedData['data']["user"]["role"]["name"];
+        prefs.setString("LocalId", decodedData['data']["user"]["id"]);
+        prefs.setString("LocalToken", decodedData['data']['token']);
+        prefs.setString("Role", decodedData['data']["user"]["role"]["name"]);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future getMyProfile() async {
+    String url = "${AppConst.appUrl}/profile";
+
+    try {
+      http.Response response = await http.get(Uri.parse(url), headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        HttpHeaders.authorizationHeader: "Bearer $token",
+      });
+
+      final decodedData = jsonDecode(response.body);
+      if (response.statusCode != 200) {
+        throw CustomHttpException(errorMessage: decodedData["data"]);
+      } else {
+        _profileData.clear();
+        final data = profileModelFromJson(response.body);
+        _profileData.addAll([data.data]);
       }
     } catch (e) {
       rethrow;

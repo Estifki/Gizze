@@ -4,6 +4,7 @@ import '../const/const.dart';
 import '../screens/auth/login.dart';
 import '../screens/auth/register/driver/register.dart';
 import '../screens/auth/register/user/phone.dart';
+import '../screens/auth/register/user/register.dart';
 
 class ContinueAsWidget extends StatelessWidget {
   final bool isLogin;
@@ -41,7 +42,7 @@ class ContinueAsWidget extends StatelessWidget {
                   } else if (isRegister) {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) =>
-                            const PhoneRegisterScreenForUser()));
+                            const RegisterScreenForUser())); //PhoneRegisterScreenForUser
                   }
                 },
                 child: Container(
