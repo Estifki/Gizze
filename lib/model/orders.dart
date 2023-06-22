@@ -53,9 +53,9 @@ class OrderData {
   DateTime createdAt;
   DateTime updatedAt;
   String orderStatusId;
-  dynamic destinationLocation;
+  DatumDestinationLocation destinationLocation;
   OrderStatus orderStatus;
-  dynamic sandLocation;
+  SandLocation sandLocation;
   dynamic acceptedBy;
   OrderedBy orderedBy;
 
@@ -94,16 +94,11 @@ class OrderData {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         orderStatusId: json["order_status_id"],
-        destinationLocation: json["destination_location"] != null
-            ? DestinationLocation.fromJson(json["destination_location"])
-            : null,
+        destinationLocation:
+            DatumDestinationLocation.fromJson(json["destination_location"]),
         orderStatus: OrderStatus.fromJson(json["order_status"]),
-        sandLocation: json["sand_location"] != null
-            ? SandLocation.fromJson(json["sand_location"])
-            : null,
-        acceptedBy: json["accepted_by"] != null
-            ? OrderedBy.fromJson(json["accepted_by"])
-            : null,
+        sandLocation: SandLocation.fromJson(json["sand_location"]),
+        acceptedBy: json["accepted_by"],
         orderedBy: OrderedBy.fromJson(json["ordered_by"]),
       );
 
@@ -124,8 +119,61 @@ class OrderData {
         "destination_location": destinationLocation.toJson(),
         "order_status": orderStatus.toJson(),
         "sand_location": sandLocation.toJson(),
-        "accepted_by": acceptedBy.toJson(),
+        "accepted_by": acceptedBy,
         "ordered_by": orderedBy.toJson(),
+      };
+}
+
+class DatumDestinationLocation {
+  String locationName;
+  String latitude;
+  String longitude;
+
+  DatumDestinationLocation({
+    required this.locationName,
+    required this.latitude,
+    required this.longitude,
+  });
+
+  factory DatumDestinationLocation.fromJson(Map<String, dynamic> json) =>
+      DatumDestinationLocation(
+        locationName: json["location_name"],
+        latitude: json["latitude"],
+        longitude: json["longitude"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "location_name": locationName,
+        "latitude": latitude,
+        "longitude": longitude,
+      };
+}
+
+class OrderStatus {
+  String id;
+  String name;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  OrderStatus({
+    required this.id,
+    required this.name,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory OrderStatus.fromJson(Map<String, dynamic> json) => OrderStatus(
+        id: json["id"],
+        name: json["name"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
       };
 }
 
@@ -191,7 +239,7 @@ class OrderedBy {
 
 class Role {
   String id;
-  RoleName name;
+  String name;
 
   Role({
     required this.id,
@@ -200,76 +248,19 @@ class Role {
 
   factory Role.fromJson(Map<String, dynamic> json) => Role(
         id: json["id"],
-        name: roleNameValues.map[json["name"]]!,
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": roleNameValues.reverse[name],
-      };
-}
-
-enum RoleName { ADMIN }
-
-final roleNameValues = EnumValues({"Admin": RoleName.ADMIN});
-
-class DestinationLocation {
-  String locationName;
-  dynamic latitude;
-  dynamic longitude;
-
-  DestinationLocation({
-    required this.locationName,
-    required this.latitude,
-    required this.longitude,
-  });
-
-  factory DestinationLocation.fromJson(Map<String, dynamic> json) =>
-      DestinationLocation(
-        locationName: json["location_name"],
-        latitude: json["latitude"],
-        longitude: json["longitude"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "location_name": locationName,
-        "latitude": latitude,
-        "longitude": longitude,
-      };
-}
-
-class OrderStatus {
-  String id;
-  String name;
-  DateTime createdAt;
-  DateTime updatedAt;
-
-  OrderStatus({
-    required this.id,
-    required this.name,
-    required this.createdAt,
-    required this.updatedAt,
-  });
-
-  factory OrderStatus.fromJson(Map<String, dynamic> json) => OrderStatus(
-        id: json["id"],
         name: json["name"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
       };
 }
 
 class SandLocation {
   String id;
   String sandId;
-  Location location;
+  SandLocationDestinationLocation destinationLocation;
   String price;
   DateTime createdAt;
   DateTime updatedAt;
@@ -277,11 +268,12 @@ class SandLocation {
   String locationId;
   Sand sand;
   OrderedBy owner;
+  OrderStatus location;
 
   SandLocation({
     required this.id,
     required this.sandId,
-    required this.location,
+    required this.destinationLocation,
     required this.price,
     required this.createdAt,
     required this.updatedAt,
@@ -289,12 +281,14 @@ class SandLocation {
     required this.locationId,
     required this.sand,
     required this.owner,
+    required this.location,
   });
 
   factory SandLocation.fromJson(Map<String, dynamic> json) => SandLocation(
         id: json["id"],
         sandId: json["sand_id"],
-        location: Location.fromJson(json["location"]),
+        destinationLocation: SandLocationDestinationLocation.fromJson(
+            json["destination_location"]),
         price: json["price"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
@@ -302,12 +296,13 @@ class SandLocation {
         locationId: json["location_id"],
         sand: Sand.fromJson(json["sand"]),
         owner: OrderedBy.fromJson(json["owner"]),
+        location: OrderStatus.fromJson(json["location"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "sand_id": sandId,
-        "location": location.toJson(),
+        "destination_location": destinationLocation.toJson(),
         "price": price,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
@@ -315,19 +310,21 @@ class SandLocation {
         "location_id": locationId,
         "sand": sand.toJson(),
         "owner": owner.toJson(),
+        "location": location.toJson(),
       };
 }
 
-class Location {
+class SandLocationDestinationLocation {
   double latitude;
   double longitude;
 
-  Location({
+  SandLocationDestinationLocation({
     required this.latitude,
     required this.longitude,
   });
 
-  factory Location.fromJson(Map<String, dynamic> json) => Location(
+  factory SandLocationDestinationLocation.fromJson(Map<String, dynamic> json) =>
+      SandLocationDestinationLocation(
         latitude: json["latitude"]?.toDouble(),
         longitude: json["longitude"]?.toDouble(),
       );
@@ -368,16 +365,4 @@ class Sand {
         "created_at": createdAt.toIso8601String(),
         "sand_image": sandImage,
       };
-}
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
 }

@@ -94,17 +94,23 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                               sandImage: value.pendingOrderData[index]
                                   .sandLocation.sand.sandImage,
                               sourceLat: value.pendingOrderData[index]
-                                  .sandLocation.location.latitude,
+                                  .sandLocation.destinationLocation.latitude,
                               sourceLong: value.pendingOrderData[index]
-                                  .sandLocation.location.longitude,
+                                  .sandLocation.destinationLocation.longitude,
                               deliveryManName: value.pendingOrderData[index]
                                   .sandLocation.owner.name
                                   .toString(),
                               deliveryManPhone: value.pendingOrderData[index]
                                   .sandLocation.owner.phone
                                   .toString(),
-                              destinationLat: 8.9947,
-                              destinationLong: 38.8136,
+                              destinationLat: double.parse(value
+                                  .pendingOrderData[index]
+                                  .destinationLocation
+                                  .latitude),
+                              destinationLong: double.parse(value
+                                  .pendingOrderData[index]
+                                  .destinationLocation
+                                  .latitude),
                             );
                           },
                         );
@@ -140,17 +146,23 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                       sandImage: value
                           .onTheWayOrderData[index].sandLocation.sand.sandImage,
                       sourceLat: value.onTheWayOrderData[index].sandLocation
-                          .location.latitude,
+                          .destinationLocation.latitude,
                       sourceLong: value.onTheWayOrderData[index].sandLocation
-                          .location.longitude,
+                          .destinationLocation.longitude,
                       deliveryManName: value
                           .onTheWayOrderData[index].sandLocation.owner.name
                           .toString(),
                       deliveryManPhone: value
                           .onTheWayOrderData[index].sandLocation.owner.phone
                           .toString(),
-                      destinationLat: 8.9947,
-                      destinationLong: 38.8136,
+                      destinationLat: double.parse(value
+                          .onTheWayOrderData[index]
+                          .destinationLocation
+                          .latitude),
+                      destinationLong: double.parse(value
+                          .onTheWayOrderData[index]
+                          .destinationLocation
+                          .latitude),
                     );
                   },
                 );
@@ -183,17 +195,23 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                       sandImage: value.deliveredOrderData[index].sandLocation
                           .sand.sandImage,
                       sourceLat: value.deliveredOrderData[index].sandLocation
-                          .location.latitude,
+                          .destinationLocation.latitude,
                       sourceLong: value.deliveredOrderData[index].sandLocation
-                          .location.longitude,
+                          .destinationLocation.longitude,
                       deliveryManName: value
                           .deliveredOrderData[index].sandLocation.owner.name
                           .toString(),
                       deliveryManPhone: value
                           .deliveredOrderData[index].sandLocation.owner.phone
                           .toString(),
-                      destinationLat: 8.9947,
-                      destinationLong: 38.8136,
+                      destinationLat: double.parse(value
+                          .deliveredOrderData[index]
+                          .destinationLocation
+                          .latitude),
+                      destinationLong: double.parse(value
+                          .deliveredOrderData[index]
+                          .destinationLocation
+                          .latitude),
                     );
                   },
                 );
@@ -226,16 +244,22 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                       sandImage: value
                           .rejectedOrderData[index].sandLocation.sand.sandImage,
                       sourceLat: value.rejectedOrderData[index].sandLocation
-                          .location.latitude,
+                          .destinationLocation.latitude,
                       sourceLong: value.rejectedOrderData[index].sandLocation
-                          .location.longitude,
+                          .destinationLocation.longitude,
                       deliveryManName: value
                           .rejectedOrderData[index].sandLocation.owner.name,
                       deliveryManPhone: value
                           .rejectedOrderData[index].sandLocation.owner.phone
                           .toString(),
-                      destinationLat: 8.9947,
-                      destinationLong: 38.8136,
+                      destinationLat: double.parse(value
+                          .rejectedOrderData[index]
+                          .destinationLocation
+                          .latitude),
+                      destinationLong: double.parse(value
+                          .rejectedOrderData[index]
+                          .destinationLocation
+                          .latitude),
                     );
                   },
                 );

@@ -46,7 +46,7 @@ class SandProvider with ChangeNotifier {
         final data = sandModelFromJson(response.body);
 
         _favSand.addAll(data.data.favorite);
-        _sand.addAll(data.data.sands.data);
+        _sand.addAll(data.data.sands);
         notifyListeners();
       }
     } catch (e) {
