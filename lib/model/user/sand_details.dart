@@ -59,6 +59,7 @@ class SandData {
 class SandLocation {
   String id;
   String sandId;
+  DestinationLocation destinationLocation;
   Location location;
   String price;
   DateTime createdAt;
@@ -71,6 +72,7 @@ class SandLocation {
   SandLocation({
     required this.id,
     required this.sandId,
+    required this.destinationLocation,
     required this.location,
     required this.price,
     required this.createdAt,
@@ -86,6 +88,8 @@ class SandLocation {
       id: json['id'],
       sandId: json['sand_id'],
       location: Location.fromJson(json['location']),
+      destinationLocation:
+          DestinationLocation.fromJson(json["destination_location"]),
       price: json['price'],
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
@@ -97,21 +101,41 @@ class SandLocation {
   }
 }
 
-class Location {
+class DestinationLocation {
   double latitude;
   double longitude;
 
-  Location({
+  DestinationLocation({
     required this.latitude,
     required this.longitude,
   });
 
-  factory Location.fromJson(Map<String, dynamic> json) {
-    return Location(
-      latitude: json['latitude'],
-      longitude: json['longitude'],
-    );
-  }
+  factory DestinationLocation.fromJson(Map<String, dynamic> json) =>
+      DestinationLocation(
+        latitude: json["latitude"],
+        longitude: json["longitude"],
+      );
+}
+
+class Location {
+  String id;
+  String name;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  Location({
+    required this.id,
+    required this.name,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory Location.fromJson(Map<String, dynamic> json) => Location(
+        id: json["id"],
+        name: json["name"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
 }
 
 class Sand {

@@ -16,6 +16,7 @@ class OrderSandScreen extends StatefulWidget {
   final String orderID;
   final String sandName;
   final String sandImage;
+  final String address;
   final String pricePerCubic;
   final double lat;
   final double long;
@@ -31,6 +32,7 @@ class OrderSandScreen extends StatefulWidget {
       required this.orderID,
       required this.sandName,
       required this.sandImage,
+      required this.address,
       required this.pricePerCubic,
       required this.lat,
       required this.long
@@ -85,8 +87,8 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
                       Text("Price /m²:  Br ${widget.pricePerCubic}",
                           style: const TextStyle(fontSize: 14)),
                       const SizedBox(height: 4),
-                      const Text("Address:  Adama",
-                          style: TextStyle(fontSize: 14)),
+                      Text("Address:  ${widget.address}",
+                          style: const TextStyle(fontSize: 14)),
                       const SizedBox(height: 4),
                     ],
                   )

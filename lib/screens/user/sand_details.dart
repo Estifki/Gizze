@@ -148,12 +148,14 @@ class SandDetailsLocationsWidget extends StatelessWidget {
                     orderID: value.sandLocationData[0].id,
                     sandName: value.sandLocationData[0].name,
                     sandImage: value.sandLocationData[0].sandImage,
+                    address: value
+                        .sandLocationData[0].sandLocations[index].location.name,
                     pricePerCubic:
                         value.sandLocationData[0].sandLocations[index].price,
-                    lat: value.sandLocationData[0].sandLocations[index].location
-                        .latitude,
+                    lat: value.sandLocationData[0].sandLocations[index]
+                        .destinationLocation.latitude,
                     long: value.sandLocationData[0].sandLocations[index]
-                        .location.longitude),
+                        .destinationLocation.longitude),
               )),
               child: Card(
                 margin: const EdgeInsets.only(top: 15.0, right: 15),
@@ -191,7 +193,7 @@ class SandDetailsLocationsWidget extends StatelessWidget {
                                 //
                                 Text(
                                   value.sandLocationData[0].sandLocations[index]
-                                      .sand.name,
+                                      .location.name,
                                   maxLines: 1,
                                   style: const TextStyle(
                                       color: Colors.black,
@@ -205,6 +207,16 @@ class SandDetailsLocationsWidget extends StatelessWidget {
                                 Text(
                                   value.sandLocationData[0].sandLocations[index]
                                       .sand.description,
+                                  maxLines: 2,
+                                  style: const TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                      color: Colors.black),
+                                ),
+
+                                const SizedBox(height: 5),
+
+                                Text(
+                                  "Br ${value.sandLocationData[0].sandLocations[index].price}",
                                   maxLines: 2,
                                   style: const TextStyle(
                                       overflow: TextOverflow.ellipsis,
