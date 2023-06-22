@@ -145,7 +145,7 @@ class SandDetailsLocationsWidget extends StatelessWidget {
             return GestureDetector(
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => OrderSandScreen(
-                    orderID: value.sandLocationData[0].id,
+                    orderID: value.sandLocationData[0].sandLocations[index].id,
                     sandName: value.sandLocationData[0].name,
                     sandImage: value.sandLocationData[0].sandImage,
                     address: value

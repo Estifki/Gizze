@@ -103,14 +103,16 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                               deliveryManPhone: value.pendingOrderData[index]
                                   .sandLocation.owner.phone
                                   .toString(),
-                              destinationLat: double.parse(value
+                              destinationLat: value.pendingOrderData[index]
+                                  .destinationLocation.latitude,
+                              destinationLong: value.pendingOrderData[index]
+                                  .destinationLocation.latitude,
+                              sourceLocationName: value.pendingOrderData[index]
+                                  .sandLocation.location.name,
+                              destinationLocationName: value
                                   .pendingOrderData[index]
                                   .destinationLocation
-                                  .latitude),
-                              destinationLong: double.parse(value
-                                  .pendingOrderData[index]
-                                  .destinationLocation
-                                  .latitude),
+                                  .locationName,
                             );
                           },
                         );
@@ -155,14 +157,14 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                       deliveryManPhone: value
                           .onTheWayOrderData[index].sandLocation.owner.phone
                           .toString(),
-                      destinationLat: double.parse(value
-                          .onTheWayOrderData[index]
-                          .destinationLocation
-                          .latitude),
-                      destinationLong: double.parse(value
-                          .onTheWayOrderData[index]
-                          .destinationLocation
-                          .latitude),
+                      destinationLat: value.onTheWayOrderData[index]
+                          .destinationLocation.latitude,
+                      destinationLong: value.onTheWayOrderData[index]
+                          .destinationLocation.latitude,
+                      sourceLocationName: value
+                          .onTheWayOrderData[index].sandLocation.location.name,
+                      destinationLocationName: value.onTheWayOrderData[index]
+                          .destinationLocation.locationName,
                     );
                   },
                 );
@@ -204,14 +206,14 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                       deliveryManPhone: value
                           .deliveredOrderData[index].sandLocation.owner.phone
                           .toString(),
-                      destinationLat: double.parse(value
-                          .deliveredOrderData[index]
-                          .destinationLocation
-                          .latitude),
-                      destinationLong: double.parse(value
-                          .deliveredOrderData[index]
-                          .destinationLocation
-                          .latitude),
+                      destinationLat: value.deliveredOrderData[index]
+                          .destinationLocation.latitude,
+                      destinationLong: value.deliveredOrderData[index]
+                          .destinationLocation.latitude,
+                      sourceLocationName: value
+                          .deliveredOrderData[index].sandLocation.location.name,
+                      destinationLocationName: value.deliveredOrderData[index]
+                          .destinationLocation.locationName,
                     );
                   },
                 );
@@ -252,14 +254,14 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                       deliveryManPhone: value
                           .rejectedOrderData[index].sandLocation.owner.phone
                           .toString(),
-                      destinationLat: double.parse(value
-                          .rejectedOrderData[index]
-                          .destinationLocation
-                          .latitude),
-                      destinationLong: double.parse(value
-                          .rejectedOrderData[index]
-                          .destinationLocation
-                          .latitude),
+                      destinationLat: value.rejectedOrderData[index]
+                          .destinationLocation.latitude,
+                      destinationLong: value.rejectedOrderData[index]
+                          .destinationLocation.latitude,
+                      sourceLocationName: value
+                          .rejectedOrderData[index].sandLocation.location.name,
+                      destinationLocationName: value.rejectedOrderData[index]
+                          .destinationLocation.locationName,
                     );
                   },
                 );

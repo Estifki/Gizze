@@ -7,9 +7,14 @@ class MyOrdersDetailsScreen extends StatefulWidget {
   final String orderID;
   final String sandName;
   final String sandImage;
+
+  final String amount;
   final String pricePerCubic;
   final String totalPrice;
   final double sourceLat;
+
+  final String sourceName;
+  final String destinationName;
   final double sourceLong;
   final double destinationLat;
   final double destinationLong;
@@ -23,6 +28,9 @@ class MyOrdersDetailsScreen extends StatefulWidget {
       required this.orderID,
       required this.sandName,
       required this.sandImage,
+      required this.sourceName,
+      required this.destinationName,
+      required this.amount,
       required this.pricePerCubic,
       required this.totalPrice,
       required this.sourceLat,
@@ -88,6 +96,9 @@ class _MyOrdersDetailsScreenState extends State<MyOrdersDetailsScreen> {
                     Text("Price /m²:  Br ${widget.pricePerCubic}",
                         style: const TextStyle(fontSize: 14)),
                     const SizedBox(height: 4),
+                    Text("Ordered amount: ${widget.amount} m²",
+                        style: const TextStyle(fontSize: 14)),
+                    const SizedBox(height: 4),
                     Text("Total Price:  Br ${widget.totalPrice}",
                         style: const TextStyle(fontSize: 14)),
                   ],
@@ -103,9 +114,12 @@ class _MyOrdersDetailsScreenState extends State<MyOrdersDetailsScreen> {
             const SizedBox(height: 5),
             Text("Phone: ${widget.deliveryManPhone}",
                 style: const TextStyle(fontSize: 14)),
+            const SizedBox(height: 10),
+            Text("${widget.sourceName} to ${widget.destinationName} ",
+                style: const TextStyle(fontSize: 14)),
             const SizedBox(height: 20),
             Container(
-              height: screenSize.height * 0.35,
+              height: screenSize.height * 0.3,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.2),

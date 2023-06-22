@@ -18,6 +18,10 @@ class MyOrdersWidget extends StatelessWidget {
   final double destinationLat;
   final double destinationLong;
 
+  final String sourceLocationName;
+
+  final String destinationLocationName;
+
   final String deliveryManName;
 
   final String deliveryManPhone;
@@ -28,6 +32,8 @@ class MyOrdersWidget extends StatelessWidget {
       required this.orderNo,
       required this.amount,
       required this.sandName,
+      required this.sourceLocationName,
+      required this.destinationLocationName,
       required this.sandImage,
       required this.pricePerCubic,
       required this.totalPrice,
@@ -47,6 +53,9 @@ class MyOrdersWidget extends StatelessWidget {
                   orderID: orderID,
                   sandName: sandName,
                   sandImage: sandImage,
+                  amount: amount,
+                  sourceName: sourceLocationName,
+                  destinationName: destinationLocationName,
                   pricePerCubic: pricePerCubic,
                   totalPrice: totalPrice,
                   sourceLat: sourceLat,
@@ -85,10 +94,11 @@ class MyOrdersWidget extends StatelessWidget {
                   // Text"(DateFormat('MMMM dd, yyyy')
                   //     .format(DateTime.parse(orderData.createdAt.toString()))"),
                   const SizedBox(height: 10),
-                  const Text(
-                    "Sand Amount",
-                    style: TextStyle(fontWeight: FontWeight.w500),
-                  ),
+                  Text(sandName),
+                  // const Text(
+                  //   "Sand Amount",
+                  //   style: TextStyle(fontWeight: FontWeight.w500),
+                  // ),
                   const SizedBox(height: 2),
                   Text("$amount m²"),
                 ],

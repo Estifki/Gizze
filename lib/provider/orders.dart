@@ -34,7 +34,6 @@ class OrderProvider with ChangeNotifier {
         },
       );
       final decodedData = jsonDecode(response.body);
-      print(response.body);
       if (response.statusCode != 200) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {

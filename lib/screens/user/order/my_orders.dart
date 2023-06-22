@@ -49,10 +49,11 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
             toolbarHeight: 10.0,
             bottom: const TabBar(
                 labelColor: Colors.black,
+                isScrollable: true,
                 indicatorPadding: EdgeInsets.only(left: 25, right: 25),
                 tabs: [
                   Tab(text: "Pending"),
-                  Tab(text: "On-Theway"),
+                  Tab(text: "On the way"),
                   Tab(text: "Delivered"),
                   Tab(text: "Rejected"),
                 ]),
@@ -101,14 +102,16 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                               deliveryManPhone: value.pendingOrderData[index]
                                   .sandLocation.owner.phone
                                   .toString(),
-                              destinationLat: double.parse(value
+                              destinationLat: value.pendingOrderData[index]
+                                  .destinationLocation.latitude,
+                              destinationLong: value.pendingOrderData[index]
+                                  .destinationLocation.latitude,
+                              sourceLocationName: value.pendingOrderData[index]
+                                  .sandLocation.location.name,
+                              destinationLocationName: value
                                   .pendingOrderData[index]
                                   .destinationLocation
-                                  .latitude),
-                              destinationLong: double.parse(value
-                                  .pendingOrderData[index]
-                                  .destinationLocation
-                                  .latitude),
+                                  .locationName,
                             );
                           },
                         );
@@ -153,14 +156,14 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                       deliveryManPhone: value
                           .onTheWayOrderData[index].sandLocation.owner.phone
                           .toString(),
-                      destinationLat: double.parse(value
-                          .onTheWayOrderData[index]
-                          .destinationLocation
-                          .latitude),
-                      destinationLong: double.parse(value
-                          .onTheWayOrderData[index]
-                          .destinationLocation
-                          .latitude),
+                      destinationLat: value.onTheWayOrderData[index]
+                          .destinationLocation.latitude,
+                      destinationLong: value.onTheWayOrderData[index]
+                          .destinationLocation.latitude,
+                      sourceLocationName: value
+                          .onTheWayOrderData[index].sandLocation.location.name,
+                      destinationLocationName: value.onTheWayOrderData[index]
+                          .destinationLocation.locationName,
                     );
                   },
                 );
@@ -202,14 +205,14 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                       deliveryManPhone: value
                           .deliveredOrderData[index].sandLocation.owner.phone
                           .toString(),
-                      destinationLat: double.parse(value
-                          .deliveredOrderData[index]
-                          .destinationLocation
-                          .latitude),
-                      destinationLong: double.parse(value
-                          .deliveredOrderData[index]
-                          .destinationLocation
-                          .latitude),
+                      destinationLat: value.deliveredOrderData[index]
+                          .destinationLocation.latitude,
+                      destinationLong: value.deliveredOrderData[index]
+                          .destinationLocation.latitude,
+                      sourceLocationName: value
+                          .deliveredOrderData[index].sandLocation.location.name,
+                      destinationLocationName: value.deliveredOrderData[index]
+                          .destinationLocation.locationName,
                     );
                   },
                 );
@@ -250,14 +253,14 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                       deliveryManPhone: value
                           .rejectedOrderData[index].sandLocation.owner.phone
                           .toString(),
-                      destinationLat: double.parse(value
-                          .rejectedOrderData[index]
-                          .destinationLocation
-                          .latitude),
-                      destinationLong: double.parse(value
-                          .rejectedOrderData[index]
-                          .destinationLocation
-                          .latitude),
+                      destinationLat: value.rejectedOrderData[index]
+                          .destinationLocation.latitude,
+                      destinationLong: value.rejectedOrderData[index]
+                          .destinationLocation.latitude,
+                      sourceLocationName: value
+                          .rejectedOrderData[index].sandLocation.location.name,
+                      destinationLocationName: value.rejectedOrderData[index]
+                          .destinationLocation.locationName,
                     );
                   },
                 );

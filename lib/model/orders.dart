@@ -126,8 +126,8 @@ class OrderData {
 
 class DatumDestinationLocation {
   String locationName;
-  String latitude;
-  String longitude;
+  double latitude;
+  double longitude;
 
   DatumDestinationLocation({
     required this.locationName,
