@@ -48,61 +48,65 @@ class OrderProvider with ChangeNotifier {
     }
   }
 
-  // Future<void> getOnTheWayOrders(String token) async {
-  //   String url = "${AppConst.appUrl}/ontheway-orders";
+  Future<void> getOnTheWayOrders(String token, bool isDriver) async {
+    String url = isDriver
+        ? "${AppConst.appUrl}/driver-ontheway-orders"
+        : "${AppConst.appUrl}/ontheway-orders";
 
-  //   try {
-  //     http.Response response = await http.get(
-  //       Uri.parse(url),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "Accept": "application/json",
-  //         HttpHeaders.authorizationHeader: "Bearer $token"
-  //       },
-  //     );
-  //     final decodedData = jsonDecode(response.body);
+    try {
+      http.Response response = await http.get(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          HttpHeaders.authorizationHeader: "Bearer $token"
+        },
+      );
+      final decodedData = jsonDecode(response.body);
 
-  //     if (response.statusCode != 200) {
-  //       throw CustomHttpException(errorMessage: decodedData["data"]);
-  //     } else {
-  //       _onTheWayOrderData.clear();
-  //       final data = ordersModelFromJson(response.body);
+      if (response.statusCode != 200) {
+        throw CustomHttpException(errorMessage: decodedData["data"]);
+      } else {
+        _onTheWayOrderData.clear();
+        final data = ordersModelFromJson(response.body);
 
-  //       _onTheWayOrderData.addAll(data.data);
-  //       notifyListeners();
-  //     }
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
+        _onTheWayOrderData.addAll(data.data);
+        notifyListeners();
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 
-  // Future<void> getDelivered(String token) async {
-  //   String url = "${AppConst.appUrl}/delivered-orders";
+  Future<void> getDelivered(String token, bool isDriver) async {
+    String url = isDriver
+        ? "${AppConst.appUrl}/driver-delivered-orders"
+        : "${AppConst.appUrl}/delivered-orders";
 
-  //   try {
-  //     http.Response response = await http.get(
-  //       Uri.parse(url),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "Accept": "application/json",
-  //         HttpHeaders.authorizationHeader: "Bearer $token"
-  //       },
-  //     );
-  //     final decodedData = jsonDecode(response.body);
+    try {
+      http.Response response = await http.get(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          HttpHeaders.authorizationHeader: "Bearer $token"
+        },
+      );
+      final decodedData = jsonDecode(response.body);
 
-  //     if (response.statusCode != 200) {
-  //       throw CustomHttpException(errorMessage: decodedData["data"]);
-  //     } else {
-  //       _deliveredOrderData.clear();
-  //       final data = ordersModelFromJson(response.body);
+      if (response.statusCode != 200) {
+        throw CustomHttpException(errorMessage: decodedData["data"]);
+      } else {
+        _deliveredOrderData.clear();
+        final data = ordersModelFromJson(response.body);
 
-  //       _deliveredOrderData.addAll(data.data);
-  //       notifyListeners();
-  //     }
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
+        _deliveredOrderData.addAll(data.data);
+        notifyListeners();
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   Future<void> getRejected(String token, bool isDriver) async {
     String url = isDriver
@@ -142,10 +146,6 @@ class OrderProvider with ChangeNotifier {
       required double lat,
       required double long}) async {
     String url = "${AppConst.appUrl}/my-orders";
-    print(sandID);
-    print(price);
-    print(amount);
-    print(locationName);
 
     try {
       http.Response response = await http.post(Uri.parse(url),
@@ -166,8 +166,30 @@ class OrderProvider with ChangeNotifier {
 
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
-      } else {
-        print(response.body);
+      } else {}
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future updateOrderStatus(
+      {required token, required orderID, required orderStatus}) async {
+//
+    String url = "${AppConst.appUrl}/change-order-status/$orderID";
+
+    try {
+      http.Response response = await http.put(Uri.parse(url),
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            HttpHeaders.authorizationHeader: "Bearer $token"
+          },
+          body: jsonEncode({"name": orderStatus}));
+      final decodedData = jsonDecode(response.body);
+      print(response.statusCode);
+      print(response.body);
+      if (response.statusCode != 201) {
+        throw CustomHttpException(errorMessage: decodedData["data"]);
       }
     } catch (e) {
       rethrow;

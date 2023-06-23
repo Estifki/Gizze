@@ -2,10 +2,11 @@ import 'package:ashewa_d/const/const.dart';
 import 'package:ashewa_d/provider/auth.dart';
 import 'package:ashewa_d/provider/orders.dart';
 import 'package:ashewa_d/provider/sand_location.dart';
+import 'package:ashewa_d/widget/orders_driver.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../widget/orders.dart';
+import '../../../widget/orders_user.dart';
 
 class MyOrdersScreenForDriver extends StatefulWidget {
   @override
@@ -14,22 +15,23 @@ class MyOrdersScreenForDriver extends StatefulWidget {
 }
 
 class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
-  bool _isinit = true;
+  bool isinit = true;
   late Future _myOrders;
 
   @override
   void didChangeDependencies() {
-    if (_isinit) {
+    if (isinit) {
       Provider.of<SandLocationProvider>(context, listen: false).getSandAddress(
           Provider.of<AuthProvider>(context, listen: false).token!);
       _myOrders = Provider.of<OrderProvider>(context, listen: false).getPending(
           Provider.of<AuthProvider>(context, listen: false).token!, true);
-      // Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
-      //     Provider.of<AuthProvider>(context, listen: false).token!);
-      // Provider.of<OrderProvider>(context, listen: false).getDelivered(
-      //     Provider.of<AuthProvider>(context, listen: false).token!);
+      Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
+          Provider.of<AuthProvider>(context, listen: false).token!, true);
+      Provider.of<OrderProvider>(context, listen: false).getDelivered(
+          Provider.of<AuthProvider>(context, listen: false).token!, true);
       Provider.of<OrderProvider>(context, listen: false).getRejected(
           Provider.of<AuthProvider>(context, listen: false).token!, true);
+      isinit = false;
     }
     super.didChangeDependencies();
   }
@@ -38,10 +40,10 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
   Widget build(BuildContext context) {
     Provider.of<OrderProvider>(context, listen: false).getPending(
         Provider.of<AuthProvider>(context, listen: false).token!, true);
-    // Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
-    //     Provider.of<AuthProvider>(context, listen: false).token!);
-    // Provider.of<OrderProvider>(context, listen: false).getDelivered(
-    //     Provider.of<AuthProvider>(context, listen: false).token!);
+    Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
+        Provider.of<AuthProvider>(context, listen: false).token!, true);
+    Provider.of<OrderProvider>(context, listen: false).getDelivered(
+        Provider.of<AuthProvider>(context, listen: false).token!, true);
     Provider.of<OrderProvider>(context, listen: false).getRejected(
         Provider.of<AuthProvider>(context, listen: false).token!, true);
     return DefaultTabController(
@@ -81,8 +83,10 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                           itemCount: value.pendingOrderData.length,
                           padding: const EdgeInsets.only(top: 15),
                           itemBuilder: (context, index) {
-                            return MyOrdersWidget(
+                            return MyOrdersWidgetForDriver(
                               orderID: value.pendingOrderData[index].id,
+                              orderStatus: value
+                                  .pendingOrderData[index].orderStatus.name,
                               orderNo: value.pendingOrderData[index].orderNo,
                               totalPrice:
                                   value.pendingOrderData[index].totalPrice,
@@ -97,12 +101,10 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                                   .sandLocation.destinationLocation.latitude,
                               sourceLong: value.pendingOrderData[index]
                                   .sandLocation.destinationLocation.longitude,
-                              deliveryManName: value.pendingOrderData[index]
-                                  .sandLocation.owner.name
-                                  .toString(),
-                              deliveryManPhone: value.pendingOrderData[index]
-                                  .sandLocation.owner.phone
-                                  .toString(),
+                              orderedUserName:
+                                  value.pendingOrderData[index].orderedBy.name,
+                              orderedUserPhone:
+                                  value.pendingOrderData[index].orderedBy.phone,
                               destinationLat: value.pendingOrderData[index]
                                   .destinationLocation.latitude,
                               destinationLong: value.pendingOrderData[index]
@@ -136,8 +138,10 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                   itemCount: value.onTheWayOrderData.length,
                   padding: const EdgeInsets.only(top: 15),
                   itemBuilder: (context, index) {
-                    return MyOrdersWidget(
+                    return MyOrdersWidgetForDriver(
                       orderID: value.onTheWayOrderData[index].id,
+                      orderStatus:
+                          value.onTheWayOrderData[index].orderStatus.name,
                       orderNo: value.onTheWayOrderData[index].orderNo,
                       totalPrice: value.onTheWayOrderData[index].totalPrice,
                       amount: value.onTheWayOrderData[index].amount,
@@ -151,12 +155,10 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                           .destinationLocation.latitude,
                       sourceLong: value.onTheWayOrderData[index].sandLocation
                           .destinationLocation.longitude,
-                      deliveryManName: value
-                          .onTheWayOrderData[index].sandLocation.owner.name
-                          .toString(),
-                      deliveryManPhone: value
-                          .onTheWayOrderData[index].sandLocation.owner.phone
-                          .toString(),
+                      orderedUserName:
+                          value.onTheWayOrderData[index].orderedBy.name,
+                      orderedUserPhone:
+                          value.onTheWayOrderData[index].orderedBy.phone,
                       destinationLat: value.onTheWayOrderData[index]
                           .destinationLocation.latitude,
                       destinationLong: value.onTheWayOrderData[index]
@@ -185,8 +187,10 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                   itemCount: value.deliveredOrderData.length,
                   padding: const EdgeInsets.only(top: 15),
                   itemBuilder: (context, index) {
-                    return MyOrdersWidget(
+                    return MyOrdersWidgetForDriver(
                       orderID: value.deliveredOrderData[index].id,
+                      orderStatus:
+                          value.deliveredOrderData[index].orderStatus.name,
                       orderNo: value.deliveredOrderData[index].orderNo,
                       totalPrice: value.deliveredOrderData[index].totalPrice,
                       amount: value.deliveredOrderData[index].amount,
@@ -200,12 +204,10 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                           .destinationLocation.latitude,
                       sourceLong: value.deliveredOrderData[index].sandLocation
                           .destinationLocation.longitude,
-                      deliveryManName: value
-                          .deliveredOrderData[index].sandLocation.owner.name
-                          .toString(),
-                      deliveryManPhone: value
-                          .deliveredOrderData[index].sandLocation.owner.phone
-                          .toString(),
+                      orderedUserName:
+                          value.deliveredOrderData[index].orderedBy.name,
+                      orderedUserPhone:
+                          value.deliveredOrderData[index].orderedBy.phone,
                       destinationLat: value.deliveredOrderData[index]
                           .destinationLocation.latitude,
                       destinationLong: value.deliveredOrderData[index]
@@ -234,8 +236,10 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                   itemCount: value.rejectedOrderData.length,
                   padding: const EdgeInsets.only(top: 15),
                   itemBuilder: (context, index) {
-                    return MyOrdersWidget(
+                    return MyOrdersWidgetForDriver(
                       orderID: value.rejectedOrderData[index].id,
+                      orderStatus:
+                          value.rejectedOrderData[index].orderStatus.name,
                       orderNo: value.rejectedOrderData[index].orderNo,
                       totalPrice: value.rejectedOrderData[index].totalPrice,
                       amount: value.rejectedOrderData[index].amount,
@@ -249,11 +253,10 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                           .destinationLocation.latitude,
                       sourceLong: value.rejectedOrderData[index].sandLocation
                           .destinationLocation.longitude,
-                      deliveryManName: value
-                          .rejectedOrderData[index].sandLocation.owner.name,
-                      deliveryManPhone: value
-                          .rejectedOrderData[index].sandLocation.owner.phone
-                          .toString(),
+                      orderedUserName:
+                          value.rejectedOrderData[index].orderedBy.name,
+                      orderedUserPhone:
+                          value.rejectedOrderData[index].orderedBy.phone,
                       destinationLat: value.rejectedOrderData[index]
                           .destinationLocation.latitude,
                       destinationLong: value.rejectedOrderData[index]

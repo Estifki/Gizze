@@ -47,7 +47,14 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    _nameController.dispose();
+    _phoneController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    _accountNameController.dispose();
+    _accountnumberController.dispose();
+    _bankNameController.dispose();
     super.dispose();
   }
 
@@ -81,8 +88,40 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
                   hint: "Email", controller: _emailController),
               const SizedBox(height: 15),
 
-              CustomTextFieldWidget(
-                  hint: "Phone Number", controller: _phoneController),
+              Container(
+                height: 48,
+                width: screenSize.width * 0.9,
+                decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.26),
+                    borderRadius: BorderRadius.circular(6)),
+                child: Row(children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 10.0, right: 8),
+                    child: Text("251",
+                        style: TextStyle(
+                            fontSize: 17,
+                            fontFamily: "",
+                            fontWeight: FontWeight.w600,
+                            color: AppColor.primaryColor)),
+                  ),
+                  Expanded(
+                    child: TextField(
+                      controller: _phoneController,
+                      maxLength: 9,
+                      onChanged: (val) {
+                        if (!val.startsWith("9")) {
+                          _phoneController.clear();
+                        }
+                      },
+                      keyboardType: TextInputType.phone,
+                      decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          counterText: "",
+                          hintText: "Phone"),
+                    ),
+                  ),
+                ]),
+              ),
               const SizedBox(height: 15),
               CustomTextFieldWidget(hint: "City", controller: _cityController),
 

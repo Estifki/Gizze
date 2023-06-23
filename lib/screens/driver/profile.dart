@@ -170,7 +170,7 @@ class _ProfileScreenForDriverState extends State<ProfileScreenForDriver> {
                         onTap: () {
                           Provider.of<AuthProvider>(context, listen: false)
                               .logOut();
-                          Provider.of<UserCustomBottomBarProvider>(context,
+                          Provider.of<DriverCustomBottomBarProvider>(context,
                                   listen: false)
                               .resetIndex();
                           Navigator.of(context).pushReplacement(

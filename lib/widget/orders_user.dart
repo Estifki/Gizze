@@ -1,9 +1,12 @@
+import 'package:ashewa_d/screens/driver/orders/details.dart';
 import 'package:ashewa_d/screens/user/order/details.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../const/const.dart';
+import '../provider/auth.dart';
 
-class MyOrdersWidget extends StatelessWidget {
+class MyOrdersWidgetUser extends StatelessWidget {
   final String orderID;
   final String orderNo;
 
@@ -26,7 +29,7 @@ class MyOrdersWidget extends StatelessWidget {
 
   final String deliveryManPhone;
 
-  const MyOrdersWidget(
+  const MyOrdersWidgetUser(
       {super.key,
       required this.orderID,
       required this.orderNo,

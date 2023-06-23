@@ -4,7 +4,8 @@ import 'package:ashewa_d/provider/orders.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../widget/orders.dart';
+import '../../../provider/sand_location.dart';
+import '../../../widget/orders_user.dart';
 
 class MyOrdersScreen extends StatefulWidget {
   @override
@@ -12,22 +13,23 @@ class MyOrdersScreen extends StatefulWidget {
 }
 
 class _MyOrdersScreenState extends State<MyOrdersScreen> {
-  bool _isinit = true;
+  bool isinit = true;
   late Future _myOrders;
 
   @override
   void didChangeDependencies() {
-    if (_isinit) {
-      // Provider.of<OrderProvider>(context, listen: false).getSandAddress(
-      //     Provider.of<UserAuthProvider>(context, listen: false).token!);
+    if (isinit) {
+      Provider.of<SandLocationProvider>(context, listen: false).getSandAddress(
+          Provider.of<AuthProvider>(context, listen: false).token!);
       _myOrders = Provider.of<OrderProvider>(context, listen: false).getPending(
           Provider.of<AuthProvider>(context, listen: false).token!, false);
-      // Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
-      //     Provider.of<AuthProvider>(context, listen: false).token!);
-      // Provider.of<OrderProvider>(context, listen: false).getDelivered(
-      //     Provider.of<AuthProvider>(context, listen: false).token!);
+      Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
+          Provider.of<AuthProvider>(context, listen: false).token!, false);
+      Provider.of<OrderProvider>(context, listen: false).getDelivered(
+          Provider.of<AuthProvider>(context, listen: false).token!, false);
       Provider.of<OrderProvider>(context, listen: false).getRejected(
           Provider.of<AuthProvider>(context, listen: false).token!, false);
+      isinit = false;
     }
     super.didChangeDependencies();
   }
@@ -36,10 +38,10 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
   Widget build(BuildContext context) {
     Provider.of<OrderProvider>(context, listen: false).getPending(
         Provider.of<AuthProvider>(context, listen: false).token!, false);
-    // Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
-    //     Provider.of<UserAuthProvider>(context, listen: false).token!);
-    // Provider.of<OrderProvider>(context, listen: false).getDelivered(
-    //     Provider.of<UserAuthProvider>(context, listen: false).token!);
+    Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
+        Provider.of<AuthProvider>(context, listen: false).token!, false);
+    Provider.of<OrderProvider>(context, listen: false).getDelivered(
+        Provider.of<AuthProvider>(context, listen: false).token!, false);
     Provider.of<OrderProvider>(context, listen: false).getRejected(
         Provider.of<AuthProvider>(context, listen: false).token!, false);
     return DefaultTabController(
@@ -80,7 +82,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                           itemCount: value.pendingOrderData.length,
                           padding: const EdgeInsets.only(top: 15),
                           itemBuilder: (context, index) {
-                            return MyOrdersWidget(
+                            return MyOrdersWidgetUser(
                               orderID: value.pendingOrderData[index].id,
                               orderNo: value.pendingOrderData[index].orderNo,
                               totalPrice:
@@ -135,7 +137,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                   itemCount: value.onTheWayOrderData.length,
                   padding: const EdgeInsets.only(top: 15),
                   itemBuilder: (context, index) {
-                    return MyOrdersWidget(
+                    return MyOrdersWidgetUser(
                       orderID: value.onTheWayOrderData[index].id,
                       orderNo: value.onTheWayOrderData[index].orderNo,
                       totalPrice: value.onTheWayOrderData[index].totalPrice,
@@ -184,7 +186,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                   itemCount: value.deliveredOrderData.length,
                   padding: const EdgeInsets.only(top: 15),
                   itemBuilder: (context, index) {
-                    return MyOrdersWidget(
+                    return MyOrdersWidgetUser(
                       orderID: value.deliveredOrderData[index].id,
                       orderNo: value.deliveredOrderData[index].orderNo,
                       totalPrice: value.deliveredOrderData[index].totalPrice,
@@ -233,7 +235,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                   itemCount: value.rejectedOrderData.length,
                   padding: const EdgeInsets.only(top: 15),
                   itemBuilder: (context, index) {
-                    return MyOrdersWidget(
+                    return MyOrdersWidgetUser(
                       orderID: value.rejectedOrderData[index].id,
                       orderNo: value.rejectedOrderData[index].orderNo,
                       totalPrice: value.rejectedOrderData[index].totalPrice,

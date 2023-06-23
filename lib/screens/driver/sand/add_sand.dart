@@ -126,8 +126,10 @@ class _AddSandScreenState extends State<AddSandScreen> {
                                 listen: false)
                             .userLong!),
                   ).then((value) {
-                    lat = value!.latitude;
-                    long = value.longitude;
+                    lat = Provider.of<LocationProvider>(context, listen: false)
+                        .userLat!;
+                    long = Provider.of<LocationProvider>(context, listen: false)
+                        .userLong!;
                     setState(() {
                       locationPicked = true;
                     });
@@ -213,8 +215,7 @@ class _AddSandScreenState extends State<AddSandScreen> {
       try {
         Provider.of<SandLocationProvider>(context, listen: false)
             .addSandLocation(
-                token: Provider.of<AuthProvider>(context, listen: false)
-                    .token!,
+                token: Provider.of<AuthProvider>(context, listen: false).token!,
                 sandID: widget.sandID,
                 price: _priceController.text,
                 locationID: selectedSandAddress,

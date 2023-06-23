@@ -1,12 +1,20 @@
 import 'package:ashewa_d/const/const.dart';
+import 'package:ashewa_d/provider/auth.dart';
+import 'package:ashewa_d/provider/orders.dart';
+import 'package:ashewa_d/uitil/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 
 class MyOrdersDetailsScreenForDriver extends StatefulWidget {
   final String orderID;
   final String sandName;
   final String sandImage;
+  final String orderStatus;
+  final String sourceName;
+  final String destinationName;
+  final String amount;
   final String pricePerCubic;
   final String totalPrice;
   final double sourceLat;
@@ -14,29 +22,36 @@ class MyOrdersDetailsScreenForDriver extends StatefulWidget {
   final double destinationLat;
   final double destinationLong;
 
-  final String deliveryManName;
+  final String orderedUserName;
 
-  final String deliveryManPhone;
+  final String orderedUserPhone;
 
   const MyOrdersDetailsScreenForDriver(
       {super.key,
       required this.orderID,
       required this.sandName,
       required this.sandImage,
+      required this.orderStatus,
+      required this.amount,
       required this.pricePerCubic,
       required this.totalPrice,
+      required this.destinationName,
+      required this.sourceName,
       required this.sourceLat,
       required this.sourceLong,
       required this.destinationLat,
       required this.destinationLong,
-      required this.deliveryManName,
-      required this.deliveryManPhone});
+      required this.orderedUserName,
+      required this.orderedUserPhone});
 
   @override
-  State<MyOrdersDetailsScreenForDriver> createState() => _MyOrdersDetailsScreenForDriverState();
+  State<MyOrdersDetailsScreenForDriver> createState() =>
+      _MyOrdersDetailsScreenForDriverState();
 }
 
-class _MyOrdersDetailsScreenForDriverState extends State<MyOrdersDetailsScreenForDriver> {
+class _MyOrdersDetailsScreenForDriverState
+    extends State<MyOrdersDetailsScreenForDriver> {
+  bool _isLoading = false;
   List<LatLng> polyLineCoordinate = [];
 
   void getPolyPoints() async {
@@ -88,6 +103,9 @@ class _MyOrdersDetailsScreenForDriverState extends State<MyOrdersDetailsScreenFo
                     Text("Price /m²:  Br ${widget.pricePerCubic}",
                         style: const TextStyle(fontSize: 14)),
                     const SizedBox(height: 4),
+                    Text("Ordered amount: ${widget.amount} m²",
+                        style: const TextStyle(fontSize: 14)),
+                    const SizedBox(height: 4),
                     Text("Total Price:  Br ${widget.totalPrice}",
                         style: const TextStyle(fontSize: 14)),
                   ],
@@ -95,17 +113,20 @@ class _MyOrdersDetailsScreenForDriverState extends State<MyOrdersDetailsScreenFo
               ],
             ),
             const SizedBox(height: 20),
-            const Text("Delivery Man Info",
+            const Text("Ordered User Info",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             const SizedBox(height: 5),
-            Text("Name: ${widget.deliveryManName}",
+            Text("Name: ${widget.orderedUserName}",
                 style: const TextStyle(fontSize: 14)),
             const SizedBox(height: 5),
-            Text("Phone: ${widget.deliveryManPhone}",
+            Text("Phone: ${widget.orderedUserPhone}",
+                style: const TextStyle(fontSize: 14)),
+            const SizedBox(height: 10),
+            Text("${widget.sourceName} to ${widget.destinationName} ",
                 style: const TextStyle(fontSize: 14)),
             const SizedBox(height: 20),
             Container(
-              height: screenSize.height * 0.35,
+              height: screenSize.height * 0.2,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.2),
@@ -169,6 +190,94 @@ class _MyOrdersDetailsScreenForDriverState extends State<MyOrdersDetailsScreenFo
                 style: TextStyle(fontSize: 17, color: AppColor.primaryColor),
               )),
             ),
+            const SizedBox(height: 25),
+            widget.orderStatus == "Pending"
+                ? _isLoading
+                    ? const Center(child: CircularProgressIndicator.adaptive())
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              try {
+                                setState(() {
+                                  _isLoading = true;
+                                });
+                                Provider.of<OrderProvider>(context,
+                                        listen: false)
+                                    .updateOrderStatus(
+                                        token: Provider.of<AuthProvider>(
+                                                context,
+                                                listen: false)
+                                            .token!,
+                                        orderID: widget.orderID,
+                                        orderStatus: "On The Way")
+                                    .then((_) {
+                                  showScaffoldMessanger(
+                                      context: context,
+                                      backgroundColor: Colors.green,
+                                      errorMessage: "Order Accepted");
+                                  setState(() {
+                                    _isLoading = false;
+                                  });
+                                  Navigator.of(context).pop();
+                                });
+                              } catch (_) {
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                                showScaffoldMessanger(
+                                    context: context,
+                                    errorMessage: "Please Try Again Later");
+                              }
+                            },
+                            child: Container(
+                              height: 42,
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(10.0)),
+                              child: const Text(
+                                "Accept Order",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 42,
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(10.0)),
+                            child: const Text(
+                              "Cancel Order",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      )
+                : widget.orderStatus == "On the Way"
+                    ? Container(
+                        height: 42,
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        alignment: Alignment.centerRight,
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(10.0)),
+                        child: const Text(
+                          "Cancel Order",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    : Container(),
           ],
         ),
       ),

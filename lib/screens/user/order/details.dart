@@ -11,10 +11,10 @@ class MyOrdersDetailsScreen extends StatefulWidget {
   final String amount;
   final String pricePerCubic;
   final String totalPrice;
-  final double sourceLat;
 
   final String sourceName;
   final String destinationName;
+  final double sourceLat;
   final double sourceLong;
   final double destinationLat;
   final double destinationLong;
@@ -119,7 +119,7 @@ class _MyOrdersDetailsScreenState extends State<MyOrdersDetailsScreen> {
                 style: const TextStyle(fontSize: 14)),
             const SizedBox(height: 20),
             Container(
-              height: screenSize.height * 0.3,
+              height: screenSize.height * 0.2,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.2),
