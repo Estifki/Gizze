@@ -21,16 +21,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(Duration.zero, () {
-      Provider.of<UserAuthProvider>(context, listen: false).getUserAndToken();
+      Provider.of<AuthProvider>(context, listen: false).getUserAndToken();
     });
     Timer(const Duration(seconds: 2), () {
-      if (Provider.of<UserAuthProvider>(context, listen: false).userID ==
+      if (Provider.of<AuthProvider>(context, listen: false).userID ==
           null) {
         Navigator.of(context).pushReplacement(
           CupertinoPageRoute(builder: (context) => const OnBoardingScreen()),
         );
       } else {
-        if (Provider.of<UserAuthProvider>(context, listen: false).role ==
+        if (Provider.of<AuthProvider>(context, listen: false).role ==
             "Driver") {
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(

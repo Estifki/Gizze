@@ -24,7 +24,7 @@ class _ProfileScreenForUserState extends State<ProfileScreenForUser> {
   void didChangeDependencies() {
     if (_isInit) {
       _myProfile =
-          Provider.of<UserAuthProvider>(context, listen: false).getMyProfile();
+          Provider.of<AuthProvider>(context, listen: false).getMyProfile();
     }
     super.didChangeDependencies();
   }
@@ -62,7 +62,7 @@ class _ProfileScreenForUserState extends State<ProfileScreenForUser> {
               child: Text("Error"),
             );
           } else {
-            return Consumer<UserAuthProvider>(
+            return Consumer<AuthProvider>(
               builder: (context, value, _) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -145,7 +145,7 @@ class _ProfileScreenForUserState extends State<ProfileScreenForUser> {
                       const SizedBox(height: 30),
                       GestureDetector(
                         onTap: () {
-                          Provider.of<UserAuthProvider>(context, listen: false)
+                          Provider.of<AuthProvider>(context, listen: false)
                               .logOut();
                           Provider.of<UserCustomBottomBarProvider>(context,
                                   listen: false)

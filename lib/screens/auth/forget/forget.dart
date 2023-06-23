@@ -120,7 +120,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         _isLoading = true;
       });
       try {
-        await Provider.of<UserAuthProvider>(context, listen: false)
+        await Provider.of<AuthProvider>(context, listen: false)
             .resetPassword("251${_phoneController.text}")
             .then((_) {
           setState(() {

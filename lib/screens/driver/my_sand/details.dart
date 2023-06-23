@@ -237,7 +237,7 @@ class _UpdateMySandScreenState extends State<UpdateMySandScreen> {
       Provider.of<SandLocationProvider>(context, listen: false)
           .deleteSandLocation(
               token:
-                  Provider.of<UserAuthProvider>(context, listen: false).token!,
+                  Provider.of<AuthProvider>(context, listen: false).token!,
               sandID: widget.sandID)
           .then((value) {
         showScaffoldMessanger(
@@ -280,7 +280,7 @@ class _UpdateMySandScreenState extends State<UpdateMySandScreen> {
       try {
         Provider.of<SandLocationProvider>(context, listen: false)
             .updateSandLocation(
-                token: Provider.of<UserAuthProvider>(context, listen: false)
+                token: Provider.of<AuthProvider>(context, listen: false)
                     .token!,
                 sandID: widget.sandID,
                 price: _priceController.text,

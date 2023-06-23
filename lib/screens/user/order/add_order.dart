@@ -257,7 +257,7 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
       try {
         await Provider.of<OrderProvider>(context, listen: false)
             .orderSand(
-                token: Provider.of<UserAuthProvider>(context, listen: false)
+                token: Provider.of<AuthProvider>(context, listen: false)
                     .token!,
                 sandID: widget.orderID,
                 price: (int.parse(_amountController.text) *

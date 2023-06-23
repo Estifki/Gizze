@@ -213,7 +213,7 @@ class _AddSandScreenState extends State<AddSandScreen> {
       try {
         Provider.of<SandLocationProvider>(context, listen: false)
             .addSandLocation(
-                token: Provider.of<UserAuthProvider>(context, listen: false)
+                token: Provider.of<AuthProvider>(context, listen: false)
                     .token!,
                 sandID: widget.sandID,
                 price: _priceController.text,

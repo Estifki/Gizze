@@ -1,7 +1,7 @@
+import 'package:ashewa_d/provider/auth/auth_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../../../provider/auth/auth_driver.dart';
 import '../../../../uitil/http_error.dart';
 import '../../../../uitil/toast.dart';
 import '../../login.dart';
@@ -385,7 +385,7 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
         setState(() {
           _isLoading = true;
         });
-        await Provider.of<DriverAuthProvider>(context, listen: false)
+        await Provider.of<AuthProvider>(context, listen: false)
             .resgisterDriver(
           phone: "251${_phoneController.text}",
           accountNumber: _accountnumberController.text,

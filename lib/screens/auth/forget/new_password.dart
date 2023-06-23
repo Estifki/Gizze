@@ -100,7 +100,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
         setState(() {
           _isLoading = true;
         });
-        await Provider.of<UserAuthProvider>(context, listen: false)
+        await Provider.of<AuthProvider>(context, listen: false)
             .changePassword(
                 newPassword: _passwordController.text,
                 confirmPassword: _confirmPasswordController.text)

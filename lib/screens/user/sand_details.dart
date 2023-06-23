@@ -36,7 +36,7 @@ class _SandDetailsScreenState extends State<SandDetailsScreen> {
     if (isInit) {
       _sandData = Provider.of<SandProvider>(context, listen: false)
           .getSandDetails(
-              Provider.of<UserAuthProvider>(context).token!, widget.sandID);
+              Provider.of<AuthProvider>(context).token!, widget.sandID);
       isInit = false;
     }
     super.didChangeDependencies();

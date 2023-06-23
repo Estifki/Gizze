@@ -202,7 +202,7 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
         setState(() {
           _isLoading = true;
         });
-        await Provider.of<UserAuthProvider>(context, listen: false)
+        await Provider.of<AuthProvider>(context, listen: false)
             .registerUser(
                 phone: "251${_phoneController.text}",
                 name: _nameController.text,

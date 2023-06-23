@@ -29,7 +29,7 @@ class _SandscreenForDriverState extends State<SandscreenForDriver> {
   void didChangeDependencies() {
     if (isInit) {
       _sandData = Provider.of<SandProvider>(context, listen: false)
-          .getSand(Provider.of<UserAuthProvider>(context).token!);
+          .getSand(Provider.of<AuthProvider>(context).token!);
       isInit = false;
     }
     super.didChangeDependencies();

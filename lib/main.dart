@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:ashewa_d/provider/auth/auth_driver.dart';
 import 'package:ashewa_d/provider/auth/auth_user.dart';
 import 'package:ashewa_d/provider/location.dart';
 import 'package:ashewa_d/provider/orders.dart';
@@ -17,8 +16,7 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.black));
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => UserAuthProvider()),
-    ChangeNotifierProvider(create: (_) => DriverAuthProvider()),
+    ChangeNotifierProvider(create: (_) =>AuthProvider()),
     ChangeNotifierProvider(create: (_) => SandProvider()),
     ChangeNotifierProvider(create: (_) => OrderProvider()),
     ChangeNotifierProvider(create: (_) => SandLocationProvider()),

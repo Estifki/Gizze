@@ -114,7 +114,7 @@ class _VerifyOtpForForgotScreenState extends State<VerifyOtpForForgotScreen> {
         _isLoading = true;
       });
       try {
-        await Provider.of<UserAuthProvider>(context, listen: false)
+        await Provider.of<AuthProvider>(context, listen: false)
             .verifyOtp(
                 isForRegister: false, phone: widget.phone, code: userInput)
             .then((_) {

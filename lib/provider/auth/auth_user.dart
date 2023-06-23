@@ -4,11 +4,12 @@ import 'dart:io';
 import 'package:ashewa_d/const/const.dart';
 import 'package:ashewa_d/model/profile.dart';
 import 'package:ashewa_d/uitil/http_error.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class UserAuthProvider with ChangeNotifier {
+class AuthProvider with ChangeNotifier {
   String? token;
   String? userID;
   String? role;
@@ -199,6 +200,65 @@ class UserAuthProvider with ChangeNotifier {
       rethrow;
     }
   }
+
+
+  Future resgisterDriver(
+      {required phone,
+      required name,
+      required email,
+      required accountNumber,
+      required accountholderName,
+      required city,
+      required bank,
+      required password,
+      required PlatformFile carOwnershipDocPath,
+      required PlatformFile licenceDocPath,
+      required PlatformFile profileImage}) async {
+    // print(phone);
+    // print(email);
+    // print(accountNumber);
+    // print(accountholderName);
+    // print(carOwnershipDocPath.path!);
+    // print(licenceDocPath.path!);
+    // print(profileImage.path!);
+    // print(password);
+    // print(bank);
+    // print(city);
+    // print(name);
+    final url = Uri.parse("${AppConst.appUrl}/register-driver");
+    try {
+      final request = http.MultipartRequest('POST', url);
+      // request.headers['Content-Type'] = 'application/json';
+      // request.fields["carOwnershipDoc"] = carOwnershipDocPath.path!;
+      // request.fields["LicenceDoc"] = licenceDocPath.path!;
+      // request.fields["profile_image"] = profileImage.path!;
+      // request.fields["phone"] = phone;
+      // request.fields["name"] = name;
+      // request.fields["email"] = email;
+      // request.fields["password"] = password.toString();
+      // request.fields["confirm_password"] = password.toString();
+      // request.fields["account_number"] = accountNumber.toString();
+      // request.fields["account_holder_name"] = accountholderName;
+      // request.fields["bank_name"] = bank;
+      // request.fields["city"] = city;
+
+      final response = await request.send();
+      print(response.statusCode);
+      var responseBody = await (response.stream.bytesToString());
+
+      var decodedData = jsonDecode(responseBody);
+
+      print(decodedData);
+      if (response.statusCode != 201) {
+        throw CustomHttpException(errorMessage: "Please Try Again Later!");
+      } else {}
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+ 
+
 
   Future getMyProfile() async {
     String url = "${AppConst.appUrl}/profile";

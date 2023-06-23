@@ -136,7 +136,7 @@ class _PhoneRegisterScreenForUserState
         setState(() {
           _isLoading = true;
         });
-        await Provider.of<UserAuthProvider>(context, listen: false)
+        await Provider.of<AuthProvider>(context, listen: false)
             .phoneRegisterUser(phone: "251${_phoneController.text}")
             .then((_) {
           setState(() {

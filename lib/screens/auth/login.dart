@@ -187,13 +187,13 @@ class _SignInScreenForUserState extends State<SignInScreenForUser> {
       });
       try {
         FocusScope.of(context).unfocus();
-        await Provider.of<UserAuthProvider>(context, listen: false)
+        await Provider.of<AuthProvider>(context, listen: false)
             .signIn("251${_phoneController.text}", _passwordController.text)
             .then((_) {
           setState(() {
             _isLoading = false;
           });
-          if (Provider.of<UserAuthProvider>(context, listen: false).role ==
+          if (Provider.of<AuthProvider>(context, listen: false).role ==
               "Driver") {
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(

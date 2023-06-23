@@ -27,7 +27,7 @@ class _HomeScreenForUserState extends State<HomeScreenForUser> {
       SystemChrome.setSystemUIOverlayStyle(
           const SystemUiOverlayStyle(statusBarColor: Colors.black));
       _sandData = Provider.of<SandProvider>(context, listen: false)
-          .getSand(Provider.of<UserAuthProvider>(context).token!);
+          .getSand(Provider.of<AuthProvider>(context).token!);
       isInit = false;
     }
     super.didChangeDependencies();

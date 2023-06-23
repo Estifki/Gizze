@@ -111,7 +111,7 @@ class _VerifyOtpForUserScreenState extends State<VerifyOtpForUserScreen> {
         setState(() {
           _isLoading = true;
         });
-        await Provider.of<UserAuthProvider>(context, listen: false)
+        await Provider.of<AuthProvider>(context, listen: false)
             .verifyOtp(
                 isForRegister: true, phone: widget.phone, code: userInput)
             .then((_) {

@@ -21,7 +21,7 @@ class _MySandScreenState extends State<MySandScreen> {
   void didChangeDependencies() {
     if (isInit) {
       _sandData = Provider.of<SandLocationProvider>(context, listen: false)
-          .getMySandLocation(Provider.of<UserAuthProvider>(context).token!);
+          .getMySandLocation(Provider.of<AuthProvider>(context).token!);
       isInit = false;
     }
     super.didChangeDependencies();
