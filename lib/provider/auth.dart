@@ -14,7 +14,7 @@ class AuthProvider with ChangeNotifier {
   String? userID;
   String? role;
 
-  List<ProfileData> _profileData = [];
+  final List<ProfileData> _profileData = [];
 
   List<ProfileData> get profileData => [..._profileData];
 
@@ -94,32 +94,32 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  Future<void> verifyOtp(
-      {required bool isForRegister,
-      required String phone,
-      required String code}) async {
-    String url = isForRegister
-        ? "${AppConst.appUrl}/verify-otp"
-        : "${AppConst.appUrl}/verify-password";
+  // Future<void> verifyOtp(
+  //     {required bool isForRegister,
+  //     required String phone,
+  //     required String code}) async {
+  //   String url = isForRegister
+  //       ? "${AppConst.appUrl}/verify-otp"
+  //       : "${AppConst.appUrl}/verify-password";
 
-    try {
-      http.Response response = await http.post(Uri.parse(url),
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: jsonEncode({"phone": phone, "password": code}));
+  //   try {
+  //     http.Response response = await http.post(Uri.parse(url),
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           "Accept": "application/json"
+  //         },
+  //         body: jsonEncode({"phone": phone, "password": code}));
 
-      final decodedData = jsonDecode(response.body);
-      if (response.statusCode != 201) {
-        throw CustomHttpException(errorMessage: decodedData["data"]);
-      } else {
-        token = decodedData['data']["token"];
-      }
-    } catch (_) {
-      rethrow;
-    }
-  }
+  //     final decodedData = jsonDecode(response.body);
+  //     if (response.statusCode != 201) {
+  //       throw CustomHttpException(errorMessage: decodedData["data"]);
+  //     } else {
+  //       token = decodedData['data']["token"];
+  //     }
+  //   } catch (_) {
+  //     rethrow;
+  //   }
+  // }
 
   Future<void> changePassword(
       {required newPassword, required confirmPassword}) async {
@@ -144,24 +144,24 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  Future<void> phoneRegisterUser({required String phone}) async {
-    String url = "${AppConst.appUrl}/register";
-    try {
-      http.Response response = await http.post(Uri.parse(url),
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: jsonEncode({"phone": phone}));
+  // Future<void> phoneRegisterUser({required String phone}) async {
+  //   String url = "${AppConst.appUrl}/register";
+  //   try {
+  //     http.Response response = await http.post(Uri.parse(url),
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           "Accept": "application/json"
+  //         },
+  //         body: jsonEncode({"phone": phone}));
 
-      final decodedData = jsonDecode(response.body);
-      if (response.statusCode != 201) {
-        throw CustomHttpException(errorMessage: decodedData["data"]);
-      } else {}
-    } catch (e) {
-      rethrow;
-    }
-  }
+  //     final decodedData = jsonDecode(response.body);
+  //     if (response.statusCode != 201) {
+  //       throw CustomHttpException(errorMessage: decodedData["data"]);
+  //     } else {}
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
 
   Future<void> registerUser(
       {required phone,
@@ -201,8 +201,7 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-
-  Future resgisterDriver(
+  Future registerDriver(
       {required phone,
       required name,
       required email,
@@ -214,36 +213,44 @@ class AuthProvider with ChangeNotifier {
       required PlatformFile carOwnershipDocPath,
       required PlatformFile licenceDocPath,
       required PlatformFile profileImage}) async {
-    // print(phone);
-    // print(email);
-    // print(accountNumber);
-    // print(accountholderName);
-    // print(carOwnershipDocPath.path!);
-    // print(licenceDocPath.path!);
-    // print(profileImage.path!);
-    // print(password);
-    // print(bank);
-    // print(city);
-    // print(name);
     final url = Uri.parse("${AppConst.appUrl}/register-driver");
     try {
       final request = http.MultipartRequest('POST', url);
-      // request.headers['Content-Type'] = 'application/json';
+      request.fields['phone'] = phone;
+      request.fields['name'] = name;
+      request.fields['email'] = email;
+      request.fields['account_number'] = accountNumber;
+      request.fields['account_holder_name'] = accountholderName;
+      request.fields['city'] = city;
+      request.fields['bank_name'] = bank;
+      request.fields['password'] = password;
+      request.fields["confirm_password"] = password;
       // request.fields["carOwnershipDoc"] = carOwnershipDocPath.path!;
       // request.fields["LicenceDoc"] = licenceDocPath.path!;
       // request.fields["profile_image"] = profileImage.path!;
-      // request.fields["phone"] = phone;
-      // request.fields["name"] = name;
-      // request.fields["email"] = email;
-      // request.fields["password"] = password.toString();
-      // request.fields["confirm_password"] = password.toString();
-      // request.fields["account_number"] = accountNumber.toString();
-      // request.fields["account_holder_name"] = accountholderName;
-      // request.fields["bank_name"] = bank;
-      // request.fields["city"] = city;
+
+      request.files.add(await http.MultipartFile.fromPath(
+        'carOwnershipDoc',
+        carOwnershipDocPath.path!,
+        // contentType: MediaType('application', 'pdf'),
+      ));
+
+      request.files.add(await http.MultipartFile.fromPath(
+        'LicenceDoc',
+        licenceDocPath.path!,
+        // contentType: MediaType('application', 'pdf'),
+      ));
+
+      request.files.add(await http.MultipartFile.fromPath(
+        'profile_image',
+        profileImage.path!,
+        // contentType: MediaType(
+        //     'image', 'jpeg'), // Adjust the media type according to your file
+      ));
 
       final response = await request.send();
       print(response.statusCode);
+
       var responseBody = await (response.stream.bytesToString());
 
       var decodedData = jsonDecode(responseBody);
@@ -251,14 +258,19 @@ class AuthProvider with ChangeNotifier {
       print(decodedData);
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: "Please Try Again Later!");
-      } else {}
+      } else {
+        var prefs = await SharedPreferences.getInstance();
+        userID = decodedData['data']["user"]["id"];
+        token = decodedData['data']['token'];
+        role = decodedData['data']["user"]["role"]["name"];
+        prefs.setString("LocalId", decodedData['data']["user"]["id"]);
+        prefs.setString("LocalToken", decodedData['data']['token']);
+        prefs.setString("Role", decodedData['data']["user"]["role"]["name"]);
+      }
     } catch (e) {
       rethrow;
     }
   }
-
- 
-
 
   Future getMyProfile() async {
     String url = "${AppConst.appUrl}/profile";

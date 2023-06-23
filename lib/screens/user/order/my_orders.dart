@@ -1,5 +1,5 @@
 import 'package:ashewa_d/const/const.dart';
-import 'package:ashewa_d/provider/auth/auth_user.dart';
+import 'package:ashewa_d/provider/auth.dart';
 import 'package:ashewa_d/provider/orders.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

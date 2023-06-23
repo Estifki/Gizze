@@ -1,10 +1,10 @@
-import 'package:ashewa_d/provider/user/sand.dart';
+import 'package:ashewa_d/provider/sand.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../const/const.dart';
-import '../../provider/auth/auth_user.dart';
+import '../../provider/auth.dart';
 import '../../screens/user/sand_details.dart';
 import '../bottom_sheet.dart';
 import 'adderss_price.dart';

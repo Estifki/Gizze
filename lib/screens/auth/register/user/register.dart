@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../user/bottom_bar.dart';
 import '/../../const/const.dart';
-import '../../../../provider/auth/auth_user.dart';
+import '../../../../provider/auth.dart';
 import '/../../uitil/http_error.dart';
 import '/../../widget/textfield.dart';
 

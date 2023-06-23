@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../const/const.dart';
-import '../../../provider/auth/auth_user.dart';
+import '../../../provider/auth.dart';
 import '../../../provider/sand_location.dart';
 
 class MySandScreen extends StatefulWidget {

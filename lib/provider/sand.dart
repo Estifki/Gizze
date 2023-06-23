@@ -5,10 +5,10 @@ import 'package:ashewa_d/const/const.dart';
 import 'package:ashewa_d/uitil/http_error.dart';
 import 'package:flutter/material.dart';
 
-import '../../model/user/sand.dart';
+import '../model/user/sand.dart';
 import 'package:http/http.dart' as http;
 
-import '../../model/user/sand_details.dart';
+import '../model/user/sand_details.dart';
 
 class SandProvider with ChangeNotifier {
   final List<Favorite> _favSand = [];

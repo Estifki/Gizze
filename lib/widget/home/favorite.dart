@@ -1,4 +1,4 @@
-import 'package:ashewa_d/provider/user/sand.dart';
+import 'package:ashewa_d/provider/sand.dart';
 import 'package:ashewa_d/widget/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,5 +1,5 @@
 import 'package:ashewa_d/const/const.dart';
-import 'package:ashewa_d/provider/auth/auth_user.dart';
+import 'package:ashewa_d/provider/auth.dart';
 import 'package:ashewa_d/screens/auth/register/user/phone.dart';
 import 'package:ashewa_d/screens/driver/bottom_bar_driver.dart';
 import 'package:ashewa_d/screens/user/home.dart';
@@ -143,8 +143,8 @@ class _SignInScreenForUserState extends State<SignInScreenForUser> {
                   //Forget Password
                   //
                   GestureDetector(
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const ForgotPasswordScreen())),
+                    // onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => const ForgotPasswordScreen())),
                     child: const Text(
                       "Forgot Password",
                       style:
@@ -158,9 +158,9 @@ class _SignInScreenForUserState extends State<SignInScreenForUser> {
                 bottom: screenSize.height * 0.0,
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) =>
-                            const PhoneRegisterScreenForUser()));
+                    // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    //     builder: (context) =>
+                    //         const PhoneRegisterScreenForUser()));
                   },
                   child: const Text(
                     "Create An Account",

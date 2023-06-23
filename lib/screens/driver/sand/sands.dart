@@ -1,5 +1,5 @@
 import 'package:ashewa_d/provider/location.dart';
-import 'package:ashewa_d/provider/user/sand.dart';
+import 'package:ashewa_d/provider/sand.dart';
 import 'package:ashewa_d/screens/driver/sand/add_sand.dart';
 import 'package:ashewa_d/widget/home/adderss_price.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../const/const.dart';
-import '../../../provider/auth/auth_user.dart';
+import '../../../provider/auth.dart';
 import '../../../uitil/shimmer/home.dart';
 import '../../../widget/home/appbar.dart';
 import '../../../widget/home/favorite.dart';

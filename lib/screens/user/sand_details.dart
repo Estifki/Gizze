@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../const/const.dart';
-import '../../provider/auth/auth_user.dart';
+import '../../provider/auth.dart';
 import '../../provider/location.dart';
-import '../../provider/user/sand.dart';
+import '../../provider/sand.dart';
 import '../driver/profile.dart';
 import 'order/add_order.dart';
 

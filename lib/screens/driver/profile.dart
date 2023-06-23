@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../provider/auth/auth_user.dart';
+import '../../provider/auth.dart';
 import '../splash.dart';
 
 class ProfileScreenForDriver extends StatefulWidget {

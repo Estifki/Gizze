@@ -1,4 +1,5 @@
-import 'package:ashewa_d/provider/auth/auth_user.dart';
+import 'package:ashewa_d/provider/auth.dart';
+import 'package:ashewa_d/screens/driver/bottom_bar_driver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -386,7 +387,7 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
           _isLoading = true;
         });
         await Provider.of<AuthProvider>(context, listen: false)
-            .resgisterDriver(
+            .registerDriver(
           phone: "251${_phoneController.text}",
           accountNumber: _accountnumberController.text,
           accountholderName: _accountNameController.text,
@@ -407,20 +408,17 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
               context: context,
               backgroundColor: Colors.green,
               errorMessage: "Driver Registered Successfully");
-          // Navigator.of(context).pushAndRemoveUntil(
-          //     MaterialPageRoute(
-          //       builder: (context) => const SignInScreenForUser(),
-          //     ),
-          //     (route) => false);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (context) => const DriverCustomBottomBar()),
+              (route) => false);
         });
       } on CustomHttpException catch (e) {
-        print("A ${e.toString()}");
         setState(() {
           _isLoading = false;
         });
         showScaffoldMessanger(context: context, errorMessage: e.toString());
       } catch (e) {
-        print("B ${e.toString()}");
         setState(() {
           _isLoading = false;
         });
