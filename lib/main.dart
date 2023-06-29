@@ -37,10 +37,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
           appBarTheme: const AppBarTheme(color: Colors.white, elevation: 0.0)),
-      // theme: ThemeData.dark().copyWith(
-      //     primaryColor: Colors.black,
-      //     scaffoldBackgroundColor: Colors.black,
-      //     appBarTheme: const AppBarTheme(backgroundColor: Colors.black)),
       home: const SplashScreen(),
     );
   }
