@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:ashewa_d/screens/driver/sand/sands.dart';
+import 'sand/sands.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

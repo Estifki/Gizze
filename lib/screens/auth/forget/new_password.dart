@@ -1,9 +1,9 @@
-import 'package:ashewa_d/const/const.dart';
-import 'package:ashewa_d/provider/auth.dart';
-import 'package:ashewa_d/screens/auth/login.dart';
-import 'package:ashewa_d/uitil/http_error.dart';
-import 'package:ashewa_d/uitil/toast.dart';
-import 'package:ashewa_d/widget/textfield.dart';
+import '../../../const/const.dart';
+import '../../../provider/auth.dart';
+import '../login.dart';
+import '../../../uitil/http_error.dart';
+import '../../../uitil/toast.dart';
+import '../../../widget/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

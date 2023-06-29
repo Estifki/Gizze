@@ -1,5 +1,5 @@
-import 'package:ashewa_d/const/const.dart';
-import 'package:ashewa_d/screens/auth/login.dart';
+import '../const/const.dart';
+import 'auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

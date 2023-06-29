@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:ashewa_d/const/const.dart';
-import 'package:ashewa_d/model/profile.dart';
-import 'package:ashewa_d/uitil/http_error.dart';
+import '../const/const.dart';
+import '../model/profile.dart';
+import '../uitil/http_error.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;

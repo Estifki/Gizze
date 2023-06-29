@@ -1,5 +1,5 @@
-import 'package:ashewa_d/provider/auth.dart';
-import 'package:ashewa_d/screens/splash.dart';
+import '../../provider/auth.dart';
+import '../../screens/splash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,7 +1,7 @@
-import 'package:ashewa_d/provider/location.dart';
-import 'package:ashewa_d/provider/sand.dart';
-import 'package:ashewa_d/screens/driver/sand/add_sand.dart';
-import 'package:ashewa_d/widget/home/adderss_price.dart';
+import '../../../provider/location.dart';
+import '../../../provider/sand.dart';
+import 'add_sand.dart';
+import '../../../widget/home/adderss_price.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';

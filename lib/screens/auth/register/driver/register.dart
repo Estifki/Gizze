@@ -1,5 +1,5 @@
-import 'package:ashewa_d/provider/auth.dart';
-import 'package:ashewa_d/screens/driver/bottom_bar_driver.dart';
+import '../../../../provider/auth.dart';
+import '../../../driver/bottom_bar_driver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';

@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'package:ashewa_d/screens/driver/bottom_bar_driver.dart';
-import 'package:ashewa_d/screens/user/bottom_bar.dart';
-import 'package:ashewa_d/screens/user/home.dart';
-import 'package:ashewa_d/screens/onboarding.dart';
+import 'driver/bottom_bar_driver.dart';
+import 'user/bottom_bar.dart';
+import 'user/home.dart';
+import 'onboarding.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

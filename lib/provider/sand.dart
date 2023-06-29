@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:ashewa_d/const/const.dart';
-import 'package:ashewa_d/uitil/http_error.dart';
+import '../const/const.dart';
+import '../uitil/http_error.dart';
 import 'package:flutter/material.dart';
 
 import '../model/user/sand.dart';

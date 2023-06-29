@@ -1,11 +1,11 @@
-import 'package:ashewa_d/const/const.dart';
-import 'package:ashewa_d/provider/auth.dart';
-import 'package:ashewa_d/screens/auth/register/user/phone.dart';
-import 'package:ashewa_d/screens/driver/bottom_bar_driver.dart';
-import 'package:ashewa_d/screens/user/home.dart';
+import '../../const/const.dart';
+import '../../provider/auth.dart';
+import 'register/user/phone.dart';
+import '../driver/bottom_bar_driver.dart';
+import '../user/home.dart';
 
-import 'package:ashewa_d/uitil/http_error.dart';
-import 'package:ashewa_d/uitil/toast.dart';
+import '../../uitil/http_error.dart';
+import '../../uitil/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';

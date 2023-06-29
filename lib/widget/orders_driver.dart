@@ -1,5 +1,5 @@
-import 'package:ashewa_d/screens/driver/orders/details.dart';
-import 'package:ashewa_d/screens/user/order/details.dart';
+import '../screens/driver/orders/details.dart';
+import '../screens/user/order/details.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

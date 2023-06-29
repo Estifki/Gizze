@@ -1,4 +1,4 @@
-import 'package:ashewa_d/screens/driver/my_sand/details.dart';
+import 'details.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

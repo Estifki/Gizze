@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:ashewa_d/model/my_sand.dart';
+import '../model/my_sand.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;

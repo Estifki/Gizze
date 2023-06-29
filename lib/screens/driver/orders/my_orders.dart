@@ -1,8 +1,8 @@
-import 'package:ashewa_d/const/const.dart';
-import 'package:ashewa_d/provider/auth.dart';
-import 'package:ashewa_d/provider/orders.dart';
-import 'package:ashewa_d/provider/sand_location.dart';
-import 'package:ashewa_d/widget/orders_driver.dart';
+import '../../../const/const.dart';
+import '../../../provider/auth.dart';
+import '../../../provider/orders.dart';
+import '../../../provider/sand_location.dart';
+import '../../../widget/orders_driver.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

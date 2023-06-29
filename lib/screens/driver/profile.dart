@@ -1,7 +1,7 @@
-import 'package:ashewa_d/const/const.dart';
-import 'package:ashewa_d/screens/driver/bottom_bar_driver.dart';
-import 'package:ashewa_d/screens/driver/my_sand/my_sand.dart';
-import 'package:ashewa_d/screens/user/bottom_bar.dart';
+import '../../const/const.dart';
+import 'bottom_bar_driver.dart';
+import 'my_sand/my_sand.dart';
+import '../user/bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

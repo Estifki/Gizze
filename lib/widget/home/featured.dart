@@ -1,4 +1,4 @@
-import 'package:ashewa_d/provider/sand.dart';
+import '../../provider/sand.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
