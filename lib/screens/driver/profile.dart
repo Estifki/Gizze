@@ -90,59 +90,60 @@ class _ProfileScreenForDriverState extends State<ProfileScreenForDriver> {
                       const SizedBox(height: 4),
                       Text(value.profileData[0].phone
                           .replaceAll("251", "+251 ")),
-                      const SizedBox(height: 20),
-                      SignInTextFieldWidget(
-                        hintText: "Name",
-                        textInputType: TextInputType.name,
-                        controller: _nameController,
-                        suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: _obscurePassword
-                              ? const Icon(Icons.visibility_off, size: 0)
-                              : const Icon(Icons.visibility, size: 0),
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-                      SignInTextFieldWidget(
-                        hintText: "Email",
-                        textInputType: TextInputType.emailAddress,
-                        controller: _emailController,
-                        suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: _obscurePassword
-                              ? const Icon(Icons.visibility_off, size: 0)
-                              : const Icon(Icons.visibility, size: 0),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      SignInTextFieldWidget(
-                        hintText: "Password",
-                        textInputType: TextInputType.visiblePassword,
-                        controller: _passwordController,
-                        obscureText: _obscurePassword,
-                        suffixIcon: IconButton(
-                          onPressed: () => showPassword(),
-                          icon: _obscurePassword
-                              ? const Icon(Icons.visibility_off, size: 18)
-                              : const Icon(Icons.visibility, size: 18),
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      Container(
-                        height: 46,
-                        width: screenSize.width,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: AppColor.primaryColor,
-                            borderRadius: BorderRadius.circular(10.0)),
-                        child: const Text(
-                          "Update Profile",
-                          style: TextStyle(
-                              fontSize: 17,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
+
+                      SizedBox(height: screenSize.height * 0.35),
+                      // SignInTextFieldWidget(
+                      //   hintText: "Name",
+                      //   textInputType: TextInputType.name,
+                      //   controller: _nameController,
+                      //   suffixIcon: IconButton(
+                      //     onPressed: () {},
+                      //     icon: _obscurePassword
+                      //         ? const Icon(Icons.visibility_off, size: 0)
+                      //         : const Icon(Icons.visibility, size: 0),
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 15),
+                      // SignInTextFieldWidget(
+                      //   hintText: "Email",
+                      //   textInputType: TextInputType.emailAddress,
+                      //   controller: _emailController,
+                      //   suffixIcon: IconButton(
+                      //     onPressed: () {},
+                      //     icon: _obscurePassword
+                      //         ? const Icon(Icons.visibility_off, size: 0)
+                      //         : const Icon(Icons.visibility, size: 0),
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 20),
+                      // SignInTextFieldWidget(
+                      //   hintText: "Password",
+                      //   textInputType: TextInputType.visiblePassword,
+                      //   controller: _passwordController,
+                      //   obscureText: _obscurePassword,
+                      //   suffixIcon: IconButton(
+                      //     onPressed: () => showPassword(),
+                      //     icon: _obscurePassword
+                      //         ? const Icon(Icons.visibility_off, size: 18)
+                      //         : const Icon(Icons.visibility, size: 18),
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 30),
+                      // Container(
+                      //   height: 46,
+                      //   width: screenSize.width,
+                      //   alignment: Alignment.center,
+                      //   decoration: BoxDecoration(
+                      //       color: AppColor.primaryColor,
+                      //       borderRadius: BorderRadius.circular(10.0)),
+                      //   child: const Text(
+                      //     "Update Profile",
+                      //     style: TextStyle(
+                      //         fontSize: 17,
+                      //         color: Colors.white,
+                      //         fontWeight: FontWeight.bold),
+                      //   ),
+                      // ),
                       const SizedBox(height: 15),
                       GestureDetector(
                         onTap: () =>
