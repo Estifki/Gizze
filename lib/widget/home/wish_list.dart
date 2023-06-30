@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 
 import '../../const/const.dart';
 
-class HomeFavoriteWidget extends StatelessWidget {
-  const HomeFavoriteWidget({super.key});
+class HomeWishListWidget extends StatelessWidget {
+  const HomeWishListWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class HomeFavoriteWidget extends StatelessWidget {
             builder: (context, value, _) {
               return ListView.builder(
                   shrinkWrap: true,
-                  itemCount: value.favoriteSand.length,
+                  itemCount: value.wishListData.length,
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.only(left: 15.0),
@@ -47,7 +47,8 @@ class HomeFavoriteWidget extends StatelessWidget {
                                     //
                                     Center(
                                         child: Image.network(
-                                            value.favoriteSand[index].sandImage,
+                                            value.wishListData[index].sand
+                                                .sandImage,
                                             height: screenSize.height * 0.074)),
                                     //
                                     //Product Name
@@ -56,7 +57,7 @@ class HomeFavoriteWidget extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10.0),
                                       child: Text(
-                                        value.favoriteSand[index].name,
+                                        value.wishListData[index].sand.name,
                                         maxLines: 1,
                                         style: const TextStyle(
                                             overflow: TextOverflow.ellipsis,
@@ -78,15 +79,22 @@ class HomeFavoriteWidget extends StatelessWidget {
                                             .push(MaterialPageRoute(
                                           builder: (context) =>
                                               SandDetailsScreen(
+                                                  isFromWishList:  value
+                                                      .wishListData[index].id,
                                                   sandID: value
-                                                      .favoriteSand[index].id,
+                                                      .wishListData[index]
+                                                      .sandId,
                                                   sandName: value
-                                                      .favoriteSand[index].name,
+                                                      .wishListData[index]
+                                                      .sand
+                                                      .name,
                                                   sandDescription: value
-                                                      .favoriteSand[index]
+                                                      .wishListData[index]
+                                                      .sand
                                                       .description,
                                                   sandImage: value
-                                                      .favoriteSand[index]
+                                                      .wishListData[index]
+                                                      .sand
                                                       .sandImage),
                                         ));
                                       },

@@ -1,9 +1,11 @@
+import 'package:ashewa_d/provider/sand.dart';
+import 'package:ashewa_d/widget/home/wish_list.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'appbar.dart';
 import 'favorite.dart';
 import 'featured.dart';
-
 
 class HomeSandsWidget extends StatelessWidget {
   const HomeSandsWidget({
@@ -16,18 +18,37 @@ class HomeSandsWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           //
           // Custom App Bar
           //
-          CustomHomeAppBarWidget(),
+          const CustomHomeAppBarWidget(),
+          //
+          //wish List
+          //
+          Provider.of<SandProvider>(context).wishListData.isNotEmpty
+              ? const Padding(
+                  padding: EdgeInsets.only(left: 16.0, top: 20),
+                  child: Text(
+                    "Wish List",
+                    style: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                )
+              : Container(),
+          Provider.of<SandProvider>(context).wishListData.isNotEmpty
+              ? const HomeWishListWidget()
+              : Container(),
           //
           // Favourite
           //
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(left: 16.0, top: 20),
             child: Text(
-              "Favorites",
+              "Most Viewed",
               style: TextStyle(
                 fontSize: 19,
                 fontWeight: FontWeight.bold,
@@ -35,15 +56,15 @@ class HomeSandsWidget extends StatelessWidget {
               ),
             ),
           ),
-          HomeFavoriteWidget(),
+          const HomeFavoriteWidget(),
           //
           // Featured Properties
           //
 
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(left: 16.0, top: 20),
             child: Text(
-              "Featured Products",
+              "Recently Added",
               style: TextStyle(
                 fontSize: 19,
                 fontWeight: FontWeight.bold,
@@ -52,7 +73,7 @@ class HomeSandsWidget extends StatelessWidget {
             ),
           ),
 
-          FeaturedProductWidget(),
+          const FeaturedProductWidget(),
         ],
       ),
     );

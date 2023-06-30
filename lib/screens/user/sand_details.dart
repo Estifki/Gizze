@@ -8,6 +8,7 @@ import '../../const/const.dart';
 import '../../provider/auth.dart';
 import '../../provider/location.dart';
 import '../../provider/sand.dart';
+import '../../uitil/toast.dart';
 import '../driver/profile.dart';
 import 'order/add_order.dart';
 
@@ -16,13 +17,15 @@ class SandDetailsScreen extends StatefulWidget {
   final String sandName;
   final String sandDescription;
   final String sandImage;
+  final String isFromWishList;
 
   const SandDetailsScreen(
       {super.key,
       required this.sandID,
       required this.sandName,
       required this.sandDescription,
-      required this.sandImage});
+      required this.sandImage,
+      this.isFromWishList = ""});
   @override
   State<SandDetailsScreen> createState() => _SandDetailsScreenState();
 }
@@ -30,6 +33,7 @@ class SandDetailsScreen extends StatefulWidget {
 class _SandDetailsScreenState extends State<SandDetailsScreen> {
   bool isInit = true;
   late Future _sandData;
+  bool _isLoading = false;
 
   @override
   void didChangeDependencies() {
@@ -76,6 +80,118 @@ class _SandDetailsScreenState extends State<SandDetailsScreen> {
                 widget.sandDescription,
                 style: const TextStyle(color: Colors.black, fontSize: 17),
               ),
+              const SizedBox(height: 15),
+              widget.isFromWishList.isNotEmpty
+                  ? _isLoading
+                      ? const CircularProgressIndicator.adaptive()
+                      : GestureDetector(
+                          onTap: () async {
+                            try {
+                              setState(() {
+                                _isLoading = true;
+                              });
+                              Provider.of<SandProvider>(context, listen: false)
+                                  .addRemoveMyWishList(
+                                      isAdd: false,
+                                      token: Provider.of<AuthProvider>(context,
+                                              listen: false)
+                                          .token!,
+                                      wishListID: widget.isFromWishList)
+                                  .then((_) {
+                                showScaffoldMessanger(
+                                    context: context,
+                                    backgroundColor: Colors.green,
+                                    errorMessage: "Sand removed from wishList");
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                                Navigator.of(context).pop();
+                                Provider.of<SandProvider>(context,
+                                        listen: false)
+                                    .getMyWishList(Provider.of<AuthProvider>(
+                                            context,
+                                            listen: false)
+                                        .token!);
+                              });
+                            } catch (_) {
+                              setState(() {
+                                _isLoading = false;
+                              });
+                              showScaffoldMessanger(
+                                  context: context,
+                                  errorMessage: "Please Try Again Later");
+                            }
+                          },
+                          child: Container(
+                            height: 52,
+                            width: 130,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6.0),
+                                border:
+                                    Border.all(color: AppColor.primaryColor)),
+                            child: const Text(
+                              "Remove from\n wishlist",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        )
+                  : _isLoading
+                      ? const CircularProgressIndicator.adaptive()
+                      : GestureDetector(
+                          onTap: () async {
+                            try {
+                              setState(() {
+                                _isLoading = true;
+                              });
+                              Provider.of<SandProvider>(context, listen: false)
+                                  .addRemoveMyWishList(
+                                      token: Provider.of<AuthProvider>(context,
+                                              listen: false)
+                                          .token!,
+                                      sandID: widget.sandID)
+                                  .then((_) {
+                                showScaffoldMessanger(
+                                    context: context,
+                                    backgroundColor: Colors.green,
+                                    errorMessage: "Sand added to wishlist");
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                                Navigator.of(context).pop();
+                                Provider.of<SandProvider>(context,
+                                        listen: false)
+                                    .getMyWishList(Provider.of<AuthProvider>(
+                                            context,
+                                            listen: false)
+                                        .token!);
+                              });
+                            } catch (_) {
+                              setState(() {
+                                _isLoading = false;
+                              });
+                              showScaffoldMessanger(
+                                  context: context,
+                                  errorMessage: "Please Try Again Later");
+                            }
+                          },
+                          child: Container(
+                            height: 32,
+                            width: 130,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6.0),
+                                border:
+                                    Border.all(color: AppColor.primaryColor)),
+                            child: const Text(
+                              "Add to wishlist",
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
               const SizedBox(height: 20),
               const Text(
                 "Sand Locations",

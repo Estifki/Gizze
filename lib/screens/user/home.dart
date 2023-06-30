@@ -28,6 +28,8 @@ class _HomeScreenForUserState extends State<HomeScreenForUser> {
           const SystemUiOverlayStyle(statusBarColor: Colors.black));
       _sandData = Provider.of<SandProvider>(context, listen: false)
           .getSand(Provider.of<AuthProvider>(context).token!);
+      Provider.of<SandProvider>(context, listen: false)
+          .getMyWishList(Provider.of<AuthProvider>(context).token!);
       isInit = false;
     }
     super.didChangeDependencies();
@@ -54,8 +56,7 @@ class _HomeScreenForUserState extends State<HomeScreenForUser> {
                     // return HomeShimmer();
                     return const HomeSandsWidget();
                   }
-                }
-              ),
+                }),
       ),
     );
   }

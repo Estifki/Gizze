@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ashewa_d/model/user/wish_list.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,12 +13,13 @@ import '../uitil/http_error.dart';
 class SandProvider with ChangeNotifier {
   final List<Favorite> _favSand = [];
   final List<Favorite> _sand = [];
-
   final List<SandData> _sandLocationData = [];
+  final List<WishListData> _wishList = [];
 
   List<Favorite> get favoriteSand => [..._favSand];
   List<Favorite> get featuredSand => [..._sand];
   List<SandData> get sandLocationData => [..._sandLocationData];
+  List<WishListData> get wishListData => [..._wishList];
 
   cleanSandDetails() {
     _sandLocationData.clear();
@@ -53,6 +55,34 @@ class SandProvider with ChangeNotifier {
     }
   }
 
+  Future<void> getMyWishList(String token) async {
+    String url = "${AppConst.appUrl}/wishlist";
+
+    try {
+      http.Response response = await http.get(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          HttpHeaders.authorizationHeader: "Bearer $token"
+        },
+      );
+      final decodedData = jsonDecode(response.body);
+      if (response.statusCode != 200) {
+        throw CustomHttpException(errorMessage: decodedData["data"]);
+      } else {
+        _wishList.clear();
+
+        final data = wishListModelFromJson(response.body);
+
+        _wishList.addAll(data.data);
+        notifyListeners();
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<void> getSandDetails(String token, String sandID) async {
     String url = "${AppConst.appUrl}/home-sands/$sandID";
 
@@ -76,6 +106,48 @@ class SandProvider with ChangeNotifier {
         _sandLocationData.addAll([data.data]);
         notifyListeners();
       }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> addRemoveMyWishList(
+      {required String token,
+      String? sandID,
+      String? wishListID,
+      bool isAdd = true}) async {
+    String url = isAdd
+        ? "${AppConst.appUrl}/wishlist"
+        : "${AppConst.appUrl}/wishlist/$wishListID";
+
+    try {
+      http.Response response = isAdd
+          ? await http.post(Uri.parse(url),
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                HttpHeaders.authorizationHeader: "Bearer $token"
+              },
+              body: jsonEncode({"sandId": sandID}))
+          : await http.delete(
+              Uri.parse(url),
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                HttpHeaders.authorizationHeader: "Bearer $token"
+              },
+            );
+      // final decodedData = jsonDecode(response.body);
+      // if (response.statusCode != 200 && response.statusCode != 201) {
+      //   throw CustomHttpException(errorMessage: decodedData["data"]);
+      // } else {
+      // _wishList.clear();
+
+      // final data = wishListModelFromJson(response.body);
+
+      // _wishList.addAll(data.data);
+      // notifyListeners();
+      // }
     } catch (e) {
       rethrow;
     }

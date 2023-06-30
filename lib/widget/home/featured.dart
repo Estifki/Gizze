@@ -134,7 +134,7 @@ class FeaturedProductWidget extends StatelessWidget {
                                     //         value.featuredSand[index].sandImage),
                                     child: Container(
                                       width: screenSize.width,
-                                      height: screenSize.height * 0.046,
+                                      height: 34,
                                       alignment: Alignment.center,
                                       margin: const EdgeInsets.only(right: 5.0),
                                       decoration: BoxDecoration(
