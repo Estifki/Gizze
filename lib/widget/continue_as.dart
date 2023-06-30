@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../const/const.dart';
 import '../screens/auth/login.dart';
 import '../screens/auth/register/driver/register.dart';
-import '../screens/auth/register/user/phone.dart';
 import '../screens/auth/register/user/register.dart';
 
 class ContinueAsWidget extends StatelessWidget {

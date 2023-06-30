@@ -53,10 +53,11 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
             toolbarHeight: 10.0,
             bottom: const TabBar(
                 labelColor: Colors.black,
+                isScrollable: true,
                 indicatorPadding: EdgeInsets.only(left: 25, right: 25),
                 tabs: [
                   Tab(text: "Pending"),
-                  Tab(text: "On-Theway"),
+                  Tab(text: "On The Way"),
                   Tab(text: "Delivered"),
                   Tab(text: "Rejected"),
                 ]),
@@ -229,7 +230,7 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
             Consumer<OrderProvider>(
               builder: (context, value, _) {
                 if (value.rejectedOrderData.isEmpty) {
-                  return const Center(child: Text("No On The Way Delivery"));
+                  return const Center(child: Text("No Rejected Delivery"));
                 }
                 return ListView.builder(
                   shrinkWrap: true,

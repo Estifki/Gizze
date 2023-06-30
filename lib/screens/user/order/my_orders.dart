@@ -55,7 +55,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                 indicatorPadding: EdgeInsets.only(left: 25, right: 25),
                 tabs: [
                   Tab(text: "Pending"),
-                  Tab(text: "On the way"),
+                  Tab(text: "On The Way"),
                   Tab(text: "Delivered"),
                   Tab(text: "Rejected"),
                 ]),

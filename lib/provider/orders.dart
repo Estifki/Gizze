@@ -188,7 +188,7 @@ class OrderProvider with ChangeNotifier {
       final decodedData = jsonDecode(response.body);
       print(response.statusCode);
       print(response.body);
-      if (response.statusCode != 201) {
+      if (response.statusCode != 200) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       }
     } catch (e) {
