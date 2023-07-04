@@ -2,7 +2,6 @@
 //
 //     final mySandModel = mySandModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 MySandModel mySandModelFromJson(String str) =>
@@ -42,19 +41,20 @@ class MySandModel {
 class MySandData {
   String id;
   String sandId;
-  Location location;
+  DestinationLocation destinationLocation;
   String price;
   DateTime createdAt;
   DateTime updatedAt;
   String userId;
-  String locationId;
+  dynamic locationId;
   Sand sand;
   Owner owner;
+  dynamic location;
 
   MySandData({
     required this.id,
     required this.sandId,
-    required this.location,
+    required this.destinationLocation,
     required this.price,
     required this.createdAt,
     required this.updatedAt,
@@ -62,12 +62,14 @@ class MySandData {
     required this.locationId,
     required this.sand,
     required this.owner,
+    required this.location,
   });
 
   factory MySandData.fromJson(Map<String, dynamic> json) => MySandData(
         id: json["id"],
         sandId: json["sand_id"],
-        location: Location.fromJson(json["location"]),
+        destinationLocation:
+            DestinationLocation.fromJson(json["destination_location"]),
         price: json["price"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
@@ -75,12 +77,13 @@ class MySandData {
         locationId: json["location_id"],
         sand: Sand.fromJson(json["sand"]),
         owner: Owner.fromJson(json["owner"]),
+        location: json["location"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "sand_id": sandId,
-        "location": location.toJson(),
+        "destination_location": destinationLocation.toJson(),
         "price": price,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
@@ -88,21 +91,23 @@ class MySandData {
         "location_id": locationId,
         "sand": sand.toJson(),
         "owner": owner.toJson(),
+        "location": location,
       };
 }
 
-class Location {
-  dynamic latitude;
-  dynamic longitude;
+class DestinationLocation {
+  double latitude;
+  double longitude;
 
-  Location({
+  DestinationLocation({
     required this.latitude,
     required this.longitude,
   });
 
-  factory Location.fromJson(Map<String, dynamic> json) => Location(
-        latitude: json["latitude"],
-        longitude: json["longitude"],
+  factory DestinationLocation.fromJson(Map<String, dynamic> json) =>
+      DestinationLocation(
+        latitude: json["latitude"]?.toDouble(),
+        longitude: json["longitude"]?.toDouble(),
       );
 
   Map<String, dynamic> toJson() => {

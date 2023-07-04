@@ -65,7 +65,7 @@ class SandLocation {
   DateTime createdAt;
   DateTime updatedAt;
   String userId;
-  String locationId;
+  dynamic locationId;
   Sand sand;
   Owner owner;
 
@@ -87,7 +87,13 @@ class SandLocation {
     return SandLocation(
       id: json['id'],
       sandId: json['sand_id'],
-      location: Location.fromJson(json['location']),
+      location: json['location'] == null
+          ? Location(
+              id: "00",
+              name: "",
+              createdAt: DateTime.now(),
+              updatedAt: DateTime.now())
+          : Location.fromJson(json['location']),
       destinationLocation:
           DestinationLocation.fromJson(json["destination_location"]),
       price: json['price'],

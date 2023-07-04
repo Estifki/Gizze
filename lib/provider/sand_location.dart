@@ -49,7 +49,7 @@ class SandLocationProvider with ChangeNotifier {
       {required String token,
       required String sandID,
       required String price,
-      required String locationID,
+      // required String locationID,
       required double lat,
       required double long}) async {
     String url = "${AppConst.appUrl}/sand-locations";
@@ -64,7 +64,7 @@ class SandLocationProvider with ChangeNotifier {
           body: jsonEncode({
             "sandId": sandID,
             "price": price,
-            "locationId": locationID,
+            // "locationId": locationID,
             "latitude": lat,
             "longitude": long
           }));
@@ -82,7 +82,7 @@ class SandLocationProvider with ChangeNotifier {
       {required String token,
       required String sandID,
       required String price,
-      required String locationID,
+      // required String locationID,
       required double lat,
       required double long}) async {
     print(price);
@@ -97,7 +97,7 @@ class SandLocationProvider with ChangeNotifier {
           },
           body: jsonEncode({
             "price": price,
-            "locationId": locationID,
+            // "locationId": locationID,
             "latitude": lat,
             "longitude": long
           }));

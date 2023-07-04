@@ -84,27 +84,26 @@ class _MyOrdersDetailsScreenState extends State<MyOrdersDetailsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.network(widget.sandImage, width: screenSize.width * 0.4),
-                const SizedBox(width: 10),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Price /m²:  Br ${widget.pricePerCubic}",
-                        style: const TextStyle(fontSize: 14)),
-                    const SizedBox(height: 4),
-                    Text("Ordered amount: ${widget.amount} m²",
-                        style: const TextStyle(fontSize: 14)),
-                    const SizedBox(height: 4),
-                    Text("Total Price:  Br ${widget.totalPrice}",
-                        style: const TextStyle(fontSize: 14)),
-                  ],
-                )
-              ],
-            ),
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.network(widget.sandImage,
+                      width: screenSize.width * 0.35),
+                  const SizedBox(width: 10),
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Price /m²:  Br ${widget.pricePerCubic}",
+                            style: const TextStyle(fontSize: 14)),
+                        const SizedBox(height: 4),
+                        Text("Ordered amount: ${widget.amount} m²",
+                            style: const TextStyle(fontSize: 14)),
+                        const SizedBox(height: 4),
+                        Text("Total Price:  Br ${widget.totalPrice}",
+                            style: const TextStyle(fontSize: 14)),
+                      ])
+                ]),
             const SizedBox(height: 20),
             const Text("Delivery Man Info",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),

@@ -94,7 +94,7 @@ class _MyOrdersDetailsScreenForDriverState
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.network(widget.sandImage, width: screenSize.width * 0.4),
+                Image.network(widget.sandImage, width: screenSize.width * 0.35),
                 const SizedBox(width: 10),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,

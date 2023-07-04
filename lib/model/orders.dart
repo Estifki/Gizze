@@ -138,8 +138,8 @@ class DatumDestinationLocation {
   factory DatumDestinationLocation.fromJson(Map<String, dynamic> json) =>
       DatumDestinationLocation(
         locationName: json["location_name"],
-        latitude: json["latitude"],
-        longitude: json["longitude"],
+        latitude: json["latitude"]?.toDouble(),
+        longitude: json["longitude"]?.toDouble(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -265,7 +265,7 @@ class SandLocation {
   DateTime createdAt;
   DateTime updatedAt;
   String userId;
-  String locationId;
+  dynamic locationId;
   Sand sand;
   OrderedBy owner;
   OrderStatus location;
@@ -296,7 +296,13 @@ class SandLocation {
         locationId: json["location_id"],
         sand: Sand.fromJson(json["sand"]),
         owner: OrderedBy.fromJson(json["owner"]),
-        location: OrderStatus.fromJson(json["location"]),
+        location: json["location"] == null
+            ? OrderStatus(
+                id: "id",
+                name: "Unknown",
+                createdAt: DateTime.now(),
+                updatedAt: DateTime.now())
+            : OrderStatus.fromJson(json["location"]),
       );
 
   Map<String, dynamic> toJson() => {

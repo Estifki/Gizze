@@ -1,3 +1,5 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import '../../../const/const.dart';
 import '../../../provider/auth.dart';
 import '../../../provider/orders.dart';
@@ -25,12 +27,9 @@ class AddSandScreen extends StatefulWidget {
 class _AddSandScreenState extends State<AddSandScreen> {
   final _priceController = TextEditingController();
   String selectedSandAddress = "";
-  bool locationPicked = false;
+
   bool _isLoading = false;
-
-  double? lat;
-  double? long;
-
+  bool _isLocationPicked = false;
   @override
   void dispose() {
     _priceController.dispose();
@@ -64,80 +63,158 @@ class _AddSandScreenState extends State<AddSandScreen> {
                   icon: const Icon(Icons.visibility_off, size: 0)),
             ),
             const SizedBox(height: 20),
-            DropdownButtonFormField2(
-              isExpanded: true,
-              decoration: InputDecoration(
-                isDense: true,
-                contentPadding: EdgeInsets.zero,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(6.0),
-                ),
-              ),
-              hint: const Text("Select Sand Address",
-                  style: TextStyle(fontSize: 17)),
-              icon: const Icon(Icons.arrow_drop_down, color: Colors.black45),
-              iconSize: 30,
-              buttonHeight: 60,
-              buttonPadding: const EdgeInsets.only(right: 10),
-              dropdownDecoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              items: Provider.of<SandLocationProvider>(context)
-                  .sandAddressData
-                  .map((item) => DropdownMenuItem<String>(
-                        value: item.id,
-                        child: Text(
-                          item.name,
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                      ))
-                  .toList(),
-              validator: (value) {
-                if (value == null) {
-                  return 'Sand Address Is Not Selected.';
-                }
-                return null;
-              },
-              onChanged: (value) {
-                setState(() {
-                  selectedSandAddress = value.toString();
-                });
-              },
-            ),
-            const SizedBox(height: 20),
+            // DropdownButtonFormField2(
+            //   isExpanded: true,
+            //   decoration: InputDecoration(
+            //     isDense: true,
+            //     contentPadding: EdgeInsets.zero,
+            //     border: OutlineInputBorder(
+            //       borderRadius: BorderRadius.circular(6.0),
+            //     ),
+            //   ),
+            //   hint: const Text("Select Sand Address",
+            //       style: TextStyle(fontSize: 17)),
+            //   icon: const Icon(Icons.arrow_drop_down, color: Colors.black45),
+            //   iconSize: 30,
+            //   buttonHeight: 60,
+            //   buttonPadding: const EdgeInsets.only(right: 10),
+            //   dropdownDecoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(15),
+            //   ),
+            //   items: Provider.of<SandLocationProvider>(context)
+            //       .sandAddressData
+            //       .map((item) => DropdownMenuItem<String>(
+            //             value: item.id,
+            //             child: Text(
+            //               item.name,
+            //               style: const TextStyle(fontSize: 16),
+            //             ),
+            //           ))
+            //       .toList(),
+            //   validator: (value) {
+            //     if (value == null) {
+            //       return 'Sand Address Is Not Selected.';
+            //     }
+            //     return null;
+            //   },
+            //   onChanged: (value) {
+            //     setState(() {
+            //       selectedSandAddress = value.toString();
+            //     });
+            //   },
+            // ),
+            // const SizedBox(height: 20),
             GestureDetector(
-              onTap: () async {
-                try {
-                  await showSimplePickerLocation(
-                    context: context,
-                    initZoom: 13,
+              onTap: () => showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    actions: [
+                      GestureDetector(
+                        onTap: () => Navigator.of(context).pop(),
+                        child: Container(
+                            height: 34,
+                            width: 80,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(6.0)),
+                            child: const Text(
+                              "Cancel",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                      ),
+                      const SizedBox(width: 4),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _isLocationPicked = true;
+                          });
+                          Navigator.of(context).pop();
+                        },
+                        child: Container(
+                            height: 34,
+                            width: 80,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: AppColor.primaryColor,
+                                borderRadius: BorderRadius.circular(6.0)),
+                            child: const Text(
+                              "Pick",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                      ),
+                    ],
+                    content: SizedBox(
+                      height: 250,
+                      child: GoogleMap(
+                        // mapType: MapType.satellite,
+                        myLocationButtonEnabled: true,
+                        indoorViewEnabled: true,
+                        // trafficEnabled: true,
+                        // liteModeEnabled: true,
+                        myLocationEnabled: false,
+                        initialCameraPosition: CameraPosition(
+                            target: LatLng(
+                                Provider.of<LocationProvider>(context,
+                                        listen: false)
+                                    .userLat!,
+                                Provider.of<LocationProvider>(context,
+                                        listen: false)
+                                    .userLong!),
+                            zoom: 8),
+                        markers: {
+                          Marker(
+                              markerId: const MarkerId("source"),
+                              position: LatLng(
+                                  Provider.of<LocationProvider>(context,
+                                          listen: false)
+                                      .userLat!,
+                                  Provider.of<LocationProvider>(context,
+                                          listen: false)
+                                      .userLong!)),
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
+              // onTap: () async {
+              //   try {
+              //     await showSimplePickerLocation(
+              //       context: context,
+              //       initZoom: 13,
 
-                    maxZoomLevel: 19.0,
-                    isDismissible: true,
-                    // title: "Pick Your address",
-                    textConfirmPicker: "Pick",
-                    textCancelPicker: "",
-                    initCurrentUserPosition: false,
-                    initPosition: GeoPoint(
-                        latitude: Provider.of<LocationProvider>(context,
-                                listen: false)
-                            .userLat!,
-                        longitude: Provider.of<LocationProvider>(context,
-                                listen: false)
-                            .userLong!),
-                  ).then((value) {
-                    lat = Provider.of<LocationProvider>(context, listen: false)
-                        .userLat!;
-                    long = Provider.of<LocationProvider>(context, listen: false)
-                        .userLong!;
-                    setState(() {
-                      locationPicked = true;
-                    });
-                  });
-                } catch (e) {
-                  rethrow;
-                }
-              },
+              //       maxZoomLevel: 19.0,
+              //       isDismissible: true,
+              //       // title: "Pick Your address",
+              //       textConfirmPicker: "Pick",
+              //       textCancelPicker: "",
+              //       initCurrentUserPosition: false,
+              //       initPosition: GeoPoint(
+              //           latitude: Provider.of<LocationProvider>(context,
+              //                   listen: false)
+              //               .userLat!,
+              //           longitude: Provider.of<LocationProvider>(context,
+              //                   listen: false)
+              //               .userLong!),
+              //     ).then((value) {
+              //       lat = Provider.of<LocationProvider>(context, listen: false)
+              //           .userLat!;
+              //       long = Provider.of<LocationProvider>(context, listen: false)
+              //           .userLong!;
+              //       setState(() {
+              //         locationPicked = true;
+              //       });
+              //     });
+              //   } catch (e) {
+              //     rethrow;
+              //   }
+              // },
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -152,9 +229,9 @@ class _AddSandScreenState extends State<AddSandScreen> {
                           size: 22, color: AppColor.primaryColor),
                     ),
                     const SizedBox(width: 13),
-                    locationPicked
+                    _isLocationPicked
                         ? const Text(
-                            "Update Sand Location",
+                            "Updated Sand Location",
                             maxLines: 2,
                             style: TextStyle(
                                 fontSize: 16,
@@ -201,13 +278,16 @@ class _AddSandScreenState extends State<AddSandScreen> {
   validate() async {
     if (_priceController.text.isEmpty) {
       showScaffoldMessanger(context: context, errorMessage: "Price is Invalid");
-    } else if (selectedSandAddress == "") {
-      showScaffoldMessanger(
-          context: context, errorMessage: "Price address is Invalid");
-    } else if (lat == null) {
-      showScaffoldMessanger(
-          context: context, errorMessage: "Please Pick Sand Location");
-    } else {
+    }
+    //  else if (selectedSandAddress == "") {
+    //   showScaffoldMessanger(
+    //       context: context, errorMessage: "Price address is Invalid");
+    // }
+    // else if (lat == null) {
+    //   showScaffoldMessanger(
+    //       context: context, errorMessage: "Please Pick Sand Location");
+    // }
+    else {
       FocusScope.of(context).unfocus();
       setState(() {
         _isLoading = true;
@@ -218,10 +298,12 @@ class _AddSandScreenState extends State<AddSandScreen> {
                 token: Provider.of<AuthProvider>(context, listen: false).token!,
                 sandID: widget.sandID,
                 price: _priceController.text,
-                locationID: selectedSandAddress,
-                lat: lat!.toDouble(),
-                long: long!.toDouble())
-            .then((value) {
+                // locationID: selectedSandAddress,
+                lat: Provider.of<LocationProvider>(context, listen: false)
+                    .userLat!,
+                long: Provider.of<LocationProvider>(context, listen: false)
+                    .userLong!)
+            .then((_) {
           showScaffoldMessanger(
               backgroundColor: Colors.green,
               context: context,
