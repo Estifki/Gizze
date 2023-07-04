@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'order/my_orders.dart';
 import 'home.dart';
-import 'profile_user.dart';
+import 'profile/profile_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

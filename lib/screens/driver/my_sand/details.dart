@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../../provider/location.dart';
 import '../../../provider/sand_location.dart';
-import '../../user/profile_user.dart';
+import '../../user/profile/profile_user.dart';
 
 class UpdateMySandScreen extends StatefulWidget {
   final String sandID;

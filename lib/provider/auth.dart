@@ -294,4 +294,57 @@ class AuthProvider with ChangeNotifier {
       rethrow;
     }
   }
+
+  Future updatePassword(
+      {required String oldPassword, required String newPassword}) async {
+    String url = "${AppConst.appUrl}/change-password";
+    try {
+      http.Response response = await http.patch(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          HttpHeaders.authorizationHeader: "Bearer $token",
+        },
+        body: jsonEncode({
+          "current_password": oldPassword,
+          "new_password": newPassword,
+          "new_confirm_password": newPassword,
+        }),
+      );
+      var decodedData = jsonDecode(response.body);
+      print(response.statusCode);
+      print(response.body);
+      if (response.statusCode != 200) {
+        throw CustomHttpException(errorMessage: decodedData["data"]);
+      } else {}
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future updateProfile({required String name, required String email}) async {
+    String url = "${AppConst.appUrl}/update-profile";
+    try {
+      http.Response response = await http.post(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          HttpHeaders.authorizationHeader: "Bearer $token",
+        },
+        body: jsonEncode({
+          "name": name,
+          "email": email,
+        }),
+      );
+      var decodedData = jsonDecode(response.body);
+
+      if (response.statusCode != 200) {
+        throw CustomHttpException(errorMessage: decodedData["data"]);
+      } else {}
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
