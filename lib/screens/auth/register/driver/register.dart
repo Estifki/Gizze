@@ -462,7 +462,7 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
           _isLoading = false;
         });
         showScaffoldMessanger(
-            context: context, errorMessage: "Please Try Again Later");
+            context: context, errorMessage: "Upload formats must be PDF ");
       }
     }
   }

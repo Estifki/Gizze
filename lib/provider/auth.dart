@@ -257,7 +257,7 @@ class AuthProvider with ChangeNotifier {
 
       print(decodedData);
       if (response.statusCode != 201) {
-        throw CustomHttpException(errorMessage: "Please Try Again Later!");
+        throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
         var prefs = await SharedPreferences.getInstance();
         userID = decodedData['data']["user"]["id"];
@@ -342,7 +342,9 @@ class AuthProvider with ChangeNotifier {
 
       if (response.statusCode != 200) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
-      } else {}
+      } else {
+        await getMyProfile();
+      }
     } catch (e) {
       rethrow;
     }

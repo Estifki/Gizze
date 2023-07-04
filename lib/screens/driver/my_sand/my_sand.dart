@@ -66,6 +66,11 @@ class MySandWidget extends StatelessWidget {
       padding: const EdgeInsets.only(top: 10.0),
       child: Consumer<SandLocationProvider>(
         builder: (context, value, _) {
+          if (value.mySandData.isEmpty) {
+            return const Center(
+              child: Text("No sand"),
+            );
+          }
           return ListView.builder(
             shrinkWrap: true,
             itemCount: value.mySandData.length,
