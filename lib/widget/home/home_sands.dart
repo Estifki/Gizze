@@ -1,5 +1,5 @@
-import 'package:ashewa_d/provider/sand.dart';
-import 'package:ashewa_d/widget/home/wish_list.dart';
+import '../../provider/sand.dart';
+import 'wish_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

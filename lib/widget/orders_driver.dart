@@ -1,10 +1,7 @@
-import '../screens/driver/orders/details.dart';
-import '../screens/user/order/details.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../const/const.dart';
-import '../provider/auth.dart';
+import '../screens/driver/orders/details.dart';
 
 class MyOrdersWidgetForDriver extends StatelessWidget {
   final String orderID;

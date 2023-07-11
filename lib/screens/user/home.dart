@@ -1,13 +1,10 @@
-import '../../provider/sand.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/auth.dart';
+import '../../provider/sand.dart';
 import '../../uitil/shimmer/home.dart';
-import '../../widget/home/appbar.dart';
-import '../../widget/home/favorite.dart';
-import '../../widget/home/featured.dart';
 import '../../widget/home/home_sands.dart';
 
 class HomeScreenForUser extends StatefulWidget {

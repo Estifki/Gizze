@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'order/my_orders.dart';
-import 'home.dart';
-import 'profile/profile_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/location.dart';
+import 'home.dart';
+import 'order/my_orders.dart';
+import 'profile/profile_user.dart';
 
 class UserCustomBottomBar extends StatefulWidget {
   const UserCustomBottomBar({super.key});

@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:ashewa_d/const/const.dart';
-import 'package:ashewa_d/provider/auth.dart';
-import 'package:ashewa_d/uitil/toast.dart';
+import '../../../const/const.dart';
+import '../../../provider/auth.dart';
+import '../../../uitil/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

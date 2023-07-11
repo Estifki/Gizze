@@ -1,7 +1,7 @@
-import 'package:ashewa_d/screens/driver/bottom_bar_driver.dart';
-import 'package:ashewa_d/screens/driver/my_sand/my_sand.dart';
-import 'package:ashewa_d/screens/user/profile/update_password.dart';
-import 'package:ashewa_d/screens/user/profile/update_profile.dart';
+import 'bottom_bar_driver.dart';
+import 'my_sand/my_sand.dart';
+import '../user/profile/update_password.dart';
+import '../user/profile/update_profile.dart';
 import 'package:flutter/services.dart';
 
 import '../../../const/const.dart';

@@ -1,5 +1,5 @@
-import 'package:ashewa_d/screens/user/profile/update_password.dart';
-import 'package:ashewa_d/screens/user/profile/update_profile.dart';
+import 'update_password.dart';
+import 'update_profile.dart';
 import 'package:flutter/services.dart';
 
 import '../../../const/const.dart';

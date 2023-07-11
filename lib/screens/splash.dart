@@ -1,14 +1,14 @@
 import 'dart:async';
-import 'driver/bottom_bar_driver.dart';
-import 'user/bottom_bar.dart';
-import 'user/home.dart';
-import 'onboarding.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 //
 import '../provider/auth.dart';
+import 'driver/bottom_bar_driver.dart';
+import 'onboarding.dart';
+import 'user/bottom_bar.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
