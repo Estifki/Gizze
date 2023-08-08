@@ -94,8 +94,7 @@ class MyOrdersWidgetUser extends StatelessWidget {
                   const SizedBox(height: 2),
                   Text(
                     orderNo,
-                    style: const TextStyle(
-                        color: AppColor.primaryColor, fontSize: 16),
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
                   ),
                   const SizedBox(height: 10),
                   // Text"(DateFormat('MMMM dd, yyyy')
@@ -103,7 +102,7 @@ class MyOrdersWidgetUser extends StatelessWidget {
                   const SizedBox(height: 10),
                   Text(
                     sandName,
-                    style: const TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 15.5),
                   ),
                   // const Text(
                   //   "Sand Amount",
@@ -112,12 +111,12 @@ class MyOrdersWidgetUser extends StatelessWidget {
                   const SizedBox(height: 2),
                   Text(
                     DateFormat.yMMMEd().format(date),
-                    style: const TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 15.5),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     "Amount: $amount",
-                    style: const TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 15.5),
                   ),
                 ],
               ),
@@ -126,7 +125,7 @@ class MyOrdersWidgetUser extends StatelessWidget {
                   child: Text(
                     "Br $totalPrice",
                     style: const TextStyle(
-                        color: AppColor.primaryColor,
+                        color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.w600),
                   ))
