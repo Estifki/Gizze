@@ -4,6 +4,13 @@ class AppAssets {}
 
 class AppColor {
   static const Color primaryColor = Color(0xffde7c1e);
+
+  static const Color zzprimaryColor = Color(0xff1abc9c);
+  static const Color secondaryColor = Color(0xff3498db);
+
+  static const Color xprimaryColor = Color(0xffd98880);
+  static const Color sdprimaryColor = Color(0xff8eac00);
+  static const Color thirdColor = Color(0xff34495e);
 }
 
 class AppConst {

@@ -39,7 +39,7 @@ class _HomeScreenForUserState extends State<HomeScreenForUser> {
     return Scaffold(
       backgroundColor: const Color(0xffedf2f6),
       body: SafeArea(
-        child: Provider.of<SandProvider>(context).favoriteSand.isNotEmpty
+        child: Provider.of<SandProvider>(context).featuredSand.isNotEmpty
             ? const HomeSandsWidget()
             : FutureBuilder(
                 future: _sandData,

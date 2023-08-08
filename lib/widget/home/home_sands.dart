@@ -118,20 +118,20 @@ class _HomeSandsWidgetState extends State<HomeSandsWidget> {
           //
           // Favourite
           //
-          searchQuery.isEmpty
-              ? const Padding(
-                  padding: EdgeInsets.only(left: 16.0, top: 20),
-                  child: Text(
-                    "Most Viewed",
-                    style: TextStyle(
-                      fontSize: 19,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                )
-              : Container(),
-          searchQuery.isEmpty ? const HomeFavoriteWidget() : Container(),
+          // searchQuery.isEmpty
+          //     ? const Padding(
+          //         padding: EdgeInsets.only(left: 16.0, top: 20),
+          //         child: Text(
+          //           "Most Viewed",
+          //           style: TextStyle(
+          //             fontSize: 19,
+          //             fontWeight: FontWeight.bold,
+          //             color: Colors.black,
+          //           ),
+          //         ),
+          //       )
+          //     : Container(),
+          // searchQuery.isEmpty ? const HomeFavoriteWidget() : Container(),
           //
           // Featured Properties
           //

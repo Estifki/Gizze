@@ -11,13 +11,13 @@ import '../model/user/sand_details.dart';
 import '../uitil/http_error.dart';
 
 class SandProvider with ChangeNotifier {
-  final List<Favorite> _favSand = [];
-  final List<Favorite> _sand = [];
+  // final List<HomeSandData> _favSand = [];
+  final List<HomeSandData> _sand = [];
   final List<SandData> _sandLocationData = [];
   final List<WishListData> _wishList = [];
 
-  List<Favorite> get favoriteSand => [..._favSand];
-  List<Favorite> get featuredSand => [..._sand];
+  // List<HomeSandData> get favoriteSand => [..._favSand];
+  List<HomeSandData> get featuredSand => [..._sand];
   List<SandData> get sandLocationData => [..._sandLocationData];
   List<WishListData> get wishListData => [..._wishList];
 
@@ -42,12 +42,12 @@ class SandProvider with ChangeNotifier {
       if (response.statusCode != 200) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
-        _favSand.clear();
+        // _favSand.clear();
         _sand.clear();
         final data = sandModelFromJson(response.body);
 
-        _favSand.addAll(data.data.favorite);
-        _sand.addAll(data.data.sands);
+        // _favSand.addAll(data.data.favorite);
+        _sand.addAll(data.data);
         notifyListeners();
       }
     } catch (e) {

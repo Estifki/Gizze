@@ -1,18 +1,11 @@
-import '../../../provider/location.dart';
 import '../../../provider/sand.dart';
 import 'add_sand.dart';
-import '../../../widget/home/adderss_price.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../const/const.dart';
 import '../../../provider/auth.dart';
 import '../../../uitil/shimmer/home.dart';
-import '../../../widget/home/appbar.dart';
-import '../../../widget/home/favorite.dart';
-import '../../../widget/home/featured.dart';
-import '../../../widget/home/home_sands.dart';
 
 class SandscreenForDriver extends StatefulWidget {
   const SandscreenForDriver({super.key});
@@ -40,7 +33,7 @@ class _SandscreenForDriverState extends State<SandscreenForDriver> {
     return Scaffold(
       backgroundColor: const Color(0xffedf2f6),
       body: SafeArea(
-        child: Provider.of<SandProvider>(context).favoriteSand.isNotEmpty
+        child: Provider.of<SandProvider>(context).featuredSand.isNotEmpty
             ? const DriverSandsWidget()
             : FutureBuilder(
                 future: _sandData,
