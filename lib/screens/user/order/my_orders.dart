@@ -1,4 +1,3 @@
-import '../../../const/const.dart';
 import '../../../provider/auth.dart';
 import '../../../provider/orders.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,8 @@ import '../../../provider/sand_location.dart';
 import '../../../widget/orders_user.dart';
 
 class MyOrdersScreen extends StatefulWidget {
+  const MyOrdersScreen({super.key});
+
   @override
   State<MyOrdersScreen> createState() => _MyOrdersScreenState();
 }
@@ -88,6 +89,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                               totalPrice:
                                   value.pendingOrderData[index].totalPrice,
                               amount: value.pendingOrderData[index].amount,
+                              orderStatus: value
+                                  .pendingOrderData[index].orderStatus.name,
                               pricePerCubic: value
                                   .pendingOrderData[index].sandLocation.price,
                               sandName: value.pendingOrderData[index]
@@ -114,6 +117,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                                   .pendingOrderData[index]
                                   .destinationLocation
                                   .locationName,
+                              date: value.pendingOrderData[index].createdAt,
                             );
                           },
                         );
@@ -142,6 +146,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                       orderNo: value.onTheWayOrderData[index].orderNo,
                       totalPrice: value.onTheWayOrderData[index].totalPrice,
                       amount: value.onTheWayOrderData[index].amount,
+                      orderStatus:
+                          value.onTheWayOrderData[index].orderStatus.name,
                       pricePerCubic:
                           value.onTheWayOrderData[index].sandLocation.price,
                       sandName:
@@ -166,6 +172,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                           .onTheWayOrderData[index].sandLocation.location.name,
                       destinationLocationName: value.onTheWayOrderData[index]
                           .destinationLocation.locationName,
+                      date: value.onTheWayOrderData[index].createdAt,
                     );
                   },
                 );
@@ -191,6 +198,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                       orderNo: value.deliveredOrderData[index].orderNo,
                       totalPrice: value.deliveredOrderData[index].totalPrice,
                       amount: value.deliveredOrderData[index].amount,
+                      orderStatus:
+                          value.deliveredOrderData[index].orderStatus.name,
                       pricePerCubic:
                           value.deliveredOrderData[index].sandLocation.price,
                       sandName: value
@@ -215,6 +224,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                           .deliveredOrderData[index].sandLocation.location.name,
                       destinationLocationName: value.deliveredOrderData[index]
                           .destinationLocation.locationName,
+                      date: value.deliveredOrderData[index].createdAt,
                     );
                   },
                 );
@@ -240,6 +250,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                       orderNo: value.rejectedOrderData[index].orderNo,
                       totalPrice: value.rejectedOrderData[index].totalPrice,
                       amount: value.rejectedOrderData[index].amount,
+                      orderStatus:
+                          value.rejectedOrderData[index].orderStatus.name,
                       pricePerCubic:
                           value.rejectedOrderData[index].sandLocation.price,
                       sandName:
@@ -263,6 +275,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                           .rejectedOrderData[index].sandLocation.location.name,
                       destinationLocationName: value.rejectedOrderData[index]
                           .destinationLocation.locationName,
+                      date: value.rejectedOrderData[index].createdAt,
                     );
                   },
                 );

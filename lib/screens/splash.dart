@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ashewa_d/screens/user/category.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
         } else {
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                  builder: (context) => const UserCustomBottomBar()),
+                  builder: (context) =>  CategoryScreen()),
               (route) => false);
         }
       }

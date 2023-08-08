@@ -159,7 +159,7 @@ class MySandWidget extends StatelessWidget {
                                     child: const Text("Update Sand",
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 16,
+                                            fontSize: 18,
                                             color: Colors.white),
                                         textAlign: TextAlign.center),
                                   ),

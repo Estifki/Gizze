@@ -2,7 +2,7 @@ import 'package:ashewa_d/const/const.dart';
 import 'package:flutter/material.dart';
 
 import '../../uitil/toast.dart';
-import 'home.dart';
+import 'bottom_bar.dart';
 
 class CategoryScreen extends StatelessWidget {
   CategoryScreen({super.key});
@@ -65,7 +65,7 @@ class CategoryScreen extends StatelessWidget {
                         backgroundColor: Colors.green);
                   } else {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const HomeScreenForUser(),
+                      builder: (context) => const UserCustomBottomBar(),
                     ));
                   }
                 },

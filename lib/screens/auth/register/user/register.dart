@@ -1,3 +1,4 @@
+import '../../../user/category.dart';
 import '../../../user/home.dart';
 import '../../../../uitil/toast.dart';
 import 'package:flutter/material.dart';
@@ -142,7 +143,7 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
                           text: const TextSpan(
                               text: "I agree to the ",
                               style:
-                                  TextStyle(fontSize: 16, color: Colors.black),
+                                  TextStyle(fontSize: 18, color: Colors.black),
                               children: [
                             TextSpan(
                                 text: "Term and Conditions",
@@ -217,8 +218,7 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
               backgroundColor: Colors.green,
               errorMessage: "User Registered Successfully");
           Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                  builder: (context) => const UserCustomBottomBar()),
+              MaterialPageRoute(builder: (context) => CategoryScreen()),
               (route) => false);
         });
       } on CustomHttpException catch (e) {

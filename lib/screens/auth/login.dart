@@ -1,5 +1,6 @@
 import '../../const/const.dart';
 import '../../provider/auth.dart';
+import '../user/category.dart';
 import 'register/user/phone.dart';
 import '../driver/bottom_bar_driver.dart';
 import '../user/home.dart';
@@ -148,7 +149,7 @@ class _SignInScreenForUserState extends State<SignInScreenForUser> {
                     child: const Text(
                       "Forgot Password",
                       style:
-                          TextStyle(fontSize: 16, color: AppColor.primaryColor),
+                          TextStyle(fontSize: 18, color: AppColor.primaryColor),
                     ),
                   ),
                 ],
@@ -165,7 +166,7 @@ class _SignInScreenForUserState extends State<SignInScreenForUser> {
                   child: const Text(
                     "Create An Account",
                     style:
-                        TextStyle(fontSize: 16, color: AppColor.primaryColor),
+                        TextStyle(fontSize: 18, color: AppColor.primaryColor),
                   ),
                 ))
           ]),
@@ -201,8 +202,7 @@ class _SignInScreenForUserState extends State<SignInScreenForUser> {
                 (route) => false);
           } else {
             Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                    builder: (context) => const UserCustomBottomBar()),
+                MaterialPageRoute(builder: (context) => CategoryScreen()),
                 (route) => false);
           }
         });

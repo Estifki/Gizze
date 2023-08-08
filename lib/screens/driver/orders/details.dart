@@ -82,7 +82,7 @@ class _MyOrdersDetailsScreenForDriverState
       appBar: AppBar(
         foregroundColor: Colors.black,
         centerTitle: true,
-        title: Text(widget.sandName, style: const TextStyle(fontSize: 16)),
+        title: Text(widget.sandName, style: const TextStyle(fontSize: 18)),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -100,30 +100,39 @@ class _MyOrdersDetailsScreenForDriverState
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Price /m²:  Br ${widget.pricePerCubic}",
-                        style: const TextStyle(fontSize: 14)),
+                    Text("Price:  Br ${widget.pricePerCubic}",
+                        style: const TextStyle(fontSize: 15.5)),
                     const SizedBox(height: 4),
-                    Text("Ordered amount: ${widget.amount} m²",
-                        style: const TextStyle(fontSize: 14)),
+                    Text("Ordered amount: ${widget.amount}",
+                        style: const TextStyle(fontSize: 15.5)),
                     const SizedBox(height: 4),
                     Text("Total Price:  Br ${widget.totalPrice}",
-                        style: const TextStyle(fontSize: 14)),
+                        style: const TextStyle(fontSize: 15.5)),
                   ],
                 )
               ],
             ),
             const SizedBox(height: 20),
-            const Text("Ordered User Info",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-            const SizedBox(height: 5),
-            Text("Name: ${widget.orderedUserName}",
-                style: const TextStyle(fontSize: 14)),
-            const SizedBox(height: 5),
-            Text("Phone: ${widget.orderedUserPhone}",
-                style: const TextStyle(fontSize: 14)),
-            const SizedBox(height: 10),
-            Text("${widget.sourceName} to ${widget.destinationName} ",
-                style: const TextStyle(fontSize: 14)),
+            widget.orderStatus != "Delivered"
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("Ordered User Info",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w600)),
+                      const SizedBox(height: 5),
+                      Text("Name: ${widget.orderedUserName}",
+                          style: const TextStyle(fontSize: 15.5)),
+                      const SizedBox(height: 5),
+                      Text("Phone: ${widget.orderedUserPhone}",
+                          style: const TextStyle(fontSize: 15.5)),
+                      const SizedBox(height: 10),
+                      Text("${widget.sourceName} to ${widget.destinationName} ",
+                          style: const TextStyle(fontSize: 15.5)),
+                    ],
+                  )
+                : Container(),
             const SizedBox(height: 20),
             Container(
               height: screenSize.height * 0.2,
@@ -187,7 +196,7 @@ class _MyOrdersDetailsScreenForDriverState
               child: const Center(
                   child: Text(
                 "View  Full-map",
-                style: TextStyle(fontSize: 17, color: AppColor.primaryColor),
+                style: TextStyle(fontSize: 18, color: AppColor.primaryColor),
               )),
             ),
             const SizedBox(height: 25),

@@ -60,7 +60,7 @@ class _UpdateMySandScreenState extends State<UpdateMySandScreen> {
         centerTitle: true,
         title: Text(
           widget.sandName,
-          style: const TextStyle(fontSize: 16),
+          style: const TextStyle(fontSize: 18),
         ),
       ),
       body: Padding(
@@ -101,7 +101,7 @@ class _UpdateMySandScreenState extends State<UpdateMySandScreen> {
             //             value: item.id,
             //             child: Text(
             //               item.name,
-            //               style: const TextStyle(fontSize: 16),
+            //               style: const TextStyle(fontSize: 18),
             //             ),
             //           ))
             //       .toList(),
@@ -247,7 +247,7 @@ class _UpdateMySandScreenState extends State<UpdateMySandScreen> {
                             "Updated Sand Location",
                             maxLines: 2,
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w600,
                                 overflow: TextOverflow.ellipsis),
                           )
@@ -255,7 +255,7 @@ class _UpdateMySandScreenState extends State<UpdateMySandScreen> {
                             "Pick Sand Location",
                             maxLines: 2,
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w600,
                                 overflow: TextOverflow.ellipsis),
                           ),
@@ -277,7 +277,7 @@ class _UpdateMySandScreenState extends State<UpdateMySandScreen> {
                       child: const Text("Update Sand",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                              fontSize: 18,
                               color: Colors.white),
                           textAlign: TextAlign.center),
                     ),
@@ -298,7 +298,7 @@ class _UpdateMySandScreenState extends State<UpdateMySandScreen> {
                       child: const Text("Delete Sand",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                              fontSize: 18,
                               color: Colors.white),
                           textAlign: TextAlign.center),
                     ),

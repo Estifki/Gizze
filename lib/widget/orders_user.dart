@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../const/const.dart';
 import '../screens/user/order/details.dart';
@@ -14,7 +15,7 @@ class MyOrdersWidgetUser extends StatelessWidget {
   final String totalPrice;
   final double sourceLat;
   final double sourceLong;
-
+  final String orderStatus;
   final double destinationLat;
   final double destinationLong;
 
@@ -25,7 +26,7 @@ class MyOrdersWidgetUser extends StatelessWidget {
   final String deliveryManName;
 
   final String deliveryManPhone;
-
+  final DateTime date;
   const MyOrdersWidgetUser(
       {super.key,
       required this.orderID,
@@ -42,7 +43,9 @@ class MyOrdersWidgetUser extends StatelessWidget {
       required this.destinationLat,
       required this.destinationLong,
       required this.deliveryManName,
-      required this.deliveryManPhone});
+      required this.deliveryManPhone,
+      required this.orderStatus,
+      required this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +57,7 @@ class MyOrdersWidgetUser extends StatelessWidget {
                   sandName: sandName,
                   sandImage: sandImage,
                   amount: amount,
+                  orderStatus: orderStatus,
                   sourceName: sourceLocationName,
                   destinationName: destinationLocationName,
                   pricePerCubic: pricePerCubic,
@@ -69,38 +73,52 @@ class MyOrdersWidgetUser extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Container(
-          height: 130,
+          height: 140,
           width: MediaQuery.of(context).size.width * 0.92,
           decoration: BoxDecoration(
-            color: Colors.grey.withOpacity(0.3),
+            color: AppColor.secondaryColor.withOpacity(0.5),
             border: Border.all(color: Colors.white),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
+            padding:
+                const EdgeInsets.only(left: 15, right: 15, top: 5, bottom: 5),
             child: Stack(alignment: Alignment.centerLeft, children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text("Order Code",
-                      style: TextStyle(fontWeight: FontWeight.w500)),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
                   const SizedBox(height: 2),
                   Text(
                     orderNo,
-                    style: const TextStyle(color: AppColor.primaryColor),
+                    style: const TextStyle(
+                        color: AppColor.primaryColor, fontSize: 16),
                   ),
                   const SizedBox(height: 10),
                   // Text"(DateFormat('MMMM dd, yyyy')
                   //     .format(DateTime.parse(orderData.createdAt.toString()))"),
                   const SizedBox(height: 10),
-                  Text(sandName),
+                  Text(
+                    sandName,
+                    style: const TextStyle(fontSize: 16),
+                  ),
                   // const Text(
                   //   "Sand Amount",
                   //   style: TextStyle(fontWeight: FontWeight.w500),
                   // ),
                   const SizedBox(height: 2),
-                  Text("$amount m²"),
+                  Text(
+                    DateFormat.yMMMEd().format(date),
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    "Amount: $amount",
+                    style: const TextStyle(fontSize: 16),
+                  ),
                 ],
               ),
               Positioned(
@@ -109,7 +127,7 @@ class MyOrdersWidgetUser extends StatelessWidget {
                     "Br $totalPrice",
                     style: const TextStyle(
                         color: AppColor.primaryColor,
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight: FontWeight.w600),
                   ))
             ]),

@@ -193,12 +193,12 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
                           ? Text(
                               "Upload Driver image",
                               style: TextStyle(
-                                  fontSize: 16, color: Colors.grey.shade700),
+                                  fontSize: 18, color: Colors.grey.shade700),
                             )
                           : Text(
                               profilePicName,
                               style: TextStyle(
-                                  fontSize: 16, color: Colors.grey.shade700),
+                                  fontSize: 18, color: Colors.grey.shade700),
                             )),
                 ),
               ),
@@ -232,12 +232,12 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
                           ? Text(
                               "Car Ownership Document",
                               style: TextStyle(
-                                  fontSize: 16, color: Colors.grey.shade700),
+                                  fontSize: 18, color: Colors.grey.shade700),
                             )
                           : Text(
                               carOwnershipDocName,
                               style: TextStyle(
-                                  fontSize: 16, color: Colors.grey.shade700),
+                                  fontSize: 18, color: Colors.grey.shade700),
                             )),
                 ),
               ),
@@ -271,12 +271,12 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
                           ? Text(
                               "Licence Doc",
                               style: TextStyle(
-                                  fontSize: 16, color: Colors.grey.shade700),
+                                  fontSize: 18, color: Colors.grey.shade700),
                             )
                           : Text(
                               licenceDocName,
                               style: TextStyle(
-                                  fontSize: 16, color: Colors.grey.shade700),
+                                  fontSize: 18, color: Colors.grey.shade700),
                             )),
                 ),
               ),
@@ -341,7 +341,7 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
                           text: const TextSpan(
                               text: "I agree to the ",
                               style:
-                                  TextStyle(fontSize: 16, color: Colors.black),
+                                  TextStyle(fontSize: 18, color: Colors.black),
                               children: [
                             TextSpan(
                                 text: "Term and Conditions",

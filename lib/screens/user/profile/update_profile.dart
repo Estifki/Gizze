@@ -34,7 +34,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       appBar: AppBar(
         foregroundColor: Colors.black,
         centerTitle: true,
-        title: const Text("Update Profile", style: TextStyle(fontSize: 16)),
+        title: const Text("Update Profile", style: TextStyle(fontSize: 18)),
       ),
       body: SingleChildScrollView(
         child: Padding(

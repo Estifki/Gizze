@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../const/const.dart';
 import '../../provider/auth.dart';
-import '../../provider/location.dart';
 import '../../provider/sand.dart';
 import '../../uitil/toast.dart';
-import '../driver/profile.dart';
 import 'order/add_order.dart';
 
 class SandDetailsScreen extends StatefulWidget {
@@ -325,6 +321,7 @@ class SandDetailsLocationsWidget extends StatelessWidget {
                                       .sand.description,
                                   maxLines: 2,
                                   style: const TextStyle(
+                                      fontSize: 15,
                                       overflow: TextOverflow.ellipsis,
                                       color: Colors.black),
                                 ),
@@ -335,6 +332,7 @@ class SandDetailsLocationsWidget extends StatelessWidget {
                                   "Br ${value.sandLocationData[0].sandLocations[index].price}",
                                   maxLines: 2,
                                   style: const TextStyle(
+                                      fontSize: 15,
                                       overflow: TextOverflow.ellipsis,
                                       color: Colors.black),
                                 ),

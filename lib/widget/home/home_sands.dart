@@ -321,7 +321,7 @@ class _HomeSandsWidgetState extends State<HomeSandsWidget> {
                                 "No sand found \n $searchQuery ",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.w500,
                                     color: Colors.grey),
                               ),

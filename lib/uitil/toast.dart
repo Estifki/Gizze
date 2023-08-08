@@ -15,7 +15,7 @@ showScaffoldMessanger(
         errorMessage,
         textAlign: TextAlign.center,
         style: const TextStyle(
-            fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+            fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
       ),
       duration: const Duration(milliseconds: 2000),
       padding: const EdgeInsets.all(16),

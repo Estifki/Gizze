@@ -9,6 +9,8 @@ import 'package:provider/provider.dart';
 import '../../../widget/orders_user.dart';
 
 class MyOrdersScreenForDriver extends StatefulWidget {
+  const MyOrdersScreenForDriver({super.key});
+
   @override
   State<MyOrdersScreenForDriver> createState() =>
       _MyOrdersScreenForDriverState();
@@ -85,38 +87,41 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                           padding: const EdgeInsets.only(top: 15),
                           itemBuilder: (context, index) {
                             return MyOrdersWidgetForDriver(
-                              orderID: value.pendingOrderData[index].id,
-                              orderStatus: value
-                                  .pendingOrderData[index].orderStatus.name,
-                              orderNo: value.pendingOrderData[index].orderNo,
-                              totalPrice:
-                                  value.pendingOrderData[index].totalPrice,
-                              amount: value.pendingOrderData[index].amount,
-                              pricePerCubic: value
-                                  .pendingOrderData[index].sandLocation.price,
-                              sandName: value.pendingOrderData[index]
-                                  .sandLocation.sand.name,
-                              sandImage: value.pendingOrderData[index]
-                                  .sandLocation.sand.sandImage,
-                              sourceLat: value.pendingOrderData[index]
-                                  .sandLocation.destinationLocation.latitude,
-                              sourceLong: value.pendingOrderData[index]
-                                  .sandLocation.destinationLocation.longitude,
-                              orderedUserName:
-                                  value.pendingOrderData[index].orderedBy.name,
-                              orderedUserPhone:
-                                  value.pendingOrderData[index].orderedBy.phone,
-                              destinationLat: value.pendingOrderData[index]
-                                  .destinationLocation.latitude,
-                              destinationLong: value.pendingOrderData[index]
-                                  .destinationLocation.latitude,
-                              sourceLocationName: value.pendingOrderData[index]
-                                  .sandLocation.location.name,
-                              destinationLocationName: value
-                                  .pendingOrderData[index]
-                                  .destinationLocation
-                                  .locationName,
-                            );
+                                orderID: value.pendingOrderData[index].id,
+                                orderStatus: value
+                                    .pendingOrderData[index].orderStatus.name,
+                                orderNo: value.pendingOrderData[index].orderNo,
+                                totalPrice:
+                                    value.pendingOrderData[index].totalPrice,
+                                amount: value.pendingOrderData[index].amount,
+                                pricePerCubic: value
+                                    .pendingOrderData[index].sandLocation.price,
+                                sandName: value.pendingOrderData[index]
+                                    .sandLocation.sand.name,
+                                sandImage: value.pendingOrderData[index]
+                                    .sandLocation.sand.sandImage,
+                                sourceLat: value.pendingOrderData[index]
+                                    .sandLocation.destinationLocation.latitude,
+                                sourceLong: value.pendingOrderData[index]
+                                    .sandLocation.destinationLocation.longitude,
+                                orderedUserName: value
+                                    .pendingOrderData[index].orderedBy.name,
+                                orderedUserPhone: value
+                                    .pendingOrderData[index].orderedBy.phone,
+                                destinationLat: value.pendingOrderData[index]
+                                    .destinationLocation.latitude,
+                                destinationLong: value.pendingOrderData[index]
+                                    .destinationLocation.latitude,
+                                sourceLocationName: value
+                                    .pendingOrderData[index]
+                                    .sandLocation
+                                    .location
+                                    .name,
+                                destinationLocationName: value
+                                    .pendingOrderData[index]
+                                    .destinationLocation
+                                    .locationName,
+                                date: value.pendingOrderData[index].createdAt);
                           },
                         );
                       },
@@ -140,35 +145,35 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                   padding: const EdgeInsets.only(top: 15),
                   itemBuilder: (context, index) {
                     return MyOrdersWidgetForDriver(
-                      orderID: value.onTheWayOrderData[index].id,
-                      orderStatus:
-                          value.onTheWayOrderData[index].orderStatus.name,
-                      orderNo: value.onTheWayOrderData[index].orderNo,
-                      totalPrice: value.onTheWayOrderData[index].totalPrice,
-                      amount: value.onTheWayOrderData[index].amount,
-                      pricePerCubic:
-                          value.onTheWayOrderData[index].sandLocation.price,
-                      sandName:
-                          value.onTheWayOrderData[index].sandLocation.sand.name,
-                      sandImage: value
-                          .onTheWayOrderData[index].sandLocation.sand.sandImage,
-                      sourceLat: value.onTheWayOrderData[index].sandLocation
-                          .destinationLocation.latitude,
-                      sourceLong: value.onTheWayOrderData[index].sandLocation
-                          .destinationLocation.longitude,
-                      orderedUserName:
-                          value.onTheWayOrderData[index].orderedBy.name,
-                      orderedUserPhone:
-                          value.onTheWayOrderData[index].orderedBy.phone,
-                      destinationLat: value.onTheWayOrderData[index]
-                          .destinationLocation.latitude,
-                      destinationLong: value.onTheWayOrderData[index]
-                          .destinationLocation.latitude,
-                      sourceLocationName: value
-                          .onTheWayOrderData[index].sandLocation.location.name,
-                      destinationLocationName: value.onTheWayOrderData[index]
-                          .destinationLocation.locationName,
-                    );
+                        orderID: value.onTheWayOrderData[index].id,
+                        orderStatus:
+                            value.onTheWayOrderData[index].orderStatus.name,
+                        orderNo: value.onTheWayOrderData[index].orderNo,
+                        totalPrice: value.onTheWayOrderData[index].totalPrice,
+                        amount: value.onTheWayOrderData[index].amount,
+                        pricePerCubic:
+                            value.onTheWayOrderData[index].sandLocation.price,
+                        sandName: value
+                            .onTheWayOrderData[index].sandLocation.sand.name,
+                        sandImage: value.onTheWayOrderData[index].sandLocation
+                            .sand.sandImage,
+                        sourceLat: value.onTheWayOrderData[index].sandLocation
+                            .destinationLocation.latitude,
+                        sourceLong: value.onTheWayOrderData[index].sandLocation
+                            .destinationLocation.longitude,
+                        orderedUserName:
+                            value.onTheWayOrderData[index].orderedBy.name,
+                        orderedUserPhone:
+                            value.onTheWayOrderData[index].orderedBy.phone,
+                        destinationLat: value.onTheWayOrderData[index]
+                            .destinationLocation.latitude,
+                        destinationLong: value.onTheWayOrderData[index]
+                            .destinationLocation.latitude,
+                        sourceLocationName: value.onTheWayOrderData[index]
+                            .sandLocation.location.name,
+                        destinationLocationName: value.onTheWayOrderData[index]
+                            .destinationLocation.locationName,
+                        date: value.onTheWayOrderData[index].createdAt);
                   },
                 );
               },
@@ -189,35 +194,35 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                   padding: const EdgeInsets.only(top: 15),
                   itemBuilder: (context, index) {
                     return MyOrdersWidgetForDriver(
-                      orderID: value.deliveredOrderData[index].id,
-                      orderStatus:
-                          value.deliveredOrderData[index].orderStatus.name,
-                      orderNo: value.deliveredOrderData[index].orderNo,
-                      totalPrice: value.deliveredOrderData[index].totalPrice,
-                      amount: value.deliveredOrderData[index].amount,
-                      pricePerCubic:
-                          value.deliveredOrderData[index].sandLocation.price,
-                      sandName: value
-                          .deliveredOrderData[index].sandLocation.sand.name,
-                      sandImage: value.deliveredOrderData[index].sandLocation
-                          .sand.sandImage,
-                      sourceLat: value.deliveredOrderData[index].sandLocation
-                          .destinationLocation.latitude,
-                      sourceLong: value.deliveredOrderData[index].sandLocation
-                          .destinationLocation.longitude,
-                      orderedUserName:
-                          value.deliveredOrderData[index].orderedBy.name,
-                      orderedUserPhone:
-                          value.deliveredOrderData[index].orderedBy.phone,
-                      destinationLat: value.deliveredOrderData[index]
-                          .destinationLocation.latitude,
-                      destinationLong: value.deliveredOrderData[index]
-                          .destinationLocation.latitude,
-                      sourceLocationName: value
-                          .deliveredOrderData[index].sandLocation.location.name,
-                      destinationLocationName: value.deliveredOrderData[index]
-                          .destinationLocation.locationName,
-                    );
+                        orderID: value.deliveredOrderData[index].id,
+                        orderStatus:
+                            value.deliveredOrderData[index].orderStatus.name,
+                        orderNo: value.deliveredOrderData[index].orderNo,
+                        totalPrice: value.deliveredOrderData[index].totalPrice,
+                        amount: value.deliveredOrderData[index].amount,
+                        pricePerCubic:
+                            value.deliveredOrderData[index].sandLocation.price,
+                        sandName: value
+                            .deliveredOrderData[index].sandLocation.sand.name,
+                        sandImage: value.deliveredOrderData[index].sandLocation
+                            .sand.sandImage,
+                        sourceLat: value.deliveredOrderData[index].sandLocation
+                            .destinationLocation.latitude,
+                        sourceLong: value.deliveredOrderData[index].sandLocation
+                            .destinationLocation.longitude,
+                        orderedUserName:
+                            value.deliveredOrderData[index].orderedBy.name,
+                        orderedUserPhone:
+                            value.deliveredOrderData[index].orderedBy.phone,
+                        destinationLat: value.deliveredOrderData[index]
+                            .destinationLocation.latitude,
+                        destinationLong: value.deliveredOrderData[index]
+                            .destinationLocation.latitude,
+                        sourceLocationName: value.deliveredOrderData[index]
+                            .sandLocation.location.name,
+                        destinationLocationName: value.deliveredOrderData[index]
+                            .destinationLocation.locationName,
+                        date: value.deliveredOrderData[index].createdAt);
                   },
                 );
               },
@@ -238,35 +243,35 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                   padding: const EdgeInsets.only(top: 15),
                   itemBuilder: (context, index) {
                     return MyOrdersWidgetForDriver(
-                      orderID: value.rejectedOrderData[index].id,
-                      orderStatus:
-                          value.rejectedOrderData[index].orderStatus.name,
-                      orderNo: value.rejectedOrderData[index].orderNo,
-                      totalPrice: value.rejectedOrderData[index].totalPrice,
-                      amount: value.rejectedOrderData[index].amount,
-                      pricePerCubic:
-                          value.rejectedOrderData[index].sandLocation.price,
-                      sandName:
-                          value.rejectedOrderData[index].sandLocation.sand.name,
-                      sandImage: value
-                          .rejectedOrderData[index].sandLocation.sand.sandImage,
-                      sourceLat: value.rejectedOrderData[index].sandLocation
-                          .destinationLocation.latitude,
-                      sourceLong: value.rejectedOrderData[index].sandLocation
-                          .destinationLocation.longitude,
-                      orderedUserName:
-                          value.rejectedOrderData[index].orderedBy.name,
-                      orderedUserPhone:
-                          value.rejectedOrderData[index].orderedBy.phone,
-                      destinationLat: value.rejectedOrderData[index]
-                          .destinationLocation.latitude,
-                      destinationLong: value.rejectedOrderData[index]
-                          .destinationLocation.latitude,
-                      sourceLocationName: value
-                          .rejectedOrderData[index].sandLocation.location.name,
-                      destinationLocationName: value.rejectedOrderData[index]
-                          .destinationLocation.locationName,
-                    );
+                        orderID: value.rejectedOrderData[index].id,
+                        orderStatus:
+                            value.rejectedOrderData[index].orderStatus.name,
+                        orderNo: value.rejectedOrderData[index].orderNo,
+                        totalPrice: value.rejectedOrderData[index].totalPrice,
+                        amount: value.rejectedOrderData[index].amount,
+                        pricePerCubic:
+                            value.rejectedOrderData[index].sandLocation.price,
+                        sandName: value
+                            .rejectedOrderData[index].sandLocation.sand.name,
+                        sandImage: value.rejectedOrderData[index].sandLocation
+                            .sand.sandImage,
+                        sourceLat: value.rejectedOrderData[index].sandLocation
+                            .destinationLocation.latitude,
+                        sourceLong: value.rejectedOrderData[index].sandLocation
+                            .destinationLocation.longitude,
+                        orderedUserName:
+                            value.rejectedOrderData[index].orderedBy.name,
+                        orderedUserPhone:
+                            value.rejectedOrderData[index].orderedBy.phone,
+                        destinationLat: value.rejectedOrderData[index]
+                            .destinationLocation.latitude,
+                        destinationLong: value.rejectedOrderData[index]
+                            .destinationLocation.latitude,
+                        sourceLocationName: value.rejectedOrderData[index]
+                            .sandLocation.location.name,
+                        destinationLocationName: value.rejectedOrderData[index]
+                            .destinationLocation.locationName,
+                        date: value.rejectedOrderData[index].createdAt);
                   },
                 );
               },

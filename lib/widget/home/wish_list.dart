@@ -62,7 +62,7 @@ class HomeWishListWidget extends StatelessWidget {
                                         style: const TextStyle(
                                             overflow: TextOverflow.ellipsis,
                                             color: Colors.black,
-                                            fontSize: 16,
+                                            fontSize: 18,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
@@ -79,7 +79,7 @@ class HomeWishListWidget extends StatelessWidget {
                                             .push(MaterialPageRoute(
                                           builder: (context) =>
                                               SandDetailsScreen(
-                                                  isFromWishList:  value
+                                                  isFromWishList: value
                                                       .wishListData[index].id,
                                                   sandID: value
                                                       .wishListData[index]
@@ -114,7 +114,7 @@ class HomeWishListWidget extends StatelessWidget {
                                             child: const Text("See More",
                                                 style: TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 16,
+                                                    fontSize: 18,
                                                     fontWeight:
                                                         FontWeight.bold),
                                                 textAlign: TextAlign.center),

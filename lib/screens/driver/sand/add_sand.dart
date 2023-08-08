@@ -46,7 +46,7 @@ class _AddSandScreenState extends State<AddSandScreen> {
         centerTitle: true,
         title: Text(
           widget.sandName,
-          style: const TextStyle(fontSize: 16),
+          style: const TextStyle(fontSize: 18),
         ),
       ),
       body: Padding(
@@ -87,7 +87,7 @@ class _AddSandScreenState extends State<AddSandScreen> {
             //             value: item.id,
             //             child: Text(
             //               item.name,
-            //               style: const TextStyle(fontSize: 16),
+            //               style: const TextStyle(fontSize: 18),
             //             ),
             //           ))
             //       .toList(),
@@ -234,7 +234,7 @@ class _AddSandScreenState extends State<AddSandScreen> {
                             "Updated Sand Location",
                             maxLines: 2,
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w600,
                                 overflow: TextOverflow.ellipsis),
                           )
@@ -242,7 +242,7 @@ class _AddSandScreenState extends State<AddSandScreen> {
                             "Pick Sand Location",
                             maxLines: 2,
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w600,
                                 overflow: TextOverflow.ellipsis),
                           ),
@@ -264,7 +264,7 @@ class _AddSandScreenState extends State<AddSandScreen> {
                       child: const Text("Add Sand",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                              fontSize: 18,
                               color: Colors.white),
                           textAlign: TextAlign.center),
                     ),

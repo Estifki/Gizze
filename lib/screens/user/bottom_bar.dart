@@ -1,11 +1,10 @@
 import 'dart:io';
 
-import 'package:ashewa_d/const/const.dart';
+import 'package:ashewa_d/screens/user/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/location.dart';
-import 'category.dart';
 import 'order/my_orders.dart';
 import 'profile/profile_user.dart';
 
@@ -18,7 +17,7 @@ class UserCustomBottomBar extends StatefulWidget {
 
 class _UserCustomBottomBarState extends State<UserCustomBottomBar> {
   final List<Widget> _screen = [
-    CategoryScreen(),
+    const HomeScreenForUser(),
     MyOrdersScreen(),
     const ProfileScreenForUser()
   ];
@@ -33,7 +32,7 @@ class _UserCustomBottomBarState extends State<UserCustomBottomBar> {
         bottomNavigationBar: SizedBox(
           height: Platform.isIOS ? null : 56,
           child: BottomNavigationBar(
-              selectedItemColor: AppColor.thirdColor,
+              // selectedItemColor: AppColor.thirdColor,
               // backgroundColor: AppColor.lightBackground,
               elevation: 0.0,
               type: BottomNavigationBarType.fixed,

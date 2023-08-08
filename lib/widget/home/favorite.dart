@@ -61,7 +61,7 @@
 //                                         style: const TextStyle(
 //                                             overflow: TextOverflow.ellipsis,
 //                                             color: Colors.black,
-//                                             fontSize: 16,
+//                                             fontSize: 18,
 //                                             fontWeight: FontWeight.bold),
 //                                       ),
 //                                     ),
@@ -106,7 +106,7 @@
 //                                             child: const Text("See More",
 //                                                 style: TextStyle(
 //                                                     color: Colors.white,
-//                                                     fontSize: 16,
+//                                                     fontSize: 18,
 //                                                     fontWeight:
 //                                                         FontWeight.bold),
 //                                                 textAlign: TextAlign.center),

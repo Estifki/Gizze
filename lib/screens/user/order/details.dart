@@ -1,7 +1,8 @@
-import '../../../const/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../../../const/const.dart';
 
 class MyOrdersDetailsScreen extends StatefulWidget {
   final String orderID;
@@ -20,7 +21,7 @@ class MyOrdersDetailsScreen extends StatefulWidget {
   final double destinationLong;
 
   final String deliveryManName;
-
+  final String orderStatus;
   final String deliveryManPhone;
 
   const MyOrdersDetailsScreen(
@@ -38,6 +39,7 @@ class MyOrdersDetailsScreen extends StatefulWidget {
       required this.destinationLat,
       required this.destinationLong,
       required this.deliveryManName,
+      required this.orderStatus,
       required this.deliveryManPhone});
 
   @override
@@ -75,7 +77,7 @@ class _MyOrdersDetailsScreenState extends State<MyOrdersDetailsScreen> {
       appBar: AppBar(
         foregroundColor: Colors.black,
         centerTitle: true,
-        title: Text(widget.sandName, style: const TextStyle(fontSize: 16)),
+        title: Text(widget.sandName, style: const TextStyle(fontSize: 18)),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -94,29 +96,38 @@ class _MyOrdersDetailsScreenState extends State<MyOrdersDetailsScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Price /m²:  Br ${widget.pricePerCubic}",
-                            style: const TextStyle(fontSize: 14)),
+                        Text("Price:  Br ${widget.pricePerCubic}",
+                            style: const TextStyle(fontSize: 15.5)),
                         const SizedBox(height: 4),
-                        Text("Ordered amount: ${widget.amount} m²",
-                            style: const TextStyle(fontSize: 14)),
+                        Text("Ordered amount: ${widget.amount}",
+                            style: const TextStyle(fontSize: 15.5)),
                         const SizedBox(height: 4),
                         Text("Total Price:  Br ${widget.totalPrice}",
-                            style: const TextStyle(fontSize: 14)),
+                            style: const TextStyle(fontSize: 15.5)),
                       ])
                 ]),
-            const SizedBox(height: 20),
-            const Text("Delivery Man Info",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-            const SizedBox(height: 5),
-            Text("Name: ${widget.deliveryManName}",
-                style: const TextStyle(fontSize: 14)),
-            const SizedBox(height: 5),
-            Text("Phone: ${widget.deliveryManPhone}",
-                style: const TextStyle(fontSize: 14)),
-            const SizedBox(height: 10),
-            Text("${widget.sourceName} to ${widget.destinationName} ",
-                style: const TextStyle(fontSize: 14)),
-            const SizedBox(height: 20),
+            widget.orderStatus != "Delivered"
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                        const SizedBox(height: 20),
+                        const Text("Delivery Man Info",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w600)),
+                        const SizedBox(height: 5),
+                        Text("Name: ${widget.deliveryManName}",
+                            style: const TextStyle(fontSize: 15.5)),
+                        const SizedBox(height: 5),
+                        Text("Phone: ${widget.deliveryManPhone}",
+                            style: const TextStyle(fontSize: 15.5)),
+                        const SizedBox(height: 10),
+                        Text(
+                            "${widget.sourceName} to ${widget.destinationName} ",
+                            style: const TextStyle(fontSize: 15.5)),
+                        const SizedBox(height: 20),
+                      ])
+                : Container(),
             Container(
               height: screenSize.height * 0.2,
               width: double.infinity,
@@ -179,7 +190,7 @@ class _MyOrdersDetailsScreenState extends State<MyOrdersDetailsScreen> {
               child: const Center(
                   child: Text(
                 "View  Full-map",
-                style: TextStyle(fontSize: 17, color: AppColor.primaryColor),
+                style: TextStyle(fontSize: 18, color: AppColor.primaryColor),
               )),
             ),
           ],

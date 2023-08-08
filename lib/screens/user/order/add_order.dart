@@ -64,7 +64,7 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
       appBar: AppBar(
         foregroundColor: Colors.black,
         centerTitle: true,
-        title: Text(widget.sandName, style: const TextStyle(fontSize: 16)),
+        title: Text(widget.sandName, style: const TextStyle(fontSize: 18)),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -84,11 +84,11 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Price /m²:  Br ${widget.pricePerCubic}",
-                          style: const TextStyle(fontSize: 14)),
+                      Text("Pric:  Br ${widget.pricePerCubic}",
+                          style: const TextStyle(fontSize: 15)),
                       const SizedBox(height: 4),
                       Text("Address:  ${widget.address}",
-                          style: const TextStyle(fontSize: 14)),
+                          style: const TextStyle(fontSize: 15)),
                       const SizedBox(height: 4),
                     ],
                   )
@@ -96,7 +96,7 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
               ),
               const SizedBox(height: 20),
               const Text("Sand Location",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
               const SizedBox(height: 15),
               Container(
                 height: screenSize.height * 0.2,
@@ -126,7 +126,7 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
               ),
               const SizedBox(height: 20),
               const Text("Delivery Info",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
               const SizedBox(height: 15),
               SignInTextFieldWidget(
                 hintText: "amount",
@@ -196,7 +196,7 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
                               "Update Delivery Location",
                               maxLines: 2,
                               style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.w600,
                                   overflow: TextOverflow.ellipsis),
                             )
@@ -204,7 +204,7 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
                               "Pick Delivery Location",
                               maxLines: 2,
                               style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.w600,
                                   overflow: TextOverflow.ellipsis),
                             ),

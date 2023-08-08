@@ -118,7 +118,7 @@
 //               },
 //               child: const Text(
 //                 "Already Have an Account",
-//                 style: TextStyle(fontSize: 16, color: AppColor.primaryColor),
+//                 style: TextStyle(fontSize: 18, color: AppColor.primaryColor),
 //               ),
 //             )
 //           ]),
