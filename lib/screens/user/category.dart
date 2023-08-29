@@ -7,7 +7,7 @@ import 'bottom_bar.dart';
 class CategoryScreen extends StatelessWidget {
   CategoryScreen({super.key});
 
-  List categoryList = [
+ final List categoryList = [
     {
       "name": "Sand",
       "status": "1",

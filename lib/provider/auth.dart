@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:ashewa_d/provider/location.dart';
-import 'package:provider/provider.dart';
+
 
 import '../const/const.dart';
 import '../model/profile.dart';
