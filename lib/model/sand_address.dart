@@ -43,12 +43,14 @@ class SandAddressModel {
 class SandAddressData {
   String id;
   String name;
+  Location location;
   DateTime createdAt;
   DateTime updatedAt;
 
   SandAddressData({
     required this.id,
     required this.name,
+    required this.location,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -57,6 +59,7 @@ class SandAddressData {
       SandAddressData(
         id: json["id"],
         name: json["name"],
+        location: Location.fromJson(json["location"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );
@@ -64,7 +67,28 @@ class SandAddressData {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+        "location": location.toJson(),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
+      };
+}
+
+class Location {
+  double latitude;
+  double longitude;
+
+  Location({
+    required this.latitude,
+    required this.longitude,
+  });
+
+  factory Location.fromJson(Map<String, dynamic> json) => Location(
+        latitude: json["latitude"]?.toDouble(),
+        longitude: json["longitude"]?.toDouble(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "latitude": latitude,
+        "longitude": longitude,
       };
 }

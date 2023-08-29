@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ashewa_d/provider/location.dart';
+import 'package:provider/provider.dart';
+
 import '../const/const.dart';
 import '../model/profile.dart';
 import '../uitil/http_error.dart';
@@ -210,6 +213,12 @@ class AuthProvider with ChangeNotifier {
       required city,
       required bank,
       required password,
+      required plateNumber,
+      required color,
+      required capacity,
+      required sandLocation,
+      required lat,
+      required long,
       required PlatformFile carOwnershipDocPath,
       required PlatformFile licenceDocPath,
       required PlatformFile profileImage}) async {
@@ -223,6 +232,14 @@ class AuthProvider with ChangeNotifier {
       request.fields['account_holder_name'] = accountholderName;
       request.fields['city'] = city;
       request.fields['bank_name'] = bank;
+      request.fields['plate_number'] = plateNumber;
+      request.fields['color'] = color;
+      request.fields['load_capacity'] = capacity;
+      request.fields["locationId"] = password;
+      request.fields["locationName"] = city;
+      request.fields["latitude"] = lat;
+      request.fields["longitude"] = long;
+
       request.fields['password'] = password;
       request.fields["confirm_password"] = password;
       // request.fields["carOwnershipDoc"] = carOwnershipDocPath.path!;

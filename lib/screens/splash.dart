@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 //
 import '../provider/auth.dart';
+import '../provider/location.dart';
 import 'driver/bottom_bar_driver.dart';
 import 'onboarding.dart';
 
@@ -24,6 +25,8 @@ class _SplashScreenState extends State<SplashScreen> {
       Provider.of<AuthProvider>(context, listen: false).getUserAndToken();
     });
     Timer(const Duration(seconds: 2), () {
+      
+    Provider.of<LocationProvider>(context, listen: false).getUserAddress();
       if (Provider.of<AuthProvider>(context, listen: false).userID ==
           null) {
         Navigator.of(context).pushReplacement(

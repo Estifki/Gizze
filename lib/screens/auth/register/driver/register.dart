@@ -1,4 +1,9 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import '../../../../provider/auth.dart';
+import '../../../../provider/location.dart';
+import '../../../../provider/sand_location.dart';
 import '../../../driver/bottom_bar_driver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,21 +24,23 @@ class RegisterScreenForDriver extends StatefulWidget {
 
 class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
   final _nameController = TextEditingController();
-
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-
   final _accountNameController = TextEditingController();
   final _accountnumberController = TextEditingController();
   final _bankNameController = TextEditingController();
-
-  // final _phoneController = TextEditingController();
-
+  final _plateNumberController = TextEditingController();
+  final _colorController = TextEditingController();
+  final _loadCapacityController = TextEditingController();
+  final _sandLocationController = TextEditingController();
   final _cityController = TextEditingController();
+
   bool _isLoading = false;
   bool checkBoxValue = false;
+
+  bool _isLocationPicked = false;
   PlatformFile? carOwnershipDocPath;
   PlatformFile? licenceDocPath;
   PlatformFile? profileImagePath;
@@ -54,6 +61,10 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
     _accountNameController.dispose();
     _accountnumberController.dispose();
     _bankNameController.dispose();
+    _plateNumberController.dispose();
+    _colorController.dispose();
+    _loadCapacityController.dispose();
+    _sandLocationController.dispose();
     super.dispose();
   }
 
@@ -62,6 +73,8 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
     Size screenSize = MediaQuery.of(context).size;
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.white));
+    // Provider.of<SandLocationProvider>(context).getSandAddress(
+    //     Provider.of<AuthProvider>(context, listen: false).token!);
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -302,6 +315,222 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
 
               const SizedBox(height: 15),
               //
+              //
+              //
+              CustomTextFieldWidget(
+                  hint: "Plate Number", controller: _accountNameController),
+              const SizedBox(height: 15),
+              //
+              //
+              //
+              CustomTextFieldWidget(
+                  hint: "Car Color", controller: _accountNameController),
+              const SizedBox(height: 15),
+              //
+              //
+              //
+              CustomTextFieldWidget(
+                  hint: "Load Capacity (M³)",
+                  controller: _accountNameController),
+              const SizedBox(height: 15),
+              //
+              //
+              //
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * 0.05),
+                child: DropdownButtonFormField2(
+                  isExpanded: true,
+                  decoration: InputDecoration(
+                    isDense: true,
+                    contentPadding: EdgeInsets.zero,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6.0),
+                    ),
+                  ),
+                  hint: const Text("Select Sand Address",
+                      style: TextStyle(fontSize: 17)),
+                  icon:
+                      const Icon(Icons.arrow_drop_down, color: Colors.black45),
+                  iconSize: 30,
+                  buttonHeight: 60,
+                  buttonPadding: const EdgeInsets.only(right: 10),
+                  dropdownDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  items: Provider.of<SandLocationProvider>(context)
+                      .sandAddressData
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item.id,
+                            child: Text(
+                              item.name,
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                          ))
+                      .toList(),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Sand Address Is Not Selected.';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    setState(() {
+                      _sandLocationController.text = value.toString();
+                    });
+                  },
+                ),
+              ),
+              const SizedBox(height: 15),
+              Padding(
+                padding: EdgeInsets.only(left: screenSize.width * 0.05),
+                child: GestureDetector(
+                  onTap: () => showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        actions: [
+                          GestureDetector(
+                            onTap: () => Navigator.of(context).pop(),
+                            child: Container(
+                                height: 34,
+                                width: 80,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(6.0)),
+                                child: const Text(
+                                  "Cancel",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          ),
+                          const SizedBox(width: 4),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _isLocationPicked = true;
+                              });
+                              Navigator.of(context).pop();
+                            },
+                            child: Container(
+                                height: 34,
+                                width: 80,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: AppColor.primaryColor,
+                                    borderRadius: BorderRadius.circular(6.0)),
+                                child: const Text(
+                                  "Pick",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          ),
+                        ],
+                        content: SizedBox(
+                          height: 250,
+                          child: GoogleMap(
+                            // mapType: MapType.satellite,
+                            myLocationButtonEnabled: true,
+                            indoorViewEnabled: true,
+                            // trafficEnabled: true,
+                            // liteModeEnabled: true,
+                            myLocationEnabled: false,
+                            initialCameraPosition: CameraPosition(
+                                target: LatLng(
+                                    Provider.of<LocationProvider>(context,
+                                            listen: false)
+                                        .userLat!,
+                                    Provider.of<LocationProvider>(context,
+                                            listen: false)
+                                        .userLong!),
+                                zoom: 8),
+                            markers: {
+                              Marker(
+                                  markerId: const MarkerId("source"),
+                                  position: LatLng(
+                                      Provider.of<LocationProvider>(context,
+                                              listen: false)
+                                          .userLat!,
+                                      Provider.of<LocationProvider>(context,
+                                              listen: false)
+                                          .userLong!)),
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  // onTap: () async {
+                  //   try {
+                  //     await showSimplePickerLocation(
+                  //       context: context,
+                  //       initZoom: 13,
+
+                  //       maxZoomLevel: 19.0,
+                  //       isDismissible: true,
+                  //       // title: "Pick Your address",
+                  //       textConfirmPicker: "Pick",
+                  //       textCancelPicker: "",
+                  //       initCurrentUserPosition: false,
+                  //       initPosition: GeoPoint(
+                  //           latitude: Provider.of<LocationProvider>(context,
+                  //                   listen: false)
+                  //               .userLat!,
+                  //           longitude: Provider.of<LocationProvider>(context,
+                  //                   listen: false)
+                  //               .userLong!),
+                  //     ).then((value) {
+                  //       lat = Provider.of<LocationProvider>(context, listen: false)
+                  //           .userLat!;
+                  //       long = Provider.of<LocationProvider>(context, listen: false)
+                  //           .userLong!;
+                  //       setState(() {
+                  //         locationPicked = true;
+                  //       });
+                  //     });
+                  //   } catch (e) {
+                  //     rethrow;
+                  //   }
+                  // },
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 35,
+                          width: 35,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.grey.withOpacity(0.2)),
+                          child: const Icon(Icons.location_pin,
+                              size: 22, color: AppColor.primaryColor),
+                        ),
+                        const SizedBox(width: 13),
+                        _isLocationPicked
+                            ? const Text(
+                                "Updated Location",
+                                maxLines: 2,
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    overflow: TextOverflow.ellipsis),
+                              )
+                            : const Text(
+                                "Pick Location",
+                                maxLines: 2,
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    overflow: TextOverflow.ellipsis),
+                              ),
+                      ]),
+                ),
+              ),
+              SizedBox(height: 15),
+              //
               //Password
               //
 
@@ -409,6 +638,14 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
     } else if (_bankNameController.text.isEmpty) {
       showScaffoldMessanger(
           context: context, errorMessage: "Invalid Bank Name");
+    } else if (_plateNumberController.text.isEmpty) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Invalid Plate Number");
+    } else if (_colorController.text.isEmpty) {
+      showScaffoldMessanger(context: context, errorMessage: "Invalid Color");
+    } else if (_loadCapacityController.text.isEmpty) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Invalid Load Capacity");
     } else if (_passwordController.text.length < 6) {
       showScaffoldMessanger(
           context: context, errorMessage: "Password must be at least 6 digit.");
@@ -437,6 +674,12 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
           name: _nameController.text,
           email: _emailController.text,
           password: _passwordController.text,
+          plateNumber: _plateNumberController.text,
+          color: _colorController.text,
+          capacity: _loadCapacityController.text,
+          sandLocation: _sandLocationController.text,
+          lat: Provider.of<LocationProvider>(context, listen: false).userLat,
+          long: Provider.of<LocationProvider>(context, listen: false).userLong,
         )
             .then((_) {
           setState(() {
