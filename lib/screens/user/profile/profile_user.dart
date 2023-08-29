@@ -1,9 +1,7 @@
 import 'update_password.dart';
 import 'update_profile.dart';
-import 'package:flutter/services.dart';
 
 import '../../../const/const.dart';
-import '../../driver/bottom_bar_driver.dart';
 import '../../splash.dart';
 import '../bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,7 +20,7 @@ class ProfileScreenForUser extends StatefulWidget {
 class _ProfileScreenForUserState extends State<ProfileScreenForUser> {
   late Future _myProfile;
 
-  bool _isInit = true;
+  final bool _isInit = true;
 
   @override
   void didChangeDependencies() {

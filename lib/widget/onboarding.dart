@@ -4,7 +4,7 @@ class CustomOnboardingWidget extends StatelessWidget {
   final String title;
   final String description;
   final String imageUrl;
-  CustomOnboardingWidget({
+  const CustomOnboardingWidget({
     super.key,
     required this.title,
     required this.description,

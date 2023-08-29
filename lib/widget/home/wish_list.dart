@@ -1,6 +1,5 @@
 import '../../provider/sand.dart';
 import '../../screens/user/sand_details.dart';
-import '../bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

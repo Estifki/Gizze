@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import '../provider/auth.dart';
 import 'driver/bottom_bar_driver.dart';
 import 'onboarding.dart';
-import 'user/bottom_bar.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

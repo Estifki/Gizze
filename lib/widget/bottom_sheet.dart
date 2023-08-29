@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../const/const.dart';
-import 'home/adderss_price.dart';
 
 showMoreSandInfo({
   required BuildContext context,

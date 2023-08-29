@@ -18,7 +18,7 @@ class UserCustomBottomBar extends StatefulWidget {
 class _UserCustomBottomBarState extends State<UserCustomBottomBar> {
   final List<Widget> _screen = [
     const HomeScreenForUser(),
-    MyOrdersScreen(),
+    const MyOrdersScreen(),
     const ProfileScreenForUser()
   ];
 

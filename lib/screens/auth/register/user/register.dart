@@ -1,11 +1,9 @@
 import '../../../user/category.dart';
-import '../../../user/home.dart';
 import '../../../../uitil/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../../user/bottom_bar.dart';
 import '/../../const/const.dart';
 import '../../../../provider/auth.dart';
 import '/../../uitil/http_error.dart';
@@ -90,7 +88,7 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
                   ),
                 ]),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               //
               //Full Name
               //

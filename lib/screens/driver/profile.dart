@@ -1,8 +1,6 @@
 import 'bottom_bar_driver.dart';
 import 'my_sand/my_sand.dart';
 import '../user/profile/update_password.dart';
-import '../user/profile/update_profile.dart';
-import 'package:flutter/services.dart';
 
 import '../../../const/const.dart';
 
@@ -23,7 +21,7 @@ class ProfileScreenForDriver extends StatefulWidget {
 class _ProfileScreenForDriverState extends State<ProfileScreenForDriver> {
   late Future _myProfile;
 
-  bool _isInit = true;
+  final bool _isInit = true;
 
   @override
   void didChangeDependencies() {

@@ -28,7 +28,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           child: Stack(alignment: Alignment.center, children: [
         PageView(
           controller: pageController,
-          children: [
+          children: const [
             CustomOnboardingWidget(
               title: "WELCOME",
               description:

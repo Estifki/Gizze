@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../../uitil/http_error.dart';
 import '../../../../uitil/toast.dart';
-import '../../login.dart';
 import '/../../const/const.dart';
 import '/../../widget/textfield.dart';
 import 'package:file_picker/file_picker.dart';

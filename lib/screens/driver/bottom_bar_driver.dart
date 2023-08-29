@@ -16,10 +16,10 @@ class DriverCustomBottomBar extends StatefulWidget {
 }
 
 class _DriverCustomBottomBarState extends State<DriverCustomBottomBar> {
-  List<Widget> _screen = [
-    MyOrdersScreenForDriver(),
-    SandscreenForDriver(),
-    ProfileScreenForDriver()
+  final List<Widget> _screen = [
+    const MyOrdersScreenForDriver(),
+    const SandscreenForDriver(),
+    const ProfileScreenForDriver()
   ];
 
   @override

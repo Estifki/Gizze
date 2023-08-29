@@ -5,9 +5,6 @@ import 'package:provider/provider.dart';
 
 import '../../const/const.dart';
 import '../../screens/user/sand_details.dart';
-import 'appbar.dart';
-import 'favorite.dart';
-import 'featured.dart';
 
 class HomeSandsWidget extends StatefulWidget {
   const HomeSandsWidget({super.key});

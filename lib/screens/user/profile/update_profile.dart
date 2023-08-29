@@ -50,7 +50,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   controller: _nameController,
                   suffixIcon: IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.abc, size: 0),
+                    icon: const Icon(Icons.abc, size: 0),
                   ),
                 ),
 
@@ -61,7 +61,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   controller: _emailController,
                   suffixIcon: IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.abc, size: 0),
+                    icon: const Icon(Icons.abc, size: 0),
                   ),
                 ),
 

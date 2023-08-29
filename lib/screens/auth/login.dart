@@ -1,9 +1,7 @@
 import '../../const/const.dart';
 import '../../provider/auth.dart';
 import '../user/category.dart';
-import 'register/user/phone.dart';
 import '../driver/bottom_bar_driver.dart';
-import '../user/home.dart';
 
 import '../../uitil/http_error.dart';
 import '../../uitil/toast.dart';
@@ -12,8 +10,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../widget/textfield.dart';
-import '../user/bottom_bar.dart';
-import 'forget/forget.dart';
 
 class SignInScreenForUser extends StatefulWidget {
   const SignInScreenForUser({super.key});

@@ -2,7 +2,6 @@
 //
 //     final ordersModel = ordersModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 OrdersModel ordersModelFromJson(String str) =>
