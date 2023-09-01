@@ -296,16 +296,16 @@ class _ProfileScreenForUserState extends State<ProfileScreenForUser> {
 }
 
 class SignInTextFieldWidget extends StatelessWidget {
-  String hintText;
+ final String hintText;
   // IconData prefixIcon;
-  IconButton? suffixIcon;
-  num screenNum;
-  VoidCallback? showPassword;
-  bool obscureText;
-  TextInputType textInputType;
-  TextEditingController controller;
+ final IconButton? suffixIcon;
+ final num screenNum;
+ final VoidCallback? showPassword;
+ final bool obscureText;
+ final TextInputType textInputType;
+ final TextEditingController controller;
 
-  SignInTextFieldWidget(
+  const SignInTextFieldWidget(
       {super.key,
       required this.hintText,
       // required this.prefixIcon,

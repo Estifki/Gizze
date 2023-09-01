@@ -529,7 +529,7 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
                       ]),
                 ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               //
               //Password
               //
