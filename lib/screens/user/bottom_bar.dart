@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:ashewa_d/screens/user/home.dart';
+import 'home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

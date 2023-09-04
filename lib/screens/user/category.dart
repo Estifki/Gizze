@@ -1,4 +1,4 @@
-import 'package:ashewa_d/const/const.dart';
+import '../../const/const.dart';
 import 'package:flutter/material.dart';
 
 import '../../uitil/toast.dart';
