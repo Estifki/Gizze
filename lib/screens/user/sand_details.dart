@@ -257,17 +257,16 @@ class SandDetailsLocationsWidget extends StatelessWidget {
             return GestureDetector(
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => OrderSandScreen(
-                    orderID: value.sandLocationData[0].sandLocations[index].id,
-                    sandName: value.sandLocationData[0].name,
-                    sandImage: value.sandLocationData[0].sandImage,
-                    address: value
-                        .sandLocationData[0].sandLocations[index].location.name,
-                    pricePerCubic:
-                        value.sandLocationData[0].sandLocations[index].price,
-                    lat: value.sandLocationData[0].sandLocations[index]
-                        .destinationLocation.latitude,
-                    long: value.sandLocationData[0].sandLocations[index]
-                        .destinationLocation.longitude),
+                  orderID: value.sandLocationData[0].sandLocations[index].id,
+                  sandName: value.sandLocationData[0].name,
+                  sandImage: value.sandLocationData[0].sandImage,
+                  address: value
+                      .sandLocationData[0].sandLocations[index].location.name,
+                  pricePerCubic:
+                      value.sandLocationData[0].sandLocations[index].price,
+                  lat: 7.3188801,
+                  long: 41.3618523,
+                ),
               )),
               child: Card(
                 margin: const EdgeInsets.only(top: 15.0, right: 15),

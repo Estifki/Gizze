@@ -156,7 +156,10 @@ class OrderProvider with ChangeNotifier {
           body: jsonEncode({
             "sandLocationId": sandID,
             "amount": amount,
+            "additionalPrice": 50,
             "totalPrice": price,
+            "prePayment": "0",
+            "transportPrice": 0,
             "locationName": locationName,
             "latitude": lat,
             "longitude": long
