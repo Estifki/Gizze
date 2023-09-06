@@ -22,8 +22,13 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+
+  final _corporatePhoneController = TextEditingController();
+  final _corporateAddressController = TextEditingController();
   bool _isLoading = false;
   bool checkBoxValue = false;
+
+  bool isCorporate = false;
 
   @override
   void dispose() {
@@ -31,7 +36,9 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
-    _phoneController.text;
+    _phoneController.dispose();
+    _corporatePhoneController.dispose();
+    _corporateAddressController.dispose();
     super.dispose();
   }
 
@@ -101,7 +108,51 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
               //
               CustomTextFieldWidget(
                   hint: "Email", controller: _emailController),
+
+              //
+              //Is Corporate
+              //
+              Padding(
+                padding:
+                    EdgeInsets.only(left: screenSize.width * 0.03, top: 15),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Checkbox(
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                          value: isCorporate,
+                          checkColor: Colors.white,
+                          activeColor: AppColor.primaryColor,
+                          onChanged: (_) {
+                            setState(() {
+                              isCorporate = !isCorporate;
+                            });
+                          }),
+                      RichText(
+                          text: const TextSpan(
+                        text: "Sign Up As Corporate",
+                        style: TextStyle(fontSize: 18, color: Colors.black),
+                      )),
+                    ]),
+              ),
               const SizedBox(height: 15),
+              if (isCorporate)
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomTextFieldWidget(
+                        hint: "Corporate Phone",
+                        controller: _corporatePhoneController),
+                    const SizedBox(height: 15),
+                    CustomTextFieldWidget(
+                        hint: "Corporate Address",
+                        controller: _corporateAddressController),
+                    const SizedBox(height: 15),
+                  ],
+                ),
               //
               //Password
               //
@@ -186,6 +237,12 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
     } else if (!RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
         .hasMatch(_emailController.text)) {
       showScaffoldMessanger(context: context, errorMessage: "Invalid email");
+    } else if (_corporatePhoneController.text.length < 10) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Invalid Corporate Phone");
+    } else if (_corporateAddressController.text.length < 2) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Invalid Corporate Phone");
     } else if (_passwordController.text.length < 6) {
       showScaffoldMessanger(
           context: context, errorMessage: "Password must be at least 6 digit.");
@@ -206,6 +263,9 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
                 phone: "251${_phoneController.text}",
                 name: _nameController.text,
                 email: _emailController.text,
+                isCorporate: isCorporate ? 1 : 0,
+                corporatePhone: _corporatePhoneController.text,
+                address: _corporateAddressController.text,
                 password: _passwordController.text)
             .then((_) {
           setState(() {

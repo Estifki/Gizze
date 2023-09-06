@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-
-
 import '../const/const.dart';
 import '../model/profile.dart';
 import '../uitil/http_error.dart';
@@ -169,7 +167,10 @@ class AuthProvider with ChangeNotifier {
       {required phone,
       required String name,
       required String email,
-      required String password}) async {
+      required String password,
+      required int isCorporate,
+      required String corporatePhone,
+      required String address}) async {
     String url = "${AppConst.appUrl}/register"; //finish-register
     try {
       http.Response response = await http.post(Uri.parse(url),
@@ -183,6 +184,11 @@ class AuthProvider with ChangeNotifier {
             "name": name,
             "email": email,
             "password": password,
+            "is_corporate": isCorporate,
+
+            if (corporatePhone != "") "corporate_phone": corporatePhone,
+
+            if (address != "") "address": {"City": address},
             // "confirm_password": confirmPassword
           }));
       print(response.body);

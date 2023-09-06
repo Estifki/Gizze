@@ -50,7 +50,7 @@ class ProfileData {
   String roleId;
   String profilePhotoUrl;
   Role role;
-  Deposit deposit;
+  Deposit? deposit;
 
   ProfileData({
     required this.id,
@@ -81,7 +81,9 @@ class ProfileData {
         roleId: json["role_id"],
         profilePhotoUrl: json["profile_photo_url"],
         role: Role.fromJson(json["role"]),
-        deposit: Deposit.fromJson(json["deposit"]),
+        deposit: json["deposit"] != null
+            ? Deposit.fromJson(json["deposit"])
+            : null, // Check if deposit is null and return null
       );
 
   Map<String, dynamic> toJson() => {
@@ -97,7 +99,7 @@ class ProfileData {
         "role_id": roleId,
         "profile_photo_url": profilePhotoUrl,
         "role": role.toJson(),
-        "deposit": deposit.toJson(),
+        "deposit": deposit!.toJson(),
       };
 }
 

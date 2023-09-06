@@ -318,20 +318,20 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
               //
               //
               CustomTextFieldWidget(
-                  hint: "Plate Number", controller: _accountNameController),
+                  hint: "Plate Number", controller: _plateNumberController),
               const SizedBox(height: 15),
               //
               //
               //
               CustomTextFieldWidget(
-                  hint: "Car Color", controller: _accountNameController),
+                  hint: "Car Color", controller: _colorController),
               const SizedBox(height: 15),
               //
               //
               //
               CustomTextFieldWidget(
                   hint: "Load Capacity (M³)",
-                  controller: _accountNameController),
+                  controller: _loadCapacityController),
               const SizedBox(height: 15),
               //
               //
