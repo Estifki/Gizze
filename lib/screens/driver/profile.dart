@@ -1,3 +1,6 @@
+import 'package:ashewa_d/model/user/payment.dart';
+import 'package:ashewa_d/screens/user/profile/payment_method.dart';
+
 import 'bottom_bar_driver.dart';
 import 'my_sand/my_sand.dart';
 import '../user/profile/update_password.dart';
@@ -100,6 +103,31 @@ class _ProfileScreenForDriverState extends State<ProfileScreenForDriver> {
                                   .replaceAll("251", "+251 "))
                             ],
                           ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      GestureDetector(
+                        onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => PaymentMethodScreen())),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 45,
+                              width: 45,
+                              margin: const EdgeInsets.only(left: 10),
+                              decoration: BoxDecoration(
+                                  color: AppColor.primaryColor.withOpacity(0.4),
+                                  shape: BoxShape.circle),
+                              child: const Icon(Icons.wallet, size: 22),
+                            ),
+                            const SizedBox(width: 20),
+                            const Text(
+                              "Deposit",
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -296,14 +324,14 @@ class _ProfileScreenForDriverState extends State<ProfileScreenForDriver> {
 }
 
 class SignInTextFieldWidget extends StatelessWidget {
- final String hintText;
+  final String hintText;
   // IconData prefixIcon;
- final IconButton? suffixIcon;
- final num screenNum;
- final VoidCallback? showPassword;
- final bool obscureText;
- final TextInputType textInputType;
- final TextEditingController controller;
+  final IconButton? suffixIcon;
+  final num screenNum;
+  final VoidCallback? showPassword;
+  final bool obscureText;
+  final TextInputType textInputType;
+  final TextEditingController controller;
 
   const SignInTextFieldWidget(
       {super.key,

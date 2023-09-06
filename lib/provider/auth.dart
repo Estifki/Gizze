@@ -229,6 +229,7 @@ class AuthProvider with ChangeNotifier {
       required PlatformFile profileImage}) async {
     final url = Uri.parse("${AppConst.appUrl}/register-driver");
     try {
+      print("object");
       final request = http.MultipartRequest('POST', url);
       request.fields['phone'] = phone;
       request.fields['name'] = name;
@@ -240,11 +241,10 @@ class AuthProvider with ChangeNotifier {
       request.fields['plate_number'] = plateNumber;
       request.fields['color'] = color;
       request.fields['load_capacity'] = capacity;
-      request.fields["locationId"] = password;
+      request.fields["locationId"] = sandLocation;
       request.fields["locationName"] = city;
       request.fields["latitude"] = lat;
       request.fields["longitude"] = long;
-
       request.fields['password'] = password;
       request.fields["confirm_password"] = password;
       // request.fields["carOwnershipDoc"] = carOwnershipDocPath.path!;
@@ -270,6 +270,7 @@ class AuthProvider with ChangeNotifier {
         //     'image', 'jpeg'), // Adjust the media type according to your file
       ));
 
+      print("object 22");
       final response = await request.send();
       print(response.statusCode);
 
