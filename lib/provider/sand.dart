@@ -121,7 +121,7 @@ class SandProvider with ChangeNotifier {
         : "${AppConst.appUrl}/wishlist/$wishListID";
 
     try {
-      http.Response response = isAdd
+      isAdd
           ? await http.post(Uri.parse(url),
               headers: {
                 "Content-Type": "application/json",

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:ashewa_d/screens/user/category.dart';
+import 'user/category.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
