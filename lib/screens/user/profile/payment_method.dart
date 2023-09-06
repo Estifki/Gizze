@@ -2,7 +2,6 @@ import 'package:ashewa_d/screens/user/profile/deposit.dart';
 import 'package:flutter/material.dart';
 
 import '../../../const/const.dart';
-import '../../../uitil/toast.dart';
 
 class PaymentMethodScreen extends StatelessWidget {
   PaymentMethodScreen({super.key});

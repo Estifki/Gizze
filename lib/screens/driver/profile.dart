@@ -1,4 +1,3 @@
-import 'package:ashewa_d/model/user/payment.dart';
 import 'package:ashewa_d/screens/user/profile/payment_method.dart';
 
 import 'bottom_bar_driver.dart';
