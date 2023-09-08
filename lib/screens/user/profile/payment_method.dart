@@ -1,4 +1,4 @@
-import 'package:ashewa_d/screens/user/profile/deposit.dart';
+import 'deposit.dart';
 import 'package:flutter/material.dart';
 
 import '../../../const/const.dart';

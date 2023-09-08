@@ -1,4 +1,4 @@
-import 'package:ashewa_d/screens/user/profile/payment_method.dart';
+import '../user/profile/payment_method.dart';
 
 import 'bottom_bar_driver.dart';
 import 'my_sand/my_sand.dart';

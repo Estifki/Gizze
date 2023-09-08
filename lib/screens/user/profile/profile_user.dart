@@ -1,4 +1,4 @@
-import 'package:ashewa_d/screens/user/profile/payment_method.dart';
+import 'payment_method.dart';
 
 import 'update_password.dart';
 import 'update_profile.dart';
