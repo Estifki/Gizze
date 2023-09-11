@@ -2,7 +2,6 @@
 //
 //     final mySandModel = mySandModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 MySandModel mySandModelFromJson(String str) =>
