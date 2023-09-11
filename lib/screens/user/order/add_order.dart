@@ -50,7 +50,7 @@ class OrderSandScreen extends StatefulWidget {
 }
 
 class _OrderSandScreenState extends State<OrderSandScreen> {
-  final _amountController = TextEditingController();
+  // final _amountController = TextEditingController();
   final _deliveryLocationNameController = TextEditingController();
   bool locationPicked = false;
   double? lat;
