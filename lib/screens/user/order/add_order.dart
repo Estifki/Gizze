@@ -127,15 +127,15 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
               const SizedBox(height: 20),
               const Text("Delivery Info",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-              const SizedBox(height: 15),
-              SignInTextFieldWidget(
-                hintText: "amount",
-                textInputType: TextInputType.number,
-                controller: _amountController,
-                suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.visibility_off, size: 0)),
-              ),
+              // const SizedBox(height: 15),
+              // SignInTextFieldWidget(
+              //   hintText: "amount",
+              //   textInputType: TextInputType.number,
+              //   controller: _amountController,
+              //   suffixIcon: IconButton(
+              //       onPressed: () {},
+              //       icon: const Icon(Icons.visibility_off, size: 0)),
+              // ),
               const SizedBox(height: 10),
               SignInTextFieldWidget(
                 hintText: "Delivery Location Name",
@@ -240,10 +240,11 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
   }
 
   validate() async {
-    if (_amountController.text.isEmpty) {
-      showScaffoldMessanger(
-          context: context, errorMessage: "Please Add Amount");
-    } else if (_deliveryLocationNameController.text.isEmpty) {
+    // if (_amountController.text.isEmpty) {
+    //   showScaffoldMessanger(
+    //       context: context, errorMessage: "Please Add Amount");
+    // } else
+    if (_deliveryLocationNameController.text.isEmpty) {
       showScaffoldMessanger(
           context: context, errorMessage: "Please Add Delivery Location");
     } else if (lat == null || long == null) {
@@ -259,10 +260,8 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
             .orderSand(
                 token: Provider.of<AuthProvider>(context, listen: false).token!,
                 sandID: widget.orderID,
-                price: (int.parse(_amountController.text) *
-                        int.parse(widget.pricePerCubic))
-                    .toString(),
-                amount: _amountController.text,
+                price: (5 * int.parse(widget.pricePerCubic)).toString(),
+                // amount: _amountController.text,
                 locationName: _deliveryLocationNameController.text,
                 lat: lat!.toDouble(),
                 long: long!.toDouble())
@@ -286,9 +285,8 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
         setState(() {
           _isLoading = false;
         });
-      } catch (_) {
-        showScaffoldMessanger(
-            context: context, errorMessage: "Please Try Again Later!");
+      } catch (e) {
+        showScaffoldMessanger(context: context, errorMessage: e.toString());
         setState(() {
           _isLoading = false;
         });

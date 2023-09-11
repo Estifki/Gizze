@@ -142,7 +142,7 @@ class OrderProvider with ChangeNotifier {
       {required String token,
       required String sandID,
       required String price,
-      required String amount,
+      // required String amount,
       required String locationName,
       required double lat,
       required double long}) async {
@@ -157,11 +157,11 @@ class OrderProvider with ChangeNotifier {
           },
           body: jsonEncode({
             "sandLocationId": sandID,
-            "amount": amount,
+            // "amount": amount,
             "additionalPrice": 50,
             "totalPrice": price,
             "prePaymentPrice": "0",
-            "transportPrice": 0,
+            "transportPrice": 25,
             "locationName": locationName,
             "latitude": lat,
             "longitude": long
