@@ -2,6 +2,7 @@
 //
 //     final mySandModel = mySandModelFromJson(jsonString);
 
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 MySandModel mySandModelFromJson(String str) =>
@@ -41,25 +42,25 @@ class MySandModel {
 class MySandData {
   String id;
   String sandId;
-  DestinationLocation destinationLocation;
+  String locationId;
+  String userId;
   String price;
+  String status;
   DateTime createdAt;
   DateTime updatedAt;
-  String userId;
-  dynamic locationId;
   Sand sand;
   Owner owner;
-  dynamic location;
+  DatumLocation location;
 
   MySandData({
     required this.id,
     required this.sandId,
-    required this.destinationLocation,
+    required this.locationId,
+    required this.userId,
     required this.price,
+    required this.status,
     required this.createdAt,
     required this.updatedAt,
-    required this.userId,
-    required this.locationId,
     required this.sand,
     required this.owner,
     required this.location,
@@ -68,44 +69,75 @@ class MySandData {
   factory MySandData.fromJson(Map<String, dynamic> json) => MySandData(
         id: json["id"],
         sandId: json["sand_id"],
-        destinationLocation:
-            DestinationLocation.fromJson(json["destination_location"]),
+        locationId: json["location_id"],
+        userId: json["user_id"],
         price: json["price"],
+        status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        userId: json["user_id"],
-        locationId: json["location_id"],
         sand: Sand.fromJson(json["sand"]),
         owner: Owner.fromJson(json["owner"]),
-        location: json["location"],
+        location: DatumLocation.fromJson(json["location"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "sand_id": sandId,
-        "destination_location": destinationLocation.toJson(),
+        "location_id": locationId,
+        "user_id": userId,
         "price": price,
+        "status": status,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "user_id": userId,
-        "location_id": locationId,
         "sand": sand.toJson(),
         "owner": owner.toJson(),
-        "location": location,
+        "location": location.toJson(),
       };
 }
 
-class DestinationLocation {
+class DatumLocation {
+  String id;
+  String name;
+  LocationLocation location;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  DatumLocation({
+    required this.id,
+    required this.name,
+    required this.location,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory DatumLocation.fromJson(Map<String, dynamic> json) => DatumLocation(
+        id: json["id"],
+        name: json["name"],
+        location: LocationLocation.fromJson(json["location"]),
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "location": location.toJson(),
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
+}
+
+class LocationLocation {
   double latitude;
   double longitude;
 
-  DestinationLocation({
+  LocationLocation({
     required this.latitude,
     required this.longitude,
   });
 
-  factory DestinationLocation.fromJson(Map<String, dynamic> json) =>
-      DestinationLocation(
+  factory LocationLocation.fromJson(Map<String, dynamic> json) =>
+      LocationLocation(
         latitude: json["latitude"]?.toDouble(),
         longitude: json["longitude"]?.toDouble(),
       );
@@ -129,6 +161,7 @@ class Owner {
   String roleId;
   String profilePhotoUrl;
   Role role;
+  dynamic deposit;
 
   Owner({
     required this.id,
@@ -143,6 +176,7 @@ class Owner {
     required this.roleId,
     required this.profilePhotoUrl,
     required this.role,
+    required this.deposit,
   });
 
   factory Owner.fromJson(Map<String, dynamic> json) => Owner(
@@ -158,6 +192,7 @@ class Owner {
         roleId: json["role_id"],
         profilePhotoUrl: json["profile_photo_url"],
         role: Role.fromJson(json["role"]),
+        deposit: json["deposit"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -173,6 +208,7 @@ class Owner {
         "role_id": roleId,
         "profile_photo_url": profilePhotoUrl,
         "role": role.toJson(),
+        "deposit": deposit,
       };
 }
 
@@ -201,6 +237,7 @@ class Sand {
   String name;
   String description;
   DateTime createdAt;
+  dynamic categoryId;
   String sandImage;
 
   Sand({
@@ -208,6 +245,7 @@ class Sand {
     required this.name,
     required this.description,
     required this.createdAt,
+    required this.categoryId,
     required this.sandImage,
   });
 
@@ -216,6 +254,7 @@ class Sand {
         name: json["name"],
         description: json["description"],
         createdAt: DateTime.parse(json["created_at"]),
+        categoryId: json["category_id"],
         sandImage: json["sand_image"],
       );
 
@@ -224,6 +263,7 @@ class Sand {
         "name": name,
         "description": description,
         "created_at": createdAt.toIso8601String(),
+        "category_id": categoryId,
         "sand_image": sandImage,
       };
 }

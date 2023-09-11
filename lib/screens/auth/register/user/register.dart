@@ -237,12 +237,14 @@ class _RegisterScreenForUserState extends State<RegisterScreenForUser> {
     } else if (!RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
         .hasMatch(_emailController.text)) {
       showScaffoldMessanger(context: context, errorMessage: "Invalid email");
-    } else if (_corporatePhoneController.text.length < 10) {
-      showScaffoldMessanger(
-          context: context, errorMessage: "Invalid Corporate Phone");
-    } else if (_corporateAddressController.text.length < 2) {
-      showScaffoldMessanger(
-          context: context, errorMessage: "Invalid Corporate Phone");
+    } else if (isCorporate) {
+      if (_corporatePhoneController.text.length < 10) {
+        showScaffoldMessanger(
+            context: context, errorMessage: "Invalid Corporate Phone");
+      } else if (_corporateAddressController.text.length < 2) {
+        showScaffoldMessanger(
+            context: context, errorMessage: "Invalid Corporate Phone");
+      }
     } else if (_passwordController.text.length < 6) {
       showScaffoldMessanger(
           context: context, errorMessage: "Password must be at least 6 digit.");

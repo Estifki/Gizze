@@ -28,8 +28,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
           Provider.of<AuthProvider>(context, listen: false).token!, false);
       Provider.of<OrderProvider>(context, listen: false).getDelivered(
           Provider.of<AuthProvider>(context, listen: false).token!, false);
-      Provider.of<OrderProvider>(context, listen: false).getRejected(
-          Provider.of<AuthProvider>(context, listen: false).token!, false);
+      // Provider.of<OrderProvider>(context, listen: false).getRejected(
+      //     Provider.of<AuthProvider>(context, listen: false).token!, false);
       isinit = false;
     }
     super.didChangeDependencies();
@@ -43,8 +43,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
         Provider.of<AuthProvider>(context, listen: false).token!, false);
     Provider.of<OrderProvider>(context, listen: false).getDelivered(
         Provider.of<AuthProvider>(context, listen: false).token!, false);
-    Provider.of<OrderProvider>(context, listen: false).getRejected(
-        Provider.of<AuthProvider>(context, listen: false).token!, false);
+    // Provider.of<OrderProvider>(context, listen: false).getRejected(
+    //     Provider.of<AuthProvider>(context, listen: false).token!, false);
     return DefaultTabController(
         length: 4,
         child: Scaffold(
@@ -86,9 +86,15 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                             return MyOrdersWidgetUser(
                               orderID: value.pendingOrderData[index].id,
                               orderNo: value.pendingOrderData[index].orderNo,
-                              totalPrice:
-                                  value.pendingOrderData[index].totalPrice,
-                              amount: value.pendingOrderData[index].amount,
+                              totalPrice: (int.parse(value
+                                          .pendingOrderData[index]
+                                          .sandLocation
+                                          .price) *
+                                      15)
+                                  .toString(),
+                              // value.pendingOrderData[index].totalPrice,
+                              amount: value.pendingOrderData[index].totalAmount
+                                  .toString(),
                               orderStatus: value
                                   .pendingOrderData[index].orderStatus.name,
                               pricePerCubic: value
@@ -98,9 +104,9 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                               sandImage: value.pendingOrderData[index]
                                   .sandLocation.sand.sandImage,
                               sourceLat: value.pendingOrderData[index]
-                                  .sandLocation.destinationLocation.latitude,
+                                  .destinationLocation.latitude,
                               sourceLong: value.pendingOrderData[index]
-                                  .sandLocation.destinationLocation.longitude,
+                                  .destinationLocation.longitude,
                               deliveryManName: value.pendingOrderData[index]
                                   .sandLocation.owner.name
                                   .toString(),
@@ -144,8 +150,13 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                     return MyOrdersWidgetUser(
                       orderID: value.onTheWayOrderData[index].id,
                       orderNo: value.onTheWayOrderData[index].orderNo,
-                      totalPrice: value.onTheWayOrderData[index].totalPrice,
-                      amount: value.onTheWayOrderData[index].amount,
+                      totalPrice: (int.parse(value.onTheWayOrderData[index]
+                                  .sandLocation.price) *
+                              15)
+                          .toString(),
+                      //value.onTheWayOrderData[index].totalPrice,
+                      amount:
+                          value.onTheWayOrderData[index].totalAmount.toString(),
                       orderStatus:
                           value.onTheWayOrderData[index].orderStatus.name,
                       pricePerCubic:
@@ -154,9 +165,9 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                           value.onTheWayOrderData[index].sandLocation.sand.name,
                       sandImage: value
                           .onTheWayOrderData[index].sandLocation.sand.sandImage,
-                      sourceLat: value.onTheWayOrderData[index].sandLocation
+                      sourceLat: value.onTheWayOrderData[index]
                           .destinationLocation.latitude,
-                      sourceLong: value.onTheWayOrderData[index].sandLocation
+                      sourceLong: value.onTheWayOrderData[index]
                           .destinationLocation.longitude,
                       deliveryManName: value
                           .onTheWayOrderData[index].sandLocation.owner.name
@@ -196,8 +207,12 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                     return MyOrdersWidgetUser(
                       orderID: value.deliveredOrderData[index].id,
                       orderNo: value.deliveredOrderData[index].orderNo,
-                      totalPrice: value.deliveredOrderData[index].totalPrice,
-                      amount: value.deliveredOrderData[index].amount,
+                      totalPrice: (int.parse(value.deliveredOrderData[index]
+                                  .sandLocation.price) *
+                              15)
+                          .toString(),
+                      amount: value.deliveredOrderData[index].totalAmount
+                          .toString(),
                       orderStatus:
                           value.deliveredOrderData[index].orderStatus.name,
                       pricePerCubic:
@@ -206,9 +221,9 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                           .deliveredOrderData[index].sandLocation.sand.name,
                       sandImage: value.deliveredOrderData[index].sandLocation
                           .sand.sandImage,
-                      sourceLat: value.deliveredOrderData[index].sandLocation
+                      sourceLat: value.deliveredOrderData[index]
                           .destinationLocation.latitude,
-                      sourceLong: value.deliveredOrderData[index].sandLocation
+                      sourceLong: value.deliveredOrderData[index]
                           .destinationLocation.longitude,
                       deliveryManName: value
                           .deliveredOrderData[index].sandLocation.owner.name
@@ -238,7 +253,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
             Consumer<OrderProvider>(
               builder: (context, value, _) {
                 if (value.rejectedOrderData.isEmpty) {
-                  return const Center(child: Text("No On The Way Delivery"));
+                  return const Center(child: Text("No Rejected Delivery"));
                 }
                 return ListView.builder(
                   shrinkWrap: true,
@@ -248,8 +263,12 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                     return MyOrdersWidgetUser(
                       orderID: value.rejectedOrderData[index].id,
                       orderNo: value.rejectedOrderData[index].orderNo,
-                      totalPrice: value.rejectedOrderData[index].totalPrice,
-                      amount: value.rejectedOrderData[index].amount,
+                      totalPrice: (int.parse(value.rejectedOrderData[index]
+                                  .sandLocation.price) *
+                              15)
+                          .toString(),
+                      amount:
+                          value.rejectedOrderData[index].totalAmount.toString(),
                       orderStatus:
                           value.rejectedOrderData[index].orderStatus.name,
                       pricePerCubic:
@@ -258,9 +277,9 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                           value.rejectedOrderData[index].sandLocation.sand.name,
                       sandImage: value
                           .rejectedOrderData[index].sandLocation.sand.sandImage,
-                      sourceLat: value.rejectedOrderData[index].sandLocation
+                      sourceLat: value.rejectedOrderData[index]
                           .destinationLocation.latitude,
-                      sourceLong: value.rejectedOrderData[index].sandLocation
+                      sourceLong: value.rejectedOrderData[index]
                           .destinationLocation.longitude,
                       deliveryManName: value
                           .rejectedOrderData[index].sandLocation.owner.name,
