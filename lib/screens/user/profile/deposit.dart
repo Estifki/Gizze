@@ -1,4 +1,7 @@
+import 'package:ashewa_d/provider/auth.dart';
+import 'package:ashewa_d/provider/payment.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../const/const.dart';
 import '../../../uitil/http_error.dart';
@@ -6,8 +9,9 @@ import '../../../uitil/toast.dart';
 import '../../../widget/textfield.dart';
 
 class DepositScreen extends StatefulWidget {
+  final String id;
   final String name;
-  const DepositScreen({super.key, required this.name});
+  const DepositScreen({super.key, required this.name, required this.id});
 
   @override
   State<DepositScreen> createState() => _DepositScreenState();
@@ -122,10 +126,16 @@ class _DepositScreenState extends State<DepositScreen> {
         setState(() {
           _isLoading = true;
         });
-        Future.delayed(const Duration(seconds: 3)).then((_) {
-          setState(() {
-            _isLoading = false;
-          });
+        Provider.of<PaymentProvider>(context, listen: false)
+            .addDeposit(
+                context: context,
+                token: Provider.of<AuthProvider>(context, listen: false).token!,
+                accountId: widget.id,
+                amount: _depositAmountController.text,
+                accountHolder: _accountNameController.text,
+                accountNumber: _accountnumberController.text,
+                referenceNumber: _referenceController.text)
+            .then((value) {
           showScaffoldMessanger(
               context: context,
               backgroundColor: Colors.green,
@@ -141,8 +151,8 @@ class _DepositScreenState extends State<DepositScreen> {
         setState(() {
           _isLoading = false;
         });
-        showScaffoldMessanger(
-            context: context, errorMessage: "Please Try Again Later");
+        print(e.toString());
+        // showScaffoldMessanger(context: context, errorMessage: e.toString());
       }
     }
   }

@@ -106,15 +106,9 @@ class _ProfileScreenForDriverState extends State<ProfileScreenForDriver> {
                       ),
                       const SizedBox(height: 20),
                       GestureDetector(
-                        onTap: () =>
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => PaymentMethodScreen(
-                                      remainingAmount:
-                                          value.profileData[0].deposit == null
-                                              ? "null"
-                                              : value.profileData[0].deposit!
-                                                  .amount,
-                                    ))),
+                        onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => PaymentMethodScreen())),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,

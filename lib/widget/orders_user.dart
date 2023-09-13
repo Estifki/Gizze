@@ -114,10 +114,10 @@ class MyOrdersWidgetUser extends StatelessWidget {
                     style: const TextStyle(fontSize: 15.5),
                   ),
                   const SizedBox(height: 2),
-                  Text(
-                    "Amount: $amount",
-                    style: const TextStyle(fontSize: 15.5),
-                  ),
+                  // Text(
+                  //   "Amount: $amount",
+                  //   style: const TextStyle(fontSize: 15.5),
+                  // ),
                 ],
               ),
               Positioned(

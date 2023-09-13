@@ -14,6 +14,8 @@ class AuthProvider with ChangeNotifier {
   String? userID;
   String? role;
 
+  String amount = "";
+
   final List<ProfileData> _profileData = [];
 
   List<ProfileData> get profileData => [..._profileData];
@@ -312,6 +314,10 @@ class AuthProvider with ChangeNotifier {
         _profileData.clear();
         final data = profileModelFromJson(response.body);
         _profileData.addAll([data.data]);
+        amount = _profileData[0].deposit == null
+            ? "null"
+            : _profileData[0].deposit!.amount;
+        notifyListeners();
       }
     } catch (e) {
       rethrow;

@@ -1,3 +1,6 @@
+import 'package:ashewa_d/provider/auth.dart';
+import 'package:provider/provider.dart';
+
 import '../../../uitil/toast.dart';
 import 'deposit.dart';
 import 'package:flutter/material.dart';
@@ -5,8 +8,8 @@ import 'package:flutter/material.dart';
 import '../../../const/const.dart';
 
 class PaymentMethodScreen extends StatelessWidget {
-  final String remainingAmount;
-  PaymentMethodScreen({super.key, required this.remainingAmount});
+  // final String remainingAmount;
+  PaymentMethodScreen({super.key});
 
   final List categoryList = [
     {
@@ -40,13 +43,8 @@ class PaymentMethodScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            remainingAmount != "null"
+            Provider.of<AuthProvider>(context).amount != "null"
                 ? Container(
-                    decoration: BoxDecoration(
-                        color: AppColor.thirdColor,
-                        borderRadius: BorderRadius.circular(10)),
-                  )
-                : Container(
                     height: 100,
                     width: screenSize.width,
                     margin: const EdgeInsets.symmetric(
@@ -74,18 +72,20 @@ class PaymentMethodScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("Your Current Balance is"),
+                            const Text("Your Current Balance"),
                             const SizedBox(
                               height: 5,
                             ),
                             Text(
-                              remainingAmount,
+                              Provider.of<AuthProvider>(context, listen: false)
+                                  .amount,
                               style: const TextStyle(
-                                  fontSize: 16, color: AppColor.primaryColor),
+                                  fontSize: 16.5, color: AppColor.primaryColor),
                             )
                           ]),
                     ),
-                  ),
+                  )
+                : Container(),
 
             //
             //
@@ -117,8 +117,8 @@ class PaymentMethodScreen extends StatelessWidget {
                       } else {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => DepositScreen(
-                            name: categoryList[index]["name"],
-                          ),
+                              name: categoryList[index]["name"],
+                              id: categoryList[index]["id"]),
                         ));
                       }
                     },
