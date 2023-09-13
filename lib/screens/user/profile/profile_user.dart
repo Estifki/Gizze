@@ -105,10 +105,15 @@ class _ProfileScreenForUserState extends State<ProfileScreenForUser> {
                       ),
                       const SizedBox(height: 20),
                       GestureDetector(
-                        onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                     PaymentMethodScreen())),
+                        onTap: () =>
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => PaymentMethodScreen(
+                                      remainingAmount:
+                                          value.profileData[0].deposit == null
+                                              ? "null"
+                                              : value.profileData[0].deposit!
+                                                  .amount,
+                                    ))),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,

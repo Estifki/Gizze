@@ -86,12 +86,15 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                             return MyOrdersWidgetUser(
                               orderID: value.pendingOrderData[index].id,
                               orderNo: value.pendingOrderData[index].orderNo,
-                              totalPrice: (int.parse(value
-                                          .pendingOrderData[index]
-                                          .sandLocation
-                                          .price) *
-                                      15)
+                              totalPrice: value
+                                  .pendingOrderData[index].totalAmount
                                   .toString(),
+                              // totalPrice: (int.parse(value
+                              //             .pendingOrderData[index]
+                              //             .sandLocation
+                              //             .price) *
+                              //         15)
+                              //     .toString(),
                               // value.pendingOrderData[index].totalPrice,
                               amount: value.pendingOrderData[index].totalAmount
                                   .toString(),
@@ -150,10 +153,12 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                     return MyOrdersWidgetUser(
                       orderID: value.onTheWayOrderData[index].id,
                       orderNo: value.onTheWayOrderData[index].orderNo,
-                      totalPrice: (int.parse(value.onTheWayOrderData[index]
-                                  .sandLocation.price) *
-                              15)
-                          .toString(),
+                      totalPrice:
+                          value.onTheWayOrderData[index].totalAmount.toString(),
+                      // totalPrice: (int.parse(value.onTheWayOrderData[index]
+                      //             .sandLocation.price) *
+                      //         15)
+                      //     .toString(),
                       //value.onTheWayOrderData[index].totalPrice,
                       amount:
                           value.onTheWayOrderData[index].totalAmount.toString(),
@@ -207,10 +212,12 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                     return MyOrdersWidgetUser(
                       orderID: value.deliveredOrderData[index].id,
                       orderNo: value.deliveredOrderData[index].orderNo,
-                      totalPrice: (int.parse(value.deliveredOrderData[index]
-                                  .sandLocation.price) *
-                              15)
+                      totalPrice: value.deliveredOrderData[index].totalAmount
                           .toString(),
+                      // totalPrice: (int.parse(value.deliveredOrderData[index]
+                      //             .sandLocation.price) *
+                      //         15)
+                      //     .toString(),
                       amount: value.deliveredOrderData[index].totalAmount
                           .toString(),
                       orderStatus:
@@ -263,10 +270,12 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                     return MyOrdersWidgetUser(
                       orderID: value.rejectedOrderData[index].id,
                       orderNo: value.rejectedOrderData[index].orderNo,
-                      totalPrice: (int.parse(value.rejectedOrderData[index]
-                                  .sandLocation.price) *
-                              15)
-                          .toString(),
+                      totalPrice:
+                          value.rejectedOrderData[index].totalAmount.toString(),
+                      // totalPrice: (int.parse(value.rejectedOrderData[index]
+                      //             .sandLocation.price) *
+                      //         15)
+                      //     .toString(),
                       amount:
                           value.rejectedOrderData[index].totalAmount.toString(),
                       orderStatus:

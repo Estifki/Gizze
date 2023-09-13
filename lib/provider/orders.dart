@@ -160,7 +160,7 @@ class OrderProvider with ChangeNotifier {
             // "amount": amount,
             "additionalPrice": 50,
             "totalPrice": price,
-            "prePaymentPrice": "0",
+            "prePaymentPrice": 150,
             "transportPrice": 25,
             "locationName": locationName,
             "latitude": lat,
