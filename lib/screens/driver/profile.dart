@@ -67,7 +67,7 @@ class _ProfileScreenForDriverState extends State<ProfileScreenForDriver> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: screenSize.height * 0.45,
+                        height: screenSize.height * 0.38,
                         width: screenSize.width,
                         color: Colors.grey.withOpacity(0.3),
                         child: Padding(
