@@ -54,7 +54,7 @@ class OrderData {
   String orderStatusId;
   int totalAmount;
   OrderStatus orderStatus;
-  SandLocation sandLocation;
+  SandLocation? sandLocation;
   dynamic acceptedBy;
   OrderedBy orderedBy;
 
@@ -96,7 +96,9 @@ class OrderData {
         orderStatusId: json["order_status_id"],
         totalAmount: json["total_amount"],
         orderStatus: OrderStatus.fromJson(json["order_status"]),
-        sandLocation: SandLocation.fromJson(json["sand_location"]),
+        sandLocation: json["sand_location"] != null
+            ? SandLocation.fromJson(json["sand_location"])
+            : null,
         acceptedBy: json["accepted_by"],
         orderedBy: OrderedBy.fromJson(json["ordered_by"]),
       );
@@ -117,7 +119,7 @@ class OrderData {
         "order_status_id": orderStatusId,
         "total_amount": totalAmount,
         "order_status": orderStatus.toJson(),
-        "sand_location": sandLocation.toJson(),
+        "sand_location": sandLocation!.toJson(),
         "accepted_by": acceptedBy,
         "ordered_by": orderedBy.toJson(),
       };
@@ -153,14 +155,14 @@ class OrderStatus {
   String name;
   DateTime createdAt;
   DateTime updatedAt;
-  // Location location;
+  Location? location;
 
   OrderStatus({
     required this.id,
     required this.name,
     required this.createdAt,
     required this.updatedAt,
-    // required this.location,
+    required this.location,
   });
 
   factory OrderStatus.fromJson(Map<String, dynamic> json) => OrderStatus(
@@ -168,7 +170,9 @@ class OrderStatus {
         name: json["name"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        // location: Location.fromJson(json["location"]),
+        location: json["location"] != null
+            ? Location.fromJson(json["location"])
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -176,7 +180,7 @@ class OrderStatus {
         "name": name,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        // "location": location.toJson(),
+        "location": location!.toJson(),
       };
 }
 
@@ -213,7 +217,7 @@ class OrderedBy {
   String roleId;
   String profilePhotoUrl;
   Role role;
-  dynamic deposit;
+  Deposit deposit;
 
   OrderedBy({
     required this.id,
@@ -244,7 +248,7 @@ class OrderedBy {
         roleId: json["role_id"],
         profilePhotoUrl: json["profile_photo_url"],
         role: Role.fromJson(json["role"]),
-        deposit: json["deposit"],
+        deposit: Deposit.fromJson(json["deposit"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -260,7 +264,7 @@ class OrderedBy {
         "role_id": roleId,
         "profile_photo_url": profilePhotoUrl,
         "role": role.toJson(),
-        "deposit": deposit,
+        "deposit": deposit.toJson(),
       };
 }
 

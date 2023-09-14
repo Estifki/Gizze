@@ -88,7 +88,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                               orderNo: value.pendingOrderData[index].orderNo,
                               totalPrice: (int.parse(value
                                           .pendingOrderData[index]
-                                          .sandLocation
+                                          .sandLocation!
                                           .price) *
                                       15)
                                   .toString(),
@@ -98,27 +98,27 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                               orderStatus: value
                                   .pendingOrderData[index].orderStatus.name,
                               pricePerCubic: value
-                                  .pendingOrderData[index].sandLocation.price,
+                                  .pendingOrderData[index].sandLocation!.price,
                               sandName: value.pendingOrderData[index]
-                                  .sandLocation.sand.name,
+                                  .sandLocation!.sand.name,
                               sandImage: value.pendingOrderData[index]
-                                  .sandLocation.sand.sandImage,
+                                  .sandLocation!.sand.sandImage,
                               sourceLat: value.pendingOrderData[index]
                                   .destinationLocation.latitude,
                               sourceLong: value.pendingOrderData[index]
                                   .destinationLocation.longitude,
                               deliveryManName: value.pendingOrderData[index]
-                                  .sandLocation.owner.name
+                                  .sandLocation!.owner.name
                                   .toString(),
                               deliveryManPhone: value.pendingOrderData[index]
-                                  .sandLocation.owner.phone
+                                  .sandLocation!.owner.phone
                                   .toString(),
                               destinationLat: value.pendingOrderData[index]
                                   .destinationLocation.latitude,
                               destinationLong: value.pendingOrderData[index]
                                   .destinationLocation.latitude,
                               sourceLocationName: value.pendingOrderData[index]
-                                  .sandLocation.location.name,
+                                  .sandLocation!.location.name,
                               destinationLocationName: value
                                   .pendingOrderData[index]
                                   .destinationLocation
@@ -151,7 +151,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                       orderID: value.onTheWayOrderData[index].id,
                       orderNo: value.onTheWayOrderData[index].orderNo,
                       totalPrice: (int.parse(value.onTheWayOrderData[index]
-                                  .sandLocation.price) *
+                                  .sandLocation!.price) *
                               15)
                           .toString(),
                       //value.onTheWayOrderData[index].totalPrice,
@@ -160,27 +160,27 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                       orderStatus:
                           value.onTheWayOrderData[index].orderStatus.name,
                       pricePerCubic:
-                          value.onTheWayOrderData[index].sandLocation.price,
-                      sandName:
-                          value.onTheWayOrderData[index].sandLocation.sand.name,
-                      sandImage: value
-                          .onTheWayOrderData[index].sandLocation.sand.sandImage,
+                          value.onTheWayOrderData[index].sandLocation!.price,
+                      sandName: value
+                          .onTheWayOrderData[index].sandLocation!.sand.name,
+                      sandImage: value.onTheWayOrderData[index].sandLocation!
+                          .sand.sandImage,
                       sourceLat: value.onTheWayOrderData[index]
                           .destinationLocation.latitude,
                       sourceLong: value.onTheWayOrderData[index]
                           .destinationLocation.longitude,
                       deliveryManName: value
-                          .onTheWayOrderData[index].sandLocation.owner.name
+                          .onTheWayOrderData[index].sandLocation!.owner.name
                           .toString(),
                       deliveryManPhone: value
-                          .onTheWayOrderData[index].sandLocation.owner.phone
+                          .onTheWayOrderData[index].sandLocation!.owner.phone
                           .toString(),
                       destinationLat: value.onTheWayOrderData[index]
                           .destinationLocation.latitude,
                       destinationLong: value.onTheWayOrderData[index]
                           .destinationLocation.latitude,
                       sourceLocationName: value
-                          .onTheWayOrderData[index].sandLocation.location.name,
+                          .onTheWayOrderData[index].sandLocation!.location.name,
                       destinationLocationName: value.onTheWayOrderData[index]
                           .destinationLocation.locationName,
                       date: value.onTheWayOrderData[index].createdAt,
@@ -208,7 +208,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                       orderID: value.deliveredOrderData[index].id,
                       orderNo: value.deliveredOrderData[index].orderNo,
                       totalPrice: (int.parse(value.deliveredOrderData[index]
-                                  .sandLocation.price) *
+                                  .sandLocation!.price) *
                               15)
                           .toString(),
                       amount: value.deliveredOrderData[index].totalAmount
@@ -216,27 +216,27 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                       orderStatus:
                           value.deliveredOrderData[index].orderStatus.name,
                       pricePerCubic:
-                          value.deliveredOrderData[index].sandLocation.price,
+                          value.deliveredOrderData[index].sandLocation!.price,
                       sandName: value
-                          .deliveredOrderData[index].sandLocation.sand.name,
-                      sandImage: value.deliveredOrderData[index].sandLocation
+                          .deliveredOrderData[index].sandLocation!.sand.name,
+                      sandImage: value.deliveredOrderData[index].sandLocation!
                           .sand.sandImage,
                       sourceLat: value.deliveredOrderData[index]
                           .destinationLocation.latitude,
                       sourceLong: value.deliveredOrderData[index]
                           .destinationLocation.longitude,
                       deliveryManName: value
-                          .deliveredOrderData[index].sandLocation.owner.name
+                          .deliveredOrderData[index].sandLocation!.owner.name
                           .toString(),
                       deliveryManPhone: value
-                          .deliveredOrderData[index].sandLocation.owner.phone
+                          .deliveredOrderData[index].sandLocation!.owner.phone
                           .toString(),
                       destinationLat: value.deliveredOrderData[index]
                           .destinationLocation.latitude,
                       destinationLong: value.deliveredOrderData[index]
                           .destinationLocation.latitude,
-                      sourceLocationName: value
-                          .deliveredOrderData[index].sandLocation.location.name,
+                      sourceLocationName: value.deliveredOrderData[index]
+                          .sandLocation!.location.name,
                       destinationLocationName: value.deliveredOrderData[index]
                           .destinationLocation.locationName,
                       date: value.deliveredOrderData[index].createdAt,
@@ -264,7 +264,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                       orderID: value.rejectedOrderData[index].id,
                       orderNo: value.rejectedOrderData[index].orderNo,
                       totalPrice: (int.parse(value.rejectedOrderData[index]
-                                  .sandLocation.price) *
+                                  .sandLocation!.price) *
                               15)
                           .toString(),
                       amount:
@@ -272,26 +272,26 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                       orderStatus:
                           value.rejectedOrderData[index].orderStatus.name,
                       pricePerCubic:
-                          value.rejectedOrderData[index].sandLocation.price,
-                      sandName:
-                          value.rejectedOrderData[index].sandLocation.sand.name,
-                      sandImage: value
-                          .rejectedOrderData[index].sandLocation.sand.sandImage,
+                          value.rejectedOrderData[index].sandLocation!.price,
+                      sandName: value
+                          .rejectedOrderData[index].sandLocation!.sand.name,
+                      sandImage: value.rejectedOrderData[index].sandLocation!
+                          .sand.sandImage,
                       sourceLat: value.rejectedOrderData[index]
                           .destinationLocation.latitude,
                       sourceLong: value.rejectedOrderData[index]
                           .destinationLocation.longitude,
                       deliveryManName: value
-                          .rejectedOrderData[index].sandLocation.owner.name,
+                          .rejectedOrderData[index].sandLocation!.owner.name,
                       deliveryManPhone: value
-                          .rejectedOrderData[index].sandLocation.owner.phone
+                          .rejectedOrderData[index].sandLocation!.owner.phone
                           .toString(),
                       destinationLat: value.rejectedOrderData[index]
                           .destinationLocation.latitude,
                       destinationLong: value.rejectedOrderData[index]
                           .destinationLocation.latitude,
                       sourceLocationName: value
-                          .rejectedOrderData[index].sandLocation.location.name,
+                          .rejectedOrderData[index].sandLocation!.location.name,
                       destinationLocationName: value.rejectedOrderData[index]
                           .destinationLocation.locationName,
                       date: value.rejectedOrderData[index].createdAt,

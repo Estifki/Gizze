@@ -90,7 +90,7 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                                 orderNo: value.pendingOrderData[index].orderNo,
                                totalPrice: (int.parse(value
                                           .pendingOrderData[index]
-                                          .sandLocation
+                                          .sandLocation!
                                           .price) *
                                       15)
                                   .toString(),
@@ -98,11 +98,11 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                                 amount: value.pendingOrderData[index].totalAmount
                                     .toString(),
                                 pricePerCubic: value
-                                    .pendingOrderData[index].sandLocation.price,
+                                    .pendingOrderData[index].sandLocation!.price,
                                 sandName: value.pendingOrderData[index]
-                                    .sandLocation.sand.name,
+                                    .sandLocation!.sand.name,
                                 sandImage: value.pendingOrderData[index]
-                                    .sandLocation.sand.sandImage,
+                                    .sandLocation!.sand.sandImage,
                                 sourceLat: value.pendingOrderData[index]
                                     .destinationLocation.latitude,
                                 sourceLong: value.pendingOrderData[index]
@@ -117,7 +117,7 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                                     .destinationLocation.latitude,
                                 sourceLocationName: value
                                     .pendingOrderData[index]
-                                    .sandLocation
+                                    .sandLocation!
                                     .location
                                     .name,
                                 destinationLocationName: value
@@ -154,17 +154,17 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                         orderNo: value.onTheWayOrderData[index].orderNo,
                        totalPrice: (int.parse(value
                                           .onTheWayOrderData[index]
-                                          .sandLocation
+                                          .sandLocation!
                                           .price) *
                                       15)
                                   .toString(),
                         amount: value.onTheWayOrderData[index].totalAmount
                             .toString(),
                         pricePerCubic:
-                            value.onTheWayOrderData[index].sandLocation.price,
+                            value.onTheWayOrderData[index].sandLocation!.price,
                         sandName: value
-                            .onTheWayOrderData[index].sandLocation.sand.name,
-                        sandImage: value.onTheWayOrderData[index].sandLocation
+                            .onTheWayOrderData[index].sandLocation!.sand.name,
+                        sandImage: value.onTheWayOrderData[index].sandLocation!
                             .sand.sandImage,
                         sourceLat: value.onTheWayOrderData[index]
                             .destinationLocation.latitude,
@@ -179,7 +179,7 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                         destinationLong: value.onTheWayOrderData[index]
                             .destinationLocation.latitude,
                         sourceLocationName: value.onTheWayOrderData[index]
-                            .sandLocation.location.name,
+                            .sandLocation!.location.name,
                         destinationLocationName: value.onTheWayOrderData[index]
                             .destinationLocation.locationName,
                         date: value.onTheWayOrderData[index].createdAt);
@@ -209,17 +209,17 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                         orderNo: value.deliveredOrderData[index].orderNo,
                          totalPrice: (int.parse(value
                                           .deliveredOrderData[index]
-                                          .sandLocation
+                                          .sandLocation!
                                           .price) *
                                       15)
                                   .toString(),
                         amount: value.deliveredOrderData[index].totalAmount
                             .toString(),
                         pricePerCubic:
-                            value.deliveredOrderData[index].sandLocation.price,
+                            value.deliveredOrderData[index].sandLocation!.price,
                         sandName: value
-                            .deliveredOrderData[index].sandLocation.sand.name,
-                        sandImage: value.deliveredOrderData[index].sandLocation
+                            .deliveredOrderData[index].sandLocation!.sand.name,
+                        sandImage: value.deliveredOrderData[index].sandLocation!
                             .sand.sandImage,
                         sourceLat: value.deliveredOrderData[index]
                             .destinationLocation.latitude,
@@ -234,7 +234,7 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                         destinationLong: value.deliveredOrderData[index]
                             .destinationLocation.latitude,
                         sourceLocationName: value.deliveredOrderData[index]
-                            .sandLocation.location.name,
+                            .sandLocation!.location.name,
                         destinationLocationName: value.deliveredOrderData[index]
                             .destinationLocation.locationName,
                         date: value.deliveredOrderData[index].createdAt);
@@ -264,17 +264,17 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                         orderNo: value.rejectedOrderData[index].orderNo,
                        totalPrice: (int.parse(value
                                           .rejectedOrderData[index]
-                                          .sandLocation
+                                          .sandLocation!
                                           .price) *
                                       15)
                                   .toString(),
                         amount: value.rejectedOrderData[index].totalAmount
                             .toString(),
                         pricePerCubic:
-                            value.rejectedOrderData[index].sandLocation.price,
+                            value.rejectedOrderData[index].sandLocation!.price,
                         sandName: value
-                            .rejectedOrderData[index].sandLocation.sand.name,
-                        sandImage: value.rejectedOrderData[index].sandLocation
+                            .rejectedOrderData[index].sandLocation!.sand.name,
+                        sandImage: value.rejectedOrderData[index].sandLocation!
                             .sand.sandImage,
                         sourceLat: value.rejectedOrderData[index]
                             .destinationLocation.latitude,
@@ -289,7 +289,7 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                         destinationLong: value.rejectedOrderData[index]
                             .destinationLocation.latitude,
                         sourceLocationName: value.rejectedOrderData[index]
-                            .sandLocation.location.name,
+                            .sandLocation!.location.name,
                         destinationLocationName: value.rejectedOrderData[index]
                             .destinationLocation.locationName,
                         date: value.rejectedOrderData[index].createdAt);
