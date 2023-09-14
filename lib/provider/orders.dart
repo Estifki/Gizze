@@ -141,7 +141,10 @@ class OrderProvider with ChangeNotifier {
   Future<void> orderSand(
       {required String token,
       required String sandID,
-      required String price,
+      required double price,
+      required double additionalPrice,
+      required double prePaymentPrice,
+      required double transportPrice,
       // required String amount,
       required String locationName,
       required double lat,

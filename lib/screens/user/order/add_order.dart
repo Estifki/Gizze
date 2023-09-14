@@ -1,3 +1,6 @@
+import 'package:ashewa_d/provider/payment.dart';
+import 'package:geolocator/geolocator.dart';
+
 import '../../../provider/auth.dart';
 import '../../../provider/orders.dart';
 import '../../../uitil/http_error.dart';
@@ -255,13 +258,45 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
       setState(() {
         _isLoading = true;
       });
+
+      double distanceInMeter =
+          Geolocator.distanceBetween(lat!, long!, widget.lat, widget.long);
+      double distanceInKm =
+          double.parse((distanceInMeter / 1000).toStringAsFixed(2));
+
+      double transportPrice = (distanceInKm *
+              Provider.of<PaymentProvider>(context, listen: false).perKmPrice) +
+          Provider.of<PaymentProvider>(context, listen: false).initialPrice;
+      double totalPrice = transportPrice + double.parse(widget.pricePerCubic);
+      double prePayment = totalPrice *
+          (Provider.of<PaymentProvider>(context, listen: false)
+                  .prePaymentPercentage /
+              100);
+      double additionalPrice = totalPrice *
+          (1 -
+              ((Provider.of<PaymentProvider>(context, listen: false)
+                      .prePaymentPercentage /
+                  100)));
+      print("distnace In KM $distanceInKm");
+
+      print("transportPrice  $transportPrice");
+
+      print("totalPrice $totalPrice");
+
+      print("additionalPrice $additionalPrice");
+
+      print("prePayment $prePayment");
+
       try {
         await Provider.of<OrderProvider>(context, listen: false)
             .orderSand(
                 token: Provider.of<AuthProvider>(context, listen: false).token!,
                 sandID: widget.orderID,
-                price: (5 * int.parse(widget.pricePerCubic)).toString(),
+                price: totalPrice,
+                additionalPrice: additionalPrice,
                 // amount: _amountController.text,
+                prePaymentPrice: prePayment,
+                transportPrice: transportPrice,
                 locationName: _deliveryLocationNameController.text,
                 lat: lat!.toDouble(),
                 long: long!.toDouble())

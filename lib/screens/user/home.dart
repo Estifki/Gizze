@@ -1,3 +1,4 @@
+import 'package:ashewa_d/provider/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,8 @@ class _HomeScreenForUserState extends State<HomeScreenForUser> {
     if (isInit) {
       SystemChrome.setSystemUIOverlayStyle(
           const SystemUiOverlayStyle(statusBarColor: Colors.black));
+      Provider.of<PaymentProvider>(context, listen: false)
+          .priceSetting(token: Provider.of<AuthProvider>(context).token!);
       _sandData = Provider.of<SandProvider>(context, listen: false)
           .getSand(Provider.of<AuthProvider>(context).token!);
       Provider.of<SandProvider>(context, listen: false)

@@ -45,11 +45,12 @@ dependencies:
 
   dropdown_button2: ^1.9.2
   flutter_osm_plugin: ^0.40.3+1
-  geolocator: ^9.0.2
+  # geolocator: ^9.0.2
   intl: ^0.18.1
 
   google_maps_flutter: ^2.2.1
   flutter_polyline_points: ^1.0.0
+  geolocator: ^10.0.1
   
 
 dev_dependencies:
