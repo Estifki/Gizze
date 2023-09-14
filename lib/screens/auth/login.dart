@@ -208,8 +208,7 @@ class _SignInScreenForUserState extends State<SignInScreenForUser> {
         });
         showScaffoldMessanger(context: context, errorMessage: e.toString());
       } catch (e) {
-        print(e.toString());
-        setState(() {
+         setState(() {
           _isLoading = false;
         });
         showScaffoldMessanger(

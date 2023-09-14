@@ -194,7 +194,6 @@ class AuthProvider with ChangeNotifier {
             if (address != "") "address": {"City": address},
             // "confirm_password": confirmPassword
           }));
-      print(response.body);
       final decodedData = jsonDecode(response.body);
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
@@ -232,7 +231,6 @@ class AuthProvider with ChangeNotifier {
       required PlatformFile profileImage}) async {
     final url = Uri.parse("${AppConst.appUrl}/register-driver");
     try {
-      print("object");
       final request = http.MultipartRequest('POST', url);
       request.fields['phone'] = phone;
       request.fields['name'] = name;
@@ -273,15 +271,12 @@ class AuthProvider with ChangeNotifier {
         //     'image', 'jpeg'), // Adjust the media type according to your file
       ));
 
-      print("object 22");
       final response = await request.send();
-      print(response.statusCode);
-
+      
       var responseBody = await (response.stream.bytesToString());
 
       var decodedData = jsonDecode(responseBody);
 
-      print(decodedData);
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
@@ -343,8 +338,7 @@ class AuthProvider with ChangeNotifier {
         }),
       );
       var decodedData = jsonDecode(response.body);
-      print(response.statusCode);
-      print(response.body);
+    
       if (response.statusCode != 200) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {}

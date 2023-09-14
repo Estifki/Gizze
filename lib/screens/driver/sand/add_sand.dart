@@ -280,17 +280,16 @@ class _AddSandScreenState extends State<AddSandScreen> {
     //   showScaffoldMessanger(
     //       context: context, errorMessage: "Price address is Invalid");
     // }
-    // else if (lat == null) {
-    //   showScaffoldMessanger(
-    //       context: context, errorMessage: "Please Pick Sand Location");
-    // }
-    else {
-      FocusScope.of(context).unfocus();
-      setState(() {
-        _isLoading = true;
-      });
+    else if (_isLocationPicked == false) {
+      showScaffoldMessanger(
+          context: context, errorMessage: "Please Pick Sand Location");
+    } else {
       try {
-        Provider.of<SandLocationProvider>(context, listen: false)
+        FocusScope.of(context).unfocus();
+        setState(() {
+          _isLoading = true;
+        });
+        await Provider.of<SandLocationProvider>(context, listen: false)
             .addSandLocation(
                 token: Provider.of<AuthProvider>(context, listen: false).token!,
                 sandID: widget.sandID,
@@ -311,6 +310,11 @@ class _AddSandScreenState extends State<AddSandScreen> {
           });
         });
       } on CustomHttpException catch (e) {
+        showScaffoldMessanger(context: context, errorMessage: e.toString());
+        setState(() {
+          _isLoading = false;
+        });
+      } catch (e) {
         showScaffoldMessanger(context: context, errorMessage: e.toString());
         setState(() {
           _isLoading = false;

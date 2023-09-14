@@ -47,7 +47,7 @@ class SandLocationProvider with ChangeNotifier {
 
   List<MySandData> get mySandData => [..._mySandData];
 
-  Future<void> getSandAddress(String token) async {
+  Future<void> getSandAddress() async {
     String url = "${AppConst.appUrl}/locations";
 
     try {
@@ -56,7 +56,7 @@ class SandLocationProvider with ChangeNotifier {
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          HttpHeaders.authorizationHeader: "Bearer $token"
+          // HttpHeaders.authorizationHeader: "Bearer $token"
         },
       );
       final decodedData = jsonDecode(response.body);
@@ -82,7 +82,6 @@ class SandLocationProvider with ChangeNotifier {
       required double lat,
       required double long}) async {
     String url = "${AppConst.appUrl}/sand-locations";
-
     try {
       http.Response response = await http.post(Uri.parse(url),
           headers: {
@@ -98,7 +97,6 @@ class SandLocationProvider with ChangeNotifier {
             "longitude": long
           }));
       final decodedData = jsonDecode(response.body);
-
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {}
@@ -114,7 +112,6 @@ class SandLocationProvider with ChangeNotifier {
       // required String locationID,
       required double lat,
       required double long}) async {
-    print(price);
     String url = "${AppConst.appUrl}/sand-locations/$sandID";
 
     try {
@@ -131,11 +128,9 @@ class SandLocationProvider with ChangeNotifier {
             "longitude": long
           }));
       final decodedData = jsonDecode(response.body);
-
       if (response.statusCode != 200) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
-        print(response.body);
         getMySandLocation(token);
       }
     } catch (e) {

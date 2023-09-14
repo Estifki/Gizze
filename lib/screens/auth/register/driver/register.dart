@@ -73,8 +73,7 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
     Size screenSize = MediaQuery.of(context).size;
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.white));
-    // Provider.of<SandLocationProvider>(context).getSandAddress(
-    //     Provider.of<AuthProvider>(context, listen: false).token!);
+    Provider.of<SandLocationProvider>(context).getSandAddress();
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
