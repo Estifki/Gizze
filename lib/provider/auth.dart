@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-
-
 import '../const/const.dart';
 import '../model/profile.dart';
 import '../uitil/http_error.dart';
@@ -15,6 +13,8 @@ class AuthProvider with ChangeNotifier {
   String? token;
   String? userID;
   String? role;
+
+  String amount = "";
 
   final List<ProfileData> _profileData = [];
 
@@ -169,7 +169,10 @@ class AuthProvider with ChangeNotifier {
       {required phone,
       required String name,
       required String email,
-      required String password}) async {
+      required String password,
+      required int isCorporate,
+      required String corporatePhone,
+      required String address}) async {
     String url = "${AppConst.appUrl}/register"; //finish-register
     try {
       http.Response response = await http.post(Uri.parse(url),
@@ -183,6 +186,11 @@ class AuthProvider with ChangeNotifier {
             "name": name,
             "email": email,
             "password": password,
+            "is_corporate": isCorporate,
+
+            if (corporatePhone != "") "corporate_phone": corporatePhone,
+
+            if (address != "") "address": {"City": address},
             // "confirm_password": confirmPassword
           }));
       print(response.body);
@@ -223,6 +231,7 @@ class AuthProvider with ChangeNotifier {
       required PlatformFile profileImage}) async {
     final url = Uri.parse("${AppConst.appUrl}/register-driver");
     try {
+      print("object");
       final request = http.MultipartRequest('POST', url);
       request.fields['phone'] = phone;
       request.fields['name'] = name;
@@ -234,11 +243,10 @@ class AuthProvider with ChangeNotifier {
       request.fields['plate_number'] = plateNumber;
       request.fields['color'] = color;
       request.fields['load_capacity'] = capacity;
-      request.fields["locationId"] = password;
+      request.fields["locationId"] = sandLocation;
       request.fields["locationName"] = city;
       request.fields["latitude"] = lat;
       request.fields["longitude"] = long;
-
       request.fields['password'] = password;
       request.fields["confirm_password"] = password;
       // request.fields["carOwnershipDoc"] = carOwnershipDocPath.path!;
@@ -264,6 +272,7 @@ class AuthProvider with ChangeNotifier {
         //     'image', 'jpeg'), // Adjust the media type according to your file
       ));
 
+      print("object 22");
       final response = await request.send();
       print(response.statusCode);
 
@@ -305,6 +314,10 @@ class AuthProvider with ChangeNotifier {
         _profileData.clear();
         final data = profileModelFromJson(response.body);
         _profileData.addAll([data.data]);
+        amount = _profileData[0].deposit == null
+            ? "null"
+            : _profileData[0].deposit!.amount;
+        notifyListeners();
       }
     } catch (e) {
       rethrow;

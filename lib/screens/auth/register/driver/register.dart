@@ -318,20 +318,20 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
               //
               //
               CustomTextFieldWidget(
-                  hint: "Plate Number", controller: _accountNameController),
+                  hint: "Plate Number", controller: _plateNumberController),
               const SizedBox(height: 15),
               //
               //
               //
               CustomTextFieldWidget(
-                  hint: "Car Color", controller: _accountNameController),
+                  hint: "Car Color", controller: _colorController),
               const SizedBox(height: 15),
               //
               //
               //
               CustomTextFieldWidget(
                   hint: "Load Capacity (M³)",
-                  controller: _accountNameController),
+                  controller: _loadCapacityController),
               const SizedBox(height: 15),
               //
               //
@@ -667,19 +667,23 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
           accountNumber: _accountnumberController.text,
           accountholderName: _accountNameController.text,
           city: _cityController.text,
-          carOwnershipDocPath: carOwnershipDocPath!,
           bank: _bankNameController.text,
-          licenceDocPath: licenceDocPath!,
-          profileImage: profileImagePath!,
           name: _nameController.text,
           email: _emailController.text,
           password: _passwordController.text,
           plateNumber: _plateNumberController.text,
           color: _colorController.text,
-          capacity: _loadCapacityController.text,
-          sandLocation: _sandLocationController.text,
-          lat: Provider.of<LocationProvider>(context, listen: false).userLat,
-          long: Provider.of<LocationProvider>(context, listen: false).userLong,
+          capacity: _loadCapacityController.text.toString(),
+          sandLocation: _sandLocationController.text.toString(),
+          lat: Provider.of<LocationProvider>(context, listen: false)
+              .userLat
+              .toString(),
+          long: Provider.of<LocationProvider>(context, listen: false)
+              .userLong
+              .toString(),
+          carOwnershipDocPath: carOwnershipDocPath!,
+          licenceDocPath: licenceDocPath!,
+          profileImage: profileImagePath!,
         )
             .then((_) {
           setState(() {
@@ -703,8 +707,7 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
         setState(() {
           _isLoading = false;
         });
-        showScaffoldMessanger(
-            context: context, errorMessage: "Upload formats must be PDF ");
+        showScaffoldMessanger(context: context, errorMessage: e.toString());
       }
     }
   }

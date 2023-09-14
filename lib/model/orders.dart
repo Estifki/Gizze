@@ -41,18 +41,18 @@ class OrdersModel {
 class OrderData {
   String id;
   String sandLocationId;
-  dynamic acceptedById;
   String orderedById;
+  dynamic canceledById;
   String orderNo;
-  String amount;
-  dynamic deposit;
-  String totalPrice;
   dynamic additionalPrice;
+  dynamic prePayment;
+  dynamic transportPrice;
+  DestinationLocation destinationLocation;
   String status;
   DateTime createdAt;
   DateTime updatedAt;
   String orderStatusId;
-  DatumDestinationLocation destinationLocation;
+  int totalAmount;
   OrderStatus orderStatus;
   SandLocation sandLocation;
   dynamic acceptedBy;
@@ -61,18 +61,18 @@ class OrderData {
   OrderData({
     required this.id,
     required this.sandLocationId,
-    required this.acceptedById,
     required this.orderedById,
+    required this.canceledById,
     required this.orderNo,
-    required this.amount,
-    required this.deposit,
-    required this.totalPrice,
     required this.additionalPrice,
+    required this.prePayment,
+    required this.transportPrice,
+    required this.destinationLocation,
     required this.status,
     required this.createdAt,
     required this.updatedAt,
     required this.orderStatusId,
-    required this.destinationLocation,
+    required this.totalAmount,
     required this.orderStatus,
     required this.sandLocation,
     required this.acceptedBy,
@@ -82,19 +82,19 @@ class OrderData {
   factory OrderData.fromJson(Map<String, dynamic> json) => OrderData(
         id: json["id"],
         sandLocationId: json["sand_location_id"],
-        acceptedById: json["accepted_by_id"],
         orderedById: json["ordered_by_id"],
+        canceledById: json["canceled_by_id"],
         orderNo: json["order_no"],
-        amount: json["amount"],
-        deposit: json["deposit"],
-        totalPrice: json["total_price"],
         additionalPrice: json["additional_price"],
+        prePayment: json["pre_payment"],
+        transportPrice: json["transport_price"],
+        destinationLocation:
+            DestinationLocation.fromJson(json["destination_location"]),
         status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         orderStatusId: json["order_status_id"],
-        destinationLocation:
-            DatumDestinationLocation.fromJson(json["destination_location"]),
+        totalAmount: json["total_amount"],
         orderStatus: OrderStatus.fromJson(json["order_status"]),
         sandLocation: SandLocation.fromJson(json["sand_location"]),
         acceptedBy: json["accepted_by"],
@@ -104,18 +104,18 @@ class OrderData {
   Map<String, dynamic> toJson() => {
         "id": id,
         "sand_location_id": sandLocationId,
-        "accepted_by_id": acceptedById,
         "ordered_by_id": orderedById,
+        "canceled_by_id": canceledById,
         "order_no": orderNo,
-        "amount": amount,
-        "deposit": deposit,
-        "total_price": totalPrice,
         "additional_price": additionalPrice,
+        "pre_payment": prePayment,
+        "transport_price": transportPrice,
+        "destination_location": destinationLocation.toJson(),
         "status": status,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "order_status_id": orderStatusId,
-        "destination_location": destinationLocation.toJson(),
+        "total_amount": totalAmount,
         "order_status": orderStatus.toJson(),
         "sand_location": sandLocation.toJson(),
         "accepted_by": acceptedBy,
@@ -123,19 +123,19 @@ class OrderData {
       };
 }
 
-class DatumDestinationLocation {
+class DestinationLocation {
   String locationName;
   double latitude;
   double longitude;
 
-  DatumDestinationLocation({
+  DestinationLocation({
     required this.locationName,
     required this.latitude,
     required this.longitude,
   });
 
-  factory DatumDestinationLocation.fromJson(Map<String, dynamic> json) =>
-      DatumDestinationLocation(
+  factory DestinationLocation.fromJson(Map<String, dynamic> json) =>
+      DestinationLocation(
         locationName: json["location_name"],
         latitude: json["latitude"]?.toDouble(),
         longitude: json["longitude"]?.toDouble(),
@@ -153,12 +153,14 @@ class OrderStatus {
   String name;
   DateTime createdAt;
   DateTime updatedAt;
+  // Location location;
 
   OrderStatus({
     required this.id,
     required this.name,
     required this.createdAt,
     required this.updatedAt,
+    // required this.location,
   });
 
   factory OrderStatus.fromJson(Map<String, dynamic> json) => OrderStatus(
@@ -166,6 +168,7 @@ class OrderStatus {
         name: json["name"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+        // location: Location.fromJson(json["location"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -173,6 +176,27 @@ class OrderStatus {
         "name": name,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
+        // "location": location.toJson(),
+      };
+}
+
+class Location {
+  double latitude;
+  double longitude;
+
+  Location({
+    required this.latitude,
+    required this.longitude,
+  });
+
+  factory Location.fromJson(Map<String, dynamic> json) => Location(
+        latitude: json["latitude"]?.toDouble(),
+        longitude: json["longitude"]?.toDouble(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "latitude": latitude,
+        "longitude": longitude,
       };
 }
 
@@ -189,6 +213,7 @@ class OrderedBy {
   String roleId;
   String profilePhotoUrl;
   Role role;
+  dynamic deposit;
 
   OrderedBy({
     required this.id,
@@ -203,6 +228,7 @@ class OrderedBy {
     required this.roleId,
     required this.profilePhotoUrl,
     required this.role,
+    required this.deposit,
   });
 
   factory OrderedBy.fromJson(Map<String, dynamic> json) => OrderedBy(
@@ -218,6 +244,7 @@ class OrderedBy {
         roleId: json["role_id"],
         profilePhotoUrl: json["profile_photo_url"],
         role: Role.fromJson(json["role"]),
+        deposit: json["deposit"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -233,6 +260,51 @@ class OrderedBy {
         "role_id": roleId,
         "profile_photo_url": profilePhotoUrl,
         "role": role.toJson(),
+        "deposit": deposit,
+      };
+}
+
+class Deposit {
+  String id;
+  String userId;
+  String amount;
+  dynamic reason;
+  String status;
+  String approvedBy;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  Deposit({
+    required this.id,
+    required this.userId,
+    required this.amount,
+    required this.reason,
+    required this.status,
+    required this.approvedBy,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory Deposit.fromJson(Map<String, dynamic> json) => Deposit(
+        id: json["id"],
+        userId: json["user_id"],
+        amount: json["amount"],
+        reason: json["reason"],
+        status: json["status"],
+        approvedBy: json["approved_by"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "user_id": userId,
+        "amount": amount,
+        "reason": reason,
+        "status": status,
+        "approved_by": approvedBy,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
       };
 }
 
@@ -259,12 +331,12 @@ class Role {
 class SandLocation {
   String id;
   String sandId;
-  SandLocationDestinationLocation destinationLocation;
+  String locationId;
+  String userId;
   String price;
+  String status;
   DateTime createdAt;
   DateTime updatedAt;
-  String userId;
-  dynamic locationId;
   Sand sand;
   OrderedBy owner;
   OrderStatus location;
@@ -272,12 +344,12 @@ class SandLocation {
   SandLocation({
     required this.id,
     required this.sandId,
-    required this.destinationLocation,
+    required this.locationId,
+    required this.userId,
     required this.price,
+    required this.status,
     required this.createdAt,
     required this.updatedAt,
-    required this.userId,
-    required this.locationId,
     required this.sand,
     required this.owner,
     required this.location,
@@ -286,57 +358,29 @@ class SandLocation {
   factory SandLocation.fromJson(Map<String, dynamic> json) => SandLocation(
         id: json["id"],
         sandId: json["sand_id"],
-        destinationLocation: SandLocationDestinationLocation.fromJson(
-            json["destination_location"]),
+        locationId: json["location_id"],
+        userId: json["user_id"],
         price: json["price"],
+        status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        userId: json["user_id"],
-        locationId: json["location_id"],
         sand: Sand.fromJson(json["sand"]),
         owner: OrderedBy.fromJson(json["owner"]),
-        location: json["location"] == null
-            ? OrderStatus(
-                id: "id",
-                name: "Unknown",
-                createdAt: DateTime.now(),
-                updatedAt: DateTime.now())
-            : OrderStatus.fromJson(json["location"]),
+        location: OrderStatus.fromJson(json["location"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "sand_id": sandId,
-        "destination_location": destinationLocation.toJson(),
+        "location_id": locationId,
+        "user_id": userId,
         "price": price,
+        "status": status,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "user_id": userId,
-        "location_id": locationId,
         "sand": sand.toJson(),
         "owner": owner.toJson(),
         "location": location.toJson(),
-      };
-}
-
-class SandLocationDestinationLocation {
-  double latitude;
-  double longitude;
-
-  SandLocationDestinationLocation({
-    required this.latitude,
-    required this.longitude,
-  });
-
-  factory SandLocationDestinationLocation.fromJson(Map<String, dynamic> json) =>
-      SandLocationDestinationLocation(
-        latitude: json["latitude"]?.toDouble(),
-        longitude: json["longitude"]?.toDouble(),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "latitude": latitude,
-        "longitude": longitude,
       };
 }
 
@@ -345,6 +389,7 @@ class Sand {
   String name;
   String description;
   DateTime createdAt;
+  dynamic categoryId;
   String sandImage;
 
   Sand({
@@ -352,6 +397,7 @@ class Sand {
     required this.name,
     required this.description,
     required this.createdAt,
+    required this.categoryId,
     required this.sandImage,
   });
 
@@ -360,6 +406,7 @@ class Sand {
         name: json["name"],
         description: json["description"],
         createdAt: DateTime.parse(json["created_at"]),
+        categoryId: json["category_id"],
         sandImage: json["sand_image"],
       );
 
@@ -368,6 +415,7 @@ class Sand {
         "name": name,
         "description": description,
         "created_at": createdAt.toIso8601String(),
+        "category_id": categoryId,
         "sand_image": sandImage,
       };
 }
