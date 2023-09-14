@@ -1,18 +1,18 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 
+import '/../../const/const.dart';
+import '/../../widget/textfield.dart';
 import '../../../../provider/auth.dart';
 import '../../../../provider/location.dart';
 import '../../../../provider/sand_location.dart';
-import '../../../driver/bottom_bar_driver.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import '../../../../uitil/http_error.dart';
 import '../../../../uitil/toast.dart';
-import '/../../const/const.dart';
-import '/../../widget/textfield.dart';
-import 'package:file_picker/file_picker.dart';
+import '../../../driver/bottom_bar_driver.dart';
 
 class RegisterScreenForDriver extends StatefulWidget {
   const RegisterScreenForDriver({super.key});
