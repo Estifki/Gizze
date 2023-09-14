@@ -1,4 +1,4 @@
-import 'package:ashewa_d/provider/auth.dart';
+import '../../../provider/auth.dart';
 import 'package:provider/provider.dart';
 
 import '../../../uitil/toast.dart';
