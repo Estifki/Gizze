@@ -1,3 +1,5 @@
+import 'package:ashewa_d/provider/payment.dart';
+
 import 'payment_method.dart';
 
 import 'update_password.dart';
@@ -29,6 +31,8 @@ class _ProfileScreenForUserState extends State<ProfileScreenForUser> {
     if (_isInit) {
       _myProfile =
           Provider.of<AuthProvider>(context, listen: false).getMyProfile();
+      Provider.of<PaymentProvider>(context, listen: false).getPaymentMethods(
+          token: Provider.of<AuthProvider>(context, listen: false).token!);
     }
     super.didChangeDependencies();
   }

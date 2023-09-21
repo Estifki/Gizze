@@ -1,3 +1,5 @@
+import 'package:ashewa_d/provider/payment.dart';
+
 import '../../../provider/auth.dart';
 import 'package:provider/provider.dart';
 
@@ -9,25 +11,7 @@ import '../../../const/const.dart';
 
 class PaymentMethodScreen extends StatelessWidget {
   // final String remainingAmount;
-  PaymentMethodScreen({super.key});
-
-  final List categoryList = [
-    {
-      "id": "99ffa677-3312-4c3c-a519-dceb1bf6a619",
-      "name": "CBE",
-      "status": "1",
-    },
-    {
-      "id": "99ffa677-32c5-418e-b843-df82c079fe61",
-      "name": "Tele Birr",
-      "status": "1",
-    },
-    {
-      "id": "99ffa677-3139-4f3e-8de4-ff314cf4447b",
-      "name": "Awash",
-      "status": "0",
-    }
-  ];
+  const PaymentMethodScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +79,9 @@ class PaymentMethodScreen extends StatelessWidget {
                   EdgeInsets.symmetric(vertical: screenSize.height * 0.015),
               child: GridView.builder(
                 shrinkWrap: true,
-                itemCount: categoryList.length,
+                itemCount: Provider.of<PaymentProvider>(context, listen: false)
+                    .paymentMethods
+                    .length,
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 padding:
@@ -109,7 +95,10 @@ class PaymentMethodScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      if (categoryList[index]["status"] == "0") {
+                      if (Provider.of<PaymentProvider>(context, listen: false)
+                              .paymentMethods[index]
+                              .status ==
+                          "0") {
                         showScaffoldMessanger(
                             context: context,
                             errorMessage: "Comming Soon",
@@ -117,8 +106,14 @@ class PaymentMethodScreen extends StatelessWidget {
                       } else {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => DepositScreen(
-                              name: categoryList[index]["name"],
-                              id: categoryList[index]["id"]),
+                              name: Provider.of<PaymentProvider>(context,
+                                      listen: false)
+                                  .paymentMethods[index]
+                                  .name,
+                              id: Provider.of<PaymentProvider>(context,
+                                      listen: false)
+                                  .paymentMethods[index].account!
+                                  .id),
                         ));
                       }
                     },
@@ -128,7 +123,9 @@ class PaymentMethodScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)),
                       child: Center(
                         child: Text(
-                          categoryList[index]["name"],
+                          Provider.of<PaymentProvider>(context, listen: false)
+                              .paymentMethods[index]
+                              .name,
                           style: const TextStyle(
                               fontSize: 17.5, color: Colors.white),
                         ),

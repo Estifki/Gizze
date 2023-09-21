@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ashewa_d/model/user/payment.dart';
 import 'package:ashewa_d/provider/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -12,10 +13,15 @@ import '../const/const.dart';
 import '../uitil/http_error.dart';
 
 class PaymentProvider with ChangeNotifier {
-  double fineAmount = 500;
-  double prePaymentPercentage = 40;
-  double initialPrice = 200;
-  double perKmPrice = 15;
+  double fineAmount = 0;
+  double prePaymentPercentage = 0;
+  double initialPrice = 0;
+  double perKmPrice = 0;
+
+  final List<PaymentMethod> _paymentMethods = [];
+
+  List<PaymentMethod> get paymentMethods => [..._paymentMethods];
+
   Future<void> addDeposit({
     required BuildContext context,
     required String token,
@@ -42,13 +48,36 @@ class PaymentProvider with ChangeNotifier {
             "referenceNumber": referenceNumber,
           }));
       final decodedData = jsonDecode(response.body);
-     
+      print(response.body);
       if (response.statusCode != 200) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
         await Provider.of<AuthProvider>(context, listen: false).getMyProfile();
       }
     } catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<void> getPaymentMethods({required String token}) async {
+    String url = "${AppConst.appUrl}/payment-methods";
+
+    try {
+      http.Response response = await http.get(Uri.parse(url), headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        HttpHeaders.authorizationHeader: "Bearer $token"
+      });
+      final decodedData = jsonDecode(response.body);
+
+      if (response.statusCode != 200) {
+        throw CustomHttpException(errorMessage: decodedData["data"]);
+      } else {
+        final data = paymentMethodesModelFromJson(response.body);
+        _paymentMethods.clear();
+        _paymentMethods.addAll(data.data);
+      }
+    } catch (e) {
       rethrow;
     }
   }
@@ -67,11 +96,11 @@ class PaymentProvider with ChangeNotifier {
       if (response.statusCode != 200) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
-        // fineAmount = double.parse(decodedData["data"]["fine_amount"]);
-        // prePaymentPercentage =
-        //     double.parse(decodedData["data"]["pre_payment_percentage"]);
-        // initialPrice = double.parse(decodedData["data"]["initial_price"]);
-        // perKmPrice = double.parse(decodedData["data"]["per_km_price"]);
+        fineAmount = double.parse(decodedData["data"]["fine_amount"]);
+        prePaymentPercentage =
+            double.parse(decodedData["data"]["pre_payment_percentage"]);
+        initialPrice = double.parse(decodedData["data"]["initial_price"]);
+        perKmPrice = double.parse(decodedData["data"]["per_km_price"]);
       }
     } catch (e) {
       rethrow;

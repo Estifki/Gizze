@@ -52,7 +52,8 @@ class OrderData {
   DateTime createdAt;
   DateTime updatedAt;
   String orderStatusId;
-  int totalAmount;
+  dynamic totalPrice;
+  dynamic totalAmount;
   OrderStatus orderStatus;
   SandLocation? sandLocation;
   dynamic acceptedBy;
@@ -67,6 +68,7 @@ class OrderData {
     required this.additionalPrice,
     required this.prePayment,
     required this.transportPrice,
+    required this.totalPrice,
     required this.destinationLocation,
     required this.status,
     required this.createdAt,
@@ -95,6 +97,7 @@ class OrderData {
         updatedAt: DateTime.parse(json["updated_at"]),
         orderStatusId: json["order_status_id"],
         totalAmount: json["total_amount"],
+        totalPrice: json["total"],
         orderStatus: OrderStatus.fromJson(json["order_status"]),
         sandLocation: json["sand_location"] != null
             ? SandLocation.fromJson(json["sand_location"])

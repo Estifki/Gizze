@@ -12,7 +12,7 @@ class MyOrdersWidgetUser extends StatelessWidget {
   final String sandName;
   final String sandImage;
   final String pricePerCubic;
-  final String totalPrice;
+  final dynamic totalPrice;
   final double sourceLat;
   final double sourceLong;
   final String orderStatus;
@@ -110,7 +110,9 @@ class MyOrdersWidgetUser extends StatelessWidget {
                   // ),
                   const SizedBox(height: 2),
                   Text(
-                    DateFormat.yMMMEd().format(date),
+                    DateFormat.yMMMEd()
+                        .add_jms()
+                        .format(date.toUtc().add(const Duration(hours: 3))),
                     style: const TextStyle(fontSize: 15.5),
                   ),
                   const SizedBox(height: 2),

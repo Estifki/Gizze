@@ -11,7 +11,7 @@ class MyOrdersDetailsScreen extends StatefulWidget {
 
   final String amount;
   final String pricePerCubic;
-  final String totalPrice;
+  final dynamic totalPrice;
 
   final String sourceName;
   final String destinationName;
@@ -98,9 +98,9 @@ class _MyOrdersDetailsScreenState extends State<MyOrdersDetailsScreen> {
                       children: [
                         Text("Price:  Br ${widget.pricePerCubic}",
                             style: const TextStyle(fontSize: 15.5)),
-                        const SizedBox(height: 4),
-                        Text("Ordered amount: ${widget.amount}",
-                            style: const TextStyle(fontSize: 15.5)),
+                        // const SizedBox(height: 4),
+                        // Text("Ordered amount: ${widget.amount}",
+                        //     style: const TextStyle(fontSize: 15.5)),
                         const SizedBox(height: 4),
                         Text("Total Price:  Br ${widget.totalPrice}",
                             style: const TextStyle(fontSize: 15.5)),

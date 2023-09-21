@@ -29,8 +29,8 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
           Provider.of<AuthProvider>(context, listen: false).token!, true);
       Provider.of<OrderProvider>(context, listen: false).getDelivered(
           Provider.of<AuthProvider>(context, listen: false).token!, true);
-      // Provider.of<OrderProvider>(context, listen: false).getRejected(
-      //     Provider.of<AuthProvider>(context, listen: false).token!, true);
+      Provider.of<OrderProvider>(context, listen: false).getRejected(
+          Provider.of<AuthProvider>(context, listen: false).token!, true);
       isinit = false;
     }
     super.didChangeDependencies();
@@ -44,8 +44,8 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
         Provider.of<AuthProvider>(context, listen: false).token!, true);
     Provider.of<OrderProvider>(context, listen: false).getDelivered(
         Provider.of<AuthProvider>(context, listen: false).token!, true);
-    // Provider.of<OrderProvider>(context, listen: false).getRejected(
-    //     Provider.of<AuthProvider>(context, listen: false).token!, true);
+    Provider.of<OrderProvider>(context, listen: false).getRejected(
+        Provider.of<AuthProvider>(context, listen: false).token!, true);
     return DefaultTabController(
         length: 4,
         child: Scaffold(
@@ -89,17 +89,13 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                                 orderStatus: value
                                     .pendingOrderData[index].orderStatus.name,
                                 orderNo: value.pendingOrderData[index].orderNo,
-                               totalPrice: (int.parse(value
-                                          .pendingOrderData[index]
-                                          .sandLocation!
-                                          .price) *
-                                      15)
-                                  .toString(),
-                                // value.pendingOrderData[index].totalPrice,
-                                amount: value.pendingOrderData[index].totalAmount
+                                totalPrice:
+                                    value.pendingOrderData[index].totalPrice,
+                                amount: value
+                                    .pendingOrderData[index].totalAmount
                                     .toString(),
-                                pricePerCubic: value
-                                    .pendingOrderData[index].sandLocation!.price,
+                                pricePerCubic: value.pendingOrderData[index]
+                                    .sandLocation!.price,
                                 sandName: value.pendingOrderData[index]
                                     .sandLocation!.sand.name,
                                 sandImage: value.pendingOrderData[index]
@@ -153,12 +149,7 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                         orderStatus:
                             value.onTheWayOrderData[index].orderStatus.name,
                         orderNo: value.onTheWayOrderData[index].orderNo,
-                       totalPrice: (int.parse(value
-                                          .onTheWayOrderData[index]
-                                          .sandLocation!
-                                          .price) *
-                                      15)
-                                  .toString(),
+                        totalPrice: value.onTheWayOrderData[index].totalPrice,
                         amount: value.onTheWayOrderData[index].totalAmount
                             .toString(),
                         pricePerCubic:
@@ -208,12 +199,7 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                         orderStatus:
                             value.deliveredOrderData[index].orderStatus.name,
                         orderNo: value.deliveredOrderData[index].orderNo,
-                         totalPrice: (int.parse(value
-                                          .deliveredOrderData[index]
-                                          .sandLocation!
-                                          .price) *
-                                      15)
-                                  .toString(),
+                        totalPrice: value.deliveredOrderData[index].totalPrice,
                         amount: value.deliveredOrderData[index].totalAmount
                             .toString(),
                         pricePerCubic:
@@ -263,12 +249,7 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                         orderStatus:
                             value.rejectedOrderData[index].orderStatus.name,
                         orderNo: value.rejectedOrderData[index].orderNo,
-                       totalPrice: (int.parse(value
-                                          .rejectedOrderData[index]
-                                          .sandLocation!
-                                          .price) *
-                                      15)
-                                  .toString(),
+                        totalPrice: value.rejectedOrderData[index].totalPrice,
                         amount: value.rejectedOrderData[index].totalAmount
                             .toString(),
                         pricePerCubic:

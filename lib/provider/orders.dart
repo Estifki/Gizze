@@ -123,7 +123,7 @@ class OrderProvider with ChangeNotifier {
         },
       );
       final decodedData = jsonDecode(response.body);
-     
+
       if (response.statusCode != 200) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
@@ -160,10 +160,11 @@ class OrderProvider with ChangeNotifier {
           body: jsonEncode({
             "sandLocationId": sandID,
             // "amount": amount,
-            "additionalPrice": 50,
+            "additionalPrice": additionalPrice,
             "totalPrice": price,
-            "prePaymentPrice": 150,
-            "transportPrice": 25,
+            "prePaymentPrice": prePaymentPrice,
+
+            "transportPrice": transportPrice,
             "locationName": locationName,
             "latitude": lat,
             "longitude": long
