@@ -14,7 +14,7 @@ class AppColor {
 }
 
 class AppConst {
-  static const String appUrl = "https://gize.amanueld.info/api";
+  static const String appUrl = "https://api.gize.amanueld.info/api";
 }
 
 class ProductM {

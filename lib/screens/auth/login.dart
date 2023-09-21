@@ -208,11 +208,10 @@ class _SignInScreenForUserState extends State<SignInScreenForUser> {
         });
         showScaffoldMessanger(context: context, errorMessage: e.toString());
       } catch (e) {
-         setState(() {
+        setState(() {
           _isLoading = false;
         });
-        showScaffoldMessanger(
-            context: context, errorMessage: "Try Again Later");
+        showScaffoldMessanger(context: context, errorMessage: e.toString());
       }
     }
   }

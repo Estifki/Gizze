@@ -248,6 +248,12 @@ class SandDetailsLocationsWidget extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
     return Consumer<SandProvider>(
       builder: (context, value, _) {
+        if (value.sandLocationData[0].sandLocations.isEmpty) {
+          return const Padding(
+            padding: EdgeInsets.symmetric(vertical: 20),
+            child: Center(child: Text("No Sand Location Found")),
+          );
+        }
         return ListView.builder(
           shrinkWrap: true,
           itemCount: value.sandLocationData[0].sandLocations.length,
@@ -269,12 +275,12 @@ class SandDetailsLocationsWidget extends StatelessWidget {
                 ),
               )),
               child: Card(
-                margin: const EdgeInsets.only(top: 15.0, right: 15),
+                margin: const EdgeInsets.only(top: 10.0, right: 15),
                 shadowColor: Colors.grey,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 child: Container(
-                  height: screenSize.height * 0.19,
+                  height: screenSize.height * 0.20,
                   width: screenSize.width,
                   decoration: BoxDecoration(
                       color: Colors.white,

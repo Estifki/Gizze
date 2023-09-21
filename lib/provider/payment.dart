@@ -12,10 +12,10 @@ import '../const/const.dart';
 import '../uitil/http_error.dart';
 
 class PaymentProvider with ChangeNotifier {
-  double fineAmount = 0;
-  double prePaymentPercentage = 0;
-  double initialPrice = 0;
-  double perKmPrice = 0;
+  double fineAmount = 500;
+  double prePaymentPercentage = 40;
+  double initialPrice = 200;
+  double perKmPrice = 15;
   Future<void> addDeposit({
     required BuildContext context,
     required String token,
@@ -42,13 +42,13 @@ class PaymentProvider with ChangeNotifier {
             "referenceNumber": referenceNumber,
           }));
       final decodedData = jsonDecode(response.body);
-
-      if (response.statusCode != 201) {
+     
+      if (response.statusCode != 200) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
         await Provider.of<AuthProvider>(context, listen: false).getMyProfile();
       }
-    } catch (e) {
+    } catch (_) {
       rethrow;
     }
   }
@@ -67,11 +67,11 @@ class PaymentProvider with ChangeNotifier {
       if (response.statusCode != 200) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
-        fineAmount = double.parse(decodedData["data"]["fine_amount"]);
-        prePaymentPercentage =
-            double.parse(decodedData["data"]["pre_payment_percentage"]);
-        initialPrice = double.parse(decodedData["data"]["initial_price"]);
-        perKmPrice = double.parse(decodedData["data"]["per_km_price"]);
+        // fineAmount = double.parse(decodedData["data"]["fine_amount"]);
+        // prePaymentPercentage =
+        //     double.parse(decodedData["data"]["pre_payment_percentage"]);
+        // initialPrice = double.parse(decodedData["data"]["initial_price"]);
+        // perKmPrice = double.parse(decodedData["data"]["per_km_price"]);
       }
     } catch (e) {
       rethrow;

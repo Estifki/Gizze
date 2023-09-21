@@ -126,7 +126,7 @@ class _DepositScreenState extends State<DepositScreen> {
         setState(() {
           _isLoading = true;
         });
-        Provider.of<PaymentProvider>(context, listen: false)
+        await Provider.of<PaymentProvider>(context, listen: false)
             .addDeposit(
                 context: context,
                 token: Provider.of<AuthProvider>(context, listen: false).token!,
@@ -136,6 +136,9 @@ class _DepositScreenState extends State<DepositScreen> {
                 accountNumber: _accountnumberController.text,
                 referenceNumber: _referenceController.text)
             .then((value) {
+          setState(() {
+            _isLoading = false;
+          });
           showScaffoldMessanger(
               context: context,
               backgroundColor: Colors.green,
@@ -151,8 +154,7 @@ class _DepositScreenState extends State<DepositScreen> {
         setState(() {
           _isLoading = false;
         });
-        print(e.toString());
-        // showScaffoldMessanger(context: context, errorMessage: e.toString());
+        showScaffoldMessanger(context: context, errorMessage: e.toString());
       }
     }
   }
