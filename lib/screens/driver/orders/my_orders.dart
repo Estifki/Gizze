@@ -29,8 +29,8 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
           Provider.of<AuthProvider>(context, listen: false).token!, true);
       Provider.of<OrderProvider>(context, listen: false).getDelivered(
           Provider.of<AuthProvider>(context, listen: false).token!, true);
-      // Provider.of<OrderProvider>(context, listen: false).getRejected(
-      //     Provider.of<AuthProvider>(context, listen: false).token!, true);
+      Provider.of<OrderProvider>(context, listen: false).getRejected(
+          Provider.of<AuthProvider>(context, listen: false).token!, true);
       isinit = false;
     }
     super.didChangeDependencies();
@@ -44,8 +44,8 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
         Provider.of<AuthProvider>(context, listen: false).token!, true);
     Provider.of<OrderProvider>(context, listen: false).getDelivered(
         Provider.of<AuthProvider>(context, listen: false).token!, true);
-    // Provider.of<OrderProvider>(context, listen: false).getRejected(
-    //     Provider.of<AuthProvider>(context, listen: false).token!, true);
+    Provider.of<OrderProvider>(context, listen: false).getRejected(
+        Provider.of<AuthProvider>(context, listen: false).token!, true);
     return DefaultTabController(
         length: 4,
         child: Scaffold(

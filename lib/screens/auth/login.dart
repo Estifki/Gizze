@@ -139,32 +139,32 @@ class _SignInScreenForUserState extends State<SignInScreenForUser> {
                   //
                   //Forget Password
                   //
-                  GestureDetector(
-                    // onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => const ForgotPasswordScreen())),
-                    child: const Text(
-                      "Forgot Password",
-                      style:
-                          TextStyle(fontSize: 18, color: AppColor.primaryColor),
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   // onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  //   //     builder: (context) => const ForgotPasswordScreen())),
+                  //   child: const Text(
+                  //     "Forgot Password",
+                  //     style:
+                  //         TextStyle(fontSize: 18, color: AppColor.primaryColor),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
-            Positioned(
-                bottom: screenSize.height * 0.0,
-                child: GestureDetector(
-                  onTap: () {
-                    // Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    //     builder: (context) =>
-                    //         const PhoneRegisterScreenForUser()));
-                  },
-                  child: const Text(
-                    "Create An Account",
-                    style:
-                        TextStyle(fontSize: 18, color: AppColor.primaryColor),
-                  ),
-                ))
+            // Positioned(
+            //     bottom: screenSize.height * 0.0,
+            //     child: GestureDetector(
+            //       onTap: () {
+            //         // Navigator.of(context).pushReplacement(MaterialPageRoute(
+            //         //     builder: (context) =>
+            //         //         const PhoneRegisterScreenForUser()));
+            //       },
+            //       child: const Text(
+            //         "Create An Account",
+            //         style:
+            //             TextStyle(fontSize: 18, color: AppColor.primaryColor),
+            //       ),
+            //     ))
           ]),
         ),
       )),

@@ -73,7 +73,7 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
     Size screenSize = MediaQuery.of(context).size;
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.white));
-    // Provider.of<SandLocationProvider>(context).getSandAddress();
+    Provider.of<SandLocationProvider>(context).getSandAddress();
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -666,29 +666,25 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
           name: _nameController.text,
           email: _emailController.text,
           password: _passwordController.text,
+          accountNumber: _accountnumberController.text,
+          accountholderName: _accountNameController.text,
+          city: _cityController.text,
+          bank: _bankNameController.text,
+          plateNumber: _plateNumberController.text,
+          color: _colorController.text,
+          capacity: _loadCapacityController.text.toString(),
+          sandLocation: _sandLocationController.text.toString(),
+          lat: Provider.of<LocationProvider>(context, listen: false)
+              .userLat
+              .toString(),
+          long: Provider.of<LocationProvider>(context, listen: false)
+              .userLong
+              .toString(),
           profileImage: profileImagePath!,
+          carOwnershipDocPath: carOwnershipDocPath!,
+          licenceDocPath: licenceDocPath!,
         )
             .then((_) {
-          // await Provider.of<AuthProvider>(context, listen: false)
-          //     .register(
-          //   accountNumber: _accountnumberController.text,
-          //   accountholderName: _accountNameController.text,
-          //   city: _cityController.text,
-          //   bank: _bankNameController.text,
-          //   plateNumber: _plateNumberController.text,
-          //   color: _colorController.text,
-          //   capacity: _loadCapacityController.text.toString(),
-          //   sandLocation: _sandLocationController.text.toString(),
-          //   lat: Provider.of<LocationProvider>(context, listen: false)
-          //       .userLat
-          //       .toString(),
-          //   long: Provider.of<LocationProvider>(context, listen: false)
-          //       .userLong
-          //       .toString(),
-          //   carOwnershipDocPath: carOwnershipDocPath!,
-          //   licenceDocPath: licenceDocPath!,
-          // )
-          //     .then((_) {
           setState(() {
             _isLoading = false;
           });
@@ -701,7 +697,6 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
                 builder: (context) => const SignInScreenForUser()),
           );
         });
-        // });
       } on CustomHttpException catch (e) {
         setState(() {
           _isLoading = false;

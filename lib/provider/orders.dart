@@ -108,34 +108,34 @@ class OrderProvider with ChangeNotifier {
     }
   }
 
-  // Future<void> getRejected(String token, bool isDriver) async {
-  //   String url = isDriver
-  //       ? "${AppConst.appUrl}/driver-rejected-orders"
-  //       : "${AppConst.appUrl}/rejected-orders";
+  Future<void> getRejected(String token, bool isDriver) async {
+    String url = isDriver
+        ? "${AppConst.appUrl}/driver-rejected-orders"
+        : "${AppConst.appUrl}/rejected-orders";
 
-  //   try {
-  //     http.Response response = await http.get(
-  //       Uri.parse(url),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "Accept": "application/json",
-  //         HttpHeaders.authorizationHeader: "Bearer $token"
-  //       },
-  //     );
-  //     final decodedData = jsonDecode(response.body);
+    try {
+      http.Response response = await http.get(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          HttpHeaders.authorizationHeader: "Bearer $token"
+        },
+      );
+      final decodedData = jsonDecode(response.body);
 
-  //     if (response.statusCode != 200) {
-  //       throw CustomHttpException(errorMessage: decodedData["data"]);
-  //     } else {
-  //       _rejectedOrderData.clear();
-  //       final data = ordersModelFromJson(response.body);
-  //       _rejectedOrderData.addAll(data.data);
-  //       notifyListeners();
-  //     }
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
+      if (response.statusCode != 200) {
+        throw CustomHttpException(errorMessage: decodedData["data"]);
+      } else {
+        _rejectedOrderData.clear();
+        final data = ordersModelFromJson(response.body);
+        _rejectedOrderData.addAll(data.data);
+        notifyListeners();
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   Future<void> orderSand(
       {required String token,

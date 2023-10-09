@@ -216,6 +216,18 @@ class AuthProvider with ChangeNotifier {
       required name,
       required email,
       required password,
+      required accountNumber,
+      required accountholderName,
+      required city,
+      required bank,
+      required plateNumber,
+      required color,
+      required capacity,
+      required sandLocation,
+      required lat,
+      required long,
+      required PlatformFile carOwnershipDocPath,
+      required PlatformFile licenceDocPath,
       required PlatformFile profileImage}) async {
     final url = Uri.parse("${AppConst.appUrl}/register-driver");
     try {
@@ -227,45 +239,6 @@ class AuthProvider with ChangeNotifier {
       request.fields['email'] = email;
       request.fields['password'] = password;
       request.fields["confirm_password"] = password;
-      // request.files.add(await http.MultipartFile.fromPath(
-      //   'profile_image',
-      //   profileImage.path!,
-      // ));
-
-      final response = await request.send();
-
-      var responseBody = await (response.stream.bytesToString());
-
-      var decodedData = jsonDecode(responseBody);
-    
-      if (response.statusCode != 201) {
-        throw CustomHttpException(errorMessage: decodedData["data"]);
-      } else {
-        token = decodedData['data']['token'];
-      }
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future register({
-    required accountNumber,
-    required accountholderName,
-    required city,
-    required bank,
-    required plateNumber,
-    required color,
-    required capacity,
-    required sandLocation,
-    required lat,
-    required long,
-    required PlatformFile carOwnershipDocPath,
-    required PlatformFile licenceDocPath,
-  }) async {
-    final url = Uri.parse("${AppConst.appUrl}/drivers");
-    try {
-      final request = http.MultipartRequest('POST', url);
-      request.headers['Authorization'] = 'Bearer $token';
       request.fields['account_number'] = accountNumber;
       request.fields['account_holder_name'] = accountholderName;
       request.fields['city'] = city;
@@ -289,22 +262,21 @@ class AuthProvider with ChangeNotifier {
         licenceDocPath.path!,
         // contentType: MediaType('application', 'pdf'),
       ));
+      request.files.add(await http.MultipartFile.fromPath(
+        'profile_image',
+        profileImage.path!,
+      ));
 
       final response = await request.send();
 
       var responseBody = await (response.stream.bytesToString());
+
       var decodedData = jsonDecode(responseBody);
 
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
-        // var prefs = await SharedPreferences.getInstance();
-        // userID = decodedData['data']["user"]["id"];
-        // token = decodedData['data']['token'];
-        // role = decodedData['data']["user"]["role"]["name"];
-        // prefs.setString("LocalId", decodedData['data']["user"]["id"]);
-        // prefs.setString("LocalToken", decodedData['data']['token']);
-        // prefs.setString("Role", decodedData['data']["user"]["role"]["name"]);
+        token = decodedData['data']['token'];
       }
     } catch (e) {
       rethrow;

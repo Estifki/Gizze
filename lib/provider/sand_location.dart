@@ -11,27 +11,27 @@ import '../uitil/http_error.dart';
 
 class SandLocationProvider with ChangeNotifier {
   final List<SandAddressData> _sandAddressData = [
-    SandAddressData(
-      id: "9a4b99e2-3474-4342-987c-3ec19694ae0a",
-      name: "Adama",
-      location: Location(latitude: 26.5, longitude: 25.6),
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-    ),
-    SandAddressData(
-      id: "9a4b99e2-3547-49e6-88e2-2bff8f1a2ed6",
-      name: "Addis Ababa",
-      location: Location(latitude: 26.5, longitude: 25.6),
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-    ),
-    SandAddressData(
-      id: "9a4b99e2-3520-4d4b-820a-65f0913f3208",
-      name: "Bahir Dar",
-      location: Location(latitude: 26.5, longitude: 25.6),
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-    ),
+    // SandAddressData(
+    //   id: "9a4b99e2-3474-4342-987c-3ec19694ae0a",
+    //   name: "Adama",
+    //   location: Location(latitude: 26.5, longitude: 25.6),
+    //   createdAt: DateTime.now(),
+    //   updatedAt: DateTime.now(),
+    // ),
+    // SandAddressData(
+    //   id: "9a4b99e2-3547-49e6-88e2-2bff8f1a2ed6",
+    //   name: "Addis Ababa",
+    //   location: Location(latitude: 26.5, longitude: 25.6),
+    //   createdAt: DateTime.now(),
+    //   updatedAt: DateTime.now(),
+    // ),
+    // SandAddressData(
+    //   id: "9a4b99e2-3520-4d4b-820a-65f0913f3208",
+    //   name: "Bahir Dar",
+    //   location: Location(latitude: 26.5, longitude: 25.6),
+    //   createdAt: DateTime.now(),
+    //   updatedAt: DateTime.now(),
+    // ),
   ];
 
   List<SandAddressData> get sandAddressData => [..._sandAddressData];
