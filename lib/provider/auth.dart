@@ -294,19 +294,19 @@ class AuthProvider with ChangeNotifier {
       final response = await request.send();
 
       var responseBody = await (response.stream.bytesToString());
-
+      print(response.statusCode);
       var decodedData = jsonDecode(responseBody);
 
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
-        var prefs = await SharedPreferences.getInstance();
-        userID = decodedData['data']["user"]["id"];
-        token = decodedData['data']['token'];
-        role = decodedData['data']["user"]["role"]["name"];
-        prefs.setString("LocalId", decodedData['data']["user"]["id"]);
-        prefs.setString("LocalToken", decodedData['data']['token']);
-        prefs.setString("Role", decodedData['data']["user"]["role"]["name"]);
+        // var prefs = await SharedPreferences.getInstance();
+        // userID = decodedData['data']["user"]["id"];
+        // token = decodedData['data']['token'];
+        // role = decodedData['data']["user"]["role"]["name"];
+        // prefs.setString("LocalId", decodedData['data']["user"]["id"]);
+        // prefs.setString("LocalToken", decodedData['data']['token']);
+        // prefs.setString("Role", decodedData['data']["user"]["role"]["name"]);
       }
     } catch (e) {
       rethrow;

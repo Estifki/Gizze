@@ -48,8 +48,8 @@ class PaymentProvider with ChangeNotifier {
             "referenceNumber": referenceNumber,
           }));
       final decodedData = jsonDecode(response.body);
-      print(response.body);
-      if (response.statusCode != 200) {
+      print(response.statusCode);
+      if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
         await Provider.of<AuthProvider>(context, listen: false).getMyProfile();
