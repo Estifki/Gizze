@@ -13,7 +13,6 @@ import '../../../../provider/location.dart';
 import '../../../../provider/sand_location.dart';
 import '../../../../uitil/http_error.dart';
 import '../../../../uitil/toast.dart';
-import '../../../driver/bottom_bar_driver.dart';
 
 class RegisterScreenForDriver extends StatefulWidget {
   const RegisterScreenForDriver({super.key});

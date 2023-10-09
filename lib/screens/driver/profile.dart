@@ -108,7 +108,7 @@ class _ProfileScreenForDriverState extends State<ProfileScreenForDriver> {
                       GestureDetector(
                         onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(
-                                builder: (context) => PaymentMethodScreen())),
+                                builder: (context) => const PaymentMethodScreen())),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,

@@ -48,7 +48,6 @@ class PaymentProvider with ChangeNotifier {
             "referenceNumber": referenceNumber,
           }));
       final decodedData = jsonDecode(response.body);
-      print(response.statusCode);
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {

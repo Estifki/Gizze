@@ -237,8 +237,7 @@ class AuthProvider with ChangeNotifier {
       var responseBody = await (response.stream.bytesToString());
 
       var decodedData = jsonDecode(responseBody);
-      print(responseBody);
-
+    
       if (response.statusCode != 201) {
         throw CustomHttpException(errorMessage: decodedData["data"]);
       } else {
@@ -294,7 +293,6 @@ class AuthProvider with ChangeNotifier {
       final response = await request.send();
 
       var responseBody = await (response.stream.bytesToString());
-      print(response.statusCode);
       var decodedData = jsonDecode(responseBody);
 
       if (response.statusCode != 201) {
