@@ -7,27 +7,10 @@ import 'bottom_bar.dart';
 class CategoryScreen extends StatelessWidget {
   CategoryScreen({super.key});
 
- final List categoryList = [
-    {
-      "name": "Sand",
-      "status": "1",
-    },
-    {
-      "name": "Gravel",
-      "status": "0",
-    },
-    {
-      "name": "Marble",
-      "status": "0",
-    },
-    {
-      "name": "Granite",
-      "status": "0",
-    },
-    {
-      "name": "Limestone",
-      "status": "0",
-    }
+  final List categoryList = [
+    {"name": "Sand", "status": "1", "image": "assets/sand_bg.jpg"},
+    {"name": "Gravel", "status": "0", "image": "assets/gravel_bg.jpg"},
+    {"name": "Limestone", "status": "0", "image": "assets/limestone_bg.jpg"}
   ];
 
   @override
@@ -71,13 +54,23 @@ class CategoryScreen extends StatelessWidget {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                      color: AppColor.thirdColor,
+                      image: DecorationImage(
+                          image: AssetImage(categoryList[index]["image"]),
+                          fit: BoxFit.cover),
+                      // color: AppColor.thirdColor,
+
                       borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                    child: Text(
-                      categoryList[index]["name"],
-                      style:
-                          const TextStyle(fontSize: 17.5, color: Colors.white),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColor.thirdColor.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        categoryList[index]["name"],
+                        style: const TextStyle(
+                            fontSize: 17.5, color: Colors.white),
+                      ),
                     ),
                   ),
                 ),

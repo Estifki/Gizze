@@ -270,8 +270,33 @@ class SandDetailsLocationsWidget extends StatelessWidget {
                       .sandLocationData[0].sandLocations[index].location.name,
                   pricePerCubic:
                       value.sandLocationData[0].sandLocations[index].price,
-                  lat: 7.3188801,
-                  long: 41.3618523,
+                  lat: value.sandLocationData[0].sandLocations[index].owner
+                              .driver ==
+                          null
+                      ? 7.3188801
+                      : double.parse(value
+                          .sandLocationData[0]
+                          .sandLocations[index]
+                          .owner
+                          .driver!
+                          .location
+                          .latitude),
+                  long: value.sandLocationData[0].sandLocations[index].owner
+                              .driver ==
+                          null
+                      ? 41.3618523
+                      : double.parse(value
+                          .sandLocationData[0]
+                          .sandLocations[index]
+                          .owner
+                          .driver!
+                          .location
+                          .longitude),
+                  capacity: value.sandLocationData[0].sandLocations[index].owner
+                              .driver ==
+                          null
+                      ? ""
+                      : "Capacity: ${value.sandLocationData[0].sandLocations[index].owner.driver!.carInformation[0].loadCapacity} M³",
                 ),
               )),
               child: Card(
@@ -324,7 +349,7 @@ class SandDetailsLocationsWidget extends StatelessWidget {
                                 Text(
                                   value.sandLocationData[0].sandLocations[index]
                                       .sand.description,
-                                  maxLines: 2,
+                                  maxLines: 1,
                                   style: const TextStyle(
                                       fontSize: 15,
                                       overflow: TextOverflow.ellipsis,
@@ -341,6 +366,20 @@ class SandDetailsLocationsWidget extends StatelessWidget {
                                       overflow: TextOverflow.ellipsis,
                                       color: Colors.black),
                                 ),
+
+                                const SizedBox(height: 3),
+                                value.sandLocationData[0].sandLocations[index]
+                                            .owner.driver ==
+                                        null
+                                    ? Container()
+                                    : Text(
+                                        "Capacity: ${value.sandLocationData[0].sandLocations[index].owner.driver!.carInformation[0].loadCapacity} M³",
+                                        maxLines: 2,
+                                        style: const TextStyle(
+                                            fontSize: 15,
+                                            overflow: TextOverflow.ellipsis,
+                                            color: Colors.black),
+                                      ),
 
                                 const SizedBox(height: 6),
 

@@ -23,30 +23,30 @@ class OrderSandScreen extends StatefulWidget {
   final String pricePerCubic;
   final double lat;
   final double long;
-  // final double destinationLat;
+  final String capacity;
   // final double destinationLong;
 
   // final String deliveryManName;
 
   // final String deliveryManPhone;
 
-  const OrderSandScreen(
-      {super.key,
-      required this.orderID,
-      required this.sandName,
-      required this.sandImage,
-      required this.address,
-      required this.pricePerCubic,
-      required this.lat,
-      required this.long
-      // required this.totalPrice,
-      // required this.sourceLat,
-      // required this.sourceLong,
-      // required this.destinationLat,
-      // required this.destinationLong,
-      // required this.deliveryManName,
-      // required this.deliveryManPhone,
-      });
+  const OrderSandScreen({
+    super.key,
+    required this.orderID,
+    required this.sandName,
+    required this.sandImage,
+    required this.address,
+    required this.pricePerCubic,
+    required this.lat,
+    required this.long,
+    required this.capacity,
+    // required this.sourceLat,
+    // required this.sourceLong,
+    // required this.destinationLat,
+    // required this.destinationLong,
+    // required this.deliveryManName,
+    // required this.deliveryManPhone,
+  });
 
   @override
   State<OrderSandScreen> createState() => _OrderSandScreenState();
@@ -89,6 +89,11 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
                     children: [
                       Text("Pric:  Br ${widget.pricePerCubic}",
                           style: const TextStyle(fontSize: 15)),
+                      const SizedBox(height: 4),
+                      widget.capacity == ""
+                          ? const SizedBox()
+                          : Text(widget.capacity,
+                              style: const TextStyle(fontSize: 15)),
                       const SizedBox(height: 4),
                       Text("Address:  ${widget.address}",
                           style: const TextStyle(fontSize: 15)),
