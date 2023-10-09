@@ -215,26 +215,58 @@ class AuthProvider with ChangeNotifier {
       {required phone,
       required name,
       required email,
-      required accountNumber,
-      required accountholderName,
-      required city,
-      required bank,
       required password,
-      required plateNumber,
-      required color,
-      required capacity,
-      required sandLocation,
-      required lat,
-      required long,
-      required PlatformFile carOwnershipDocPath,
-      required PlatformFile licenceDocPath,
       required PlatformFile profileImage}) async {
     final url = Uri.parse("${AppConst.appUrl}/register-driver");
     try {
       final request = http.MultipartRequest('POST', url);
+      request.headers['Content-Type'] = '*/*';
+      request.headers['Accept'] = 'application/json';
       request.fields['phone'] = phone;
       request.fields['name'] = name;
       request.fields['email'] = email;
+      request.fields['password'] = password;
+      request.fields["confirm_password"] = password;
+      // request.files.add(await http.MultipartFile.fromPath(
+      //   'profile_image',
+      //   profileImage.path!,
+      // ));
+
+      final response = await request.send();
+
+      var responseBody = await (response.stream.bytesToString());
+
+      var decodedData = jsonDecode(responseBody);
+      print(responseBody);
+
+      if (response.statusCode != 201) {
+        throw CustomHttpException(errorMessage: decodedData["data"]);
+      } else {
+        token = decodedData['data']['token'];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future register({
+    required accountNumber,
+    required accountholderName,
+    required city,
+    required bank,
+    required plateNumber,
+    required color,
+    required capacity,
+    required sandLocation,
+    required lat,
+    required long,
+    required PlatformFile carOwnershipDocPath,
+    required PlatformFile licenceDocPath,
+  }) async {
+    final url = Uri.parse("${AppConst.appUrl}/drivers");
+    try {
+      final request = http.MultipartRequest('POST', url);
+      request.headers['Authorization'] = 'Bearer $token';
       request.fields['account_number'] = accountNumber;
       request.fields['account_holder_name'] = accountholderName;
       request.fields['city'] = city;
@@ -246,11 +278,6 @@ class AuthProvider with ChangeNotifier {
       request.fields["locationName"] = city;
       request.fields["latitude"] = lat;
       request.fields["longitude"] = long;
-      request.fields['password'] = password;
-      request.fields["confirm_password"] = password;
-      // request.fields["carOwnershipDoc"] = carOwnershipDocPath.path!;
-      // request.fields["LicenceDoc"] = licenceDocPath.path!;
-      // request.fields["profile_image"] = profileImage.path!;
 
       request.files.add(await http.MultipartFile.fromPath(
         'carOwnershipDoc',
@@ -262,13 +289,6 @@ class AuthProvider with ChangeNotifier {
         'LicenceDoc',
         licenceDocPath.path!,
         // contentType: MediaType('application', 'pdf'),
-      ));
-
-      request.files.add(await http.MultipartFile.fromPath(
-        'profile_image',
-        profileImage.path!,
-        // contentType: MediaType(
-        //     'image', 'jpeg'), // Adjust the media type according to your file
       ));
 
       final response = await request.send();

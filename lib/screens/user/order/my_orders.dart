@@ -29,8 +29,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
           Provider.of<AuthProvider>(context, listen: false).token!, false);
       Provider.of<OrderProvider>(context, listen: false).getDelivered(
           Provider.of<AuthProvider>(context, listen: false).token!, false);
-      Provider.of<OrderProvider>(context, listen: false).getRejected(
-          Provider.of<AuthProvider>(context, listen: false).token!, false);
+      // Provider.of<OrderProvider>(context, listen: false).getRejected(
+      //     Provider.of<AuthProvider>(context, listen: false).token!, false);
       isinit = false;
     }
     super.didChangeDependencies();
@@ -44,8 +44,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
         Provider.of<AuthProvider>(context, listen: false).token!, false);
     Provider.of<OrderProvider>(context, listen: false).getDelivered(
         Provider.of<AuthProvider>(context, listen: false).token!, false);
-    Provider.of<OrderProvider>(context, listen: false).getRejected(
-        Provider.of<AuthProvider>(context, listen: false).token!, false);
+    // Provider.of<OrderProvider>(context, listen: false).getRejected(
+    //     Provider.of<AuthProvider>(context, listen: false).token!, false);
     return DefaultTabController(
         length: 4,
         child: Scaffold(

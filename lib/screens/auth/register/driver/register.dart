@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
+import '../../login.dart';
 import '/../../const/const.dart';
 import '/../../widget/textfield.dart';
 import '../../../../provider/auth.dart';
@@ -73,7 +74,7 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
     Size screenSize = MediaQuery.of(context).size;
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.white));
-    Provider.of<SandLocationProvider>(context).getSandAddress();
+    // Provider.of<SandLocationProvider>(context).getSandAddress();
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -663,39 +664,44 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
         await Provider.of<AuthProvider>(context, listen: false)
             .registerDriver(
           phone: "251${_phoneController.text}",
-          accountNumber: _accountnumberController.text,
-          accountholderName: _accountNameController.text,
-          city: _cityController.text,
-          bank: _bankNameController.text,
           name: _nameController.text,
           email: _emailController.text,
           password: _passwordController.text,
-          plateNumber: _plateNumberController.text,
-          color: _colorController.text,
-          capacity: _loadCapacityController.text.toString(),
-          sandLocation: _sandLocationController.text.toString(),
-          lat: Provider.of<LocationProvider>(context, listen: false)
-              .userLat
-              .toString(),
-          long: Provider.of<LocationProvider>(context, listen: false)
-              .userLong
-              .toString(),
-          carOwnershipDocPath: carOwnershipDocPath!,
-          licenceDocPath: licenceDocPath!,
           profileImage: profileImagePath!,
         )
-            .then((_) {
-          setState(() {
-            _isLoading = false;
-          });
-          showScaffoldMessanger(
-              context: context,
-              backgroundColor: Colors.green,
-              errorMessage: "Driver Registered Successfully");
-          Navigator.of(context).pushAndRemoveUntil(
+            .then((_) async {
+          await Provider.of<AuthProvider>(context, listen: false)
+              .register(
+            accountNumber: _accountnumberController.text,
+            accountholderName: _accountNameController.text,
+            city: _cityController.text,
+            bank: _bankNameController.text,
+            plateNumber: _plateNumberController.text,
+            color: _colorController.text,
+            capacity: _loadCapacityController.text.toString(),
+            sandLocation: _sandLocationController.text.toString(),
+            lat: Provider.of<LocationProvider>(context, listen: false)
+                .userLat
+                .toString(),
+            long: Provider.of<LocationProvider>(context, listen: false)
+                .userLong
+                .toString(),
+            carOwnershipDocPath: carOwnershipDocPath!,
+            licenceDocPath: licenceDocPath!,
+          )
+              .then((_) {
+            setState(() {
+              _isLoading = false;
+            });
+            showScaffoldMessanger(
+                context: context,
+                backgroundColor: Colors.green,
+                errorMessage: "Driver Registered Successfully");
+            Navigator.of(context).push(
               MaterialPageRoute(
-                  builder: (context) => const DriverCustomBottomBar()),
-              (route) => false);
+                  builder: (context) => const SignInScreenForUser()),
+            );
+          });
         });
       } on CustomHttpException catch (e) {
         setState(() {
