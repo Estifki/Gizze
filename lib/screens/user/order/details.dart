@@ -1,8 +1,12 @@
+import 'package:ashewa_d/provider/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 
 import '../../../const/const.dart';
+import '../../../provider/orders.dart';
+import '../../../uitil/toast.dart';
 
 class MyOrdersDetailsScreen extends StatefulWidget {
   final String orderID;
@@ -48,6 +52,7 @@ class MyOrdersDetailsScreen extends StatefulWidget {
 
 class _MyOrdersDetailsScreenState extends State<MyOrdersDetailsScreen> {
   List<LatLng> polyLineCoordinate = [];
+  bool _isLoading = false;
 
   void getPolyPoints() async {
     PolylinePoints polylinePoints = PolylinePoints();
@@ -193,6 +198,79 @@ class _MyOrdersDetailsScreenState extends State<MyOrdersDetailsScreen> {
                 style: TextStyle(fontSize: 18, color: AppColor.primaryColor),
               )),
             ),
+            const SizedBox(height: 25),
+            widget.orderStatus == "Pending"
+                ? _isLoading
+                    ? const Center(child: CircularProgressIndicator.adaptive())
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                            GestureDetector(
+                              onTap: () async {
+                                try {
+                                  setState(() {
+                                    _isLoading = true;
+                                  });
+                                  Provider.of<OrderProvider>(context,
+                                          listen: false)
+                                      .userDeleteOrder(
+                                          token: Provider.of<AuthProvider>(
+                                                  context,
+                                                  listen: false)
+                                              .token!,
+                                          orderID: widget.orderID)
+                                      .then((_) {
+                                    showScaffoldMessanger(
+                                        context: context,
+                                        backgroundColor: Colors.green,
+                                        errorMessage: "Order Cancled");
+                                    setState(() {
+                                      _isLoading = false;
+                                    });
+                                    Navigator.of(context).pop();
+                                    Provider.of<OrderProvider>(context,
+                                            listen: false)
+                                        .getPending(
+                                            Provider.of<AuthProvider>(context,
+                                                    listen: false)
+                                                .token!,
+                                            true);
+
+                                    // Provider.of<OrderProvider>(context,
+                                    //         listen: false)
+                                    //     .getRejected(
+                                    //         Provider.of<AuthProvider>(context,
+                                    //                 listen: false)
+                                    //             .token!,
+                                    //         true);
+                                  });
+                                } catch (_) {
+                                  setState(() {
+                                    _isLoading = false;
+                                  });
+                                  showScaffoldMessanger(
+                                      context: context,
+                                      errorMessage: "Please Try Again Later");
+                                }
+                              },
+                              child: Container(
+                                height: 42,
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                child: const Text(
+                                  "Cancel Order",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ])
+                : Container()
           ],
         ),
       ),

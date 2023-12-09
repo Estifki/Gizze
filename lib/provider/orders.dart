@@ -200,4 +200,26 @@ class OrderProvider with ChangeNotifier {
       rethrow;
     }
   }
+
+  Future userDeleteOrder({required token, required orderID}) async {
+//
+    String url = "${AppConst.appUrl}/my-orders/$orderID";
+
+    try {
+      http.Response response = await http.delete(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          HttpHeaders.authorizationHeader: "Bearer $token"
+        },
+      );
+      final decodedData = jsonDecode(response.body);
+      if (response.statusCode != 200) {
+        throw CustomHttpException(errorMessage: decodedData["data"]);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

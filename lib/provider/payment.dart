@@ -58,28 +58,28 @@ class PaymentProvider with ChangeNotifier {
     }
   }
 
-  Future<void> getPaymentMethods({required String token}) async {
-    String url = "${AppConst.appUrl}/payment-methods";
+  // Future<void> getPaymentMethods({required String token}) async {
+  //   String url = "${AppConst.appUrl}/payment-methods";
 
-    try {
-      http.Response response = await http.get(Uri.parse(url), headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        HttpHeaders.authorizationHeader: "Bearer $token"
-      });
-      final decodedData = jsonDecode(response.body);
+  //   try {
+  //     http.Response response = await http.get(Uri.parse(url), headers: {
+  //       "Content-Type": "application/json",
+  //       "Accept": "application/json",
+  //       HttpHeaders.authorizationHeader: "Bearer $token"
+  //     });
+  //     final decodedData = jsonDecode(response.body);
 
-      if (response.statusCode != 200) {
-        throw CustomHttpException(errorMessage: decodedData["data"]);
-      } else {
-        final data = paymentMethodesModelFromJson(response.body);
-        _paymentMethods.clear();
-        _paymentMethods.addAll(data.data);
-      }
-    } catch (e) {
-      rethrow;
-    }
-  }
+  //     if (response.statusCode != 200) {
+  //       throw CustomHttpException(errorMessage: decodedData["data"]);
+  //     } else {
+  //       final data = paymentMethodesModelFromJson(response.body);
+  //       _paymentMethods.clear();
+  //       _paymentMethods.addAll(data.data);
+  //     }
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
 
   Future<void> priceSetting({required String token}) async {
     String url = "${AppConst.appUrl}/price-settings";

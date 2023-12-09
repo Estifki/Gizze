@@ -125,8 +125,10 @@ class _MyOrdersDetailsScreenForDriverState
                       Text("Name: ${widget.orderedUserName}",
                           style: const TextStyle(fontSize: 15.5)),
                       const SizedBox(height: 5),
-                      Text("Phone: ${widget.orderedUserPhone}",
-                          style: const TextStyle(fontSize: 15.5)),
+                      widget.orderStatus == "On The Way"
+                          ? Text("Phone: ${widget.orderedUserPhone}",
+                              style: const TextStyle(fontSize: 15.5))
+                          : Container(),
                       const SizedBox(height: 10),
                       Text("${widget.sourceName} to ${widget.destinationName} ",
                           style: const TextStyle(fontSize: 15.5)),
@@ -209,43 +211,57 @@ class _MyOrdersDetailsScreenForDriverState
                         children: [
                           GestureDetector(
                             onTap: () async {
+                              DateTime currentTime = DateTime.now();
+
                               try {
                                 setState(() {
                                   _isLoading = true;
                                 });
-                                Provider.of<OrderProvider>(context,
-                                        listen: false)
-                                    .updateOrderStatus(
-                                        token: Provider.of<AuthProvider>(
-                                                context,
-                                                listen: false)
-                                            .token!,
-                                        orderID: widget.orderID,
-                                        orderStatus: "On The Way")
-                                    .then((_) {
+                                if (currentTime.hour != 10 &&
+                                    currentTime.minute != 0) {
                                   showScaffoldMessanger(
                                       context: context,
-                                      backgroundColor: Colors.green,
-                                      errorMessage: "Order Accepted");
+                                      backgroundColor: Colors.red,
+                                      errorMessage:
+                                          "Please Wait Until 4 o'clock");
                                   setState(() {
                                     _isLoading = false;
                                   });
-                                  Navigator.of(context).pop();
+                                } else {
                                   Provider.of<OrderProvider>(context,
                                           listen: false)
-                                      .getPending(
-                                          Provider.of<AuthProvider>(context,
+                                      .updateOrderStatus(
+                                          token: Provider.of<AuthProvider>(
+                                                  context,
                                                   listen: false)
                                               .token!,
-                                          true);
-                                  Provider.of<OrderProvider>(context,
-                                          listen: false)
-                                      .getOnTheWayOrders(
-                                          Provider.of<AuthProvider>(context,
-                                                  listen: false)
-                                              .token!,
-                                          true);
-                                });
+                                          orderID: widget.orderID,
+                                          orderStatus: "On The Way")
+                                      .then((_) {
+                                    showScaffoldMessanger(
+                                        context: context,
+                                        backgroundColor: Colors.green,
+                                        errorMessage: "Order Accepted");
+                                    setState(() {
+                                      _isLoading = false;
+                                    });
+                                    Navigator.of(context).pop();
+                                    Provider.of<OrderProvider>(context,
+                                            listen: false)
+                                        .getPending(
+                                            Provider.of<AuthProvider>(context,
+                                                    listen: false)
+                                                .token!,
+                                            true);
+                                    Provider.of<OrderProvider>(context,
+                                            listen: false)
+                                        .getOnTheWayOrders(
+                                            Provider.of<AuthProvider>(context,
+                                                    listen: false)
+                                                .token!,
+                                            true);
+                                  });
+                                }
                               } catch (_) {
                                 setState(() {
                                   _isLoading = false;

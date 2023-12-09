@@ -1,3 +1,4 @@
+import 'package:ashewa_d/model/user/payment.dart';
 import 'package:ashewa_d/provider/payment.dart';
 
 import '../../../provider/auth.dart';
@@ -79,9 +80,7 @@ class PaymentMethodScreen extends StatelessWidget {
                   EdgeInsets.symmetric(vertical: screenSize.height * 0.015),
               child: GridView.builder(
                 shrinkWrap: true,
-                itemCount: Provider.of<PaymentProvider>(context, listen: false)
-                    .paymentMethods
-                    .length,
+                itemCount: pay.length,
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 padding:
@@ -95,10 +94,7 @@ class PaymentMethodScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      if (Provider.of<PaymentProvider>(context, listen: false)
-                              .paymentMethods[index]
-                              .status ==
-                          "0") {
+                      if (pay[index].status == false) {
                         showScaffoldMessanger(
                             context: context,
                             errorMessage: "Comming Soon",
@@ -106,14 +102,7 @@ class PaymentMethodScreen extends StatelessWidget {
                       } else {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => DepositScreen(
-                              name: Provider.of<PaymentProvider>(context,
-                                      listen: false)
-                                  .paymentMethods[index]
-                                  .name,
-                              id: Provider.of<PaymentProvider>(context,
-                                      listen: false)
-                                  .paymentMethods[index].account!
-                                  .id),
+                              name: pay[index].title, id: pay[index].id),
                         ));
                       }
                     },
@@ -123,9 +112,7 @@ class PaymentMethodScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)),
                       child: Center(
                         child: Text(
-                          Provider.of<PaymentProvider>(context, listen: false)
-                              .paymentMethods[index]
-                              .name,
+                          pay[index].title,
                           style: const TextStyle(
                               fontSize: 17.5, color: Colors.white),
                         ),
@@ -140,4 +127,24 @@ class PaymentMethodScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+List<paymentMethod> pay = [
+  paymentMethod(
+      id: "9a53db19-9b3f-4cef-a3b0-1ef0a992f483", title: "CBE", status: true),
+  paymentMethod(
+      id: "9a53db19-9ae7-4357-9215-33b9c689b3b9",
+      title: "Tele Birr",
+      status: true),
+  paymentMethod(id: "3", title: "Awash"),
+  paymentMethod(id: "3", title: "Dashen"),
+  paymentMethod(id: "3", title: "Buna"),
+  paymentMethod(id: "3", title: "Abyssinia"),
+];
+
+class paymentMethod {
+  final String title;
+  final String id;
+  final bool status;
+  paymentMethod({required this.id, required this.title, this.status = false});
 }

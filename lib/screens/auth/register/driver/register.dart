@@ -23,6 +23,7 @@ class RegisterScreenForDriver extends StatefulWidget {
 }
 
 class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
+  bool isInit = true;
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
@@ -69,11 +70,19 @@ class _RegisterScreenForDriverState extends State<RegisterScreenForDriver> {
   }
 
   @override
+  void didChangeDependencies() {
+    if (isInit) {
+      Provider.of<SandLocationProvider>(context).getSandAddress();
+      isInit = false;
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.white));
-    Provider.of<SandLocationProvider>(context).getSandAddress();
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,

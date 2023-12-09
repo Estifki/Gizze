@@ -31,8 +31,8 @@ class _ProfileScreenForUserState extends State<ProfileScreenForUser> {
     if (_isInit) {
       _myProfile =
           Provider.of<AuthProvider>(context, listen: false).getMyProfile();
-      Provider.of<PaymentProvider>(context, listen: false).getPaymentMethods(
-          token: Provider.of<AuthProvider>(context, listen: false).token!);
+      // Provider.of<PaymentProvider>(context, listen: false).getPaymentMethods(
+      //     token: Provider.of<AuthProvider>(context, listen: false).token!);
     }
     super.didChangeDependencies();
   }

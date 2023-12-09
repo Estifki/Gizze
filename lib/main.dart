@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Gizze',
       theme: ThemeData(
+          useMaterial3: false,
           scaffoldBackgroundColor: Colors.white,
           appBarTheme: const AppBarTheme(color: Colors.white, elevation: 0.0)),
       home: const SplashScreen(),
