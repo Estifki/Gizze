@@ -1,4 +1,3 @@
-import 'package:ashewa_d/provider/payment.dart';
 
 import 'payment_method.dart';
 

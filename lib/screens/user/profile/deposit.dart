@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import '../../../provider/auth.dart';
 import '../../../provider/payment.dart';
 import 'package:flutter/material.dart';

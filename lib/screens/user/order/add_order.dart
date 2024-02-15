@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:ashewa_d/provider/payment.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -282,15 +284,15 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
               ((Provider.of<PaymentProvider>(context, listen: false)
                       .prePaymentPercentage /
                   100)));
-      print("distnace In KM $distanceInKm");
+      // print("distnace In KM $distanceInKm");
 
-      print("transportPrice  $transportPrice");
+      // print("transportPrice  $transportPrice");
 
-      print("totalPrice $totalPrice");
+      // print("totalPrice $totalPrice");
 
-      print("additionalPrice $additionalPrice");
+      // print("additionalPrice $additionalPrice");
 
-      print("prePayment $prePayment");
+      // print("prePayment $prePayment");
 
       try {
         await Provider.of<OrderProvider>(context, listen: false)

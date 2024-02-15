@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../const/const.dart';

@@ -1,5 +1,3 @@
-import 'package:ashewa_d/model/user/payment.dart';
-import 'package:ashewa_d/provider/payment.dart';
 
 import '../../../provider/auth.dart';
 import 'package:provider/provider.dart';
@@ -129,22 +127,22 @@ class PaymentMethodScreen extends StatelessWidget {
   }
 }
 
-List<paymentMethod> pay = [
-  paymentMethod(
+List<PaymentMethod> pay = [
+  PaymentMethod(
       id: "9a53db19-9b3f-4cef-a3b0-1ef0a992f483", title: "CBE", status: true),
-  paymentMethod(
+  PaymentMethod(
       id: "9a53db19-9ae7-4357-9215-33b9c689b3b9",
       title: "Tele Birr",
       status: true),
-  paymentMethod(id: "3", title: "Awash"),
-  paymentMethod(id: "3", title: "Dashen"),
-  paymentMethod(id: "3", title: "Buna"),
-  paymentMethod(id: "3", title: "Abyssinia"),
+  PaymentMethod(id: "3", title: "Awash"),
+  PaymentMethod(id: "3", title: "Dashen"),
+  PaymentMethod(id: "3", title: "Buna"),
+  PaymentMethod(id: "3", title: "Abyssinia"),
 ];
 
-class paymentMethod {
+class PaymentMethod {
   final String title;
   final String id;
   final bool status;
-  paymentMethod({required this.id, required this.title, this.status = false});
+PaymentMethod({required this.id, required this.title, this.status = false});
 }

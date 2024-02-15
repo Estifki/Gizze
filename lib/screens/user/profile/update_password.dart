@@ -1,4 +1,6 @@
 
+// ignore_for_file: use_build_context_synchronously
+
 import '../../../const/const.dart';
 import '../../../provider/auth.dart';
 import '../../../uitil/toast.dart';
