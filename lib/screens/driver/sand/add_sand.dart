@@ -1,9 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../const/const.dart';
 import '../../../provider/auth.dart';
+import '../../../provider/sand.dart';
 import '../../../uitil/http_error.dart';
 import '../../../uitil/toast.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +27,9 @@ class AddSandScreen extends StatefulWidget {
 
 class _AddSandScreenState extends State<AddSandScreen> {
   final _priceController = TextEditingController();
-  String selectedSandAddress = "";
+  final _sandTypeController = TextEditingController();
+
+  // String selectedSandAddress = "";
 
   bool _isLoading = false;
   bool _isLocationPicked = false;
@@ -62,6 +66,50 @@ class _AddSandScreenState extends State<AddSandScreen> {
                   icon: const Icon(Icons.visibility_off, size: 0)),
             ),
             const SizedBox(height: 20),
+            //
+            //
+            //
+            DropdownButtonFormField2(
+              isExpanded: true,
+              decoration: InputDecoration(
+                isDense: true,
+                contentPadding: EdgeInsets.zero,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(6.0),
+                ),
+              ),
+              hint: const Text("Select Sand Type",
+                  style: TextStyle(fontSize: 17)),
+              icon: const Icon(Icons.arrow_drop_down, color: Colors.black45),
+              iconSize: 30,
+              buttonHeight: 60,
+              buttonPadding: const EdgeInsets.only(right: 10),
+              dropdownDecoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              items: Provider.of<SandProvider>(context)
+                  .sandTypeData
+                  .map((item) => DropdownMenuItem<String>(
+                        value: item.id,
+                        child: Text(
+                          item.name,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ))
+                  .toList(),
+              validator: (value) {
+                if (value == null) {
+                  return 'Sand Type Is Not Selected.';
+                }
+                return null;
+              },
+              onChanged: (value) {
+                setState(() {
+                  _sandTypeController.text = value.toString();
+                });
+              },
+            ),
+            const SizedBox(height: 15),
             // DropdownButtonFormField2(
             //   isExpanded: true,
             //   decoration: InputDecoration(
@@ -296,7 +344,8 @@ class _AddSandScreenState extends State<AddSandScreen> {
                 token: Provider.of<AuthProvider>(context, listen: false).token!,
                 sandID: widget.sandID,
                 price: _priceController.text,
-                // locationID: selectedSandAddress,
+                locationId: "9a53db19-62a3-4e6a-8094-c3514864ee3a",
+                sandTypeId: _sandTypeController.text,
                 lat: Provider.of<LocationProvider>(context, listen: false)
                     .userLat!,
                 long: Provider.of<LocationProvider>(context, listen: false)

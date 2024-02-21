@@ -1,4 +1,3 @@
-
 import '../../../provider/auth.dart';
 import 'package:provider/provider.dart';
 
@@ -129,9 +128,9 @@ class PaymentMethodScreen extends StatelessWidget {
 
 List<PaymentMethod> pay = [
   PaymentMethod(
-      id: "9a53db19-9b3f-4cef-a3b0-1ef0a992f483", title: "CBE", status: true),
+      id: "9b634012-af06-4be4-9a22-8023b5ef1a1e", title: "CBE", status: true),
   PaymentMethod(
-      id: "9a53db19-9ae7-4357-9215-33b9c689b3b9",
+      id: "9b634012-aeb3-422b-8e6e-323550fe2365",
       title: "Tele Birr",
       status: true),
   PaymentMethod(id: "3", title: "Awash"),
@@ -144,5 +143,5 @@ class PaymentMethod {
   final String title;
   final String id;
   final bool status;
-PaymentMethod({required this.id, required this.title, this.status = false});
+  PaymentMethod({required this.id, required this.title, this.status = false});
 }

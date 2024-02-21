@@ -49,7 +49,7 @@ class MySandData {
   DateTime updatedAt;
   Sand sand;
   Owner owner;
-  DatumLocation location;
+  // DatumLocation location;
 
   MySandData({
     required this.id,
@@ -62,13 +62,13 @@ class MySandData {
     required this.updatedAt,
     required this.sand,
     required this.owner,
-    required this.location,
+    // required this.location,
   });
 
   factory MySandData.fromJson(Map<String, dynamic> json) => MySandData(
         id: json["id"],
         sandId: json["sand_id"],
-        locationId: json["location_id"],
+        locationId: json["location_id"] ?? "",
         userId: json["user_id"],
         price: json["price"],
         status: json["status"],
@@ -76,7 +76,7 @@ class MySandData {
         updatedAt: DateTime.parse(json["updated_at"]),
         sand: Sand.fromJson(json["sand"]),
         owner: Owner.fromJson(json["owner"]),
-        location: DatumLocation.fromJson(json["location"]),
+        // location: DatumLocation.fromJson(json["location"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -90,41 +90,41 @@ class MySandData {
         "updated_at": updatedAt.toIso8601String(),
         "sand": sand.toJson(),
         "owner": owner.toJson(),
-        "location": location.toJson(),
+        // "location": location.toJson(),
       };
 }
 
-class DatumLocation {
-  String id;
-  String name;
-  LocationLocation location;
-  DateTime createdAt;
-  DateTime updatedAt;
+// class DatumLocation {
+//   String id;
+//   String name;
+//   LocationLocation location;
+//   DateTime createdAt;
+//   DateTime updatedAt;
 
-  DatumLocation({
-    required this.id,
-    required this.name,
-    required this.location,
-    required this.createdAt,
-    required this.updatedAt,
-  });
+//   DatumLocation({
+//     required this.id,
+//     required this.name,
+//     required this.location,
+//     required this.createdAt,
+//     required this.updatedAt,
+//   });
 
-  factory DatumLocation.fromJson(Map<String, dynamic> json) => DatumLocation(
-        id: json["id"],
-        name: json["name"],
-        location: LocationLocation.fromJson(json["location"]),
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-      );
+//   factory DatumLocation.fromJson(Map<String, dynamic> json) => DatumLocation(
+//         id: json["id"],
+//         name: json["name"],
+//         location: LocationLocation.fromJson(json["location"]),
+//         createdAt: DateTime.parse(json["created_at"]),
+//         updatedAt: DateTime.parse(json["updated_at"]),
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "location": location.toJson(),
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "name": name,
+//         "location": location.toJson(),
+//         "created_at": createdAt.toIso8601String(),
+//         "updated_at": updatedAt.toIso8601String(),
+//       };
+// }
 
 class LocationLocation {
   double latitude;

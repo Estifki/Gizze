@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../const/const.dart';
+import '../model/sand_types.dart';
 import '../model/user/sand.dart';
 import '../model/user/sand_details.dart';
 import '../model/user/wish_list.dart';
@@ -15,11 +16,13 @@ class SandProvider with ChangeNotifier {
   final List<HomeSandData> _sand = [];
   final List<SandData> _sandLocationData = [];
   final List<WishListData> _wishList = [];
+  final List<SandTypeData> _sandTypeData = [];
 
   // List<HomeSandData> get favoriteSand => [..._favSand];
   List<HomeSandData> get featuredSand => [..._sand];
   List<SandData> get sandLocationData => [..._sandLocationData];
   List<WishListData> get wishListData => [..._wishList];
+  List<SandTypeData> get sandTypeData => [..._sandTypeData];
 
   cleanSandDetails() {
     _sandLocationData.clear();
@@ -104,6 +107,33 @@ class SandProvider with ChangeNotifier {
         final data = sandDetailsModelFromJson(response.body);
 
         _sandLocationData.addAll([data.data]);
+        notifyListeners();
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> getSandTypes(String token) async {
+    String url = "${AppConst.appUrl}/sand-types";
+
+    try {
+      http.Response response = await http.get(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          HttpHeaders.authorizationHeader: "Bearer $token"
+        },
+      );
+      final decodedData = jsonDecode(response.body);
+
+      if (response.statusCode != 200) {
+        throw CustomHttpException(errorMessage: decodedData["data"]);
+      } else {
+        _sandTypeData.clear();
+        final data = sandTypesModelFromJson(response.body);
+        _sandTypeData.addAll(data.data);
         notifyListeners();
       }
     } catch (e) {

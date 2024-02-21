@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Provider.of<AuthProvider>(context, listen: false).logOut();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Gizze',
