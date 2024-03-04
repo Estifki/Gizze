@@ -83,13 +83,13 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.network(widget.sandImage,
-                      width: screenSize.width * 0.4),
+                      width: screenSize.width * 0.34),
                   const SizedBox(width: 10),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Pric:  Br ${widget.pricePerCubic}",
+                      Text("Pric: Br ${widget.pricePerCubic}",
                           style: const TextStyle(fontSize: 15)),
                       const SizedBox(height: 4),
                       widget.capacity == ""
@@ -97,8 +97,12 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
                           : Text(widget.capacity,
                               style: const TextStyle(fontSize: 15)),
                       const SizedBox(height: 4),
-                      Text("Address:  ${widget.address}",
-                          style: const TextStyle(fontSize: 15)),
+                      SizedBox(
+                        width: screenSize.width * 0.5,
+                        child: Text("Address: ${widget.address}",
+                            style: const TextStyle(
+                                fontSize: 15, overflow: TextOverflow.ellipsis)),
+                      ),
                       const SizedBox(height: 4),
                     ],
                   )

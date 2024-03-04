@@ -78,7 +78,9 @@ class SandLocation {
   final String updatedAt;
   final Sand sand;
   final Owner owner;
-  final Location location;
+   final SandType sandType;
+
+  final LocationDetail location;
 
   SandLocation({
     required this.id,
@@ -92,13 +94,14 @@ class SandLocation {
     required this.sand,
     required this.owner,
     required this.location,
+    required this.sandType,
   });
 
   factory SandLocation.fromJson(Map<String, dynamic> json) {
     return SandLocation(
       id: json['id'],
       sandId: json['sand_id'],
-      locationId: json['location_id'],
+      locationId: json['location_id'] ?? "",
       userId: json['user_id'],
       price: json['price'],
       status: json['status'],
@@ -106,9 +109,39 @@ class SandLocation {
       updatedAt: json['updated_at'],
       sand: Sand.fromJson(json['sand']),
       owner: Owner.fromJson(json['owner']),
-      location: Location.fromJson(json['location']),
+             sandType: SandType.fromJson(json["sand_type"]),
+ 
+      location: LocationDetail.fromJson(json['location']),
     );
   }
+}
+
+class SandType {
+    final String id;
+    final String name;
+    final DateTime createdAt;
+    final DateTime updatedAt;
+
+    SandType({
+        required this.id,
+        required this.name,
+        required this.createdAt,
+        required this.updatedAt,
+    });
+
+    factory SandType.fromJson(Map<String, dynamic> json) => SandType(
+        id: json["id"],
+        name: json["name"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+    };
 }
 
 class Sand {
@@ -372,31 +405,31 @@ class Role {
   }
 }
 
-class Location {
-  final String id;
-  final String name;
-  final LocationDetail locationDetail;
-  final String createdAt;
-  final String updatedAt;
+// class Location {
+//   final String id;
+//   final String name;
+//   final LocationDetail locationDetail;
+//   final String createdAt;
+//   final String updatedAt;
 
-  Location({
-    required this.id,
-    required this.name,
-    required this.locationDetail,
-    required this.createdAt,
-    required this.updatedAt,
-  });
+//   Location({
+//     required this.id,
+//     required this.name,
+//     required this.locationDetail,
+//     required this.createdAt,
+//     required this.updatedAt,
+//   });
 
-  factory Location.fromJson(Map<String, dynamic> json) {
-    return Location(
-      id: json['id'],
-      name: json['name'],
-      locationDetail: LocationDetail.fromJson(json['location']),
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
-    );
-  }
-}
+//   factory Location.fromJson(Map<String, dynamic> json) {
+//     return Location(
+//       id: json['id']??"",
+//       name: json['name']??"",
+//       locationDetail: LocationDetail.fromJson(json['location']),
+//       createdAt: json['created_at'],
+//       updatedAt: json['updated_at'],
+//     );
+//   }
+// }
 
 class LocationDetail {
   final double latitude;

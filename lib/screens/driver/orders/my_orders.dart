@@ -21,7 +21,7 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
   void didChangeDependencies() {
     if (isinit) {
       Provider.of<SandLocationProvider>(context, listen: false).getSandAddress(
-          // Provider.of<AuthProvider>(context, listen: false).token!
+          // Provider.of<AuthProvider>(context, listen: false).token
           );
       _myOrders = Provider.of<OrderProvider>(context, listen: false).getPending(
           Provider.of<AuthProvider>(context, listen: false).token!, true);
@@ -89,17 +89,16 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                                 orderStatus: value
                                     .pendingOrderData[index].orderStatus.name,
                                 orderNo: value.pendingOrderData[index].orderNo,
-                                totalPrice:
-                                    value.pendingOrderData[index].totalPrice,
+                                totalPrice: value.pendingOrderData[index].totalAmount.toStringAsFixed(2),
                                 amount: value
                                     .pendingOrderData[index].totalAmount
                                     .toString(),
-                                pricePerCubic: value.pendingOrderData[index]
-                                    .sandLocation!.price,
+                                pricePerCubic: value
+                                    .pendingOrderData[index].sandLocation.price,
                                 sandName: value.pendingOrderData[index]
-                                    .sandLocation!.sand.name,
+                                    .sandLocation.sand.name,
                                 sandImage: value.pendingOrderData[index]
-                                    .sandLocation!.sand.sandImage,
+                                    .sandLocation.sand.sandImage,
                                 sourceLat: value.pendingOrderData[index]
                                     .destinationLocation.latitude,
                                 sourceLong: value.pendingOrderData[index]
@@ -114,8 +113,8 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                                     .destinationLocation.latitude,
                                 sourceLocationName: value
                                     .pendingOrderData[index]
-                                    .sandLocation!
-                                    .location
+                                    .sandLocation
+                                    .sand
                                     .name,
                                 destinationLocationName: value
                                     .pendingOrderData[index]
@@ -149,14 +148,13 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                         orderStatus:
                             value.onTheWayOrderData[index].orderStatus.name,
                         orderNo: value.onTheWayOrderData[index].orderNo,
-                        totalPrice: value.onTheWayOrderData[index].totalPrice,
-                        amount: value.onTheWayOrderData[index].totalAmount
+                        totalPrice: value.onTheWayOrderData[index].totalAmount.toStringAsFixed(2),                      amount: value.onTheWayOrderData[index].totalAmount
                             .toString(),
                         pricePerCubic:
-                            value.onTheWayOrderData[index].sandLocation!.price,
+                            value.onTheWayOrderData[index].sandLocation.price,
                         sandName: value
-                            .onTheWayOrderData[index].sandLocation!.sand.name,
-                        sandImage: value.onTheWayOrderData[index].sandLocation!
+                            .onTheWayOrderData[index].sandLocation.sand.name,
+                        sandImage: value.onTheWayOrderData[index].sandLocation
                             .sand.sandImage,
                         sourceLat: value.onTheWayOrderData[index]
                             .destinationLocation.latitude,
@@ -170,8 +168,8 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                             .destinationLocation.latitude,
                         destinationLong: value.onTheWayOrderData[index]
                             .destinationLocation.latitude,
-                        sourceLocationName: value.onTheWayOrderData[index]
-                            .sandLocation!.location.name,
+                        sourceLocationName: value
+                            .onTheWayOrderData[index].sandLocation.sand.name,
                         destinationLocationName: value.onTheWayOrderData[index]
                             .destinationLocation.locationName,
                         date: value.onTheWayOrderData[index].createdAt);
@@ -199,14 +197,14 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                         orderStatus:
                             value.deliveredOrderData[index].orderStatus.name,
                         orderNo: value.deliveredOrderData[index].orderNo,
-                        totalPrice: value.deliveredOrderData[index].totalPrice,
+                        totalPrice: value.deliveredOrderData[index].totalAmount.toStringAsFixed(2),
                         amount: value.deliveredOrderData[index].totalAmount
                             .toString(),
                         pricePerCubic:
-                            value.deliveredOrderData[index].sandLocation!.price,
+                            value.deliveredOrderData[index].sandLocation.price,
                         sandName: value
-                            .deliveredOrderData[index].sandLocation!.sand.name,
-                        sandImage: value.deliveredOrderData[index].sandLocation!
+                            .deliveredOrderData[index].sandLocation.sand.name,
+                        sandImage: value.deliveredOrderData[index].sandLocation
                             .sand.sandImage,
                         sourceLat: value.deliveredOrderData[index]
                             .destinationLocation.latitude,
@@ -220,8 +218,8 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                             .destinationLocation.latitude,
                         destinationLong: value.deliveredOrderData[index]
                             .destinationLocation.latitude,
-                        sourceLocationName: value.deliveredOrderData[index]
-                            .sandLocation!.location.name,
+                        sourceLocationName: value
+                            .deliveredOrderData[index].sandLocation.sand.name,
                         destinationLocationName: value.deliveredOrderData[index]
                             .destinationLocation.locationName,
                         date: value.deliveredOrderData[index].createdAt);
@@ -249,14 +247,14 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                         orderStatus:
                             value.rejectedOrderData[index].orderStatus.name,
                         orderNo: value.rejectedOrderData[index].orderNo,
-                        totalPrice: value.rejectedOrderData[index].totalPrice,
+                        totalPrice: value.rejectedOrderData[index].totalAmount.toStringAsFixed(2),
                         amount: value.rejectedOrderData[index].totalAmount
                             .toString(),
                         pricePerCubic:
-                            value.rejectedOrderData[index].sandLocation!.price,
+                            value.rejectedOrderData[index].sandLocation.price,
                         sandName: value
-                            .rejectedOrderData[index].sandLocation!.sand.name,
-                        sandImage: value.rejectedOrderData[index].sandLocation!
+                            .rejectedOrderData[index].sandLocation.sand.name,
+                        sandImage: value.rejectedOrderData[index].sandLocation
                             .sand.sandImage,
                         sourceLat: value.rejectedOrderData[index]
                             .destinationLocation.latitude,
@@ -270,8 +268,8 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                             .destinationLocation.latitude,
                         destinationLong: value.rejectedOrderData[index]
                             .destinationLocation.latitude,
-                        sourceLocationName: value.rejectedOrderData[index]
-                            .sandLocation!.location.name,
+                        sourceLocationName: value
+                            .rejectedOrderData[index].sandLocation.sand.name,
                         destinationLocationName: value.rejectedOrderData[index]
                             .destinationLocation.locationName,
                         date: value.rejectedOrderData[index].createdAt);

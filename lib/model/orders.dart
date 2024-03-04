@@ -2,6 +2,7 @@
 //
 //     final ordersModel = ordersModelFromJson(jsonString);
 
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 OrdersModel ordersModelFromJson(String str) =>
@@ -10,10 +11,10 @@ OrdersModel ordersModelFromJson(String str) =>
 String ordersModelToJson(OrdersModel data) => json.encode(data.toJson());
 
 class OrdersModel {
-  bool success;
-  String message;
-  int status;
-  List<OrderData> data;
+  final bool success;
+  final String message;
+  final int status;
+  final List<OrderData> data;
 
   OrdersModel({
     required this.success,
@@ -39,25 +40,25 @@ class OrdersModel {
 }
 
 class OrderData {
-  String id;
-  String sandLocationId;
-  String orderedById;
-  dynamic canceledById;
-  String orderNo;
-  dynamic additionalPrice;
-  dynamic prePayment;
-  dynamic transportPrice;
-  DestinationLocation destinationLocation;
-  String status;
-  DateTime createdAt;
-  DateTime updatedAt;
-  String orderStatusId;
-  dynamic totalPrice;
-  dynamic totalAmount;
-  OrderStatus orderStatus;
-  SandLocation? sandLocation;
-  dynamic acceptedBy;
-  OrderedBy orderedBy;
+  final String id;
+  final String sandLocationId;
+  final String orderedById;
+  final dynamic canceledById;
+  final String orderNo;
+  final String additionalPrice;
+  final String prePayment;
+  final String transportPrice;
+  final DestinationLocation destinationLocation;
+  final String status;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final String orderStatusId;
+  final String total;
+  final double totalAmount;
+  final OrderStatus orderStatus;
+  final SandLocation sandLocation;
+  final dynamic acceptedBy;
+  final OrderedBy orderedBy;
 
   OrderData({
     required this.id,
@@ -68,12 +69,12 @@ class OrderData {
     required this.additionalPrice,
     required this.prePayment,
     required this.transportPrice,
-    required this.totalPrice,
     required this.destinationLocation,
     required this.status,
     required this.createdAt,
     required this.updatedAt,
     required this.orderStatusId,
+    required this.total,
     required this.totalAmount,
     required this.orderStatus,
     required this.sandLocation,
@@ -96,12 +97,10 @@ class OrderData {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         orderStatusId: json["order_status_id"],
-        totalAmount: json["total_amount"],
-        totalPrice: json["total"],
+        total: json["total"],
+        totalAmount: json["total_amount"]?.toDouble(),
         orderStatus: OrderStatus.fromJson(json["order_status"]),
-        sandLocation: json["sand_location"] != null
-            ? SandLocation.fromJson(json["sand_location"])
-            : null,
+        sandLocation: SandLocation.fromJson(json["sand_location"]),
         acceptedBy: json["accepted_by"],
         orderedBy: OrderedBy.fromJson(json["ordered_by"]),
       );
@@ -120,18 +119,19 @@ class OrderData {
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "order_status_id": orderStatusId,
+        "total": total,
         "total_amount": totalAmount,
         "order_status": orderStatus.toJson(),
-        "sand_location": sandLocation!.toJson(),
+        "sand_location": sandLocation.toJson(),
         "accepted_by": acceptedBy,
         "ordered_by": orderedBy.toJson(),
       };
 }
 
 class DestinationLocation {
-  String locationName;
-  double latitude;
-  double longitude;
+  final String locationName;
+  final double latitude;
+  final double longitude;
 
   DestinationLocation({
     required this.locationName,
@@ -154,18 +154,16 @@ class DestinationLocation {
 }
 
 class OrderStatus {
-  String id;
-  String name;
-  DateTime createdAt;
-  DateTime updatedAt;
-  Location? location;
+  final String id;
+  final String name;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   OrderStatus({
     required this.id,
     required this.name,
     required this.createdAt,
     required this.updatedAt,
-    required this.location,
   });
 
   factory OrderStatus.fromJson(Map<String, dynamic> json) => OrderStatus(
@@ -173,9 +171,6 @@ class OrderStatus {
         name: json["name"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        location: json["location"] != null
-            ? Location.fromJson(json["location"])
-            : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -183,44 +178,24 @@ class OrderStatus {
         "name": name,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "location": location!.toJson(),
-      };
-}
-
-class Location {
-  double latitude;
-  double longitude;
-
-  Location({
-    required this.latitude,
-    required this.longitude,
-  });
-
-  factory Location.fromJson(Map<String, dynamic> json) => Location(
-        latitude: json["latitude"]?.toDouble(),
-        longitude: json["longitude"]?.toDouble(),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "latitude": latitude,
-        "longitude": longitude,
       };
 }
 
 class OrderedBy {
-  String id;
-  String name;
-  String phone;
-  String email;
-  dynamic phoneVerifiedAt;
-  dynamic twoFactorConfirmedAt;
-  DateTime createdAt;
-  DateTime updatedAt;
-  dynamic deletedAt;
-  String roleId;
-  String profilePhotoUrl;
-  Role role;
-  Deposit? deposit;
+  final String id;
+  final String name;
+  final String phone;
+  final String email;
+  final dynamic phoneVerifiedAt;
+  final dynamic twoFactorConfirmedAt;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final dynamic deletedAt;
+  final String roleId;
+  final String profilePhotoUrl;
+  final Role role;
+  final Deposit deposit;
+  // final Driver driver;
 
   OrderedBy({
     required this.id,
@@ -236,6 +211,7 @@ class OrderedBy {
     required this.profilePhotoUrl,
     required this.role,
     required this.deposit,
+    // required this.driver,
   });
 
   factory OrderedBy.fromJson(Map<String, dynamic> json) => OrderedBy(
@@ -251,8 +227,8 @@ class OrderedBy {
         roleId: json["role_id"],
         profilePhotoUrl: json["profile_photo_url"],
         role: Role.fromJson(json["role"]),
-        deposit:
-            json["deposit"] != null ? Deposit.fromJson(json["deposit"]) : null,
+        deposit: Deposit.fromJson(json["deposit"]),
+        // driver: Driver.fromJson(json["driver"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -268,19 +244,20 @@ class OrderedBy {
         "role_id": roleId,
         "profile_photo_url": profilePhotoUrl,
         "role": role.toJson(),
-        "deposit": deposit!.toJson(),
+        "deposit": deposit.toJson(),
+        // "driver": driver.toJson(),
       };
 }
 
 class Deposit {
-  String id;
-  String userId;
-  String amount;
-  dynamic reason;
-  String status;
-  String approvedBy;
-  DateTime createdAt;
-  DateTime updatedAt;
+  final String id;
+  final String userId;
+  final String amount;
+  final dynamic reason;
+  final String status;
+  final String approvedBy;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   Deposit({
     required this.id,
@@ -316,9 +293,128 @@ class Deposit {
       };
 }
 
+class Driver {
+  final String id;
+  final String userId;
+  final String locationId;
+  final DriverLocation location;
+  final String status;
+  final DateTime createdAt;
+  final List<String> carOwnershipDoc;
+  final List<String> licenceDoc;
+  final List<CarInformation> carInformation;
+  final dynamic account;
+
+  Driver({
+    required this.id,
+    required this.userId,
+    required this.locationId,
+    required this.location,
+    required this.status,
+    required this.createdAt,
+    required this.carOwnershipDoc,
+    required this.licenceDoc,
+    required this.carInformation,
+    required this.account,
+  });
+
+  factory Driver.fromJson(Map<String, dynamic> json) => Driver(
+        id: json["id"],
+        userId: json["user_id"],
+        locationId: json["location_id"],
+        location: DriverLocation.fromJson(json["location"]),
+        status: json["status"],
+        createdAt: DateTime.parse(json["created_at"]),
+        carOwnershipDoc:
+            List<String>.from(json["carOwnershipDoc"].map((x) => x)),
+        licenceDoc: List<String>.from(json["LicenceDoc"].map((x) => x)),
+        carInformation: List<CarInformation>.from(
+            json["car_information"].map((x) => CarInformation.fromJson(x))),
+        account: json["account"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "user_id": userId,
+        "location_id": locationId,
+        "location": location.toJson(),
+        "status": status,
+        "created_at": createdAt.toIso8601String(),
+        "carOwnershipDoc": List<dynamic>.from(carOwnershipDoc.map((x) => x)),
+        "LicenceDoc": List<dynamic>.from(licenceDoc.map((x) => x)),
+        "car_information":
+            List<dynamic>.from(carInformation.map((x) => x.toJson())),
+        "account": account,
+      };
+}
+
+class CarInformation {
+  final String id;
+  final String driverId;
+  final String plateNumber;
+  final String color;
+  final String loadCapacity;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  CarInformation({
+    required this.id,
+    required this.driverId,
+    required this.plateNumber,
+    required this.color,
+    required this.loadCapacity,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory CarInformation.fromJson(Map<String, dynamic> json) => CarInformation(
+        id: json["id"],
+        driverId: json["driver_id"],
+        plateNumber: json["plate_number"],
+        color: json["color"],
+        loadCapacity: json["load_capacity"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "driver_id": driverId,
+        "plate_number": plateNumber,
+        "color": color,
+        "load_capacity": loadCapacity,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
+}
+
+class DriverLocation {
+  final String locationName;
+  final String latitude;
+  final String longitude;
+
+  DriverLocation({
+    required this.locationName,
+    required this.latitude,
+    required this.longitude,
+  });
+
+  factory DriverLocation.fromJson(Map<String, dynamic> json) => DriverLocation(
+        locationName: json["location_name"],
+        latitude: json["latitude"],
+        longitude: json["longitude"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "location_name": locationName,
+        "latitude": latitude,
+        "longitude": longitude,
+      };
+}
+
 class Role {
-  String id;
-  String name;
+  final String id;
+  final String name;
 
   Role({
     required this.id,
@@ -337,68 +433,93 @@ class Role {
 }
 
 class SandLocation {
-  String id;
-  String sandId;
-  String locationId;
-  String userId;
-  String price;
-  String status;
-  DateTime createdAt;
-  DateTime updatedAt;
-  Sand sand;
-  OrderedBy owner;
-  OrderStatus location;
+  final String id;
+  final String sandId;
+  final String userId;
+  final String price;
+  final String status;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final String sandTypeId;
+  final SandLocationLocation location;
+  final Sand sand;
+  final OrderedBy owner;
+  final OrderStatus sandType;
 
   SandLocation({
     required this.id,
     required this.sandId,
-    required this.locationId,
     required this.userId,
     required this.price,
     required this.status,
     required this.createdAt,
     required this.updatedAt,
+    required this.sandTypeId,
+    required this.location,
     required this.sand,
     required this.owner,
-    required this.location,
+    required this.sandType,
   });
 
   factory SandLocation.fromJson(Map<String, dynamic> json) => SandLocation(
         id: json["id"],
         sandId: json["sand_id"],
-        locationId: json["location_id"],
         userId: json["user_id"],
         price: json["price"],
         status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+        sandTypeId: json["sand_type_id"],
+        location: SandLocationLocation.fromJson(json["location"]),
         sand: Sand.fromJson(json["sand"]),
         owner: OrderedBy.fromJson(json["owner"]),
-        location: OrderStatus.fromJson(json["location"]),
+        sandType: OrderStatus.fromJson(json["sand_type"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "sand_id": sandId,
-        "location_id": locationId,
         "user_id": userId,
         "price": price,
         "status": status,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
+        "sand_type_id": sandTypeId,
+        "location": location.toJson(),
         "sand": sand.toJson(),
         "owner": owner.toJson(),
-        "location": location.toJson(),
+        "sand_type": sandType.toJson(),
+      };
+}
+
+class SandLocationLocation {
+  final double latitude;
+  final double longitude;
+
+  SandLocationLocation({
+    required this.latitude,
+    required this.longitude,
+  });
+
+  factory SandLocationLocation.fromJson(Map<String, dynamic> json) =>
+      SandLocationLocation(
+        latitude: json["latitude"]?.toDouble(),
+        longitude: json["longitude"]?.toDouble(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "latitude": latitude,
+        "longitude": longitude,
       };
 }
 
 class Sand {
-  String id;
-  String name;
-  String description;
-  DateTime createdAt;
-  dynamic categoryId;
-  String sandImage;
+  final String id;
+  final String name;
+  final String description;
+  final DateTime createdAt;
+  final dynamic categoryId;
+  final String sandImage;
 
   Sand({
     required this.id,

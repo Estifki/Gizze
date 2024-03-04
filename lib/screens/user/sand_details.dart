@@ -266,8 +266,8 @@ class SandDetailsLocationsWidget extends StatelessWidget {
                   orderID: value.sandLocationData[0].sandLocations[index].id,
                   sandName: value.sandLocationData[0].name,
                   sandImage: value.sandLocationData[0].sandImage,
-                  address: value
-                      .sandLocationData[0].sandLocations[index].location.name,
+                  address:
+                      value.sandLocationData[0].sandLocations[index].sand.name,
                   pricePerCubic:
                       value.sandLocationData[0].sandLocations[index].price,
                   lat: value.sandLocationData[0].sandLocations[index].owner
@@ -305,7 +305,7 @@ class SandDetailsLocationsWidget extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 child: Container(
-                  height: screenSize.height * 0.20,
+                  height: screenSize.height * 0.21,
                   width: screenSize.width,
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -321,7 +321,7 @@ class SandDetailsLocationsWidget extends StatelessWidget {
                       Image.network(
                           value.sandLocationData[0].sandLocations[index].sand
                               .sandImage,
-                          width: screenSize.width * 0.4),
+                          width: screenSize.width * 0.3),
                       const SizedBox(width: 10),
                       Flexible(
                         child: Padding(
@@ -335,7 +335,7 @@ class SandDetailsLocationsWidget extends StatelessWidget {
                                 //
                                 Text(
                                   value.sandLocationData[0].sandLocations[index]
-                                      .location.name,
+                                      .sand.name,
                                   maxLines: 1,
                                   style: const TextStyle(
                                       color: Colors.black,
@@ -356,8 +356,6 @@ class SandDetailsLocationsWidget extends StatelessWidget {
                                       color: Colors.black),
                                 ),
 
-                                const SizedBox(height: 5),
-
                                 Text(
                                   "Br ${value.sandLocationData[0].sandLocations[index].price}",
                                   maxLines: 2,
@@ -367,7 +365,6 @@ class SandDetailsLocationsWidget extends StatelessWidget {
                                       color: Colors.black),
                                 ),
 
-                                const SizedBox(height: 3),
                                 value.sandLocationData[0].sandLocations[index]
                                             .owner.driver ==
                                         null
@@ -381,7 +378,18 @@ class SandDetailsLocationsWidget extends StatelessWidget {
                                             color: Colors.black),
                                       ),
 
-                                const SizedBox(height: 6),
+                                value.sandLocationData[0].sandLocations[index]
+                                            .owner.driver ==
+                                        null
+                                    ? Container()
+                                    : Text(
+                                        "Sand type: ${value.sandLocationData[0].sandLocations[index].sandType.name}",
+                                        maxLines: 1,
+                                        style: const TextStyle(
+                                            fontSize: 15,
+                                            overflow: TextOverflow.ellipsis,
+                                            color: Colors.black),
+                                      ),
 
                                 //
                                 //Order Now Button
