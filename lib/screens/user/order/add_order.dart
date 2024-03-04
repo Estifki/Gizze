@@ -265,19 +265,26 @@ class _OrderSandScreenState extends State<OrderSandScreen> {
       showScaffoldMessanger(
           context: context, errorMessage: "Please Pick Sand Delivery Location");
     } else {
-      FocusScope.of(context).unfocus();
-      setState(() {
-        _isLoading = true;
-      });
+      // FocusScope.of(context).unfocus();
+      // setState(() {
+      //   _isLoading = true;
+      // });
 
       double distanceInMeter =
           Geolocator.distanceBetween(lat!, long!, widget.lat, widget.long);
       double distanceInKm =
           double.parse((distanceInMeter / 1000).toStringAsFixed(2));
 
-      double transportPrice = (distanceInKm *
-              Provider.of<PaymentProvider>(context, listen: false).perKmPrice) +
-          Provider.of<PaymentProvider>(context, listen: false).initialPrice;
+      double transportPrice = distanceInKm > 7
+          ? (distanceInKm *
+                  Provider.of<PaymentProvider>(context, listen: false)
+                      .perKmPrice) +
+              500
+          : distanceInKm *
+              Provider.of<PaymentProvider>(context, listen: false).perKmPrice;
+      // (distanceInKm *
+      //         Provider.of<PaymentProvider>(context, listen: false).perKmPrice) +
+      //     Provider.of<PaymentProvider>(context, listen: false).initialPrice;
       double totalPrice = transportPrice + double.parse(widget.pricePerCubic);
       double prePayment = totalPrice *
           (Provider.of<PaymentProvider>(context, listen: false)

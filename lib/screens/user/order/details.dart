@@ -111,7 +111,7 @@ class _MyOrdersDetailsScreenState extends State<MyOrdersDetailsScreen> {
                             style: const TextStyle(fontSize: 15.5)),
                       ])
                 ]),
-            widget.orderStatus != "Delivered"
+            widget.orderStatus == "Delivered" || widget.orderStatus != "Pending"
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,

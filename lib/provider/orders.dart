@@ -9,11 +9,14 @@ import '../uitil/http_error.dart';
 
 class OrderProvider with ChangeNotifier {
   final List<OrderData> _pendingOrderData = [];
+
+  final List<OrderData> _acceptedOrderData = [];
   final List<OrderData> _onTheWayOrderData = [];
   final List<OrderData> _deliveredOrderData = [];
   final List<OrderData> _rejectedOrderData = [];
 
   List<OrderData> get pendingOrderData => [..._pendingOrderData];
+  List<OrderData> get acceptedOrderData => [..._acceptedOrderData];
   List<OrderData> get onTheWayOrderData => [..._onTheWayOrderData];
   List<OrderData> get deliveredOrderData => [..._deliveredOrderData];
   List<OrderData> get rejectedOrderData => [..._rejectedOrderData];
@@ -40,6 +43,35 @@ class OrderProvider with ChangeNotifier {
         final data = ordersModelFromJson(response.body);
 
         _pendingOrderData.addAll(data.data);
+
+        notifyListeners();
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> getAccepted(String token, bool isDriver) async {
+    String url = isDriver
+        ? "${AppConst.appUrl}/driver-accepted-orders"
+        : "${AppConst.appUrl}/accepted-orders";
+
+    try {
+      http.Response response = await http.get(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          HttpHeaders.authorizationHeader: "Bearer $token"
+        },
+      );
+      final decodedData = jsonDecode(response.body);
+      if (response.statusCode != 200) {
+        throw CustomHttpException(errorMessage: decodedData["data"]);
+      } else {
+        _acceptedOrderData.clear();
+        final data = ordersModelFromJson(response.body);
+        _acceptedOrderData.addAll(data.data);
 
         notifyListeners();
       }

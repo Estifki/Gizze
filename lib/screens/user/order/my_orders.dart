@@ -25,6 +25,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
           );
       _myOrders = Provider.of<OrderProvider>(context, listen: false).getPending(
           Provider.of<AuthProvider>(context, listen: false).token!, false);
+      Provider.of<OrderProvider>(context, listen: false).getAccepted(
+          Provider.of<AuthProvider>(context, listen: false).token!, false);
       Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
           Provider.of<AuthProvider>(context, listen: false).token!, false);
       Provider.of<OrderProvider>(context, listen: false).getDelivered(
@@ -40,14 +42,17 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
   Widget build(BuildContext context) {
     Provider.of<OrderProvider>(context, listen: false).getPending(
         Provider.of<AuthProvider>(context, listen: false).token!, false);
+    Provider.of<OrderProvider>(context, listen: false).getAccepted(
+        Provider.of<AuthProvider>(context, listen: false).token!, false);
     Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
         Provider.of<AuthProvider>(context, listen: false).token!, false);
     Provider.of<OrderProvider>(context, listen: false).getDelivered(
         Provider.of<AuthProvider>(context, listen: false).token!, false);
     Provider.of<OrderProvider>(context, listen: false).getRejected(
         Provider.of<AuthProvider>(context, listen: false).token!, false);
+
     return DefaultTabController(
-        length: 4,
+        length: 5,
         child: Scaffold(
           appBar: AppBar(
             toolbarHeight: 10.0,
@@ -57,6 +62,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                 indicatorPadding: EdgeInsets.only(left: 25, right: 25),
                 tabs: [
                   Tab(text: "Pending"),
+                  Tab(text: "Accepted"),
                   Tab(text: "On The Way"),
                   Tab(text: "Delivered"),
                   Tab(text: "Rejected"),
@@ -130,6 +136,60 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                 }
               },
             ),
+            //
+            //Accepted
+            //
+
+            Consumer<OrderProvider>(
+              builder: (context, value, _) {
+                if (value.acceptedOrderData.isEmpty) {
+                  return const Center(child: Text("No Accepted Delivery"));
+                }
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: value.acceptedOrderData.length,
+                  padding: const EdgeInsets.only(top: 15),
+                  itemBuilder: (context, index) {
+                    return MyOrdersWidgetUser(
+                      orderID: value.acceptedOrderData[index].id,
+                      orderNo: value.acceptedOrderData[index].orderNo,
+                      totalPrice: value.acceptedOrderData[index].totalAmount
+                          .toStringAsFixed(2),
+                      amount:
+                          value.acceptedOrderData[index].totalAmount.toString(),
+                      orderStatus:
+                          value.acceptedOrderData[index].orderStatus.name,
+                      pricePerCubic:
+                          value.acceptedOrderData[index].sandLocation.price,
+                      sandName:
+                          value.acceptedOrderData[index].sandLocation.sand.name,
+                      sandImage: value
+                          .acceptedOrderData[index].sandLocation.sand.sandImage,
+                      sourceLat: value.acceptedOrderData[index]
+                          .destinationLocation.latitude,
+                      sourceLong: value.acceptedOrderData[index]
+                          .destinationLocation.longitude,
+                      deliveryManName: value
+                          .acceptedOrderData[index].sandLocation.owner.name
+                          .toString(),
+                      deliveryManPhone: value
+                          .acceptedOrderData[index].sandLocation.owner.phone
+                          .toString(),
+                      destinationLat: value.acceptedOrderData[index]
+                          .destinationLocation.latitude,
+                      destinationLong: value.acceptedOrderData[index]
+                          .destinationLocation.latitude,
+                      sourceLocationName:
+                          value.acceptedOrderData[index].sandLocation.sand.name,
+                      destinationLocationName: value.acceptedOrderData[index]
+                          .destinationLocation.locationName,
+                      date: value.acceptedOrderData[index].createdAt,
+                    );
+                  },
+                );
+              },
+            ),
+
             //
             //On The way
             //

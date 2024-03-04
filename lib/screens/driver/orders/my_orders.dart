@@ -25,6 +25,8 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
           );
       _myOrders = Provider.of<OrderProvider>(context, listen: false).getPending(
           Provider.of<AuthProvider>(context, listen: false).token!, true);
+      Provider.of<OrderProvider>(context, listen: false).getAccepted(
+          Provider.of<AuthProvider>(context, listen: false).token!, true);
       Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
           Provider.of<AuthProvider>(context, listen: false).token!, true);
       Provider.of<OrderProvider>(context, listen: false).getDelivered(
@@ -40,6 +42,8 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
   Widget build(BuildContext context) {
     Provider.of<OrderProvider>(context, listen: false).getPending(
         Provider.of<AuthProvider>(context, listen: false).token!, true);
+    Provider.of<OrderProvider>(context, listen: false).getAccepted(
+        Provider.of<AuthProvider>(context, listen: false).token!, true);
     Provider.of<OrderProvider>(context, listen: false).getOnTheWayOrders(
         Provider.of<AuthProvider>(context, listen: false).token!, true);
     Provider.of<OrderProvider>(context, listen: false).getDelivered(
@@ -47,7 +51,7 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
     Provider.of<OrderProvider>(context, listen: false).getRejected(
         Provider.of<AuthProvider>(context, listen: false).token!, true);
     return DefaultTabController(
-        length: 4,
+        length: 5,
         child: Scaffold(
           appBar: AppBar(
             toolbarHeight: 10.0,
@@ -57,6 +61,7 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                 indicatorPadding: EdgeInsets.only(left: 25, right: 25),
                 tabs: [
                   Tab(text: "Pending"),
+                  Tab(text: "Accepted"),
                   Tab(text: "On The Way"),
                   Tab(text: "Delivered"),
                   Tab(text: "Rejected"),
@@ -89,7 +94,9 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                                 orderStatus: value
                                     .pendingOrderData[index].orderStatus.name,
                                 orderNo: value.pendingOrderData[index].orderNo,
-                                totalPrice: value.pendingOrderData[index].totalAmount.toStringAsFixed(2),
+                                totalPrice: value
+                                    .pendingOrderData[index].totalAmount
+                                    .toStringAsFixed(2),
                                 amount: value
                                     .pendingOrderData[index].totalAmount
                                     .toString(),
@@ -130,6 +137,56 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
               },
             ),
             //
+            //Accepted
+            //
+
+            Consumer<OrderProvider>(
+              builder: (context, value, _) {
+                if (value.acceptedOrderData.isEmpty) {
+                  return const Center(child: Text("No Accepted Delivery"));
+                }
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: value.acceptedOrderData.length,
+                  padding: const EdgeInsets.only(top: 15),
+                  itemBuilder: (context, index) {
+                    return MyOrdersWidgetForDriver(
+                        orderID: value.acceptedOrderData[index].id,
+                        orderStatus:
+                            value.acceptedOrderData[index].orderStatus.name,
+                        orderNo: value.acceptedOrderData[index].orderNo,
+                        totalPrice: value.acceptedOrderData[index].totalAmount
+                            .toStringAsFixed(2),
+                        amount: value.acceptedOrderData[index].totalAmount
+                            .toString(),
+                        pricePerCubic:
+                            value.acceptedOrderData[index].sandLocation.price,
+                        sandName: value
+                            .acceptedOrderData[index].sandLocation.sand.name,
+                        sandImage: value.acceptedOrderData[index].sandLocation
+                            .sand.sandImage,
+                        sourceLat: value.acceptedOrderData[index]
+                            .destinationLocation.latitude,
+                        sourceLong: value.acceptedOrderData[index]
+                            .destinationLocation.longitude,
+                        orderedUserName:
+                            value.acceptedOrderData[index].orderedBy.name,
+                        orderedUserPhone:
+                            value.acceptedOrderData[index].orderedBy.phone,
+                        destinationLat: value.acceptedOrderData[index]
+                            .destinationLocation.latitude,
+                        destinationLong: value.acceptedOrderData[index]
+                            .destinationLocation.latitude,
+                        sourceLocationName: value
+                            .acceptedOrderData[index].sandLocation.sand.name,
+                        destinationLocationName: value.acceptedOrderData[index]
+                            .destinationLocation.locationName,
+                        date: value.acceptedOrderData[index].createdAt);
+                  },
+                );
+              },
+            ),
+            //
             //On The way
             //
 
@@ -148,7 +205,9 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                         orderStatus:
                             value.onTheWayOrderData[index].orderStatus.name,
                         orderNo: value.onTheWayOrderData[index].orderNo,
-                        totalPrice: value.onTheWayOrderData[index].totalAmount.toStringAsFixed(2),                      amount: value.onTheWayOrderData[index].totalAmount
+                        totalPrice: value.onTheWayOrderData[index].totalAmount
+                            .toStringAsFixed(2),
+                        amount: value.onTheWayOrderData[index].totalAmount
                             .toString(),
                         pricePerCubic:
                             value.onTheWayOrderData[index].sandLocation.price,
@@ -197,7 +256,8 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                         orderStatus:
                             value.deliveredOrderData[index].orderStatus.name,
                         orderNo: value.deliveredOrderData[index].orderNo,
-                        totalPrice: value.deliveredOrderData[index].totalAmount.toStringAsFixed(2),
+                        totalPrice: value.deliveredOrderData[index].totalAmount
+                            .toStringAsFixed(2),
                         amount: value.deliveredOrderData[index].totalAmount
                             .toString(),
                         pricePerCubic:
@@ -247,7 +307,8 @@ class _MyOrdersScreenForDriverState extends State<MyOrdersScreenForDriver> {
                         orderStatus:
                             value.rejectedOrderData[index].orderStatus.name,
                         orderNo: value.rejectedOrderData[index].orderNo,
-                        totalPrice: value.rejectedOrderData[index].totalAmount.toStringAsFixed(2),
+                        totalPrice: value.rejectedOrderData[index].totalAmount
+                            .toStringAsFixed(2),
                         amount: value.rejectedOrderData[index].totalAmount
                             .toString(),
                         pricePerCubic:

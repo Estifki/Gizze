@@ -211,57 +211,44 @@ class _MyOrdersDetailsScreenForDriverState
                         children: [
                           GestureDetector(
                             onTap: () async {
-                              DateTime currentTime = DateTime.now();
-
                               try {
                                 setState(() {
                                   _isLoading = true;
                                 });
-                                if (currentTime.hour != 10 &&
-                                    currentTime.minute != 0) {
+
+                                Provider.of<OrderProvider>(context,
+                                        listen: false)
+                                    .updateOrderStatus(
+                                        token: Provider.of<AuthProvider>(
+                                                context,
+                                                listen: false)
+                                            .token!,
+                                        orderID: widget.orderID,
+                                        orderStatus: "Accepted")
+                                    .then((_) {
                                   showScaffoldMessanger(
                                       context: context,
-                                      backgroundColor: Colors.red,
-                                      errorMessage:
-                                          "Please Wait Until 4 o'clock");
+                                      backgroundColor: Colors.green,
+                                      errorMessage: "Order Accepted");
                                   setState(() {
                                     _isLoading = false;
                                   });
-                                } else {
+                                  Navigator.of(context).pop();
                                   Provider.of<OrderProvider>(context,
                                           listen: false)
-                                      .updateOrderStatus(
-                                          token: Provider.of<AuthProvider>(
-                                                  context,
+                                      .getPending(
+                                          Provider.of<AuthProvider>(context,
                                                   listen: false)
                                               .token!,
-                                          orderID: widget.orderID,
-                                          orderStatus: "On The Way")
-                                      .then((_) {
-                                    showScaffoldMessanger(
-                                        context: context,
-                                        backgroundColor: Colors.green,
-                                        errorMessage: "Order Accepted");
-                                    setState(() {
-                                      _isLoading = false;
-                                    });
-                                    Navigator.of(context).pop();
-                                    Provider.of<OrderProvider>(context,
-                                            listen: false)
-                                        .getPending(
-                                            Provider.of<AuthProvider>(context,
-                                                    listen: false)
-                                                .token!,
-                                            true);
-                                    Provider.of<OrderProvider>(context,
-                                            listen: false)
-                                        .getOnTheWayOrders(
-                                            Provider.of<AuthProvider>(context,
-                                                    listen: false)
-                                                .token!,
-                                            true);
-                                  });
-                                }
+                                          true);
+                                  Provider.of<OrderProvider>(context,
+                                          listen: false)
+                                      .getOnTheWayOrders(
+                                          Provider.of<AuthProvider>(context,
+                                                  listen: false)
+                                              .token!,
+                                          true);
+                                });
                               } catch (_) {
                                 setState(() {
                                   _isLoading = false;
@@ -352,12 +339,12 @@ class _MyOrdersDetailsScreenForDriverState
                           ),
                         ],
                       )
-                : widget.orderStatus == "On The Way"
+                : widget.orderStatus == "Accepted"
                     ? _isLoading
                         ? const Center(
                             child: CircularProgressIndicator.adaptive())
                         : Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               GestureDetector(
@@ -374,26 +361,26 @@ class _MyOrdersDetailsScreenForDriverState
                                                     listen: false)
                                                 .token!,
                                             orderID: widget.orderID,
-                                            orderStatus: "Delivered")
+                                            orderStatus: "On The Way")
                                         .then((_) {
                                       showScaffoldMessanger(
                                           context: context,
                                           backgroundColor: Colors.green,
-                                          errorMessage: "Order Delivered");
+                                          errorMessage: "Order On The Way");
                                       setState(() {
                                         _isLoading = false;
                                       });
                                       Navigator.of(context).pop();
                                       Provider.of<OrderProvider>(context,
                                               listen: false)
-                                          .getOnTheWayOrders(
+                                          .getAccepted(
                                               Provider.of<AuthProvider>(context,
                                                       listen: false)
                                                   .token!,
                                               true);
                                       Provider.of<OrderProvider>(context,
                                               listen: false)
-                                          .getDelivered(
+                                          .getOnTheWayOrders(
                                               Provider.of<AuthProvider>(context,
                                                       listen: false)
                                                   .token!,
@@ -420,7 +407,7 @@ class _MyOrdersDetailsScreenForDriverState
                                         borderRadius:
                                             BorderRadius.circular(10.0)),
                                     child: const Text(
-                                      "Mark As Delivered",
+                                      "Start",
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
@@ -428,75 +415,228 @@ class _MyOrdersDetailsScreenForDriverState
                                   ),
                                 ),
                               ),
-                              GestureDetector(
-                                onTap: () async {
-                                  try {
-                                    setState(() {
-                                      _isLoading = true;
-                                    });
-                                    Provider.of<OrderProvider>(context,
-                                            listen: false)
-                                        .updateOrderStatus(
-                                            token: Provider.of<AuthProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .token!,
-                                            orderID: widget.orderID,
-                                            orderStatus: "Rejected")
-                                        .then((_) {
-                                      showScaffoldMessanger(
-                                          context: context,
-                                          backgroundColor: Colors.green,
-                                          errorMessage: "Order Rejected");
-                                      setState(() {
-                                        _isLoading = false;
-                                      });
-                                      Navigator.of(context).pop();
-                                      Provider.of<OrderProvider>(context,
-                                              listen: false)
-                                          .getPending(
-                                              Provider.of<AuthProvider>(context,
-                                                      listen: false)
-                                                  .token!,
-                                              true);
+                              // GestureDetector(
+                              //   onTap: () async {
+                              //     try {
+                              //       setState(() {
+                              //         _isLoading = true;
+                              //       });
+                              //       Provider.of<OrderProvider>(context,
+                              //               listen: false)
+                              //           .updateOrderStatus(
+                              //               token: Provider.of<AuthProvider>(
+                              //                       context,
+                              //                       listen: false)
+                              //                   .token!,
+                              //               orderID: widget.orderID,
+                              //               orderStatus: "Rejected")
+                              //           .then((_) {
+                              //         showScaffoldMessanger(
+                              //             context: context,
+                              //             backgroundColor: Colors.green,
+                              //             errorMessage: "Order Rejected");
+                              //         setState(() {
+                              //           _isLoading = false;
+                              //         });
+                              //         Navigator.of(context).pop();
+                              //         Provider.of<OrderProvider>(context,
+                              //                 listen: false)
+                              //             .getPending(
+                              //                 Provider.of<AuthProvider>(context,
+                              //                         listen: false)
+                              //                     .token!,
+                              //                 true);
 
-                                      // Provider.of<OrderProvider>(context,
-                                      //         listen: false)
-                                      //     .getRejected(
-                                      //         Provider.of<AuthProvider>(context,
-                                      //                 listen: false)
-                                      //             .token!,
-                                      //         true);
-                                    });
-                                  } catch (_) {
-                                    setState(() {
-                                      _isLoading = false;
-                                    });
-                                    showScaffoldMessanger(
-                                        context: context,
-                                        errorMessage: "Please Try Again Later");
-                                  }
-                                },
-                                child: Container(
-                                  height: 42,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      borderRadius:
-                                          BorderRadius.circular(10.0)),
-                                  child: const Text(
-                                    "Cancel Order",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
+                              //         // Provider.of<OrderProvider>(context,
+                              //         //         listen: false)
+                              //         //     .getRejected(
+                              //         //         Provider.of<AuthProvider>(context,
+                              //         //                 listen: false)
+                              //         //             .token!,
+                              //         //         true);
+                              //       });
+                              //     } catch (_) {
+                              //       setState(() {
+                              //         _isLoading = false;
+                              //       });
+                              //       showScaffoldMessanger(
+                              //           context: context,
+                              //           errorMessage: "Please Try Again Later");
+                              //     }
+                              //   },
+                              //   child: Container(
+                              //     height: 42,
+                              //     width:
+                              //         MediaQuery.of(context).size.width * 0.4,
+                              //     alignment: Alignment.center,
+                              //     decoration: BoxDecoration(
+                              //         color: Colors.red,
+                              //         borderRadius:
+                              //             BorderRadius.circular(10.0)),
+                              //     child: const Text(
+                              //       "Cancel Order",
+                              //       style: TextStyle(
+                              //           color: Colors.white,
+                              //           fontWeight: FontWeight.bold),
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           )
-                    : Container(),
+                    : widget.orderStatus == "On The Way"
+                        ? _isLoading
+                            ? const Center(
+                                child: CircularProgressIndicator.adaptive())
+                            : Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () async {
+                                      try {
+                                        setState(() {
+                                          _isLoading = true;
+                                        });
+                                        Provider.of<OrderProvider>(context,
+                                                listen: false)
+                                            .updateOrderStatus(
+                                                token:
+                                                    Provider.of<AuthProvider>(
+                                                            context,
+                                                            listen: false)
+                                                        .token!,
+                                                orderID: widget.orderID,
+                                                orderStatus: "Delivered")
+                                            .then((_) {
+                                          showScaffoldMessanger(
+                                              context: context,
+                                              backgroundColor: Colors.green,
+                                              errorMessage: "Order Delivered");
+                                          setState(() {
+                                            _isLoading = false;
+                                          });
+                                          Navigator.of(context).pop();
+                                          Provider.of<OrderProvider>(context,
+                                                  listen: false)
+                                              .getOnTheWayOrders(
+                                                  Provider.of<AuthProvider>(
+                                                          context,
+                                                          listen: false)
+                                                      .token!,
+                                                  true);
+                                          Provider.of<OrderProvider>(context,
+                                                  listen: false)
+                                              .getDelivered(
+                                                  Provider.of<AuthProvider>(
+                                                          context,
+                                                          listen: false)
+                                                      .token!,
+                                                  true);
+                                        });
+                                      } catch (_) {
+                                        setState(() {
+                                          _isLoading = false;
+                                        });
+                                        showScaffoldMessanger(
+                                            context: context,
+                                            errorMessage:
+                                                "Please Try Again Later");
+                                      }
+                                    },
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Container(
+                                        height: 42,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.4,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                            color: Colors.green,
+                                            borderRadius:
+                                                BorderRadius.circular(10.0)),
+                                        child: const Text(
+                                          "Mark As Delivered",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () async {
+                                      try {
+                                        setState(() {
+                                          _isLoading = true;
+                                        });
+                                        Provider.of<OrderProvider>(context,
+                                                listen: false)
+                                            .updateOrderStatus(
+                                                token:
+                                                    Provider.of<AuthProvider>(
+                                                            context,
+                                                            listen: false)
+                                                        .token!,
+                                                orderID: widget.orderID,
+                                                orderStatus: "Rejected")
+                                            .then((_) {
+                                          showScaffoldMessanger(
+                                              context: context,
+                                              backgroundColor: Colors.green,
+                                              errorMessage: "Order Rejected");
+                                          setState(() {
+                                            _isLoading = false;
+                                          });
+                                          Navigator.of(context).pop();
+                                          Provider.of<OrderProvider>(context,
+                                                  listen: false)
+                                              .getPending(
+                                                  Provider.of<AuthProvider>(
+                                                          context,
+                                                          listen: false)
+                                                      .token!,
+                                                  true);
+
+                                          // Provider.of<OrderProvider>(context,
+                                          //         listen: false)
+                                          //     .getRejected(
+                                          //         Provider.of<AuthProvider>(context,
+                                          //                 listen: false)
+                                          //             .token!,
+                                          //         true);
+                                        });
+                                      } catch (_) {
+                                        setState(() {
+                                          _isLoading = false;
+                                        });
+                                        showScaffoldMessanger(
+                                            context: context,
+                                            errorMessage:
+                                                "Please Try Again Later");
+                                      }
+                                    },
+                                    child: Container(
+                                      height: 42,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.4,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                          color: Colors.red,
+                                          borderRadius:
+                                              BorderRadius.circular(10.0)),
+                                      child: const Text(
+                                        "Cancel Order",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                        : Container(),
           ],
         ),
       ),
