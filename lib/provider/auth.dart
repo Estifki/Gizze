@@ -347,10 +347,10 @@ class AuthProvider with ChangeNotifier {
           "Accept": "application/json",
           HttpHeaders.authorizationHeader: "Bearer $token",
         },
-        body: jsonEncode({
-          "name": name,
-          "email": email,
-        }),
+        // body: jsonEncode({
+        //   "name": name,
+        //   "email": email,
+        // }),
       );
       var decodedData = jsonDecode(response.body);
 
